@@ -212,7 +212,7 @@ Students working on a Windows system can download and install **Git for Windows*
 
 _<https://gitforwindows.org>_
 
-Detailed instruction for the installation can be found [**here**](fpga/labs/lab0/README.md#install-git).
+Detailed instructions for the installation can be found [**here**](fpga/labs/lab0/README.md#install-git).
 
 <br />
 
@@ -334,13 +334,25 @@ A more complete guide to the basic `git` commands can be found [**here**](http:/
 # Sample Xilinx Vivado simulation and implementation flows
 [**[Contents]**](#contents)
 
-A small Verilog simulation example is provided to **test your environment setup** and **tools installation**.<br/>
-Step-by-step instruction explaining how to run this test flow can be found [**here**](fpga/test/README.md).
+A small **mixed-language** HDL design example is provided to help students in testing
+their overall **command-line environment setup** and all **software installations** required for the course.<br />
+
+Step-by-step instructions explaining how to run this test flow can be found [**here**](fpga/test/README.md).
 
 <br />
 
 # Reference documentation
 [**[Contents]**](#contents)
+
+<br />
+
+>
+> **NOTE**
+>
+> Links to Xilinx official documentation refer to Vivado version **2019.2** ! 
+>
+
+<br />
 
 <details>
 <summary><b>Digital electronics and logic design fundamentals</b></summary>
@@ -492,6 +504,7 @@ Step-by-step instruction explaining how to run this test flow can be found [**he
 * B.B. Welch, _Practical Programming in Tcl and Tk_
 * J.K. Ousterhout, _Tcl and the Tk Toolkit_
 * A.P. Nadkarni, _The Tcl Programming Language: A Comprehensive Guide_
+* [_Vivado Design Suite User Guide: Using Tcl Scripting (UG894)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug894-vivado-tcl-scripting.pdf)
 
 </p>
 <br/>

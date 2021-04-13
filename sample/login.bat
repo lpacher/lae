@@ -76,6 +76,9 @@ doskey ll=ls --color -lah $*
 :: force the built in 'cd' command to behave as the Linux one
 doskey cd=if /i "$1" == "" ( cd /d %%USERPROFILE%% ^& set OLDCD=%%CD%% ) else ( if /i "$1" == "-" ( cd /d %%OLDCD%% ^& set OLDCD=%%CD%% ) else ( cd /d "$1" ^& set OLDCD=%%CD%% )) 
 
+:: redefine 'pwd' in order to display paths with / separator instead of \ as under Linux
+doskey pwd=echo %%CD%% ^| sed -e "s/\\\\/\//g"
+
 
 ::--------------------
 ::   Nano/Vim setup
