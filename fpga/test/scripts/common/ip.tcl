@@ -123,19 +123,37 @@ if { [info exists ::env(XCI_FILE)]} {
          remove_files -verbose [get_files ${xciFile}]
 
          ## re-load IP customization
-         read_ip -verbose [file normalize ${xciFile}]
+         read_ip -verbose [get_files ${xciFile}]
+
+         ## IP name
+         set ipName [get_property IP_TOP [get_files ${xciFile}]]
+
+         ## optionally upgrade IP to new Xilix Vivado version
+         if { [get_property IS_LOCKED [get_ips ${ipName}]] } {
+
+            upgrade_ip -verbose [get_ips ${ipName}]
+         }
 
          ## re-generate output products
          generate_target all -force -verbose [get_files ${xciFile}]
 
          ## synthesize the IP to generate Out-Of Context (OOC) design checkpoint (.dcp)
          synth_ip -force [get_files ${xciFile}]
-         #synth_design -top [get_property IP_TOP [get_files ${xciFile}]] -part ${targetXilinxDevice} -mode out_of_context
+         #synth_design -top ${ipName} -part ${targetXilinxDevice} -mode out_of_context
 
       } else {
 
          ## IP not yet part of the repository, compile it from .xci
          read_ip -verbose ${xciFile}
+
+         ## IP name
+         set ipName [get_property IP_TOP [get_files ${xciFile}]]
+
+         ## optionally upgrade IP to new Xilix Vivado version
+         if { [get_property IS_LOCKED [get_ips ${ipName}]] } {
+
+            upgrade_ip -verbose [get_ips ${ipName}]
+         }
 
          ## generate output products
          generate_target all -force -verbose [get_files ${xciFile}] ; puts "\n\nDone !\n\n"
