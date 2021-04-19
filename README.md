@@ -554,5 +554,10 @@ The complete list of past video-recorded lectures held during Spring 2020 can be
 ### Links to **video-recorded lectures** (in Italian)
 
 * Lecture 1 - Mon 19, 2021<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/f3906e665e5f4072af8a0d9ca88aa06e>_
+
+
+* Lecture 2 - Tue 20, 2021<br />
 `TODO`
+
 
