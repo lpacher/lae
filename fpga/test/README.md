@@ -1,3 +1,4 @@
+
 # Sample Xilinx Vivado simulation and implementation flows
 
 # Contents
@@ -114,6 +115,37 @@ List all available `Makefile` targets with:
 ![](./doc/pictures/make_help.png)
 
 <br />
+
+
+<br />
+
+>
+> **IMPORTANT !**
+>
+> Each target in the `Makefile` is actually executed invoking a `bash` shell. Windows users might notice that
+> a strange warning is generated when executing `make` targets:
+>
+> ```
+> bash.exe: warning: could not find /tmp, please create
+> ```
+>
+> This is a known problem and can be easily fixed by opening a `bash` session and creating the missing `/tmp` directory
+> as expected by `bash`. To to this, launch `bash` in the _Command Prompt_ and create the missing directory:
+>
+> ```
+> % bash
+>
+> Loading C:\Users\username\.bashrc
+>
+> bash$ mkdir /tmp
+> bash$ exit
+> %
+> ```
+>
+> See also [this note](../lab0/KPAS.md) or _<https://stackoverflow.com/questions/22492715/bash-exe-warning-could-not-find-tmp-please-create>_.
+>
+
+<br />
 <!--------------------------------------------------------------------->
 
 
@@ -187,7 +219,8 @@ For less typing, this is equivalent to run:
 
 <br />
 
-Explore simulation results in the XSim graphical interface. Once happy, close the window.
+Display the full simulation time scale with **View > Zoom Fit**. Explore simulation results in the XSim graphical
+interface. Once happy, close the window.
 
 <br />
 
