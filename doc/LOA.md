@@ -263,6 +263,9 @@
 ## G
 [**[Top]**](#list-of-acronyms)
 
+**GP** - General Purpose
+
+**GPIO** - General Purpose I/O
 
 **GBT** - GigaBit Transceiver
 
