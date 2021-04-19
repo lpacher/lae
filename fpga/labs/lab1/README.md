@@ -15,7 +15,7 @@
 * [**Create a Makefile to automate the flow**](#Create-a-makefile-to-automate-the-flow)
 * [**Exercises**](#exercises)
 * [**Extra: comparison with VHDL code**](#extra-comparison-with-vhdl-code)
-* [**Further reading**](#further-readings)
+* [**Further readings**](#further-readings)
 
 
 <br />

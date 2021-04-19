@@ -1476,13 +1476,13 @@ The output of the above command might be `/bin/tclsh`, `/usr/bin/tclsh` or `/usr
 In case the Tcl package is not installed on your Linux system, use
 
 ```
-% sudo yum install tcl
+% sudo yum install tcl tcllib
 ```
 
 or
 
 ```
-% sudo apt-get install tcl
+% sudo apt-get install tcl tcllib
 ```
 
 according to the package manager of the Linux distribution you are working with.
