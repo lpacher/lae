@@ -1,5 +1,6 @@
 
 # Lab 1 Instructions
+[[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/labs)]
 
 ## Contents
 
@@ -953,6 +954,15 @@ For Windows users:
 % cp .solutions\cleanup.bat .
 % call cleanup.bat
 ```
+
+<br />
+
+>
+> **WARNING**
+>
+> Do not forget the dot `.` to indicate that the **target destination directory** for the `cp` command
+> is the current working directory.
+>
 
 <br />
 

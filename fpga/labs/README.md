@@ -11,3 +11,7 @@ https://github.com/lpacher/lae/tree/master/fpga/labs/lab0)
 [Simulate a simple inverter in Verilog](
 https://github.com/lpacher/lae/tree/master/fpga/labs/lab1)
 
+* **Lab 2**<br />
+[Fundamental logic gates](
+https://github.com/lpacher/lae/tree/master/fpga/labs/lab2)
+
