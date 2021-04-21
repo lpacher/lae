@@ -810,6 +810,12 @@ be used as a "virtual oscilloscope" to trace and debug digital signals in the gr
 <br />
 
 
+Inspect the **help** for the `add_wave` simulation command:
+
+```
+add_wave -help
+```
+
 <br />
 
 >
@@ -1251,7 +1257,7 @@ Compare the Verilog implementation of our inverter with its VHDL equivalent:
 ```vhdl
 
 --
--- A simple inverter in VHDL
+-- A simple NOT-gate (inverter) in VHDL.
 -- 
 
 
@@ -1288,7 +1294,7 @@ For this purpose, create a new `Inverter.vhd` VHDL file and write the above code
 Save and exit once done. To run the flow use:
 
 ```
-% rm -rf *.log *.jou *pb *.wdb xsim.dir .Xil
+% rm -rf *.log *.jou *.pb *.wdb xsim.dir .Xil
 % xvhdl Inverter.vhd
 % xvlog tb_Inverter.v
 % xelab -debug all tb_Inverter

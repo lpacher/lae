@@ -224,6 +224,10 @@
 
 **EMC** - Electro-Magnetic Compliance
 
+**EOF** - End Of File
+
+**EOS** - End Of Stream
+
 **ERC** - Electrical Rule Check
 
 **ESD** - Electrostatic Discharge

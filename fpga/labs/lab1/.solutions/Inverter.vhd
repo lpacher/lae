@@ -1,6 +1,6 @@
 --
--- A simple inverter (NOT gate) in VHDL
--- 
+-- A simple NOT-gate (inverter) in VHDL.
+--
 -- Luca Pacher - pacher@to.infn.it
 -- Fall 2020
 --

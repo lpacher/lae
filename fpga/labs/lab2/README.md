@@ -479,11 +479,11 @@ in the code Verilog gates primitives `and`, `nand`, `or`, `nor`, `xor` and `xnor
 
 `timescale 1ns / 100ps
 
-module GatesCase (
+module GatesPrimitives (
 
    input  wire A
    input  wire B,
-   output reg [5:0] Z     // **QUESTION: why Z is now declared as 'reg' instead of 'wire' ?
+   output wire [5:0] Z     // **QUESTION: why Z is now declared back to 'wire' instead of 'reg' ?
 
    ) ;
 
@@ -512,7 +512,22 @@ endmodule
 
 
 The above code is a first example of **structural HDL code**, resembling more a **gate-level schematic**.
-Update the `SOURCES` variable in your `Makefile` to parse and compile `GatesCase.v` :
+
+Update the testbench code in order to instantiate the new `GatesPrimitives` module as device under test: 
+
+```verilog
+// device under test (DUT)
+
+//Gates DUT (.A(count[0]), .B(count[1]), .Z(Z)) ;
+//GatesCase DUT (.A(count[0]), .B(count[1]), .Z(Z)) ;
+GatesPrimitives DUT (.A(count[0]), .B(count[1]), .Z(Z)) ;
+
+```
+
+<br />
+
+
+Update also the `SOURCES` variable in your `Makefile` to parse and compile `GatesPrimitives.v` :
 
 
 ```make
