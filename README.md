@@ -504,7 +504,10 @@ Step-by-step instructions explaining how to run this test flow can be found [**h
 * B.B. Welch, _Practical Programming in Tcl and Tk_
 * J.K. Ousterhout, _Tcl and the Tk Toolkit_
 * A.P. Nadkarni, _The Tcl Programming Language: A Comprehensive Guide_
+* [_Vivado Design Suite Tcl Command Reference Guide (UG835)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug835-vivado-tcl-commands.pdf)
 * [_Vivado Design Suite User Guide: Using Tcl Scripting (UG894)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug894-vivado-tcl-scripting.pdf)
+* [_TCL/TK Command Reference Guide_](https://www.rkeene.org/projects/vtcl/tcl-tk-reference-guide.html)
+* [_TCL/TK Quick Reference Card_](http://www.cheat-sheets.org/saved-copy/TclTk_quickref.pdf)
 
 </p>
 <br/>
