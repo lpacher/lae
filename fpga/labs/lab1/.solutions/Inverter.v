@@ -38,7 +38,7 @@ module Inverter (
    //assign ZN = (X == 1'b1) ? 1'b0 : 1'b1 ;   // **NOTE: same as ZN = (X) ? 1'b1 : 1'b0 ;
 
    // gate-primitive instantiation
-   //not(ZN, X) ;
+   //not u1 (ZN, X) ;
 
 endmodule
 

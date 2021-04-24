@@ -2075,7 +2075,7 @@ https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug973-vivad
 
 <br />
 
-Xilinx FPGAs are programmed using the **JTAG protocol**. In the past a dedicated (end expensive)
+Xilinx FPGAs are programmed using the **JTAG protocol**. In the past a dedicated (and expensive)
 **programming cable**, namely _Xilinx USB Platform Cable_, was required
 to program FPGA boards from a host computer. This dedicated cable (still in use for particular applications)
 **connects to a host computer USB port** (in the past to the "old style" serial port instead) and converts

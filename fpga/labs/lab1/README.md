@@ -1099,6 +1099,7 @@ using the `-tclbatch` option when invoking the `xsim` executable at the command 
 <br />
 <!--------------------------------------------------------------------->
 
+
 ## Create a Makefile to automate the flow
 [**[Contents]**](#contents)
 
@@ -1180,15 +1181,26 @@ clean :
 
 <br />
 
-Save and exit. Try to run the flow with :
+Save and exit. Try to run the flow with:
 
 ```
-% make clean sim
+% make clean
+% make compile
+% make elaborate
+% make simulate
 ```
 
 <br />
 
-As already noted once `xsim -gui` is invoked the shell hangs and we are not able to type commands in the terminal anymore.
+For less typing, this is equivalent to run:
+
+```
+% make clean sim
+``` 
+
+<br />
+
+As already noted once `xsim -gui` is invoked **the shell hangs** and we are not able to type commands in the terminal anymore.
 In order to allow to **launch the command in background also under Windows** we can forward to `tclsh`
 the execution of the command as follows:
 
@@ -1200,10 +1212,11 @@ simulate:
 
 <br />
 
-Update the `simulate` target in the `Makefile` and try to relaunch the simulation flow:
+Close XSim and update the `simulate` target in the `Makefile`, then try to relaunch the simulation without re-compile/re-elaborate the design
+from scratch:
 
 ```
-% make clean sim
+% make simulate
 ```
 
 <br />
@@ -1231,6 +1244,19 @@ included in the simulation.
 
 <br />
 
+>
+>**IMPORTANT !**
+>
+> The proposed Makefile-based automated flow **suffers from an important drawback**. That is, the compilation/elaboration/simulation flow
+> **cannot be re-invoked** from the XSim graphical interface after RTL or testbench changes, thus requiring to exit from the GUI and re-build
+> the simulation snapshot from scratch. This happens because XSim doesn't keep track of `xvlog/xvhdl` and `xelab` flows.
+>
+> Later in the course we will see how to solve these issues by moving all calls to standalone executables into **Tcl scripts**
+> executed by `tclsh` from `Makefile`.
+>
+
+<br />
+
 **EXERCISE 2**
 
 Comment-out the original implementation of the inverter and replace it with a **MUX-style conditional assignment** as follows:
@@ -1241,6 +1267,30 @@ assign ZN = (X == 1'b1) ? 1'b0 : 1'b1 ;
 ```
 
 <br />
+
+Save the file once done. Re-compile and re-simulate the code.
+Verify if the functionality of the NOT gate has changed.
+
+<br />
+
+**EXERCISE 3**
+
+Further modify the implementation of the inverter and replace the previous conditional assignment with a true instance of a **NOT-gate**
+using the `not` **gate primitive** provided by the Verilog language:
+
+
+```verilog
+//assign #3 ZN = !X ;
+//assign ZN = (X == 1'b1) ? 1'b0 : 1'b1 ;
+
+// gate-primitive instantiation
+not  u1 (ZN , X) ;   
+```
+
+<br />
+
+This is a first example of a **gate primitive instantiation**, and the resulting Verilog code basically represents a true **schematic**
+with a NOT-gate symbol.
 
 Save the file once done. Re-compile and re-simulate the code.
 Verify if the functionality of the NOT gate has changed.
@@ -1314,4 +1364,9 @@ refer to:
 * [*Vivado Design Suite User Guide: Logic Simulation*](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug900-vivado-logic-simulation.pdf)
 * [*Vivado Design Suite Tutorial: Logic Simulation*](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug937-vivado-design-suite-simulation-tutorial.pdf)
 
+<br />
 
+A nice tutorial discussing the usage of Xilinx XSim from the command line can be found at:
+
+* _<https://www.itsembedded.com/dhd/vivado_sim_1>_
+* _<https://www.itsembedded.com/dhd/vivado_sim_2>_

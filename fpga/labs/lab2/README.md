@@ -58,7 +58,7 @@ This lab should exercise the following concepts:
 ## Navigate to the lab directory
 [**[Contents]**](#contents) 
 
-Open a terminal window and change to the `lab2/` directory:
+Open a **terminal** window and change to the `lab2/` directory:
 
 ```
 % cd Desktop/lae/fpga/labs/lab2
@@ -210,10 +210,10 @@ Inspect the provided testbench code:
 
 module tb_Gates ;
 
-   // 40 MHz clock generator
+   // 100 MHz clock generator
    reg clk = 1'b0 ;                 // note that we can also initialize a 'reg' to some initial value when declared
 
-   always #12.5 clk = ~ clk ;
+   always #5.0 clk = ~ clk ;        // simply "toggle" the clk value every 1/2 period
 
    // 2-bits counter
    reg [1:0] count = 2'b00 ;
@@ -310,18 +310,28 @@ open_wave_config ./tb_Gates.wcfg
 
 <br />
 
-or using the `-view` command line switch when invoking the `xsim` executable at the command line:
+Close the simulator graphical interface when done.
+
+<br />
+
+You can also restore a waveform configuration using the `-view` command line switch when invoking the `xsim` executable at the command line:
 
 ```
 % xsim -gui -tclbatch run.tcl -view tb_Gates.wcfg tb_Gates
 ```
 
 <br />
-
-Close the simulator graphical interface when done.
-
-<br />
 <!--------------------------------------------------------------------->
+
+
+## Restore a waveform database
+
+```
+xsim -gui -view tb_Gates.wcfg xsim/dir/tb_Gates.wdb
+```
+
+...
+
 
 
 ## Exercises
@@ -468,7 +478,7 @@ Save your changes and re-run the simulation with:
 **EXERCISE 3**
 
 Create a new file e.g. `GatesPrimitives.v` and try implement all logic operators by instantiating
-in the code Verilog gates primitives `and`, `nand`, `or`, `nor`, `xor` and `xnor`.
+in the code Verilog **gates primitives** `and`, `nand`, `or`, `nor`, `xor` and `xnor`.
 
 
 ```Verilog
