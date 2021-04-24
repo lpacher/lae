@@ -200,23 +200,11 @@ mode ?= gui
 ##############################################
 
 ##
-## export HDL variables to xvlog/xvhdl/xelab flows
+## **NOTE
 ##
-
-export RTL_TOP_MODULE
-export SIM_TOP_MODULE
-
-ifneq ($(VLOG_SOURCES),)
-   export VLOG_SOURCES
-endif
-
-ifneq ($(VHDL_SOURCES),)
-   export VHDL_SOURCES
-endif
-
-ifneq ($(IPS_SOURCES),)
-   export IPS_SOURCES
-endif
+## Use the strip function to avoid interpreting whitespace as a non-empty values
+## in case the design uses only one HDL language.
+##
 
 ## export target device and memory IDs to implementation flows
 export XILINX_DEVICE=$(part)
@@ -224,6 +212,22 @@ export QFLASH_MEMORY=$(flash)
 
 ## export the chosen working directory to all flows
 export WORK_DIR
+
+## export HDL variables to xvlog/xvhdl/xelab flows
+export RTL_TOP_MODULE
+export SIM_TOP_MODULE
+
+ifneq ($(strip $(VLOG_SOURCES)),)
+   export VLOG_SOURCES
+endif
+
+ifneq ($(strip $(VHDL_SOURCES)),)
+   export VHDL_SOURCES
+endif
+
+ifneq ($(strip $(IPS_SOURCES)),)
+   export IPS_SOURCES
+endif
 
 
 ################################

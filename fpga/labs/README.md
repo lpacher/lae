@@ -15,3 +15,7 @@ https://github.com/lpacher/lae/tree/master/fpga/labs/lab1)
 [Fundamental logic gates](
 https://github.com/lpacher/lae/tree/master/fpga/labs/lab2)
 
+* **Lab 3**<br />
+[Different coding styles for a 2:1 multiplexer](
+https://github.com/lpacher/lae/tree/master/fpga/labs/lab3)
+

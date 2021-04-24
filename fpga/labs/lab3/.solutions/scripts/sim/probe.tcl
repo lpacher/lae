@@ -33,19 +33,7 @@ log_wave -r /*
 create_wave_config "Waveforms"
 
 ## probe all top-level signals (testbench signals)
-add_wave /tb_Counter/*
-
-## probe PLL output signals (divided clock and locked flag)
-add_wave /tb_Counter/DUT/pll_clk
-add_wave /tb_Counter/DUT/pll_locked -color SILVER ;   ## you can also customize the trace color from Tcl
-
-## define a new custom bus and group the first 5 least-significant bits of the counter to view some toggles
-add_wave_virtual_bus "count[4:0]"
-
-for {set k 0} {$k < 5} {incr k} {
-
-   add_wave /tb_Counter/DUT/count[$k] -name "count[$k]" -into "count[4:0]" ;   ## you can also customize the name of the signal from Tcl
-}
+add_wave /*
 
 
 #######################################################
@@ -66,16 +54,9 @@ if { ${rdi::mode} != "gui" } {
    open_vcd ${vcdDir}/waveforms.vcd
 
    ## use 'log_vcd' to select signals to trace
-   log_vcd /tb_Counter/*
-   log_vcd /tb_Counter/DUT/pll_clk
-   log_vcd /tb_Counter/DUT/pll_locked
-   log_vcd /tb_Counter/DUT/count[0]
-   log_vcd /tb_Counter/DUT/count[1]
-   log_vcd /tb_Counter/DUT/count[2]
-   log_vcd /tb_Counter/DUT/count[3]
-   log_vcd /tb_Counter/DUT/count[4]
-
+   log_vcd /*
 }
+
 
 #################################################################
 ##   example waveforms-related commands (just for reference)   ##
