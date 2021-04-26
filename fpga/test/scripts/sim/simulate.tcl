@@ -156,7 +156,7 @@ proc simulate { {mode "gui"} } {
 ## optionally, run the Tcl procedure when the script is executed by tclsh from Makefile
 if { ${argc} > 0 } {
 
-   if { [lindex ${argv} 0] == "simulate" } {
+   if { [lindex ${argv} 0] eq "simulate" } {
 
       puts "\n**INFO: \[TCL\] Running [file normalize [info script]]"
 

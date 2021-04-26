@@ -161,7 +161,7 @@
 
 **DFM** - Design For Manufacturing
 
-**DFT** - Design for Test
+**DFT** - Design for Test _or_ Discrete Fourier Transform
 
 **DIP** - Dual In-line Package
 
@@ -786,6 +786,8 @@
 **XSCT** - Xilinx Software Command-line Tools
 
 **XST** - Xilinx Synthesis Technology (legacy ISE synthesis engine)
+
+**XTAL** - crystal oscillator
 
 **XUP** - Xilinx University Program
 

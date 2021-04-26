@@ -976,6 +976,7 @@ Explore the content of the script using the `cat` command:
 
 ```
 % cat cleanup.sh      (for Linux users)
+
 % cat cleanup.bat     (for Windows users)
 ```
 
@@ -1016,6 +1017,7 @@ With your **text editor** program create a new file named `run.tcl` :
 
 ```
 % gedit run.tcl &   (for Linux users)
+
 % n++ run.tcl       (for Windows users)
 ```
 
@@ -1079,7 +1081,7 @@ source run.tcl
 
 <br />
 
-By default `source` also prints in the Tcl console all Tcl statements that are executed as comments (a commend always starts with the `#` character in Tcl).
+By default `source` also prints in the Tcl console all Tcl statements that are executed as comments (a comment always starts with the `#` character in Tcl).
 You can **suppress the command echoing** by adding the `-notrace` option as follows:
 
 ```
@@ -1113,6 +1115,7 @@ For this purpose, create a new text file named `Makefile` (without extension):
 
 ```
 % gedit Makefile &   (for Linux users)
+
 % n++ Makefile       (for Windows users)
 ```
 
@@ -1140,17 +1143,17 @@ RMDIR := rm -rf -v
 
 ## compile Verilog sources (xvlog)
 compile :
-        @xvlog $(SOURCES)
+        @xvlog $(SOURCES) -log $@.log
 
 
 ## elaborate the design (xelab)
 elaborate :
-	@xelab -debug all $(TOP)
+	@xelab -debug all $(TOP) -log $@.log
 
 
 ## run the simulation (xsim)
 simulate :
-	@xsim -gui -tclbatch run.tcl $(TOP)
+	@xsim -gui -tclbatch run.tcl $(TOP) -log $@.log
 
 
 ## one-step compilation/elaboration/simulation
@@ -1207,7 +1210,7 @@ the execution of the command as follows:
 
 ```make
 simulate:
-	@echo "exec xsim -gui -tclbatch run.tcl $(TOP) &" | tclsh -norc
+	@echo "exec xsim -gui -tclbatch run.tcl $(TOP) -log $@.log &" | tclsh -norc
 ```
 
 <br />

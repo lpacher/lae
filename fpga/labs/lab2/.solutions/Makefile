@@ -19,18 +19,18 @@ RMDIR := rm -rf -v
 
 
 ## compile Verilog sources (xvlog)
-compile :
-	@xvlog $(SOURCES)
+compile : $(SOURCES)
+	@xvlog $(SOURCES) -log $@.log
 
 
 ## elaborate the design (xelab)
 elaborate :
-	@xelab -debug all $(TOP)
+	@xelab -debug all $(TOP) -log $@.log
 
 
 ## run the simulation (xsim)
 simulate :
-	@echo "exec xsim -gui -tclbatch run.tcl $(TOP) &" | tclsh -norc
+	@echo "exec xsim -gui -tclbatch run.tcl $(TOP) -log $@.log &" | tclsh -norc
 
 
 ## one-step compilation/elaboration/simulation

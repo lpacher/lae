@@ -841,6 +841,14 @@ MUX2  DUT (.A(count[0]), .B(count[1]), .S(count[2]), .Z(Z)) ;
 
 <br />
 
+Re-compile and re-simulate the design from scratch:
+
+```
+% make clean sim
+```
+
+<br />
+
 
 **EXERCISE 3**
 
@@ -921,4 +929,6 @@ Compile and simulate the new design from scratch:
 ```
 % make clean sim
 ```
+
+Verify the proper functionality of the new digital block.
 
