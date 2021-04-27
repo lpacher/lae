@@ -148,6 +148,12 @@ List the content of the directory to understand the new sources organization:
 >
 
 <br />
+
+From now on, **synthesizable RTL sources** will be stored inside the `rtl/` directory, while the **testbench module** along with other
+**simulation sources** inside the `bench/` directory.
+
+
+<br />
 <!--------------------------------------------------------------------->
 
 

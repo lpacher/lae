@@ -11,6 +11,7 @@
 * [**Write and compile the DUT code**](#write-and-compile-the-dut-code)
 * [**Simulate the design**](#simulate-the-design)
 * [**Save and restore waveforms customizations**](#save-and-restore-waveforms-customizations)
+* [**Restore a waveform database**](#restore-a-waveform-database)
 * [**Exercises**](#exercises)
 
 <br />
@@ -325,13 +326,30 @@ You can also restore a waveform configuration using the `-view` command line swi
 
 
 ## Restore a waveform database
+[**[Contents]**](#contents)
+
+By default all HDL objects selected for tracing in the Wave window and then simulated are automatically
+saved by XSim into a **binary database** placed in the `xsim.dir/` directory and referred to as **Waveform Database** (`.wdb`).
+
+This binary database can be used to **restore simulation results** without the need of re-running a simulation
+from scratch.
+
+Try to restore all previous simulation results and waveforms customizations as follows:
 
 ```
-xsim -gui -view tb_Gates.wcfg xsim/dir/tb_Gates.wdb
+xsim -gui -view tb_Gates.wcfg xsim.dir/tb_Gates.wdb
 ```
 
-...
+<br />
 
+>
+> **NOTE**
+>
+> In this case the main target for the `xsim` executable is **the name of waveform database**, not the name of the simulation executable!
+>
+
+<br />
+<!--------------------------------------------------------------------->
 
 
 ## Exercises
