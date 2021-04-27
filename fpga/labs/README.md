@@ -19,3 +19,7 @@ https://github.com/lpacher/lae/tree/master/fpga/labs/lab2)
 [Different coding styles for a 2:1 multiplexer](
 https://github.com/lpacher/lae/tree/master/fpga/labs/lab3)
 
+* **Lab 4**<br />
+[A 5b/32b binary to one-hot decoder](
+https://github.com/lpacher/lae/tree/master/fpga/labs/lab4)
+
