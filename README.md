@@ -566,4 +566,8 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/c572d2a5bf
 * Lecture 3 - Wed 22, 2021<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/cd9e74965f0142568879939574cb27b2>_
 
+* Lecture 4 - Mon 26, 2021<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/7406d1fc88b510398ebe00505681b7cf>_
+
+
 
