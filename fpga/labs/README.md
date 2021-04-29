@@ -23,3 +23,7 @@ https://github.com/lpacher/lae/tree/master/fpga/labs/lab3)
 [A 5b/32b binary to one-hot decoder](
 https://github.com/lpacher/lae/tree/master/fpga/labs/lab4)
 
+* **Lab 5**<br />
+[The Xilinx Vivado FPGA implementation flow on a simple RTL design](
+https://github.com/lpacher/lae/tree/master/fpga/labs/lab5)
+
