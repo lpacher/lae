@@ -23,6 +23,7 @@ test/*
 ## all students stuffs (use git add -f to add .solutions/ instead)
 fpga/test/*
 fpga/labs/*
+fpga/practicum/*
 fpga/projects/*
 
 ## add here further directives if required ...
