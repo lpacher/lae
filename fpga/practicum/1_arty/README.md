@@ -692,7 +692,7 @@ For the legacy _Arty_ board the device name to be selected is **mt25ql128-spi-x1
 
 For the new _Arty A7_ board the device name to be selected is **s25fl128sxxxxxx0-spi-x1-_x2_x4** as follows:
 
-* _Manufacturer_: **Spansion*
+* _Manufacturer_: **Spansion**
 * _Density (Mb)_: **128**
 * _Type_: **spi**
 * _Width_: **x1_x2_x4**
