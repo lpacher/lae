@@ -242,7 +242,7 @@ Verify that all jumpers are properly inserted.
 
 Despite the board can be powered from external power supply, for this course we will simply power the board
 using 5V from USB cable. Connect the board to the USB port of your personal computer using a **USB A to micro USB cable**.
-Verify that the **POWER** LED turns on.
+Verify that the **POWER** status LED turns on.
 
 Use the DMM to perform basic power checks. Repeat the measurement using the **oscilloscope**.
 
@@ -291,7 +291,7 @@ an **on-board dedicated circuitry** that **converts USB to JTAG without the need
 of a dedicated cable**. That is, you can easily program your board by using a simple **USB Type A/Type B** or **USB Type A/micro USB**
 cable connected between the host computer and the board without the need of a dedicated programming cable.
 
-On Digilent Arty/ Arty A7 boards this conversion is perfoemed by an integrated circuit by **FTDI (Future Technology Devices International)**.
+On Digilent Arty/ Arty A7 boards this conversion is performed by an integrated circuit by **FTDI (Future Technology Devices International)**.
 As already mentioned this circuitry has been left undocumented, but you can easily recognize the FTDI chip on the board
 close to the micro-USB connector.
 
@@ -397,7 +397,7 @@ For Windows users:
 
 <br />
 
-You can then launch the _Hardware Manager_ from the main Vivado GUI using **Flow > Open Harware Manager**.
+You can then launch the _Hardware Manager_ from the main Vivado GUI using **Flow > Open Hardware Manager**.
 Alternatively you can type `open_hw_manager` in the Tcl console.
 
 <br />
@@ -503,7 +503,7 @@ get_property REGISTER.EFUSE.FUSE_DNA [current_hw_device]
 [**[Contents]**](#contents)
 
 All 7-Series and SoC Xilinx FPGAs have an embedded 1-MS/s 12-bit Analog to Digital Converter (ADC), referred to as **XADC**.
-The XADC can be compiled and used in the RTL code as an IP core, but is also available from the _Harware Manager_
+The XADC can be compiled and used in the RTL code as an IP core, but is also available from the _Hardware Manager_
 for monitoring purposes.
 
 Right-click on XADC and select **Dashboard > New Dashboard**. In the _New Dashboard_ window you can specify a name for the
@@ -534,7 +534,7 @@ Observe at the oscilloscope JTAG signals **TCK**, **TMS**, **TDI** and **TDO** u
 
 <br />
 
-Compare your measurement at the oscilloscope with the output of the following Tcl commnd:
+Compare your measurement at the oscilloscope with the output of the following Tcl command:
 
 ```
 get_property PARAM.FREQUENCY [current_hw_target]
@@ -570,7 +570,7 @@ Map on the board the simple NOT-gate (inverter) already discussed in the first l
 To save time, copy from the `.solutions/` directory the `Inverter.v` source file:
 
 ```
-% cp .solutions/Inverter.v
+% cp .solutions/Inverter.v .
 ```
 
 <br />
@@ -595,7 +595,7 @@ If you run out of time you can also run the _Project Mode_ flow using a Tcl scri
 the sample `project.tcl` script:
 
 ```
-% cp .solutions/project.tcl
+% cp .solutions/project.tcl .
 ```
 
 <br />
@@ -612,7 +612,7 @@ source project.tcl
 > **IMPORTANT !**
 >
 > In order to be able to program also the external Quad SPI Flash memory you must generate
-> the **raw binary version** (`.bin`) of the bitstream file (`.bin`). To do this when working in Project Mode
+> the **raw binary version** (`.bin`) of the bitstream file (`.bit`). To do this when working in Project Mode
 > right-click on **Generate Bitstream** in the **Flow Navigator** and select **Bitstream settings**, then
 > check the `-bin_file` in the table:
 >
@@ -647,7 +647,7 @@ Finally, left-click on **Program**.
 
 <br />
 
-Observe the **DONE** LED turning-off and then turning-on once the programming sequence has completed.
+Observe the **DONE** status LED turning-off and then turning-on once the programming sequence has completed.
 Debug your firmware on the board.
 
 You can also **observe the bitstream** at the oscilloscope through JTAG. To do this, probe the **TDI** signal
@@ -666,7 +666,7 @@ The firmware loaded into the FPGA is stored into a volatile RAM inside the chip.
 across power cycles and you have to **re-program the FPGA** whenever you **disconnect the power** from the board.
 
 In order to get the FPGA automatically programmed at power up you have to write the FPGA configuration into some dedicated
-**external flash memory**. The Digilent Arty A7 board provided a **128 MB Quad SPI Flash memory** by Microsemi for this purpose.
+**external flash memory**. The Digilent Arty board provided a **128 MB Quad SPI Flash memory** by Microsemi for this purpose.
 
 To program the external memory we have to first add the memory to the JTAG chain from the _Hardware Manager_. To do this,
 right click on the  `xc7a35t_0` device and select **Add Configuration Memory Device**.

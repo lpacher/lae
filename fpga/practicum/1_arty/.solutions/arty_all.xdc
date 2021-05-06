@@ -319,3 +319,18 @@ set_property CONFIG_VOLTAGE 3.3 [current_design]
 #set_property -dict { PACKAGE_PIN A16   IOSTANDARD LVCMOS33 } [get_ports { isns0v95_n }]  ; #IO_L8N_T1_AD10N_15 Sch=ad_n[10]
 #set_property -dict { PACKAGE_PIN A15   IOSTANDARD LVCMOS33 } [get_ports { isns0v95_p }]  ; #IO_L8P_T1_AD10P_15 Sch=ad_p[10]
 
+
+################################
+##   additional constraints   ##
+################################
+
+##
+## additional XDC statements to optimize the memory configuration file (.bin)
+## to program the external 128 Mb Quad Serial Peripheral Interface (SPI) flash
+## memory in order to automatically load the FPGA configuration at power-up
+##
+
+set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 4  [current_design]
+set_property CONFIG_MODE SPIx4  [current_design]
+
+

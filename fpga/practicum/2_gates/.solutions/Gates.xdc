@@ -72,5 +72,8 @@ set_load 10 [all_outputs] -verbose
 ############################
 
 ## this is a pure combinational block, only constrain a maximum delay of 10 ns between input and output ports
-set_max_delay 10 -from [all_inputs] -to [all_outputs] -verbose
+#set_max_delay 10 -from [all_inputs] -to [all_outputs] -verbose
+
+## alternatively, disable timing checks from all inputs to all outputs
+set_false_path -from [all_inputs] -to [all_outputs]
 
