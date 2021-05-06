@@ -11,3 +11,6 @@ https://github.com/lpacher/lae/tree/master/fpga/practicum/1_arty)
 [Fundamental logic gates](
 https://github.com/lpacher/lae/tree/master/fpga/practicum/2_gates)
 
+* **Practicum 3** <br />
+[Drive a 7-segment display](
+https://github.com/lpacher/lae/tree/master/fpga/practicum/3_seven_segment_display)
