@@ -348,11 +348,12 @@ in the XSim **Tcl console**. Debug simulation results in the XSim graphical inte
 [**[Contents]**](#contents)
 
 Create a suitable testbench `bench/tb_DLATCH.v` to **simulate and verify also the functionality of the D-latch**.
-Update also the values of `RTL_TOP_MODULE`, `SIM_TOP_MODULE`, `RTL_VLOG_SOURCES` and `SIM_VLOG_SOURCES`` variables
+Update also the values of `RTL_TOP_MODULE`, `SIM_TOP_MODULE`, `RTL_VLOG_SOURCES` and `SIM_VLOG_SOURCES` variables
 in the `Makefile` in order to simulate the second sequential block:
 
 ```
 RTL_TOP_MODULE := DLATCH
+SIM_TOP_MODULE := tb_DLATCH
 
 ...
 ...

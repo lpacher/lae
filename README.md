@@ -556,26 +556,27 @@ The complete list of past video-recorded lectures held during Spring 2020 can be
 
 ### Links to **video-recorded lectures** (in Italian)
 
-* Lecture 1 - Mon 19, 2021<br />
+* Lecture 1 - Mon 19/04/2021<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/f3906e665e5f4072af8a0d9ca88aa06e>_
 
-
-* Lecture 2 - Tue 20, 2021<br />
+* Lecture 2 - Tue 20/04/2021<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/c572d2a5bfb34bc4aaafa1d28b3ef645>_
 
-* Lecture 3 - Wed 22, 2021<br />
+* Lecture 3 - Wed 22/04/2021<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/cd9e74965f0142568879939574cb27b2>_
 
-* Lecture 4 - Mon 26, 2021<br />
+* Lecture 4 - Mon 26/04/2021<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/7406d1fc88b510398ebe00505681b7cf>_
 
-* Lecture 5 - Tue 27, 2021<br />
+* Lecture 5 - Tue 27/04/2021<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/7eb4554f898f103983fe0050568134da>_
 
-* Lecture 6 - Wed 28, 2021<br />
+* Lecture 6 - Wed 28/04/2021<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/4c1147458a5910398773005056813326>_
 
-* Lecture 7 - Thu 29, 2021<br />
+* Lecture 7 - Thu 29/04/2021<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/aceaae168b1710399e7f00505681c128>_
 
+* Lecture 8 - Tue 11/05/2021<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/dc07cd46948f1039b73900505681c2fb>_
 
