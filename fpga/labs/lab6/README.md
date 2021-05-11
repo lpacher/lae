@@ -271,7 +271,7 @@ module tb_DFF ;
 
    wire Q ;
 
-   DFF DUT (.clk(clk_buf), .reset(rst), .D(D), .Q(Q) ) ;
+   DFF DUT (.clk(clk_buf), .rst(rst), .D(D), .Q(Q) ) ;
 
 
    //////////////////
