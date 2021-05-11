@@ -55,12 +55,13 @@ and to learn how to program its Xilinx Artix-7 FPGA with a simple Verilog RTL de
 This introductory practicum should exercise the following concepts:
 
 * locate Digilent Arty A7 development board reference documentation
-* understand board schematics
+* explore and understand board schematics
 * locate main circuit components on the board
 * power the board from host computer using a simple USB cable
 * review the usage of fundamental lab instrumentation for measurements (DMM, digital oscilloscope)
 * check cable drivers installation and jumper settings
 * use the Vivado _Hardware Manager_ to interact with the FPGA
+* run the Xilinx Vivado FPGA implementation flow on a simple RTL design
 * program the FPGA and the external Quad SPI Flash memory
 
 <br />
@@ -240,11 +241,11 @@ Verify that all jumpers are properly inserted.
 ## Connect the board to your personal computer
 [**[Contents]**](#contents)
 
-Despite the board can be powered from external power supply, for this course we will simply power the board
+Despite the board can be powered from an external power supply, for this course we will simply power the board
 using 5V from USB cable. Connect the board to the USB port of your personal computer using a **USB A to micro USB cable**.
 Verify that the **POWER** status LED turns on.
 
-Use the DMM to perform basic power checks. Repeat the measurement using the **oscilloscope**.
+Use the DMM to perform basic power checks. Repeat all your measurements using the **oscilloscope**.
 
 <br />
 

@@ -121,7 +121,7 @@ add_files -norecurse -fileset sources_1 [concat [glob -nocomplain ${rtlDir}/*.vh
 ##
 ## load testbench sources
 ##
-add_files -norecurse -fileset sim_1 [glob -nocomplain ${benchDir}/*.vhd]
+add_files -norecurse -fileset sim_1 [concat [glob -nocomplain ${benchDir}/*.vhd] [glob -nocomplain ${benchDir}/*.v]]
 
 
 ##
