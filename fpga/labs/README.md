@@ -27,3 +27,7 @@ https://github.com/lpacher/lae/tree/master/fpga/labs/lab4)
 [The Xilinx Vivado FPGA implementation flow on a simple RTL design](
 https://github.com/lpacher/lae/tree/master/fpga/labs/lab5)
 
+* **Lab 6**<br />
+[Latch and FlipFlop](
+https://github.com/lpacher/lae/tree/master/fpga/labs/lab6)
+
