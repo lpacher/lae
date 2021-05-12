@@ -580,3 +580,6 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/aceaae168b
 * Lecture 8 - Tue 11/05/2021<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/dc07cd46948f1039b73900505681c2fb>_
 
+* Lecture 9 - Wed 12/05/2021<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/4174c25c95481039bfe50050568165e9>_
+
