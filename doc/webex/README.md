@@ -58,6 +58,16 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/d5eab66c10
 * Lecture 17 - Thu 21/05/2020<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/a5bafd58d8c4498191ee5cf47b259e86>_
 
+* Lecture 18 - Fri 22/05/2020<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/c2703909263d4b6992d5f6b131998dee>_
+
+* Lecture 19 - Mon 25/05/2020<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/66fdf9600093463c897bcff83132bc9a>_
+
+* Lecture 20 - Tue 26/05/2020<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/0c9e788f735c4411aab36a264f1ac586>_
+
+<br />
 
 **PART II - Prof. Greco [20 h]**
 
