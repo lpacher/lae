@@ -684,7 +684,7 @@ Try to run the FPGA implementation flow using a **Non Project mode Tcl flow** as
 
 <br />
 
-Explore the content of the `scripts/impl/build.tcl` script already prepared for you:
+Explore the content of the `scripts/build/build.tcl` script already prepared for you:
 
 ```
 % more scripts/build/build.tcl
