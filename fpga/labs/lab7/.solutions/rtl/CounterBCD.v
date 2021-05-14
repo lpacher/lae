@@ -11,38 +11,34 @@
 module CounterBCD (
 
    input  wire clk,
-   input  wire rst,           // active-high reset
-   input  wire  en,           // asynchronous enable
-   output reg [3:0] BCD,      // 4-bit BCD output code
+   input  wire rst,
+   input  wire  en,
+   output reg [3:0] BCD,
    output wire carryout
 
    ) ;
-   
 
-   always @(posedge clk) begin                              // synchronous reset
-   //always @(posedge clk or posedge rst) begin 	    // asynchronous reset
 
-      if( rst == 1'b1 )
-         BCD <= 4'b0000 ;
+   always @(posedge clk) begin
+
+      if( rst == 1'b1 )              // synchronous reset, active-high (same as 'if(rst)' for less typing)
+         BCD <= 4'b0000 ;            // here you can also use 4'd0 or 'd0
 
       else begin
 
-         if( en == 1'b1 ) begin      // let the counter to increment only if enabled !
+         if( en == 1'b1 ) begin      // let the counter to increment only if enabled (same as 'if(en)' for less typing)
 
-            if( BCD == 4'b1001 )     // force the count roll-over at 9
+            if( BCD == 4'b1001 )     // force the count roll-over at 9 (you can also use 4'd9)
                BCD <= 4'b0000 ;
             else
-               BCD <= BCD + 1'b1 ;
+               BCD <= BCD + 4'b1 ;
          end
-
-         //else begin
-         //   BCD <= BCD ;    // keep MEMORY otherwise, but this can be omitted !
-         //end
-
-      end  // if
+         //else ? keep memory otherwise
+      end
    end // always
 
-   assign carryout = ( BCD == 4'b1001 ) ? 1'b1 : 1'b0 ;
+
+   assign carryout = ( (BCD == 4'b1001) && (en == 1'b1) ) ? 1'b1 : 1'b0 ;
 
 endmodule
 

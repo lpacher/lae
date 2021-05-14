@@ -180,7 +180,7 @@ proc compile {} {
             puts "Compiling Verilog source file ${src} ..."
 
             ## launch the xvlog executable from Tcl (force xvlog -sv to compile all sources as SystemVerilog files)
-            catch {exec xvlog -relax -sv -work work ${src} -nolog | tee -a ${logFile} }
+            catch {exec xvlog -relax -sv -work work ${src} -include [pwd]/../../rtl -nolog | tee -a ${logFile} }
 
          } else {
 

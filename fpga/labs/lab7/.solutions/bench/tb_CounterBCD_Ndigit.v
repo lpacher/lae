@@ -17,6 +17,17 @@
 
 `define NUMBER_OF_DIGITS 4
 
+//`define FREQUENCY   100e6
+//`define FREQUENCY   100e6/2
+//`define FREQUENCY   100e6/4
+//`define FREQUENCY   100e6/8
+//`define FREQUENCY   100e6/16
+//`define FREQUENCY   100e6/32
+//`define FREQUENCY   100e6/64
+
+`define FREQUENCY    10e6   // 10 MHz with MAX=10  in the "ticker"
+//`define FREQUENCY     1e6   //  1 MHz with MAX=100 in the "ticker"
+
 `timescale 1ns / 100ps
 
 
@@ -34,24 +45,11 @@ module tb_CounterBCD_Ndigit ;
    IBUF  IBUF_inst ( .I(clk100), .O(clk100_buf) ) ;
 
 
-   ////////////////
-   //   ticker   //
-   ////////////////
-
-   // assert a single clock-pulse every 1 us i.e. 100 x 10 ns clock period at 100 MHz
-
-   //wire enable ;
-   reg enable ;
-
-   //TickCounter  #(.MAX(100)) TickCounter_inst ( .clk(clk100_buf), .tick(enable)) ;
-
-
-
    ///////////////////////////
    //   device under test   //
    ///////////////////////////
 
-   reg rst ;
+   reg rst, enable ;
 
    wire [`NUMBER_OF_DIGITS*4-1:0] BCD ;  // each 4-bit slice of the BCD counter is a "digit" in decimal
 
@@ -65,31 +63,15 @@ module tb_CounterBCD_Ndigit ;
    //   stimulus   //
    //////////////////
 
-   wire [3:0] BCD_0 = BCD[ 3: 0] ;
-   wire [3:0] BCD_1 = BCD[ 7: 4] ;
-   wire [3:0] BCD_2 = BCD[11: 8] ;
-   wire [3:0] BCD_3 = BCD[15:12] ;
-
-`ifdef TICKER
-
-   initial begin
-
-      #72 rst = 1'b1 ;
-
-      // release the reset
-      #515 rst = 1'b0 ;
-
-      #(1000*2157) force enable = 1'b0 ; $display("Effective number of counts from BCD counter : %d%d%d%d", BCD_3 , BCD_2 , BCD_1 , BCD_0 ) ;
-
-      #500 $finish  ;
-   end
-
-`else
+   wire [3:0] DIGIT_0 = BCD[ 3: 0] ;
+   wire [3:0] DIGIT_1 = BCD[ 7: 4] ;
+   wire [3:0] DIGIT_2 = BCD[11: 8] ;
+   wire [3:0] DIGIT_3 = BCD[15:12] ;
 
    // assume 100 MHz clock frequency and count clock pulses every 10 ns instead
 
    //realtime t1, t2 ;              // **WARN: 'realtime' is 64-bit DOUBLE-precision floating point to be used with $realtime system task
-   time t1, t2 ;                    // **WARN: 'time' is 64-bit UNSIGNED integer to be used with $time system task (in ps since timescale is ps)
+   time t1, t2 ;                    // **WARN: 'time' is 64-bit UNSIGNED integer to be used with $time system task (in ns since timescale is ns)
 
    initial begin
 
@@ -98,17 +80,15 @@ module tb_CounterBCD_Ndigit ;
       // release the reset
       #515 rst = 1'b0 ;
 
-      #500   enable = 1'b1 ; t1 = $time ;
-      #10843 enable = 1'b0 ; t2 = $time ;
+      #500   enable = 1'b1 ; t1 = $time ;   // returns 64-bit uint ns
+      #10843 enable = 1'b0 ; t2 = $time ;   // returns 64-bit uint ns
 
-      $display("\n**INFO: Expected number of clock cycles counted by BCD counter : %d", (t2-t1)/10.0 ) ;
-      $display("        Effective number of counts from BCD counter : %d%d%d%d", BCD_3 , BCD_2 , BCD_1 , BCD_0 ) ;
+      $display("\n**INFO: Expected number of clock cycles counted by BCD counter : %d", ((t2-t1)*1e-9)*(`FREQUENCY) ) ;
+      $display("        Effective number of counts from BCD counter : %d%d%d%d", DIGIT_3 , DIGIT_2 , DIGIT_1 , DIGIT_0 ) ;
 
       #3000 $finish  ;
 
    end
-
-`endif   // TICKER
 
 endmodule
 

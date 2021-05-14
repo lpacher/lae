@@ -44,7 +44,7 @@ if { [info exists ::env(QFLASH_MEMORY)] } {
 
 } else {
 
-   ## default: Micron 128 MB Quad SPI Flash (Arty A7/Z7, KC705)
+   ## default: Micron 128 MB Quad SPI Flash (Arty/Z7, KC705)
    set targetQuadSpiFlash mt25ql128-spi-x1_x2_x4
    #set targetQuadSpiFlash n25q128-3.3v-spi-x1_x2_x4 ;   ## **WARN: should be the same as "mt25ql128-spi-x1_x2_x4" (alias), but this string gives programming errors
 }

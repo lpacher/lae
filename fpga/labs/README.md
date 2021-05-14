@@ -28,6 +28,11 @@ https://github.com/lpacher/lae/tree/master/fpga/labs/lab4)
 https://github.com/lpacher/lae/tree/master/fpga/labs/lab5)
 
 * **Lab 6**<br />
-[Latch and FlipFlop](
+[Introduction to sequential circuits: D-latch and D-FlipFlop in Verilog](
 https://github.com/lpacher/lae/tree/master/fpga/labs/lab6)
+
+* **Lab 7**<br />
+[Implementation of a simple parameterizable N-digit Binary-Coded Decimal (BCD) counter in Verilog.<br />
+Good and bad clocking techniques. Introduction to the Vivado IP flow (the _Clocking Wizard_)](
+https://github.com/lpacher/lae/tree/master/fpga/labs/lab7)
 

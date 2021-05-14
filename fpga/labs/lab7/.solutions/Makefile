@@ -1,5 +1,6 @@
 ##
-## Improved GNU Makefile example to automate the Xilinx XSim simulation flow.
+## Example GNU Makefile to automate simulation and implementation flows
+## using Xilinx Vivado tools.
 ##
 ## Command line usage:
 ##
@@ -10,7 +11,7 @@
 ## Examples:
 ##
 ##   % make compile [hdl=rtl/verilog.v]
-##   % make sim
+##   % make build install
 ##
 ## Luca Pacher - pacher@to.infn.it
 ## Fall 2020
@@ -55,7 +56,7 @@ SIM_DIR := bench
 TCL_DIR := scripts
 DOC_DIR := doc
 
-## put non-Tcl scripts and programs into a ./bin directory (e.g. Bash/Batch or Python scripts)
+## put non-Tcl scripts and programs into a ./bin directory (e.g. Python scripts)
 BIN_DIR := bin
 
 ## flows-specific directories
@@ -91,6 +92,7 @@ SIM_TOP_MODULE := tb_CounterBCD_Ndigit
 ## specify RTL sources by hand (more in general can be Verilog + VHDL code)
 ##
 
+#RTL_VLOG_SOURCES := $(RTL_DIR)/CounterBCD.v $(RTL_DIR)/CounterBCD_Ndigit.v
 RTL_VLOG_SOURCES := $(RTL_DIR)/CounterBCD.v $(RTL_DIR)/CounterBCD_Ndigit.v $(RTL_DIR)/TickCounter.v
 
 SIM_VLOG_SOURCES := $(SIM_DIR)/glbl.v $(SIM_DIR)/ClockGen.v $(SIM_DIR)/tb_CounterBCD_Ndigit.v
@@ -150,13 +152,23 @@ VHDL_SOURCES := $(RTL_VHDL_SOURCES) $(SIM_VHDL_SOURCES)
 ##
 
 ## as for HDL sources, specify IP netlists by hand or automatically search for all *netlist.v sources
-# IPS_SOURCES := $(IPS_DIR)/PLL/PLL_netlist.v
+# IPS_SOURCES := $(IPS_DIR)/PLL/PLL_sim_netlist.v
 
-#
-#ifneq ($(wildcard $(IPS_DIR)/*/*netlist.v ),)
-#   IPS_SOURCES += $(wildcard $(IPS_DIR)/*/*netlist.v )
-#endif
-#
+ifneq ($(wildcard $(IPS_DIR)/*/*netlist.v ),)
+   IPS_SOURCES += $(wildcard $(IPS_DIR)/*/*netlist.v )
+endif
+
+
+################################################
+##   target FPGA device and external memory   ##
+################################################
+
+## default: Artix7 on Digilent Arty A7 development board
+part  := xc7a35ticsg324-1L
+
+## default: 128 MB Quad SPI Flash on Digilent Arty A7 development board
+flash := mt25ql128-spi-x1_x2_x4
+#flash := n25q128-3.3v-spi-x1_x2_x4 ; ## WARN: **should be the same as "mt25ql128-spi-x1_x2_x4" (alias), but this string gives programming errors
 
 
 #########################
@@ -198,8 +210,12 @@ mode ?= gui
 ## **NOTE
 ##
 ## Use the strip function to avoid interpreting whitespace as a non-empty values
-## in case the design uses only one HDL language. 
+## in case the design uses only one HDL language.
 ##
+
+## export target device and memory IDs to implementation flows
+export XILINX_DEVICE=$(part)
+export QFLASH_MEMORY=$(flash)
 
 ## export the chosen working directory to all flows
 export WORK_DIR
@@ -267,10 +283,14 @@ help : ## Command line help
 	@$(ECHO) ""
 	@grep -E '^[a-zA-Z_-]+ :.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "- make \033[36m%-15s\033[0m %s\n", $$1, $$2}'
 	@$(ECHO) ""
+	@$(ECHO) "Target Xilinx device:            $(XILINX_DEVICE)"
+	@$(ECHO) "External Quad SPI Flash memory:  $(QFLASH_MEMORY)"
+	@$(ECHO) ""
 	@$(ECHO) "Examples:"
 	@$(ECHO) ""
 	@$(ECHO) "   % make compile [hdl=/path/to/verilog.v|hdl=/path/to/vhdl.vhd]"
 	@$(ECHO) "   % make sim"
+	@$(ECHO) "   % make build install"
 	@$(ECHO) ""
 ##____________________________________________________________________________________________________
 
@@ -379,6 +399,191 @@ sim : compile elaborate simulate ## One-step compilation, elaboration and simula
 
 
 ##
+## Implementation targets (you can also run the flow step-by-step using escaped targets)
+##
+
+.PHONY : build/import
+build/import :
+
+ifeq ($(wildcard $(WORK_DIR)/build/.*),)
+	@$(error ERROR: Missing implementation working area $(WORK_DIR)/build ! Run 'make area' before running the flows.)
+else
+   ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/import.tcl \
+	   -log $(LOG_DIR)/import.log -nojournal -verbose -notrace &" | tclsh -norc
+   else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/import.tcl \
+	   -log $(LOG_DIR)/import.log -nojournal -verbose -notrace
+   endif
+endif
+
+.PHONY : build/syn
+build/syn :
+
+ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/syn.tcl \
+	   -log $(LOG_DIR)/syn.log -nojournal -verbose -notrace &" | tclsh -norc
+else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/syn.tcl \
+	   -log $(LOG_DIR)/syn.log -nojournal -verbose -notrace
+endif
+
+
+.PHONY : build/place
+build/place :
+
+ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/place.tcl \
+	   -log $(LOG_DIR)/place.log -nojournal -verbose -notrace &" | tclsh -norc
+else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/place.tcl \
+	   -log $(LOG_DIR)/place.log -nojournal -verbose -notrace
+endif
+
+.PHONY : build/route
+build/route :
+
+ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/route.tcl \
+	   -log $(LOG_DIR)/route.log -nojournal -verbose -notrace &" | tclsh -norc
+else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/route.tcl \
+	   -log $(LOG_DIR)/route.log -nojournal -verbose -notrace
+endif
+
+.PHONY : build/export
+build/export :
+
+ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/export.tcl \
+	   -log $(LOG_DIR)/export.log -nojournal -verbose -notrace &" | tclsh -norc
+else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/export.tcl \
+	   -log $(LOG_DIR)/export.log -nojournal -verbose -notrace
+endif
+
+.PHONY : build
+build : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/build/build.tcl ## Run the full Vivado FPGA implementation flow and generate bitstream (non-project mode)
+
+ifeq ($(wildcard $(WORK_DIR)/build/.*),)
+	@$(error ERROR: Missing implementation working area $(WORK_DIR)/build ! Run 'make area' before running the flows.)
+else
+   ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/build.tcl \
+	   -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace &" | tclsh -norc
+   else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/build.tcl \
+	   -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace
+   endif
+endif
+##_______________________________________________________________________________________
+
+
+##
+## Programming targets
+##
+
+## empty variables to optionally specify input files from the command line, either .bit/.ltx or .bin
+bit :=
+ltx :=
+bin :=
+
+ifneq ($(bit),)
+   export BIT_FILE=$(bit)
+endif
+
+ifneq ($(ltx),)
+   export LTX_FILE=$(ltx)
+endif
+
+ifneq ($(bin),)
+   export BIN_FILE=$(bin)
+endif
+
+
+.PHONY : hw_manager
+hw_manager : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/install/hw_manager.tcl ## Open Vivado Hardware Manager
+
+ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/install/hw_manager.tcl -notrace \
+	   -log $(LOG_DIR)/$@.log -nojournal -verbose &" | tclsh -norc
+else
+	@vivado -mode tcl \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/install/hw_manager.tcl -notrace \
+	   -log $(LOG_DIR)/$@.log -nojournal -verbose
+endif
+##____________________________________________________________________________________________________
+
+
+.PHONY : install
+install : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/install/install.tcl ## Upload bitstream to target FPGA using Vivado Hardware Manager
+
+ifeq ($(mode),gui)
+
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/install/install.tcl \
+	   -notrace -log $(LOG_DIR)/$@.log -nojournal &" | tclsh -norc
+else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/install/install.tcl \
+	   -notrace -log $(LOG_DIR)/$@.log -nojournal 
+endif
+##____________________________________________________________________________________________________
+
+
+.PHONY : install_flash
+install_flash : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/install/install_flash.tcl ## Program external Quad SPI Flash memory with FPGA configuration
+
+ifeq ($(mode),gui)
+
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/install/install_flash.tcl \
+	   -notrace -log $(LOG_DIR)/$@.log -nojournal &" | tclsh -norc
+else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/install/install_flash.tcl \
+	   -notrace -log $(LOG_DIR)/$@.log -nojournal
+endif
+##____________________________________________________________________________________________________
+
+
+##
+## Other targets
+##
+
+## empty variable to optionally specify a design checkpoint (.dcp) to be restored
+dcp :=
+
+restore : ## Restore Vivado project from XML project file (.xpr) or design checkpoint (.dcp)
+
+ifeq ($(dcp),)
+	@$(error ERROR: Missing design checkpoint to be restored! Usage: 'make restore dcp=/path/to/filename.dcp'.)
+else
+   ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace $(dcp) &" | tclsh -norc
+   else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace $(dcp)
+   endif
+endif
+##____________________________________________________________________________________________________
+
+
+##
 ## Cleanup targets
 ##
 
@@ -397,8 +602,15 @@ clean_sim : ## Delete ALL files from work/sim
 ##____________________________________________________________________________________________________
 
 
+.PHONY : clean_build
+clean_build : ## Delete ALL files from work/build
+
+	@$(RMDIR) $(WORK_DIR)/build/*
+##____________________________________________________________________________________________________
+
+
 .PHONY : clean_all
-clean_all : clean_log clean_sim ## Delete ALL temporary and garbage files
+clean_all : clean_log clean_sim clean_build ## Delete ALL temporary and garbage files
 
 	@$(RM) *.pb *.wdb *.log *.jou
 	@$(RMDIR) xsim.dir
