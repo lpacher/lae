@@ -37,3 +37,6 @@ Good and bad clocking techniques. Introduction to the Vivado IP flow (the _Clock
 Example Real-Number Model (RNM) simulation of a Voltage-Controlled Oscillator (VCO).](
 https://github.com/lpacher/lae/tree/master/fpga/labs/lab7)
 
+* **Lab 8**<br />
+[Pulse-Width Modulation (PWM).](
+https://github.com/lpacher/lae/tree/master/fpga/labs/lab8)
