@@ -353,14 +353,14 @@ Modify the implementation of the PWM in order to have:
 * the PWM output always OFF when the threshold value is 0
 * the PWM output always ON when the threshold value is set to the maximum, that is `11111 ... 11` (e.g. 255 for an 8-bit PWM counter)
 
-In order to to this we have to force the roll-over of the counter when it reaches MAX-1, that is `11111 ... 10` as follows:
+In order to do this we have to force the roll-over of the counter when it reaches MAX-1, that is `11111 ... 10` as follows:
 
 ```verilog
 always @(posedge clk) begin
 
    if (enable) begin
 
-      if( pwm_count == {THRESHOLD_NBITS{1'b1}} -1 )
+      if( pwm_count == {THRESHOLD_NBITS{1'b1}} - 'b1 )
          pwm_count <= 'b0 ;
 
       else
