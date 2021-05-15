@@ -15,6 +15,7 @@
 * [**Compile a Phase-Locked Loop (PLL) IP core**](#compile-a-phase-locked-loop-pll-ip-core)
 * [**Run the FPGA implementation flow in non-project mode interactively**](#run-the-FPGA-implementation-flow-in-non-project-mode-interactively)
 * [**Exercise**](#exercise)
+* [**Extra: example Real-Number Model (RNM) simulation of a Voltage-Controlled Oscillator (VCO) using SystemVerilog**](#vco-simulation)
 * [**Further readings**](#further-readings)
 
 <br />
@@ -786,22 +787,15 @@ module CounterBCD_Ndigit #(parameter integer Ndigit = 1) (
 
 
 
-   ////////////////////////////////////
-   //   PLL IP core (Clock Wizard)   //
-   ////////////////////////////////////
+   ///////////////////////////////////////
+   //   PLL IP core (Clocking Wizard)   //
+   ///////////////////////////////////////
 
    // PLL signals
-   wire pll_clk100, pll_clk200, pll_locked ;
+   wire pll_clk, pll_locked, UNCONNECTED ;
 
-   PLL  PLL_inst ( .CLK_IN(clk), .CLK_OUT_100(pll_clk100), .CLK_OUT_200(pll_clk200), .LOCKED(pll_locked) ) ;
-
-
-   wire pll_clk ;
-
-   // choose here the clock fed to core logic
-   assign pll_clk =  pll_clk100 ;              // 100 MHz output clock
-   //assign pll_clk =  pll_clk200 ;            // 200 MHz output clock
-
+   PLL  PLL_inst ( .CLK_IN(clk), .CLK_OUT_100(pll_clk), .CLK_OUT_200(UNCONNECTED), .LOCKED(pll_locked) ) ;      // 100 MHz output clock
+   //PLL  PLL_inst ( .CLK_IN(clk), .CLK_OUT_100(UNCONNECTED), .CLK_OUT_200(pll_clk), .LOCKED(pll_locked) ) ;    // 200 MHz output clock
 
 
 /*
@@ -884,7 +878,25 @@ Save modifications to HDL sources and try to re-simulate the design from scratch
 
 <br />
 
-Debug your simulation results. Add PLL signals to the Waveform window. Close the simulator graphical interface once happy.
+Debug your simulation results. Add PLL signals to the Waveform window. Comment/uncomment the PLL instantiation code
+in order to switch between 100 MHz and 200 MHz output clock:
+
+```verilog
+PLL  PLL_inst ( .CLK_IN(clk), .CLK_OUT_100(pll_clk), .CLK_OUT_200(UNCONNECTED), .LOCKED(pll_locked) ) ;      // 100 MHz output clock
+//PLL  PLL_inst ( .CLK_IN(clk), .CLK_OUT_100(UNCONNECTED), .CLK_OUT_200(pll_clk), .LOCKED(pll_locked) ) ;    // 200 MHz output clock
+```
+
+<br />
+
+Remind that you can always relaunch the simulation from the XSim Tcl console with:
+
+```
+relaunch
+```
+
+<br />
+
+Close the simulator graphical interface once happy.
 
 <br />
 
@@ -1214,6 +1226,194 @@ In required, this flag can be than used to **stop and freeze the counter** when 
 <!--------------------------------------------------------------------->
 
 
+## <a name="vco-simulation"></a> Extra: example Real-Number Model (RNM) simulation <br /> of a Voltage-Controlled Oscillator (VCO) using SystemVerilog
+[**[Contents]**](#contents)
+
+The core component of a Phase-Locked Loop (PLL) circuit is a **Voltage-Controlled Oscillator (VCO)**. Despite up to now
+we only simulated pure-digital systems, hardware description languages allows to also simulate **mixed-signal systems**
+at different levels of accuracy.
+
+In this section we provide a small example to demonstrate how you can "model" a complex mixed-signal circuit such as a VCO
+with **real numbers** and **SystemVerilog real ports**. The resulting simulation is a **pure-digital simulation**.
+
+As a first step, create a dedidcated directory e.g. `extra/` to contain additional HDL sources you are going to write:
+
+```
+% mkdir extra
+```
+
+<br />
+
+With your text editor application create a first new **SystemVerilog** simulation source `extra/VCO.sv` with the following content:
+
+```SystemVerilog
+//
+// Example Real-Number Model (RNM) using SystemVerilog real ports for a simple
+// Voltage-Controlled Oscillator (VCO).
+//
+
+
+`timescale 1ns / 100ps
+
+module VCO (
+
+   input  real  Vctrl,     // analog control voltage using a 'real' input port, only supported by SystemVerilog
+   output logic clk        // SystemVerilog 'logic' net type, same as 'reg'
+
+   ) ;
+
+   // VCO parameters
+   parameter real INTRINSIC_FREQ = 2.5 ;  // MHz
+   parameter real VCO_GAIN = 10 ;         // MHz/V
+
+   real clk_delay ;
+   real freq ;
+
+   initial begin
+      clk = 1'b0 ;
+      freq = INTRINSIC_FREQ ;             // initial frequency
+      clk_delay = 1.0/(2*freq)*1e3 ;      // initial semi-period
+    end
+
+
+   // change the clock frequency whenever the control voltage changes
+   always @(Vctrl) begin
+      freq = INTRINSIC_FREQ + VCO_GAIN*Vctrl ;
+      clk_delay = 1.0/(2*freq)*1e3 ;
+
+      $display("VCO clock frequency for Vctrl = %.2f V is %2.2f MHz", Vctrl, freq) ;
+   end
+
+   // clock generator
+   always #clk_delay clk = ~clk ;
+
+endmodule : VCO
+```
+
+<br />
+
+
+This is of course **NON-SYNTHESIZABLE CODE**, but **real-number models (RNM)** are very useful to model **mixed signal blocks**
+connected to FPGA devices such as A/D and D/A converters, temperature sensors etc.
+
+<br />
+
+Create also a Verilog testbench `extra/tb_VCO.v` to test the functionality of the VCO:
+
+```verilog
+//
+// Verilog testbench for VCO mixed-signal real model.
+//
+
+`timescale 1ns / 100ps
+
+module tb_VCO ;
+
+   ///////////////////////////
+   //   device under test   //
+   ///////////////////////////
+
+   real Vctrl ;   // analog control voltage
+   wire clk ;     // VCO output clock
+
+   VCO   DUT (.Vctrl(Vctrl), .clk(clk)) ;
+
+
+   /////////////////////////
+   //   analog stimulus   //
+   /////////////////////////
+
+   initial begin
+        #0    Vctrl = 1.25 ;
+        #3000 Vctrl = 2.00 ;
+        #3000 Vctrl = 0.50 ;
+        #3000 Vctrl = 0.78 ;
+        #3000 Vctrl = 1.25 ;
+
+        #3000 $finish ;      // check also that clock frequency is 2.5 MHz as expected for Vctrl = 0 V
+   end
+
+endmodule
+```
+
+<br />
+
+>
+> **NOTE**
+>
+> You can also copy HDL sources already prepared for you from the `.solutions/` directory:
+>
+> ```
+> % cp .solutions/extra/VCO.sv     extra/
+> % cp .solutions/extra/tb_VCO.v   extra/
+> ```
+>
+
+<br />
+
+Before simulating this small example change into the `work/sim` directory in order to keep the `lab7/` directory clean:
+
+```
+% cd work/sim
+```
+
+<br />
+
+Compile the design from the command line by invoking the `xvlog` executable as follows:
+
+
+```
+% xvlog -sv ../../extra/VCO.sv
+% xvlog ../../extra/VCO.sv
+```
+
+<br />
+
+Note the usage of the `-sv` option required to enable SystemVerilog extensions. Elaborate the design with the `xelab` executable:
+
+```
+% xelab -debug all tb_VCO
+```
+
+<br />
+
+Finally, load the simulation snaphot invoking `xsim` in graphic mode. For Linux users:
+
+```
+% xsim -gui tb_VCO &
+```
+
+<br />
+
+For Windows users:
+
+```
+% echo "exec xsim -gui tb_VCO &" | tclsh -norc
+```
+
+<br />
+
+Add all testbench module signals to a new Wave window with the `add_wave` command and run the simulation:
+
+
+```
+add_wave /*
+run all
+```
+
+<br />
+
+![](doc/pictures/vco_sim.png)
+
+<br />
+
+This small example can be used as a reference code to describe and simulate other mixed-signal blocks
+such as A/D and D/A converters using only real numbers.
+
+<br />
+<!--------------------------------------------------------------------->
+
+
 ## Further readings
 [**[Contents]**](#contents)
 
@@ -1222,5 +1422,4 @@ Xilinx official documentation:
 
 * [_Vivado Design Suite User Guide: Designing with IP (UG896)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug896-vivado-ip.pdf)
 * [_Clocking Wizard v6.0 LogiCORE IP Product Guide_](https://www.xilinx.com/support/documentation/ip_documentation/clk_wiz/v6_0/pg065-clk-wiz.pdf)
-
 

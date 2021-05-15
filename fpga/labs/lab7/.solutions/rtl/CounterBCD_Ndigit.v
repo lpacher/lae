@@ -29,21 +29,15 @@ module CounterBCD_Ndigit #(parameter integer Ndigit = 1) (
    ) ;
 
 
-   ////////////////////////////////////
-   //   PLL IP core (Clock Wizard)   //
-   ////////////////////////////////////
+   ///////////////////////////////////////
+   //   PLL IP core (Clocking Wizard)   //
+   ///////////////////////////////////////
 
    // PLL signals
-   wire pll_clk100, pll_clk200, pll_locked ;
+   wire pll_clk, pll_locked, UNCONNECTED ;
 
-   PLL  PLL_inst ( .CLK_IN(clk), .CLK_OUT_100(pll_clk100), .CLK_OUT_200(pll_clk200), .LOCKED(pll_locked) ) ;
-
-
-   wire pll_clk ;
-
-   // choose here the clock fed to core logic
-   assign pll_clk =  pll_clk100 ;              // 100 MHz output clock
-   //assign pll_clk =  pll_clk200 ;            // 200 MHz output clock
+   PLL  PLL_inst ( .CLK_IN(clk), .CLK_OUT_100(pll_clk), .CLK_OUT_200(UNCONNECTED), .LOCKED(pll_locked) ) ;      // 100 MHz output clock
+   //PLL  PLL_inst ( .CLK_IN(clk), .CLK_OUT_100(UNCONNECTED), .CLK_OUT_200(pll_clk), .LOCKED(pll_locked) ) ;    // 200 MHz output clock
 
 
 /*
