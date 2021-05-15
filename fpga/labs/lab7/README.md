@@ -1043,7 +1043,7 @@ set_property CONFIG_MODE SPIx4  [current_design]
 
 **RUN THE FLOW INTERACTIVELY**
 
-Run the flow Vivado FPGA implementation mode in Non-Project mode interactively. As a first step, create
+Run the flow Vivado FPGA implementation flow in _Non-Project_ mode interactively. As a first step, create
 an in-memory project and load all RTL and IP design sources as follows: 
 
 ```
