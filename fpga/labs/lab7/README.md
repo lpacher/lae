@@ -14,8 +14,8 @@
 * [**Clock management issues**](#clock-management-issues)
 * [**Compile a Phase-Locked Loop (PLL) IP core**](#compile-a-phase-locked-loop-pll-ip-core)
 * [**Run the FPGA implementation flow in non-project mode interactively**](#run-the-FPGA-implementation-flow-in-non-project-mode-interactively)
-* [**Exercise**](#exercise)
-* [**Extra: example Real-Number Model (RNM) simulation of a Voltage-Controlled Oscillator (VCO) using SystemVerilog**](#vco-simulation)
+* [**Extra: example Real-Number Model (RNM) simulation <br /> of a Voltage-Controlled Oscillator (VCO) using SystemVerilog**](#vco-simulation)
+* [**Exercises**](#exercises)
 * [**Further readings**](#further-readings)
 
 <br />
@@ -1155,77 +1155,6 @@ exit
 <!--------------------------------------------------------------------->
 
 
-## Exercises
-[**[Contents]**](#contents)
-
-
-**EXCERCISE 1**
-
-Modify timing constraints in the XDC file and **increase the input clock frequency to 1 GHz** as follows:
-
-```
-#create_clock -period 10.000 -name clk100 -waveform {0.000 5.000} -add [get_ports clk]
-create_clock -period 1.000 -name clk100 -waveform {0.000 5.000} -add [get_ports clk]
-```
-
-<br />
-
-Re-run the flow in _Non-Project_ mode with:
-
-```
-% make clean
-% make build
-```
-
-<br />
-
-Generate a new summary timing report.
-
-<br />
-
->
-> **QUESTION**
->
-> Are there timing violations in the design ?
->
->   \____________________________________________________________________________________________________
->
-
-<br />
-
-
-**EXERCISE 2**
-
-Modify the code of the parameterized N-digit BCD counter in order to introduce an additional **"end of scale" flag** `eos` asserted
-when 999...9 is reached. As an example you can use the Verilog **replication operator** with the following syntax:
-
-```verilog
-// generate end-of-scale flag when 9999 ... 9 is reached
-assign eos = ( BCD == {Ndigit{4'b1001}} ) ? 1'b1 : 1'b0 ;      // use Verilog replication operator to replicate 4'1001 N times
-```
-
-Alternatively you can generate a true **"overflow" flag** `overflow` by registering in a FlipFlop the true carry-out flag of the most-significant
-BCD counter:
-
-```verilog
-// generate overflow flag
-always @(posedge clk) begin
-
-   if(rst == 1'b1) begin
-      overflow <= 1'b0 ;
-   end
-   else begin
-      overflow <= ( w[Ndigit] == 1'b1 ) ;
-   end
-end   // always
-```
-
-In required, this flag can be than used to **stop and freeze the counter** when an overflow is detected.
-
-<br />
-<!--------------------------------------------------------------------->
-
-
 ## <a name="vco-simulation"></a> Extra: example Real-Number Model (RNM) simulation <br /> of a Voltage-Controlled Oscillator (VCO) using SystemVerilog
 [**[Contents]**](#contents)
 
@@ -1409,6 +1338,77 @@ run all
 
 This small example can be used as a reference code to describe and simulate other mixed-signal blocks
 such as A/D and D/A converters using only real numbers.
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+## Exercises
+[**[Contents]**](#contents)
+
+
+**EXCERCISE 1**
+
+Modify timing constraints in the XDC file and **increase the input clock frequency to 1 GHz** as follows:
+
+```
+#create_clock -period 10.000 -name clk100 -waveform {0.000 5.000} -add [get_ports clk]
+create_clock -period 1.000 -name clk100 -waveform {0.000 5.000} -add [get_ports clk]
+```
+
+<br />
+
+Re-run the flow in _Non-Project_ mode with:
+
+```
+% make clean
+% make build
+```
+
+<br />
+
+Generate a new summary timing report.
+
+<br />
+
+>
+> **QUESTION**
+>
+> Are there timing violations in the design ?
+>
+>   \____________________________________________________________________________________________________
+>
+
+<br />
+
+
+**EXERCISE 2**
+
+Modify the code of the parameterized N-digit BCD counter in order to introduce an additional **"end of scale" flag** `eos` asserted
+when 999...9 is reached. As an example you can use the Verilog **replication operator** with the following syntax:
+
+```verilog
+// generate end-of-scale flag when 9999 ... 9 is reached
+assign eos = ( BCD == {Ndigit{4'b1001}} ) ? 1'b1 : 1'b0 ;      // use Verilog replication operator to replicate 4'1001 N times
+```
+
+Alternatively you can generate a true **"overflow" flag** `overflow` by registering in a FlipFlop the true carry-out flag of the most-significant
+BCD counter:
+
+```verilog
+// generate overflow flag
+always @(posedge clk) begin
+
+   if(rst == 1'b1) begin
+      overflow <= 1'b0 ;
+   end
+   else begin
+      overflow <= ( w[Ndigit] == 1'b1 ) ;
+   end
+end   // always
+```
+
+In required, this flag can be than used to **stop and freeze the counter** when an overflow is detected.
 
 <br />
 <!--------------------------------------------------------------------->
