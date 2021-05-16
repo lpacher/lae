@@ -22,13 +22,13 @@
 [**[Contents]**](#contents)
 
 In this lab we implement a **parameterizable Pulse-Width Modulation (PWM) generator** using a simple free-running counter and a binary comparator in Verilog.
-This is the "digital" equivalent of feeding to an analog comparator (e.g. an operational amplifier working in open-loop configuration) a sowtooth waveform
+This is the "digital" equivalent of feeding to an analog comparator (e.g. an operational amplifier working in open-loop configuration) a sawtooth waveform
 compared with a fixed DC threshold voltage to generate a **variable duty-cycle square wave**.
 
 The PWM technique is very popular in electronics. As an example it can be used to:
 
 * implement a 1-bit D/A converter to generate a programmable DC voltage
-* generate sinusoidal or sowtooth waveforms
+* generate sinusoidal or sawtooth waveforms
 * control DC motors
 * control switching power regulators
 
@@ -162,7 +162,7 @@ module PWM #(parameter integer THRESHOLD_NBITS = 4) (
       if (enable)
 
          // simple implementation, count from 0 to 111 ... 11, then pwm_out = 0 when threshold = 0, but pwm_out != 1 when threshold = 111 ... 11
-         pwm_count <= pwm_count + 1'b1 ;
+         pwm_count <= pwm_count + 'b1 ;
 
    end   // always
 
@@ -348,7 +348,7 @@ exit
 
 **EXERCISE 1**
 
-Modify the implementation of the PWM in order to have:
+Modify the implementation of the PWM generator in order to have:
 
 * the PWM output always OFF when the threshold value is 0
 * the PWM output always ON when the threshold value is set to the maximum, that is `11111 ... 11` (e.g. 255 for an 8-bit PWM counter)
@@ -364,7 +364,7 @@ always @(posedge clk) begin
          pwm_count <= 'b0 ;
 
       else
-         pwm_count <= pwm_count + 1'b1 ;
+         pwm_count <= pwm_count + 'b1 ;
 
    end   // if
 end   // always

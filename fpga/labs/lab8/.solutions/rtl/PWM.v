@@ -66,14 +66,14 @@ module PWM #(parameter integer THRESHOLD_NBITS = 4) (
       if (enable & pll_locked) begin
 
          // simple implementation, count from 0 to 111 ... 11, then pwm_out = 0 when threshold = 0, but pwm_out != 1 when threshold = 111 ... 11
-         //pwm_count <= pwm_count + 1'b1 ;
+         //pwm_count <= pwm_count + 'b1 ;
 
          // alternatively, count from 0 to 111 ... 10 sunch that PWM = 0 when threshold = 0 and PWM = 1 when threshold = 111 ... 11 (like for "Arduino" PWM pins)
-         if( pwm_count == {THRESHOLD_NBITS{1'b1}} -1 )
+         if( pwm_count == {THRESHOLD_NBITS{1'b1}} - 'b1 )
             pwm_count <= 'b0 ;
 
          else 
-            pwm_count <= pwm_count + 1'b1 ;
+            pwm_count <= pwm_count + 'b1 ;
 
       end  // if
    end   // always
