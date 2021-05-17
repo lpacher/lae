@@ -588,3 +588,6 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/45579a7896
 
 * Lecture 11 - Fri 14/05/2021<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/a46c4dd196da1039b7df005056818de3>_
+
+* Lecture 12 - Mon 17/05/2021<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/85d8ab5799361039bf3f005056818b31>
