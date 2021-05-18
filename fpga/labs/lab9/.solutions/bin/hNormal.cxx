@@ -84,32 +84,26 @@ void hNormal (char* fileName="work/sim/gaus.txt") {
    hRandom->Fit("gaus") ;
 
 
-/*
+
 
    ////////////////////////////////////////////
    //   compare with MonteCarlo (optional)   //
    ////////////////////////////////////////////
 
-   double mu    = hRandom.GetMean() ;
-   double sigma = hRandom.GetRMS() ;
+   double mu    = hRandom->GetMean() ;
+   double sigma = hRandom->GetRMS() ;
 
-   TH1I hNormal("hNormal", "", nBins, nMin, nMax) ;
+   TH1I *hNormal = new TH1I("hNormal", "", nBins, nMin, nMax) ;
 
-   hNormal.SetStats(0) ;
+   hNormal->SetStats(0) ;
 
    for(int i=0; i < Ntrials; ++i) {
 
-      hNormal.Fill(gRandom->Gaus(mu,sigma)) ;
+      hNormal->Fill(gRandom->Gaus(mu,sigma)) ;
    }
 
-   hNormal.SetFillColor(kYellow) ;
+   hNormal->SetFillColor(kYellow) ;
 
-   //hRandom.GetXaxis().SetTitle("random") ;
 
-   //hNormal.GetYaxis().SetRangeUser(0,3800) ; gPad->Modified() ;
-
-   //hRandom.Draw("same") ;
-
-*/
-
+   hNormal->Draw("same") ;
 }
