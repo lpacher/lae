@@ -590,4 +590,8 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/45579a7896
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/a46c4dd196da1039b7df005056818de3>_
 
 * Lecture 12 - Mon 17/05/2021<br />
-_<https://unito.webex.com/recordingservice/sites/unito/recording/play/85d8ab5799361039bf3f005056818b31>
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/85d8ab5799361039bf3f005056818b31>_
+
+* Lecture 13 - Tue 18/05/2021<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/74b6067c9a101039bff700505681a2ec>_
+
