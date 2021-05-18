@@ -40,3 +40,8 @@ https://github.com/lpacher/lae/tree/master/fpga/labs/lab7)
 * **Lab 8**<br />
 [Pulse-Width Modulation (PWM).](
 https://github.com/lpacher/lae/tree/master/fpga/labs/lab8)
+
+* **Lab 9**<br />
+[Implement a Pseudo-Random Bit Sequence (PRBS) generator using a Linear-Feedback Shift-Register (LFSR)](
+https://github.com/lpacher/lae/tree/master/fpga/labs/lab9)
+
