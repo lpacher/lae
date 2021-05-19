@@ -93,15 +93,15 @@ Create a new fresh working area:
 Additionally, recursively copy from the `.solutions/` directory all **simulation and implementation scripts** as follows:
 
 ```
-% cp -r .solutions/scripts/   scripts/
+% cp -r .solutions/scripts/  .
 ```
 <br />
 
 >
 > **NOTE**
 >
-> In this case we want to perform a **recursive copy**, do not forget add the `-r` option. In this case the `cp` command
-> works fine under Windows also if you use back-slashes in the path.
+> In this case we want to perform a **recursive copy**, do not forget add the `-r` option. <br />
+> The above `cp` command works fine under Windows also if you use back-slashes in the path.
 >
 
 <br />
