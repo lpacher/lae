@@ -9,7 +9,7 @@
 `define ROM_DEPTH  1024
 
 
-`timescale 1ns / 1ps
+`timescale 1ns / 100ps
 
 module tb_ROM ;
 
@@ -54,7 +54,7 @@ module tb_ROM ;
    wire [`ROM_WIDTH-1:0] rom_data ;
 
    ROM #(.WIDTH(`ROM_WIDTH), .DEPTH(`ROM_DEPTH)) DUT (.clk(clk100), .ren(rom_ren), .addr(rom_addr), .dout(rom_data)) ;
-   //ROM_WIDTH8_DEPTH64 DUT (.clk(clk100), .qspo_ce(rom_ren), .a(rom_addr), .qspo(rom_data) ) ;
+   //ROM_WIDTH8_DEPTH1024 DUT (.clk(clk100), .qspo_ce(rom_ren), .a(rom_addr), .qspo(rom_data) ) ;
 
 
    ///////////////////////

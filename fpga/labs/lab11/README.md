@@ -11,7 +11,7 @@
 * [**RTL coding**](#rtl-coding)
 * [**Simulate the design**](#simulate-the-design)
 * [**Synthesize the design**](#synthesize-the-design)
-* [**Exercise**](#exercise)
+* [**Exercises**](#exercises)
 
 <br />
 <!--------------------------------------------------------------------->
@@ -175,7 +175,9 @@ endmodule
 >
 > **IMPORTANT !**
 >
-> Customize the path to locate `ROM_8x1024.hex` according to your machine !
+> Customize the path string specified in `$readmemh()` to locate the `ROM_8x1024.hex` file according to your machine!          <br />
+> Moreover you **MUST** use the **forward slash** `/` as path separator, otherwise since the Verilog HDL is C-like a **back**  <br />
+> **slash** character `\` in the path is interpreted as **_escape_** character.
 >
 
 <br />
@@ -343,8 +345,40 @@ Open the new gate-level schematic and debug your synthesis results. Close the Vi
 <!--------------------------------------------------------------------->
 
 
-## Exercise
+## Exercises
 [**[Contents]**](#contents)
+
+<br />
+
+**EXERCISE 1**
+
+Of course by increasing the resolution used in sampling sine values you improve the accuracy in generating a sine waveform starting from discrete
+digital values. In the `.solutions/rtl/` directory you can find **three different ROM initialization files** corresponding to different resolutions
+in sampling sine values, in particular **8-bit**, **12-bit**, **16-bit** resolutions:
+
+```
+% ls -l .solutions/rtl/  | grep hex
+```
+
+<br />
+
+Copy from the `.solutions/` directory additional initialization files `ROM_12x1024.hex` and `ROM_16x1024.hex` into `rtl/` with:
+
+```
+% cp .solutions/rtl/ROM_12x1024.hex  rtl/
+% cp .solutions/rtl/ROM_16x1024.hex  rtl/
+```
+
+<br />
+
+Modify the default value of the `WIDTH` parameter in `rtl/ROM.v` and update the name of the `*.hex` file passed to the `$readmemh` Verilog task
+and try to simulate additional 12-bit and 16-bit resolutions. Update also the value of the `ROM_WIDTH` macro in the testbench code `bench/tb_ROM.v`
+accordingly.
+
+<br />
+
+
+**EXERCISE 2**
 
 Xilinx Vivado offers the possibility to **compile ROMs as IP cores**. We can therefore replace our 8x1024
 ROM with a compiled version from the **Vivado IP Catalog**.
@@ -389,7 +423,24 @@ Create new ROM IP with the following configuration:
 * Width: 8
 * Memory Type: ROM
 * Output Options: Registered + Single Port Output CE
-* Coefficients file: `/path/to/rtl/ROM_8x1024.coe`
+* Coefficients file: `/path/to/lae/fpga/labs/lab11/rtl/ROM_8x1024.coe`
+
+<br />
+
+![](./doc/pictures/make_ip1.png)
+![](./doc/pictures/make_ip2.png)
+![](./doc/pictures/make_ip3.png)
+![](./doc/pictures/make_ip4.png)
+
+<br />
+
+>
+> **IMPORTANT !**
+>
+> Customize the path string to locate the `*.hex` file according to your machine!  <br />
+>
+
+<br />
 
 Once done, left-click _OK_ and **generate all output products** (choose Out-of Context).
 <br/>
@@ -420,8 +471,8 @@ according to the Verilog instantiation template:
 
 
 ```verilog
-//ROM   DUT (.clk(clk100), .ren(rom_ren), .addr(rom_addr), .dout(rom_word)) ;
-ROM_WIDTH8_DEPTH64  DUT  (.clk(clk100), .qspo_ce(rom_ren), .a(rom_addr), .qspo(rom_data) ) ;
+//ROM   DUT (.clk(clk100), .ren(rom_ren), .addr(rom_addr), .dout(rom_data)) ;
+ROM_WIDTH8_DEPTH1024  DUT  (.clk(clk100), .qspo_ce(rom_ren), .a(rom_addr), .qspo(rom_data) ) ;
 ```
 
 <br/>
@@ -432,4 +483,11 @@ Save your changes and try to recompile and re-simulate the design from scratch:
 % make clean
 % make sim
 ```
+
+<br />
+
+**EXERCISE 3**
+
+Write with your preferred programming language your own software routine to generate and record sampled sine values on a text file
+and initialize the ROM.
 

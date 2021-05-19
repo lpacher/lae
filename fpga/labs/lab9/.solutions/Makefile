@@ -95,6 +95,7 @@ SIM_TOP_MODULE := tb_LFSR
 RTL_VLOG_SOURCES := $(RTL_DIR)/LFSR.v $(RTL_DIR)/TickCounterRst.v
 SIM_VLOG_SOURCES := $(SIM_DIR)/glbl.v $(SIM_DIR)/ClockGen.v $(SIM_DIR)/tb_LFSR.v
 
+
 ## if no VHDL sources, you can either comment the below variables or just leave them empty
 RTL_VHDL_SOURCES :=
 SIM_VHDL_SOURCES :=
