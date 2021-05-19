@@ -681,7 +681,7 @@ Recompile and re-simulate the design from scratch.
 Modify the feedback in the `LFSR.v` module in order to explore all possible values between 0 and 255:
 
 ```verilog
-wire feedback = LFSR[7] ^ (LFSR[6:0] == 7'b0000000) ;  // this modified feedback allows reaching 256 states instead of 255
+wire feedback = q[7] ^ (q[6:0] == 7'b0000000) ;  // this modified feedback allows reaching 256 states instead of 255
 ```
 
 Recompile and re-simulate the design from scratch. Plot the new trend of random values in ROOT and
