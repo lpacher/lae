@@ -45,3 +45,6 @@ https://github.com/lpacher/lae/tree/master/fpga/labs/lab8)
 [Implement a Pseudo-Random Bit Sequence (PRBS) generator using a Linear-Feedback Shift-Register (LFSR)](
 https://github.com/lpacher/lae/tree/master/fpga/labs/lab9)
 
+* **Lab 11**<br />
+[Implementation and simulatin of a Read-Only Memory (ROM) in Verilog. Synthesis pragmas.](
+https://github.com/lpacher/lae/tree/master/fpga/labs/lab11)
