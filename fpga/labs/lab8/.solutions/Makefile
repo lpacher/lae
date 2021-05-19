@@ -11,7 +11,7 @@
 ## Examples:
 ##
 ##   % make compile [hdl=rtl/verilog.v]
-##   % make build install
+##   % make build install [board=Arty|ArtyA7]
 ##
 ## Luca Pacher - pacher@to.infn.it
 ## Fall 2020
@@ -137,6 +137,15 @@ VLOG_SOURCES := $(RTL_VLOG_SOURCES) $(SIM_VLOG_SOURCES)
 VHDL_SOURCES := $(RTL_VHDL_SOURCES) $(SIM_VHDL_SOURCES)
 
 
+############################
+##   gate-level netlist   ##
+############################
+
+ifneq ($(wildcard $(WORK_DIR)/build/outputs/signoff.v ),)
+   VLOG_NETLIST := $(WORK_DIR)/build/outputs/signoff.v
+endif
+
+
 ##########################
 ##   IP sources setup   ##
 ##########################
@@ -152,8 +161,8 @@ VHDL_SOURCES := $(RTL_VHDL_SOURCES) $(SIM_VHDL_SOURCES)
 ## as for HDL sources, specify IP netlists by hand or automatically search for all *netlist.v sources
 # IPS_SOURCES := $(IPS_DIR)/PLL/PLL_sim_netlist.v
 
-ifneq ($(wildcard $(IPS_DIR)/*/*netlist.v ),)
-   IPS_SOURCES += $(wildcard $(IPS_DIR)/*/*netlist.v )
+ifneq ($(wildcard $(IPS_DIR)/*/*sim_netlist.v ),)
+   IPS_SOURCES += $(wildcard $(IPS_DIR)/*/*sim_netlist.v )
 endif
 
 
@@ -161,12 +170,22 @@ endif
 ##   target FPGA device and external memory   ##
 ################################################
 
-## default: Artix7 on Digilent Arty A7 development board
+board := Arty
+#board := ArtyA7
+
+## default: Artix7 on Digilent Aty/Arty A7 development boards
 part  := xc7a35ticsg324-1L
 
-## default: 128 MB Quad SPI Flash on Digilent Arty A7 development board
-flash := mt25ql128-spi-x1_x2_x4
-#flash := n25q128-3.3v-spi-x1_x2_x4 ; ## WARN: **should be the same as "mt25ql128-spi-x1_x2_x4" (alias), but this string gives programming errors
+## default: 128 MB Quad SPI Flash on Digilent Arty/Arty A7 development boards (but different chip IDs between Arty And Arty A7)
+ifeq ($(board),Arty)
+   flash := mt25ql128-spi-x1_x2_x4
+else
+ifeq ($(board),ArtyA7)
+   flash := s25fl128sxxxxxx0-spi-x1-_x2_x4
+else
+   $(error ERROR: Unknown board name $(board))
+endif
+endif
 
 
 #########################
@@ -288,7 +307,7 @@ help : ## Command line help
 	@$(ECHO) ""
 	@$(ECHO) "   % make compile [hdl=/path/to/verilog.v|hdl=/path/to/vhdl.vhd]"
 	@$(ECHO) "   % make sim"
-	@$(ECHO) "   % make build install"
+	@$(ECHO) "   % make build install [board=Arty|ArtyA7]"
 	@$(ECHO) ""
 ##____________________________________________________________________________________________________
 

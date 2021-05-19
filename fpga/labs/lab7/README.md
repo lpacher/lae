@@ -1293,7 +1293,7 @@ Compile the design from the command line by invoking the `xvlog` executable as f
 
 ```
 % xvlog -sv ../../extra/VCO.sv
-% xvlog ../../extra/VCO.sv
+% xvlog ../../extra/tb_VCO.sv
 ```
 
 <br />
