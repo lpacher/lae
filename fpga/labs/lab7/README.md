@@ -1280,7 +1280,7 @@ endmodule
 
 <br />
 
-Before simulating this small example change into the `work/sim` directory in order to keep the `lab7/` directory clean:
+Before simulating this small example change into the `work/sim` directory in order to keep the working directory clean:
 
 ```
 % cd work/sim
@@ -1306,7 +1306,7 @@ Note the usage of the `-sv` option required to enable SystemVerilog extensions. 
 
 <br />
 
-Finally, load the simulation snaphot invoking `xsim` in graphic mode. For Linux users:
+Finally, load the simulation snapshot invoking `xsim` in graphic mode. For Linux users:
 
 ```
 % xsim -gui tb_VCO &
