@@ -145,8 +145,10 @@ module ROM #(parameter integer WIDTH = 8, parameter integer DEPTH = 1024) (
    //   read logic   //
    ////////////////////
 
+   // initialize all FlipFlop outputs to zero at FPGA startup
    initial
-      dout <= 'b0 ;   // initialize all FlipFlop outputs to zero at FPGA startup
+      dout <= 'b0 ;
+      //dout <= {WIDTH{1'b0}} ;   // alternatively you can also use the replication operator
 
 
    always @(posedge clk) begin
@@ -162,7 +164,7 @@ module ROM #(parameter integer WIDTH = 8, parameter integer DEPTH = 1024) (
 
    initial begin
 
-      // initialize the ROM using an external file...
+      // initialize the ROM using an external file
       $readmemh("/path/to/Desktop/lae/fpga/labs/lab11/rtl/ROM_8x1024.hex", mem) ;
 
    end

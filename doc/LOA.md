@@ -204,6 +204,8 @@
 
 **ECAD** - Electronic Computer Aided Design
 
+**ECC** - Error Correction Checking** (_Xilinx FIFO Generator_)
+
 **ECO** - Engineering Change Orders
 
 **ECL** - Emitter-Coupled Logic
@@ -261,6 +263,7 @@
 
 **FSM** - Finite-State-Machine
 
+**FWFT** - First Word Fall Through (_Xilinx FIFO Generstor_)
 
 
 

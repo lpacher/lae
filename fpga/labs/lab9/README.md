@@ -100,7 +100,7 @@ Additionally, recursively copy from the `.solutions/` directory all **simulation
 >
 > **NOTE**
 >
-> In this case we want to perform a **recursive copy**, do not forget add the `-r` option. <br />
+> In this case we want to perform a **recursive copy**, do not forget to add the `-r` option. <br />
 > The above `cp` command works fine under Windows also if you use back-slashes in the path.
 >
 
