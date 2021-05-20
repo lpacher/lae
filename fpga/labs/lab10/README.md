@@ -103,6 +103,14 @@ Additionally, recursively copy from the `.solutions/` directory all **simulation
 ## RTL coding
 [**[Contents]**](#contents)
 
+The circuit that we want to describe and simulate using Verilog HDL is the following:
+
+<br />
+
+![](./doc/pictures/PISO_schematic.png)
+
+<br />
+
 With your text editor application create a new Verilog file `rtl/PISO.v` and write the following RTL code:
 
 ```verilog

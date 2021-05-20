@@ -597,3 +597,7 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/74b6067c9a
 
 * Lecture 14 - Wed 19/05/2021<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/49a960e89ac81039a5fe005056819946>_
+
+* Lecture 15 - Thu 20/05/2021<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/ad29c3e99b911039bfff0050568157ee>_
+
