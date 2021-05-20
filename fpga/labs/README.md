@@ -52,7 +52,7 @@ Introduction to serial communication through Universal Asynchronous Receiver/Tra
 https://github.com/lpacher/lae/tree/master/fpga/labs/lab10)
 
 * **Lab 11**<br />
-[Implementation and simulatin of a Read-Only Memory (ROM) in Verilog. Synthesis pragmas.](
+[Implementation and simulation of a Read-Only Memory (ROM) in Verilog. Synthesis pragmas.](
 https://github.com/lpacher/lae/tree/master/fpga/labs/lab11)
 
 * **Lab 12**<br />
