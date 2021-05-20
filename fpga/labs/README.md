@@ -48,3 +48,8 @@ https://github.com/lpacher/lae/tree/master/fpga/labs/lab9)
 * **Lab 11**<br />
 [Implementation and simulatin of a Read-Only Memory (ROM) in Verilog. Synthesis pragmas.](
 https://github.com/lpacher/lae/tree/master/fpga/labs/lab11)
+
+* **Lab 12**<br />
+[Compile and simulate a First-In First-Out (FIFO) memory as IP core](
+https://github.com/lpacher/lae/tree/master/fpga/labs/lab12)
+
