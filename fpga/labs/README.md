@@ -42,14 +42,20 @@ https://github.com/lpacher/lae/tree/master/fpga/labs/lab7)
 https://github.com/lpacher/lae/tree/master/fpga/labs/lab8)
 
 * **Lab 9**<br />
-[Implement a Pseudo-Random Bit Sequence (PRBS) generator using a Linear-Feedback Shift-Register (LFSR)](
+[Implement and simulate a Pseudo-Random Bit Sequence (PRBS) generator using a Linear-Feedback Shift-Register (LFSR). <br />
+Generate normally-distributed random numbers using the Central Limit Theorem (CLT).](
 https://github.com/lpacher/lae/tree/master/fpga/labs/lab9)
+
+* **Lab 10**<br />
+[Implement and simulate a parameterizable N-bit Parallel-In Serial-Out (PISO) shift register.<br />
+Introduction to serial communication through Universal Asynchronous Receiver/Transmitter (UART).](
+https://github.com/lpacher/lae/tree/master/fpga/labs/lab10)
 
 * **Lab 11**<br />
 [Implementation and simulatin of a Read-Only Memory (ROM) in Verilog. Synthesis pragmas.](
 https://github.com/lpacher/lae/tree/master/fpga/labs/lab11)
 
 * **Lab 12**<br />
-[Compile and simulate a First-In First-Out (FIFO) memory as IP core](
+[Compile and simulate a First-In First-Out (FIFO) memory as IP core.](
 https://github.com/lpacher/lae/tree/master/fpga/labs/lab12)
 
