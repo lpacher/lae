@@ -86,6 +86,9 @@ module tb_CounterBCD_Ndigit ;
       $display("\n**INFO: Expected number of clock cycles counted by BCD counter : %d", ((t2-t1)*1e-9)*(`FREQUENCY) ) ;
       $display("        Effective number of counts from BCD counter : %d%d%d%d", DIGIT_3 , DIGIT_2 , DIGIT_1 , DIGIT_0 ) ;
 
+      #500  force clk100  = 1'b0 ;          // **QUESTION: what happens to the PLL if the input clock disappears ?
+      #1000 release clk100 ;
+
       #3000 $finish  ;
 
    end
