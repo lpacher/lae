@@ -59,3 +59,7 @@ https://github.com/lpacher/lae/tree/master/fpga/labs/lab11)
 [Compile and simulate a First-In First-Out (FIFO) memory as IP core.](
 https://github.com/lpacher/lae/tree/master/fpga/labs/lab12)
 
+* **Lab 13**<br />
+[Different coding styles for a Finite State Machine (FSM) example. <br />
+Implementation of a UART transmitter for serial communication using a state machine.](
+https://github.com/lpacher/lae/tree/master/fpga/labs/lab13)
