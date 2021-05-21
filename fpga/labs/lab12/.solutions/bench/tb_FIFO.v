@@ -42,7 +42,9 @@ module tb_FIFO ;
    reg  [7:0] wr_data = 8'h00 ;
    wire [7:0] rd_data ;
 
-   FIFO   DUT (
+   wire empty, full ;
+
+   FIFO  DUT (
 
       // clock and reset
       .Clock     (       clk100 ),

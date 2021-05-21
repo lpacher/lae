@@ -78,6 +78,7 @@ RTL_TOP_MODULE := PISO
 
 ## specify top-level testbench module (this is the target module for the xelab executable)
 SIM_TOP_MODULE := tb_PISO
+#SIM_TOP_MODULE := tb_uart_tx
 
 ##
 ## **NOTE
@@ -92,8 +93,11 @@ SIM_TOP_MODULE := tb_PISO
 ## specify RTL sources by hand (more in general can be Verilog + VHDL code)
 ##
 
-RTL_VLOG_SOURCES := $(RTL_DIR)/PISO.v $(RTL_DIR)/TickCounter.v
-SIM_VLOG_SOURCES := $(SIM_DIR)/glbl.v $(SIM_DIR)/ClockGen.v $(SIM_DIR)/tb_PISO.v
+RTL_VLOG_SOURCES := $(RTL_DIR)/PISO.v $(RTL_DIR)/TickCounter.v $(RTL_DIR)/BaudGen.v
+SIM_VLOG_SOURCES := $(SIM_DIR)/glbl.v $(SIM_DIR)/ClockGen.v
+
+SIM_VLOG_SOURCES += $(SIM_DIR)/tb_PISO.v
+#SIM_VLOG_SOURCES += $(SIM_DIR)/tb_uart_tx.v
 
 
 ## if no VHDL sources, you can either comment the below variables or just leave them empty
