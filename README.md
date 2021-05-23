@@ -601,3 +601,6 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/49a960e89a
 * Lecture 15 - Thu 20/05/2021<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/ad29c3e99b911039bfff0050568157ee>_
 
+* Lecture 16 - Fri 21/05/2021<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/b1e2b3419c5a1039bbd50050568165e9>_
+
