@@ -93,7 +93,7 @@ SIM_TOP_MODULE := tb_LED_blink
 ##
 
 RTL_VLOG_SOURCES := $(RTL_DIR)/LED_blink.v
-SIM_VLOG_SOURCES :=
+SIM_VLOG_SOURCES := $(SIM_DIR)/ClockGen.v $(SIM_DIR)/glbl.v $(SIM_DIR)/tb_LED_blink.v
 
 
 ## if no VHDL sources, you can either comment the below variables or just leave them empty
@@ -181,7 +181,7 @@ ifeq ($(board),Arty)
    flash := mt25ql128-spi-x1_x2_x4
 else
 ifeq ($(board),ArtyA7)
-   flash := s25fl128sxxxxxx0-spi-x1-_x2_x4
+   flash := s25fl128sxxxxxx0-spi-x1_x2_x4
 else
    $(error ERROR: Unknown board name $(board))
 endif
