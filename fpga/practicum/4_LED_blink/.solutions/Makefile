@@ -214,9 +214,9 @@ MKDIR := mkdir -p -v
 ##
 
 ## by default, run Vivado/XSim flows in GUI mode
-mode ?= gui
+#mode ?= gui
 #mode ?= tcl
-#mode ?= batch
+mode ?= batch
 
 
 ##############################################
