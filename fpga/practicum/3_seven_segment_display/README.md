@@ -52,6 +52,7 @@ This practicum should exercise the following concepts:
 <br />
 <!--------------------------------------------------------------------->
 
+
 ## Navigate to the practicum directory
 [**[Contents]**](#contents)
 
@@ -67,6 +68,7 @@ List the content of the directory:
 
 ```
 % ls -l
+% ls -la
 ```
 
 
@@ -195,7 +197,7 @@ Create with your **text-editor** application a second source file named `SevenSe
 Copy from the `.solutions/` directory the reference XDC file for the Arty board:
 
 ```
-cp .solutions/arty_all.xdc
+% cp .solutions/arty_all.xdc .
 ```
 
 <br />
@@ -324,7 +326,7 @@ create_project -force -part xc7a35ticsg324-1L SevenSegmentDecoder -verbose
 
 <br />
 
-Add Verilog and XDC sources to the project and try to run the FPGA implementation flow up to bitsreeam generation.
+Add Verilog and XDC sources to the project and try to run the FPGA implementation flow up to bitstream generation.
 
 If you run out of time you can also run the _Project Mode_ flow using a Tcl script. Copy from the `.solutions/` directory
 the `project.tcl` script already prepared for you:

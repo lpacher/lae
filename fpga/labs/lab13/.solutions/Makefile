@@ -190,7 +190,7 @@ ifeq ($(board),Arty)
    flash := mt25ql128-spi-x1_x2_x4
 else
 ifeq ($(board),ArtyA7)
-   flash := s25fl128sxxxxxx0-spi-x1-_x2_x4
+   flash := s25fl128sxxxxxx0-spi-x1_x2_x4
 else
    $(error ERROR: Unknown board name $(board))
 endif
