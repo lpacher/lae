@@ -19,14 +19,14 @@ set_property -dict { PACKAGE_PIN C10  IOSTANDARD LVCMOS33} [get_ports {BCD[2]} ]
 set_property -dict { PACKAGE_PIN A10  IOSTANDARD LVCMOS33} [get_ports {BCD[3]} ]
 
 ## JA header mapping (200 ohm series resistor on each pin)
-set_property -dict { PACKAGE_PIN D13   IOSTANDARD LVCMOS33 } [get_ports segA ]
-set_property -dict { PACKAGE_PIN G13   IOSTANDARD LVCMOS33 } [get_ports segB ]
-set_property -dict { PACKAGE_PIN B18   IOSTANDARD LVCMOS33 } [get_ports segC ]
-set_property -dict { PACKAGE_PIN B11   IOSTANDARD LVCMOS33 } [get_ports segD ]
-set_property -dict { PACKAGE_PIN A18   IOSTANDARD LVCMOS33 } [get_ports segE ]
-set_property -dict { PACKAGE_PIN A11   IOSTANDARD LVCMOS33 } [get_ports segF ]
-set_property -dict { PACKAGE_PIN K16   IOSTANDARD LVCMOS33 } [get_ports segG ]
-set_property -dict { PACKAGE_PIN D12   IOSTANDARD LVCMOS33 } [get_ports DP   ]
+set_property -dict { PACKAGE_PIN G13  IOSTANDARD LVCMOS33 } [get_ports segA] ;   ## JA[1]
+set_property -dict { PACKAGE_PIN B11  IOSTANDARD LVCMOS33 } [get_ports segB] ;   ## JA[2]
+set_property -dict { PACKAGE_PIN A11  IOSTANDARD LVCMOS33 } [get_ports segC] ;   ## JA[3]
+set_property -dict { PACKAGE_PIN D12  IOSTANDARD LVCMOS33 } [get_ports segD] ;   ## JA[4]
+set_property -dict { PACKAGE_PIN D13  IOSTANDARD LVCMOS33 } [get_ports segE] ;   ## JA[5]
+set_property -dict { PACKAGE_PIN B18  IOSTANDARD LVCMOS33 } [get_ports segF] ;   ## JA[6]
+set_property -dict { PACKAGE_PIN A18  IOSTANDARD LVCMOS33 } [get_ports segG] ;   ## JA[7]
+set_property -dict { PACKAGE_PIN K16  IOSTANDARD LVCMOS33 } [get_ports DP  ] ;   ## JA[8]
 
 
 ################################
