@@ -43,7 +43,7 @@ set_property -dict { PACKAGE_PIN C10  IOSTANDARD LVCMOS33 } [get_ports { DelaySe
 set_property -dict { PACKAGE_PIN A10  IOSTANDARD LVCMOS33 } [get_ports { DelaySelect[3] }] ;   ## SW3
 
 ## input signal
-set_property -dict { PACKAGE_PIN N17  IOSTANDARD LVCMOS33 } [get_ports SignalIn] ;  ## IO31
+set_property -dict { PACKAGE_PIN N17  IOSTANDARD LVCMOS33 } [get_ports SignalIn] ;  ## IO41
 
 ## delayed output signal
 set_property -dict { PACKAGE_PIN G13  IOSTANDARD LVCMOS33 } [get_ports SignalOut] ;  ## JA1

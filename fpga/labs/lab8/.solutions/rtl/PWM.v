@@ -86,7 +86,7 @@ module PWM #(parameter integer THRESHOLD_NBITS = 4) (
    wire pwm_comb ;
 
    // PWM output: logic 1 if pwm_count < threshold, 0 otherwise
-   assign pwm_comb = ( pwm_count < threshold ) ? 1'b1 : 1'b0 ;        // binary comparator (pure combinationational block using conditional assignment)
+   assign pwm_comb = ( pwm_count < threshold ) ? 1'b1 : 1'b0 ;        // binary comparator (pure combinational block using conditional assignment)
 
 /*
 
