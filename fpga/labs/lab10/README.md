@@ -324,5 +324,42 @@ Inspect the **post-synthesis utilization report** at the command line:
 ## Simulate a UART transmitter
 [**[Contents]**](#contents)
 
-`TODO`
+Data serialization is a fundamental component for any **communication system**. The proposed simple shift register
+with parallel-load and serial output is in fact a first example of **serializer**.
+
+One of the oldest and simplest example of serial communication is the so calles **RS-232 protocol**, also known
+as [**Universal Asynchronous Receiver/Transmitter (UART)**](https://en.wikipedia.org/wiki/Universal_asynchronous_receiver-transmitter)
+protocol or simply "serial".
+
+In this section we are going to use the implemented shift-register in order to send data according to the UART **timing specification**.
+For this simulation copy from the `.solutions/` directory the following additional RTL and simulation sources:
+
+```
+cp .solutions/rtl/TickCounter.v    rtl/
+cp .solutions/rtl/BaudGen.v        rtl/
+cp .solutions/bench/tb_uart_tx.v   bench/
+```
+
+<br />
+
+Open new sources with a text editor application and inspect their contents.
+
+Before running the simulation flow
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
