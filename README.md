@@ -49,7 +49,7 @@ Webex: _<https://unito.webex.com/meet/luca.pacher>_
 [**[Contents]**](#contents)
 
 This is a postgraduate introductory course about digital design and FPGA programming using **Xilinx Vivado** <br />
-and the **Verilog Hardwre Description Language (HDL)**.
+and the **Verilog Hardware Description Language (HDL)**.
 
 The course covers:
 

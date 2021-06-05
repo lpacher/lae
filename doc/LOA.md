@@ -204,7 +204,7 @@
 
 **ECAD** - Electronic Computer Aided Design
 
-**ECC** - Error Correction Checking** (_Xilinx FIFO Generator_)
+**ECC** - Error Correction Checking (_Xilinx FIFO Generator_)
 
 **ECO** - Engineering Change Orders
 
@@ -381,6 +381,8 @@
 
 **LCD** - Liquid Crystal Display
 
+**LCM** - Liquid Crystal Module
+
 **LDO** - Low Drop-Out voltage regulator
 
 **LEC** - Logic Equivalence Checking (Checker)
@@ -398,6 +400,8 @@
 **LP** - Low-Power
 
 **LPC** - Low Pin Count
+
+**LPF** - Low-Pass Filter
 
 **LRM** - Language Reference Manual
 
@@ -584,6 +588,8 @@
 
 **ROM** - Read Only Memory
 
+**RT** - Room Temperature
+
 **RTOS** - Real-Time Operating System
 
 **RTL** - Register Transfer Level
@@ -695,6 +701,7 @@
 
 **TTL** - Transistor-Transistor Logic
 
+**TWI** - Two Wires Interface
 
 
 ## U

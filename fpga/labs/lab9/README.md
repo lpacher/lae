@@ -519,7 +519,7 @@ Compile the new design from the command line by invoking the `xvlog` executable 
 Elaborate the design with the `xelab` executable:
 
 ```
-% xelab -dedug all
+% xelab -dedug all tb_NormalDistribution
 ```
 
 <br />
