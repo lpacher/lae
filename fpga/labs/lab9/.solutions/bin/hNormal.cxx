@@ -13,7 +13,7 @@
 //   % cd /path/to/lab9/work/sim
 //   % root
 //   root[] .L ../../bin/hNormal.cxx
-//   root[] hBytes("gaus.txt")
+//   root[] hNormal("gaus.txt")
 //
 // Luca Pacher - pacher@to.infn.it
 // Spring 2020
