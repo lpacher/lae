@@ -22,7 +22,7 @@
 
 void hBytes (char *fileName="work/sim/LFSR.txt") {
 
-   gROOT -> Reset() ;
+   gROOT->Reset() ;
 
    gStyle->SetOptStat(0) ;   // don't show the statistics box 
 
