@@ -32,7 +32,7 @@ at University of Torino, Physics Department.
 # Contacts
 [**[Contents]**](#contents)
 
-[<h3>Dott. Luca Pacher</h3>](https://fisica.campusnet.unito.it/do/docenti.pl/Show?_id=lpacher#tab-profilo)
+[<h3>Prof. Luca Pacher</h3>](https://fisica.campusnet.unito.it/do/docenti.pl/Show?_id=lpacher#tab-profilo)
 
 University of Torino, Physics Department<br />
 via Pietro Giuria 1, 10125, Torino, Italy<br />
@@ -538,8 +538,9 @@ can be found [**here**](doc/LOA.md).
 # Webex lectures
 [**[Contents]**](#contents)
 
-Due to the COVID-19 emergency all theoretical lectures and _"virtual laboratories"_ will be held **remotely** using the **Webex UniTO** platform.
-All lectures will be also **video-recorded**.
+Introductory theoretical lectures and _"virtual laboratories"_ will be held in presence by using one of the available
+computer classrooms of the Physics Department at University of Torino. These lectures will be also available in streaming 
+using the **Webex UniTO** platform and they will be **video-recorded**.
 
 The virtual room to attend these lectures is accessible at the following link:
 
