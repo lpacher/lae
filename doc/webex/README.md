@@ -2,6 +2,57 @@
 # List of Webex video-recorded lectures (in Italian)
 [[**Home**](../../README.md)]
 
+## Spring 2021
+
+* Lecture 1 - Mon 19/04/2021<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/f3906e665e5f4072af8a0d9ca88aa06e>_
+
+* Lecture 2 - Tue 20/04/2021<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/c572d2a5bfb34bc4aaafa1d28b3ef645>_
+
+* Lecture 3 - Wed 22/04/2021<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/cd9e74965f0142568879939574cb27b2>_
+
+* Lecture 4 - Mon 26/04/2021<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/7406d1fc88b510398ebe00505681b7cf>_
+
+* Lecture 5 - Tue 27/04/2021<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/7eb4554f898f103983fe0050568134da>_
+
+* Lecture 6 - Wed 28/04/2021<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/4c1147458a5910398773005056813326>_
+
+* Lecture 7 - Thu 29/04/2021<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/aceaae168b1710399e7f00505681c128>_
+
+* Lecture 8 - Tue 11/05/2021<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/dc07cd46948f1039b73900505681c2fb>_
+
+* Lecture 9 - Wed 12/05/2021<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/4174c25c95481039bfe50050568165e9>_
+
+* Lecture 10 - Thu 13/05/2021<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/45579a7896111039bb6f00505681240f>_
+
+* Lecture 11 - Fri 14/05/2021<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/a46c4dd196da1039b7df005056818de3>_
+
+* Lecture 12 - Mon 17/05/2021<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/85d8ab5799361039bf3f005056818b31>_
+
+* Lecture 13 - Tue 18/05/2021<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/74b6067c9a101039bff700505681a2ec>_
+
+* Lecture 14 - Wed 19/05/2021<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/49a960e89ac81039a5fe005056819946>_
+
+* Lecture 15 - Thu 20/05/2021<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/ad29c3e99b911039bfff0050568157ee>_
+
+* Lecture 16 - Fri 21/05/2021<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/b1e2b3419c5a1039bbd50050568165e9>_
+
+<br />
 
 ## Spring 2020
 
