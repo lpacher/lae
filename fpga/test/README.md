@@ -245,7 +245,7 @@ Explore the content of provided simulation files using basic Linux commands, e.g
 
 ```
 % cat  Makefile
-% cat  rtl/Counter.vhd
+% cat  rtl/Counter.v
 % more rtl/ClockBuffer.vhd
 % less scripts/sim/compile.tcl
 ```
