@@ -556,3 +556,8 @@ number of students foreseen by present sanitary rules.
 ### Links to **video-recorded lectures** (in Italian)
 
 The complete list of past video-recorded lectures held during Spring 2020 and 2021 can be accessed [**here**](doc/webex/README.md).
+
+* Lecture 1 - Fri 08/04/2022<br />
+**TODO**
+
+
