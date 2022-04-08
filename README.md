@@ -559,5 +559,7 @@ The complete list of past video-recorded lectures held during Spring 2020 and 20
 
 * Lecture 1 - Fri 08/04/2022<br />
 **TODO**
+  
+* Lecture 2 - TODO
 
 
