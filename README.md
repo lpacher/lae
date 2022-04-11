@@ -558,8 +558,8 @@ number of students foreseen by present sanitary rules.
 The complete list of past video-recorded lectures held during Spring 2020 and 2021 can be accessed [**here**](doc/webex/README.md).
 
 * Lecture 1 - Fri 08/04/2022<br />
-**TODO**
-  
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/0b2cf28e9964103a82fa005056818fdc>_
+
 * Lecture 2 - TODO
 
 
