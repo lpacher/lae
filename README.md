@@ -560,6 +560,7 @@ The complete list of past video-recorded lectures held during Spring 2020 and 20
 * Lecture 1 - Fri 08/04/2022<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/0b2cf28e9964103a82fa005056818fdc>_
 
-* Lecture 2 - TODO
+* Lecture 2 - Fri 22/04/2022<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/322db33da463103abeff005056813402>_
 
 
