@@ -563,4 +563,6 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/0b2cf28e99
 * Lecture 2 - Fri 22/04/2022<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/322db33da463103abeff005056813402>_
 
+* Lecture 3 - Fri 29/04/2022<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/3ac4748fa9e3103ab7fb00505681ed57>_
 
