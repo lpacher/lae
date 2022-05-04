@@ -24,7 +24,7 @@
 In this second lab we introduce basic **Verilog bitwise logic operators** to implement fundamental **logic gates**
 such as AND, NAND, OR, NOR, XOR and XNOR. 
 
-The digital circuit that we are going to describe and simulate in Verilog in is the following:
+The digital circuit that we are going to describe and simulate in Verilog is the following:
 
 <br />
 
@@ -72,7 +72,7 @@ Open a **terminal** window and change to the `lab2/` directory:
 ## Copy sources already prepared for you
 [**[Contents]**](#contents) 
 
-For this lab **simulation scripts** and the main **testbench Verilog module** have been already prepared for you and can
+For this lab **simulation scripts** and the main **testbench Verilog module** have been already prepared for you and
 can be copied using `cp` from the `.solutions/` directory:
 
 
@@ -268,7 +268,7 @@ Finally, **elaborate** the top-level module and **launch the simulation** with:
 
 <br />
 
-Add all testbench waveforms in the XSim **Wave Window** type in the **Tcl console** :
+Add all testbench waveforms in the XSim **Wave Window** by executing the following command in the **Tcl console** :
 
 ```
 add_wave /*
@@ -405,7 +405,7 @@ remove_force -help
 **EXERCISE 2**
 
 Instead of using logic operators we can also implement the functionality of each basic gate in terms of a **truth table**.<br/>
-A Verilog `case` statement can be used for this purpose.
+A Verilog `case` statement within an `always` sequential block can be used for this purpose.
 
 Create a new file e.g. `GatesCase.v` and try to **complete** the following **code skeleton**:
 
