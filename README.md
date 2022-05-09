@@ -403,13 +403,16 @@ Step-by-step instructions explaining how to run this test flow can be found [**h
 
 
 <details>
-<summary><b>FPGA programming using Xilinx Vivado</b></summary>
+<summary><b>FPGA programming (mainly using Xilinx Vivado but not only)</b></summary>
 
 <p>
 
 * S. Churiwala (Editor), _Designing with Xilinx FPGAs Using Vivado_
 * C. Unsalan and B. Tar, _Digital System Design with FPGA: Implementation Using Verilog and VHDL_
 * R.E. Haskell and D.M. Hanna, _Introduction to Digital Design Using Digilent FPGA Boards / Verilog (VHDL) Vivado Edition_
+* S. Kilts, _Advanced FPGA Design: Architecture, Implementation, and Optimization_
+* E. Stavinov, _100 Power Tips for FPGA Designers_
+* C. Maxfield, _The Design Warrior's Guide to FPGAs: Devices, Tools and Flows_
 
 </p>
 <br/>
@@ -526,7 +529,8 @@ Step-by-step instructions explaining how to run this test flow can be found [**h
 * _<https://en.wikibooks.org/wiki/Category:Book:VHDL_for_FPGA_Design>_
 * _<https://surf-vhdl.com>_
 * _<https://www.so-logic.net/documents/knowledge/tutorial/Basic_FPGA_Tutorial_VHDL>_
-
+* _<https://www.hackster.io/xilinx/projects>_
+* _<https://web.archive.org/web/20190115230224/http://hamsterworks.co.nz/mediawiki/index.php/FPGA_Projects>_
 
 #### List of acronyms and abbreviations
 
