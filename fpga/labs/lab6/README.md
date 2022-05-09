@@ -294,7 +294,7 @@ endmodule
 
 <br />
 
-In particular, observe in the code the usage of a `IBUF` FPGA device primitive. This is a first example of ihow you can
+In particular, observe in the code the usage of a `IBUF` FPGA device primitive. This is a first example of how you can
 include and simulate Xilinx device primitives in your HDL code.
 
 Simulate with Xilinx XSim simulator the functionality of the D-FlipFlop from the command line with:
