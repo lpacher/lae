@@ -28,7 +28,8 @@ https://github.com/lpacher/lae/tree/master/fpga/labs/lab4)
 https://github.com/lpacher/lae/tree/master/fpga/labs/lab5)
 
 * **Lab 6**<br />
-[Introduction to sequential circuits: D-latch and D-FlipFlop in Verilog.](
+[Introduction to sequential circuits: D-latch and D-FlipFlop in Verilog.<br />
+Implementation of 4-bit asynchronous and synchronous counters using structural code.](
 https://github.com/lpacher/lae/tree/master/fpga/labs/lab6)
 
 * **Lab 7**<br />
