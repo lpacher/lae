@@ -74,11 +74,14 @@ LOG_DIR  := log
 
 ## specify top-level RTL (this is used for implementation and firmware installation)
 #RTL_TOP_MODULE := DLATCH
-RTL_TOP_MODULE := DFF
+#RTL_TOP_MODULE := DFF
+RTL_TOP_MODULE := RippleCounter4b
 
 ## specify top-level testbench module (this is the target module for the xelab executable)
 #SIM_TOP_MODULE := tb_DLATCH
-SIM_TOP_MODULE := tb_DFF
+#SIM_TOP_MODULE := tb_DFF
+SIM_TOP_MODULE := tb_RippleCounter4b
+
 
 ##
 ## **NOTE
@@ -93,11 +96,13 @@ SIM_TOP_MODULE := tb_DFF
 ## specify RTL sources by hand (more in general can be Verilog + VHDL code)
 ##
 
-RTL_VLOG_SOURCES := $(RTL_DIR)/DFF.v
+#RTL_VLOG_SOURCES := $(RTL_DIR)/DFF.v
 #RTL_VLOG_SOURCES := $(RTL_DIR)/DLATCH.v
+RTL_VLOG_SOURCES := $(RTL_DIR)/RippleCounter4b.v
 
-SIM_VLOG_SOURCES := $(SIM_DIR)/glbl.v $(SIM_DIR)/ClockGen.v $(SIM_DIR)/tb_DFF.v
+#SIM_VLOG_SOURCES := $(SIM_DIR)/glbl.v $(SIM_DIR)/ClockGen.v $(SIM_DIR)/tb_DFF.v
 #SIM_VLOG_SOURCES := $(SIM_DIR)/glbl.v $(SIM_DIR)/ClockGen.v $(SIM_DIR)/tb_DLATCH.v
+SIM_VLOG_SOURCES := $(SIM_DIR)/glbl.v $(SIM_DIR)/ClockGen.v $(SIM_DIR)/tb_RippleCounter4b.v
 
 
 ## if no VHDL sources, you can either comment the below variables or just leave them empty
