@@ -335,7 +335,7 @@ according to the Linux distribution you are working with.
 
 <br />
 
-Beside `lsudb` you can use `dmesg` to query **kernel messages** (whatever happens on your PC can be traced using `dmesg`):
+Beside `lsusb` you can use `dmesg` to query **kernel messages** (whatever happens on your PC can be traced using `dmesg`):
 
 ```
 % dmesg
