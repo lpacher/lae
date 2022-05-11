@@ -16,7 +16,7 @@ module tb_DFF ;
 
    wire clk, clk_buf ;
 
-   ClockGen  #(.PERIOD(100.0)) ClockGen_inst (.clk(clk) ) ;   // override default period as module parameter (default is 50.0 ns)
+   ClockGen  #(.PERIOD(100.0)) ClockGen_inst (.clk(clk) ) ;   // override default period as module parameter (default is 10.0 ns)
 
 
    ////////////////////////////////////////////////
