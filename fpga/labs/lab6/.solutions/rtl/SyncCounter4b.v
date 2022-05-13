@@ -1,5 +1,6 @@
 //
-// Example Verilog implementation for a simple 4-bit synchronous up-counter using structural code.
+// Example Verilog implementation for a simple 4-bit synchronous up-counter using
+// either behavioral or structural coding styles.
 //
 // Luca Pacher - pacher@to.infn.it
 // Spring 2022
@@ -100,6 +101,10 @@ module SyncCounter4b (
    ) ;
 
 
+   ////////////////////
+   //   structural   //
+   ////////////////////
+
    // 4-bit bus for internal wiring
    wire [3:0] T ;
 
@@ -116,6 +121,33 @@ module SyncCounter4b (
    TFF  ff_1 ( .clk(clk), .rst(rst), .T(T[1]), .Q(Q[1]) ) ;
    TFF  ff_2 ( .clk(clk), .rst(rst), .T(T[2]), .Q(Q[2]) ) ;
    TFF  ff_3 ( .clk(clk), .rst(rst), .T(T[3]), .Q(Q[3]) ) ;
+
+
+   ////////////////////
+   //   behavioral   //
+   ////////////////////
+
+/*
+   reg [3:0] Qreg ;   // since we declared the Q output bus as 'wire' we cannot assign values to Q within an 'always' sequential block
+
+   assign Q = Qreg ;
+
+   //always @(posedge clk or posedge rst) begin      // asynchronous reset
+   always @(posedge clk) begin                       // synchronous reset
+
+      if(rst == 1'b1) begin
+
+         Qreg <= 4'b0000 ;
+
+      end
+      else if(en == 1'b1) begin
+
+         Qreg <= Qreg + 1'b1 ;
+
+      end
+   end   // always
+
+*/
 
 endmodule
 
