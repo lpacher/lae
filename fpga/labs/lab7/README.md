@@ -498,9 +498,9 @@ module TickCounter #(parameter integer MAX = 10414) (      // default is ~9.6 kH
    ) ;
 
 
-   /////////////////////////////////////////////////
-   //   32-bit modulus-MAX free-running counter   //
-   /////////////////////////////////////////////////
+   //////////////////////////////////////////
+   //   modulus-MAX free-running counter   //
+   //////////////////////////////////////////
 
    //
    // **NOTE
@@ -515,19 +515,19 @@ module TickCounter #(parameter integer MAX = 10414) (      // default is ~9.6 kH
    // MAX = 10000 => one "tick" asserted every 10000 x 10 ns = 100 us  => logic "running" at  10 kHz etc.
    //
 
-   reg [31:0] count = 32'd0  ;      // **IMPORTANT: unused bits are simply DELETED by the synthesizer !
+   reg [$clog2(MAX)-1:0] count = 'b0 ;   // **IMPORTANT: use the ceil-function on log2(MAX) to determine how many FlipFlops are required to count from 0 to MAX
 
    always @(posedge clk) begin
 
       if( count == MAX-1 ) begin
 
-         count <= 32'd0 ;           // force the roll-over
+         count <= 'b0 ;             // force the roll-over
          tick  <= 1'b1 ;            // assert a single-clock pulse each time the counter resets
 
       end
       else begin
 
-         count <= count + 1'b1 ;
+         count <= count + 'b1 ;
          tick  <= 1'b0 ;
 
       end    // if
@@ -663,12 +663,12 @@ Close the simulator graphical interface once happy.
 The usage of a "tick" counter is a popular "clean" solution in order to "slow down" the logic without the need of additional
 dedicated clocks in the design. However what happens if we need to run the logic at **higher frequencies** instead? As an example
 we have 100 MHz clock from on-board XTAL oscillator but we might want to send data out from the FPGA at 400 MHz transmission rate.
-Or let suppose that we need to **divide the clock frequency by a non-trivial factor**, e.g. 100 MHz/2.5, how we can achieve
+Or let suppose that we need to **divide the clock frequency by a non-trivial factor**, e.g. 100 MHz/2.5, how we can achieve this
 in FPGA?
 
 In electronics engineering **clock multiplication and clock division** are tasks performed by a dedicated mixed-signal
 circuit called **Phase-Locked Loop (PLL)**. This is one of the most widespread circuit in consumer electronics.
-Given the importance of this block Xilinx FPGAs already includes **configurable clock-management blocks** in the chip to deal clock signals.
+Given the importance of this block Xilinx FPGAs already includes **configurable clock-management blocks** in the chip to deal with clock signals.
 In order to use this circuit we only need to "_customize_" and then "_compile_" the block that already comes in form of
 **Intellectual Property (IP) core** as part of the **Vivado IP flow**.
 
