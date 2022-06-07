@@ -263,7 +263,7 @@
 
 **FSM** - Finite-State-Machine
 
-**FWFT** - First Word Fall Through (_Xilinx FIFO Generstor_)
+**FWFT** - First Word Fall Through (_Xilinx FIFO Generator_)
 
 
 
