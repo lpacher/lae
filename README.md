@@ -6,7 +6,7 @@
 
 <br />
 
-Git repository for the first part (40 hours, 4 CFU) of the [_Advanced Electronics Laboratory_](https://fisica.campusnet.unito.it/do/corsi.pl/Show?_id=70d4) (MFN1324) course<br /> 
+Git repository for the first part (40 hours, 4 CFU) of the [_Advanced Electronics Laboratory_](https://www.fisicamagistrale.unito.it/do/corsi.pl/Show?_id=70d4) (MFN1324) course<br /> 
 at University of Torino, Physics Department.
 
 <br />
