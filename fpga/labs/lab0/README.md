@@ -2054,7 +2054,7 @@ of the tool simply run Vivado and don't care about licensing.
 
 <br />
 
-For more details anout licensing ref. also to [_Vivado Design Suite User Guide: Release Notes, Installation, and Licensing_](
+For more details about licensing ref. also to [_Vivado Design Suite User Guide: Release Notes, Installation, and Licensing_](
 https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug973-vivado-release-notes-install-license.pdf).
 
 <br />
@@ -2082,7 +2082,7 @@ to program FPGA boards from a host computer. This dedicated cable (still in use 
 USB data into JTAG data.<br />
 Please ref. to [_USB Cable Installation Guide (UG344)_](https://www.xilinx.com/support/documentation/user_guides/ug344.pdf)
 Xilinx official documentation for more details. Be aware that this PDF document is old (2016) and refers to
-legacy the _Xilinx ISE Design Suite_.
+the legacy _Xilinx ISE Design Suite_.
 
 For easier programming, the majority of new modern FPGA boards equipped with a Xilinx device provides 
 an **on-board dedicated circuitry** (usually NOT documented in board schematics) that **converts USB to JTAG without the need
