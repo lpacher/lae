@@ -559,29 +559,10 @@ number of students foreseen by present sanitary rules.
 
 ### Links to **video-recorded lectures** (in Italian)
 
-The complete list of past video-recorded lectures held during Spring 2020 and 2021 can be accessed [**here**](doc/webex/README.md).
+The complete list of past video-recorded lectures can be accessed [**here**](doc/webex/README.md).
 
-* Lecture 1 - Fri 08/04/2022<br />
-_<https://unito.webex.com/recordingservice/sites/unito/recording/play/0b2cf28e9964103a82fa005056818fdc>_
+* Lecture 1 - Fri 10/03/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/f58dd9ada174103b9fdf00505681416f>_
 
-* Lecture 2 - Fri 22/04/2022<br />
-_<https://unito.webex.com/recordingservice/sites/unito/recording/play/322db33da463103abeff005056813402>_
-
-* Lecture 3 - Fri 29/04/2022<br />
-_<https://unito.webex.com/recordingservice/sites/unito/recording/play/3ac4748fa9e3103ab7fb00505681ed57>_
-
-* Lecture 4 - Fri 06/05/2022<br />
-_<https://unito.webex.com/recordingservice/sites/unito/recording/play/36b0db65af63103a8fff00505681cdf1>_
-
-* Lecture 5 - Wed 11/05/2022<br />
-_<https://unito.webex.com/recordingservice/sites/unito/recording/play/d7ad30f5b329103abcbb005056821ff4>_
-
-* Lecture 6 - Fri 13/05/2022<br />
-_<https://unito.webex.com/recordingservice/sites/unito/recording/play/3e92865ab4e4103ab73f00505681efcc>_
-
-* Lecture 7 - Fri 20/05/2022<br />
-_<https://unito.webex.com/recordingservice/sites/unito/recording/play/c04c617bba65103abf6f005056818ac4>_
-
-* Lecture 8 - Fri 27/05/2022<br />
-_<https://unito.webex.com/recordingservice/sites/unito/recording/play/b2cc9ee1bfe4103a8fe700505681ed57>_
-
+* Lecture 2 - Mon 20/03/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/0e0d0b56a924103bbbbb00505681b634>_
