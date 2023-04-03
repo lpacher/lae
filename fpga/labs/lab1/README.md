@@ -1299,6 +1299,21 @@ Save the file once done. Re-compile and re-simulate the code.
 Verify if the functionality of the NOT gate has changed.
 
 <br />
+
+**EXERCISE 4**
+
+Create a new source file `BufferTri.v` and try yourself to implement a **three-state buffer** using a C-like
+**conditional assignment** and an active-high output-enable `OE` control port:
+
+```verilog
+assign Z = (OE == 1'b1) ? X : 1'b1z ;
+```
+
+<br />
+
+Re-use and extend the original inverter testbench code to simulate and verify the expected functionality.
+
+<br />
 <!--------------------------------------------------------------------->
 
 

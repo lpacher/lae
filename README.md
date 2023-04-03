@@ -567,6 +567,9 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/f58dd9ada1
 * Lecture 2 - Mon 20/03/2023<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/0e0d0b56a924103bbbbb00505681b634>_
 
-* Lecture 3 - Wed 29/03/2023<br />
+* Lecture 3 - Mon 27/03/2023<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/9184017dae9b103b9ffb0050568124e2>_
+
+* Lecture 4 - Wed 29/03/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/3bce5d52b06a103bbfd9005056829d03>_
 

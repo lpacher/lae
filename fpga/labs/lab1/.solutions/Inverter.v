@@ -1,6 +1,6 @@
 //
 // Verilog description for a NOT-gate (inverter) using either a continuous
-// assignment, a conditional assignment or a gate-primitive instantiation.  
+// assignment, a conditional assignment or a gate-primitive instantiation.
 //
 // Luca Pacher - pacher@to.infn.it
 // Spring 2020
