@@ -190,11 +190,11 @@ In this case a simple **2-bits synchronous counter** can be used to easily gener
 Thus we will also learn how to generate a **clock waveform** and to implement a **counter** in Verilog.
 
 The simulation code has been already prepared for you. Open the testbench module `tb_Gates.v` that you initially copied
-from the `.solutions/` directory with you text editor:
+from the `.solutions/` directory with your text editor:
 
 ```
 % gedit tb_Gates.v &   (for Linux users)
-% n++ tb_Gates.v       (for Windos users)
+% n++ tb_Gates.v       (for Windows users)
 ```
 
 <br />
@@ -220,7 +220,7 @@ module tb_Gates ;
    reg [1:0] count = 2'b00 ;
 
    always @(posedge clk)
-      count <= count + 1'b1 ;       // **WARN: be aware of the SIZE CASTING ! This is count[2:0] <= count[2:0] + 1'b1 !
+      count <= count + 1'b1 ;       // **WARN: be aware of the SIZE CASTING ! This is count[1:0] <= count[1:0] + 1'b1 !
 
    // device under test (DUT)
    wire [5:0] Z ;
@@ -229,7 +229,7 @@ module tb_Gates ;
 
    // main stimulus
    initial
-      #(4*25) $finish ;   // here we only need to choose the simulation time, e.g. 4x clock cycles
+      #(4*10) $finish ;   // here we only need to choose the simulation time, e.g. 4x clock cycles
 
 endmodule
 ```
@@ -265,6 +265,15 @@ Finally, **elaborate** the top-level module and **launch the simulation** with:
 > ```
 > Do not call `xelab` or `xsim` targeting a `.v` file and **always pay attention to TAB completion on files !**
 >
+
+<br />
+
+Alternatively you can also use the `Makefile` already prepared for you:
+
+```
+% make clean
+% make compile elaborate simulate
+```
 
 <br />
 
@@ -407,6 +416,13 @@ remove_force -help
 Instead of using logic operators we can also implement the functionality of each basic gate in terms of a **truth table**.<br/>
 A Verilog `case` statement within an `always` sequential block can be used for this purpose.
 
+<br />
+
+<img src="doc/pictures/table.png" alt="drawing" width="500"/>
+
+<br />
+
+
 Create a new file e.g. `GatesCase.v` and try to **complete** the following **code skeleton**:
 
 ```Verilog
@@ -424,34 +440,19 @@ module GatesCase (
 
    ) ;
 
-   // AND
+
+   // as recommended by the Verilog standard, use always @(*) to describe COMBINATIONAL blocks
    always @(*) begin
 
-      case( {A,B} )        //  concatenation operator { , }, that's why Verilog uses begin/end instead of standard C/C++ brackets {}
+      case( {A,B} )        // concatenation operator { , }, that's why Verilog uses begin/end instead of standard C/C++ brackets {}
 
-         2'b00 :  Z[0] = 1'b0 ;
-         2'b01 :  Z[0] = 1'b0 ;
-         2'b10 :  Z[0] = 1'b0 ;
-         2'b11 :  Z[0] = 1'b1 ;
+         2'b00 :  Z = 6'b ...
+         2'b01 :  Z = 6'b ...
+         2'b10 :  Z = 6'b ...
+         2'b11 :  Z = 6'b ...
 
       endcase
    end  // always
-
-
-   // NAND
-   ...
-
-   // OR
-   ...
-
-   // NOR
-   ...
-
-   // XOR
-   ....
-
-   // XNOR
-   ...
 
 endmodule
 ```

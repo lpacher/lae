@@ -32,19 +32,23 @@ module Gates (
 
    // NAND
    assign Z[1] = ~(A & B) ;
+   //assign Z[1] = ~Z[0] ;     // OK in Verilog, not allowed using VHDL instead (in VHDL an output port can be only written, not read)
 
    // OR
    assign Z[2] = A | B ;
 
    // NOR
    assign Z[3] = ~(A | B) ;
+   //assign Z[3] = ~Z[2] ;
 
    // XOR
    assign Z[4] = A ^ B ;
+   //assign Z[4] = (~A &B ) | (A & (~B)) ;     // XOR logic equation
 
    // XNOR
    assign Z[5] = ~(A ^ B) ;
-
+   //assign Z[5] = ~Z[4] ;
+   //assign Z[5] = ((~A) & (~B)) | (A & B) ;   // XNOR logic equation
 
 endmodule
 

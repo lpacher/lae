@@ -35,7 +35,7 @@ module tb_Gates ;
    reg [1:0] count = 2'b00 ;
 
    always @(posedge clk)
-      count <= count + 1 ;    // **WARN: be aware of the implicit casting! This is count[2:0] <= count[2:0] + 32'b1 since 1 is a 32-bit integer! Use + 1'b1 to avoid bad surprises!
+      count <= count + 1 ;    // **WARN: be aware of the implicit casting! This is count[1:0] <= count[1:0] + 32'b1 since 1 is a 32-bit integer! Use + 1'b1 to avoid bad surprises!
 
 
    /////////////////////////////////
@@ -54,7 +54,7 @@ module tb_Gates ;
    ///////////////////////
 
    initial
-      #(4*25) $finish ;   // here we only need to choose the simulation time, e.g. 4x clock cycles
+      #(4*10) $finish ;   // here we only need to choose the simulation time, e.g. 4x clock cycles
 
 endmodule
 
