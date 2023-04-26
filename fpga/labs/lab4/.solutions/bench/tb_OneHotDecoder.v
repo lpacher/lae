@@ -52,5 +52,13 @@ module tb_OneHotDecoder ;
 
    end
 
+   //////////////////////////////////////
+   //   text-based simulation output   //
+   //////////////////////////////////////
+
+   initial begin
+      $monitor("%d ns   %b   %b", $time, count, code) ;
+   end
+
 endmodule
 
