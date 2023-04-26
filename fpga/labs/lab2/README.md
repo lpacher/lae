@@ -102,6 +102,7 @@ With a **text editor** application create a new file named `Gates.v`, for exampl
 
 ```
 % gedit Gates.v &   (for Linux users)
+
 % n++ Gates.v       (for Windows users)
 ```
 
@@ -194,6 +195,7 @@ from the `.solutions/` directory with your text editor:
 
 ```
 % gedit tb_Gates.v &   (for Linux users)
+
 % n++ tb_Gates.v       (for Windows users)
 ```
 
