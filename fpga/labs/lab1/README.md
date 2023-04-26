@@ -292,6 +292,7 @@ Create a second Verilog file named `tb_Inverter.v` from the command line as foll
 
 ```
 % gedit tb_Inverter.v &   (for Linux users)
+
 % n++ tb_Inverter.v       (for Windows users)
 ```
 
@@ -1294,6 +1295,15 @@ not  u1 (ZN , X) ;
 
 This is a first example of a **gate primitive instantiation**, and the resulting Verilog code basically represents a true **schematic**
 with a NOT-gate symbol.
+
+You can also add some **propagation-delay** to the `not` gate-primitive with the following syntax:
+
+```verilog
+// gate-primitive instantiation + 3ns propagation delay
+not #(3) u1  (ZN , X) ;
+```
+
+<br />
 
 Save the file once done. Re-compile and re-simulate the code.
 Verify if the functionality of the NOT gate has changed.
