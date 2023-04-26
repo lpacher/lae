@@ -11,7 +11,7 @@
 * [**Copy simulation scripts**](#copy-simulation-scripts)
 * [**RTL coding**](#rtl-coding)
 * [**Simulate the design**](#simulate-the-design)
-* [**Exercise**](#exercise)
+* [**Exercises**](#exercises)
 
 <br />
 <!--------------------------------------------------------------------->
@@ -258,6 +258,16 @@ module tb_OneHotDecoder ;
 
    end
 
+
+   //////////////////////////////////////
+   //   text-based simulation output   //
+   //////////////////////////////////////
+
+   initial begin
+      $monitor("%d ns   %b   %b", $time, count, code) ;
+   end
+
+
 endmodule
 ```
 
@@ -276,9 +286,12 @@ Debug simulation results in the XSim graphical interface. Close the simulator on
 <!--------------------------------------------------------------------->
 
 
-## Exercise
+## Exercises
 [**[Contents]**](#contents)
 
+<br />
+
+**EXERCISE 1**
 
 Create a new Verilog source file `rtl/ThemometerDecoder.v`. Modify the behavioral description
 of the one-hot decoder in order to implement a **5b/32b binary to thermometer decoder** instead.
@@ -315,4 +328,56 @@ Re-compile and re-simulate the design:
 % make sim
 ```
 
+<br />
+
+**EXERCISE 2**
+
+Create a new Verilog source file `rtl/GrayDecoder.v`. Try yourself to implement and
+simulate a **4b/4b binary-to-Gray decoder**. This functionality can be implemented using
+simple `assign` statements:
+
+```verilog
+// MSB
+assign GrayOut[N-1] = Bin[N-1] ;   // same as GrayOut[N-1] = Bin[N-1] ^ 1'b0
+
+// LSB to MSB-1
+assign GrayOut[0] = Bin[0] ^ Bin[1] ;
+assign GrayOut[1] = Bin[1] ^ Bin[2] ;
+...
+...
+assign GrayOut[N-2] = Bin[N-2] ^ Bin[N-1] ;
+```
+
+<br />
+
+which is equivalent to a XOR between the binary input word `Bin` and the same word right-shifted by one position
+using the right-shift `>>` operator:
+
+<br />
+
+``` verilog
+assign GrayOut = (Bin >> 1) ^ Bin ;
+``` 
+
+<br />
+
+Indeed since there is a recursive formula a for-loop statement can be also used to implement this functionality.
+The following code-snippet can be used as an example starting point:
+
+<br />
+
+```verilog
+always @(*) begin
+
+   // MSB
+   GrayOut[N-1] = Bin[N-1] ;
+
+   // LSB to MSB-1
+   for(i=0; i < N-1; i=i+1) begin
+      GrayOut[i] = Bin[i] ^ Bin[i+1] ;
+   end
+end   //always
+```
+
+<br />
 
