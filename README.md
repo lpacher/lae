@@ -574,6 +574,12 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/9184017dae
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/3bce5d52b06a103bbfd9005056829d03>_
 
 * Lecture 5 - Mon 03/04/2023<br />
-_<https://unito.webex.com/recordingservice/sites/unito/recording/play/efa51e57b41b103bb9b2005056812fe7>_ <br />
-_<https://unito.webex.com/recordingservice/sites/unito/recording/play/f2cda9d4b42d103baffe005056812bc8>_
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/efa51e57b41b103bb9b2005056812fe7>_ (link1) <br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/f2cda9d4b42d103baffe005056812bc8>_ (link2)
+
+* Lecture 6 - Mon 17/04/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/e5bf72e9bf1b103ba8ff86793e577aa7>_
+
+* Lecture 7 - Wed 19/04/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/ea549431c0ea103bbf7ffa16ad552dd4>_
 
