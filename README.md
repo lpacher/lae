@@ -583,3 +583,6 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/e5bf72e9bf
 * Lecture 7 - Wed 19/04/2023<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/ea549431c0ea103bbf7ffa16ad552dd4>_
 
+* Lecture 8 - Wed 26/04/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/84866933c66b103bbe27b69c4113f4ba>_
+
