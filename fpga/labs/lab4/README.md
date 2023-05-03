@@ -333,7 +333,7 @@ Re-compile and re-simulate the design:
 **EXERCISE 2**
 
 Create a new Verilog source file `rtl/GrayDecoder.v`. Try yourself to implement and
-simulate a **4b/4b binary-to-Gray decoder**. This functionality can be implemented using
+simulate a **parameterizable binary-to-Gray decoder**. This functionality can be implemented using
 simple `assign` statements:
 
 ```verilog
