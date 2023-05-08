@@ -13,7 +13,8 @@ module DFF (
    input  wire clk,   // clock
    input  wire rst,   // reset, active-high (then can be synchronous or asynchronous according to sensitivity list)
    input  wire D,
-   output reg Q, Qbar
+   output reg  Q,
+   output wire Qbar
 
    ) ;
 
@@ -72,4 +73,3 @@ module RippleCounter4b (
    //DFF  ff_3 ( .rst( rst ), .clk( Q[2] ), .D( Qbar[3] ), .Q( Q[3] ), .Qbar( Qbar[3]) ) ;
 
 endmodule
-

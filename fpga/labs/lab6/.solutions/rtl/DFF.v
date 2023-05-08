@@ -14,7 +14,8 @@ module DFF (
    input  wire clk,   // clock
    input  wire rst,   // reset, active-high (then can be synchronous or asynchronous according to sensitivity list)
    input  wire D,
-   output reg Q
+   output reg  Q,
+   output wire Qbar
 
    ) ;
 
@@ -31,5 +32,7 @@ module DFF (
       end
    end  // always
 
-endmodule
+   // inverted output
+   assign Qbar = ~ Q ;
 
+endmodule

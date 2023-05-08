@@ -14,7 +14,8 @@ module DFF (
    input  wire clk,   // clock
    input  wire rst,   // reset, active-high (then can be synchronous or asynchronous according to sensitivity list)
    input  wire D,
-   output reg Q, Qbar
+   output reg  Q,
+   output wire Qbar
 
    ) ;
 
@@ -33,6 +34,7 @@ module DFF (
 
 
    // inverted output
+   //not (Qbar,Q) ;
    assign Qbar = ~ Q ;
 
 endmodule
@@ -49,6 +51,7 @@ module XOR (
 
    ) ;
 
+   //xor (Z,A,B) ;
    assign Z = A ^ B ;
 
 endmodule
@@ -65,6 +68,7 @@ module AND (
 
    ) ;
 
+   //and (Z,A,B) ;
    assign Z = A & B ;
 
 endmodule
@@ -81,10 +85,32 @@ module TFF (
 
    ) ;
 
+
+   ////////////////////
+   //   structural   //
+   ////////////////////
+
    wire Dint ;
 
    DFF  u1 (.clk(clk), .rst(rst), .D(Dint), .Q(Q) ) ;
    XOR  u2 (.A(T), .B(Q), .Z(Dint) ) ;
+
+
+   ////////////////////
+   //   behavioral   //
+   ////////////////////
+
+/*
+   always @(posedge clk) begin
+      if(rst) begin
+         Q <= 1'b0 ;
+      end
+      else begin
+         Q <= T ^ Q ;
+      end
+   end   //always
+
+*/
 
 endmodule
 
@@ -150,4 +176,3 @@ module SyncCounter4b (
 */
 
 endmodule
-
