@@ -371,3 +371,12 @@ Re-compile and re-simulate the design:
 % make sim
 ```
 
+
+TODO
+
+
+![](./doc/pictures/4bRippleCounterUp.png)
+
+![](./doc/pictures/4bRippleCounterDown.png)
+
+
