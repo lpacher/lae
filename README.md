@@ -595,3 +595,5 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/8cb0408bcb
 * Lecture 11 - Mon 08/05/2023<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/9d76c54acf9d103bbeff2243352c8e87>_
 
+* Lecture 12 - Mon 10/05/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/561d624dd16b103bb9ebf23fea10416b>_
