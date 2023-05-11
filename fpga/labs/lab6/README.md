@@ -379,4 +379,7 @@ TODO
 
 ![](./doc/pictures/4bRippleCounterDown.png)
 
+![](./doc/pictures/4bSyncCounter.png)
+
+
 
