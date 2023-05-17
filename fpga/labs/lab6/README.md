@@ -374,6 +374,7 @@ Re-compile and re-simulate the design:
 
 TODO
 
+![](./doc/pictures/TFF.png)
 
 ![](./doc/pictures/4bRippleCounterUp.png)
 
@@ -381,5 +382,9 @@ TODO
 
 ![](./doc/pictures/4bSyncCounter.png)
 
+## Exercise
 
+[**[Contents]**](#contents)
+
+![](./doc/pictures/JKFF.png)
 
