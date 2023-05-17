@@ -147,6 +147,7 @@ Verify that all required scripts are in place:
 ## RTL coding
 [**[Contents]**](#contents)
 
+![](./doc/pictures/DLATCH.png)
 
 With your **text editor** application create a first new Verilog file `rtl/DLATCH.v` and write the RTL code for a **D-latch** as follows:
 
@@ -197,7 +198,8 @@ module DFF (
    input  wire clk,        // clock
    input  wire rst,        // reset, active-high (then can be synchronous or asynchronous)
    input  wire D,
-   output reg Q
+   output reg  Q,
+   output wire Qbar
 
    ) ;
 
@@ -212,6 +214,9 @@ module DFF (
          Q <= D ;
       end
    end  // always
+
+   // inverted output
+   assign Qbar = ~ Q ;
 
 endmodule
 ```
@@ -384,7 +389,7 @@ always @(posedge clk) begin
    else begin
       Q <= T ^ Q ;
    end
-end   //always
+end   // always
 ```
 
 
@@ -408,6 +413,6 @@ always @(posedge clk) begin
    else begin
       Q <= (J & (~Q)) | ((~K) & Q) ;
    end
-end   //always
+end   // always
 ```
 
