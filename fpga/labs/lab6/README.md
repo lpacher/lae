@@ -376,6 +376,18 @@ TODO
 
 ![](./doc/pictures/TFF.png)
 
+```verilog
+always @(posedge clk) begin
+   if(rst) begin
+      Q <= 1'b0 ;
+   end
+   else begin
+      Q <= T ^ Q ;
+   end
+end   //always
+```
+
+
 ![](./doc/pictures/4bRippleCounterUp.png)
 
 ![](./doc/pictures/4bRippleCounterDown.png)
@@ -387,4 +399,15 @@ TODO
 [**[Contents]**](#contents)
 
 ![](./doc/pictures/JKFF.png)
+
+```verilog
+always @(posedge clk) begin
+   if(rst) begin
+      Q <= 1'b0 ;
+   end
+   else begin
+      Q <= (J & (~Q)) | ((~K) & Q) ;
+   end
+end   //always
+```
 
