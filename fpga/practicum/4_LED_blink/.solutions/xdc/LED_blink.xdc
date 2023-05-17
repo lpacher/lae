@@ -46,6 +46,16 @@ set_property -dict {PACKAGE_PIN T10 IOSTANDARD LVCMOS33} [get_ports LED] ;   ## 
 ## **EXERCISE: probe the divided clock at the oscilloscope on pin JA1
 #set_property -dict { PACKAGE_PIN G13  IOSTANDARD LVCMOS33 } [get_ports LED]
 
+## **OPTIONAL: drive 7-segment display module as in practicum #3 (JA header mapping with 200 ohm series resistor on each pin)
+#set_property -dict { PACKAGE_PIN G13  IOSTANDARD LVCMOS33 } [get_ports segA] ;   ## JA[1]
+#set_property -dict { PACKAGE_PIN B11  IOSTANDARD LVCMOS33 } [get_ports segB] ;   ## JA[2]
+#set_property -dict { PACKAGE_PIN A11  IOSTANDARD LVCMOS33 } [get_ports segC] ;   ## JA[3]
+#set_property -dict { PACKAGE_PIN D12  IOSTANDARD LVCMOS33 } [get_ports segD] ;   ## JA[4]
+#set_property -dict { PACKAGE_PIN D13  IOSTANDARD LVCMOS33 } [get_ports segE] ;   ## JA[5]
+#set_property -dict { PACKAGE_PIN B18  IOSTANDARD LVCMOS33 } [get_ports segF] ;   ## JA[6]
+#set_property -dict { PACKAGE_PIN A18  IOSTANDARD LVCMOS33 } [get_ports segG] ;   ## JA[7]
+#set_property -dict { PACKAGE_PIN K16  IOSTANDARD LVCMOS33 } [get_ports DP  ] ;   ## JA[8]
+
 
 ################################
 ##   electrical constraints   ##
@@ -63,8 +73,8 @@ set_property CONFIG_VOLTAGE 3.3 [current_design]
 ## create a 100 MHz clock signal with 50% duty cycle for reg2reg Static Timing Analysis (STA)
 create_clock -period 10.000 -name clk100 -waveform {0.000 5.000} -add [get_ports clk]
 
-## constrain the reg2out timing path (assume approx. 1/2 clock period)
-set_output_delay -clock clk100 5.000 [get_ports LED]
+## constrain reg2out timing paths (assume approx. 1/2 clock period)
+set_output_delay -clock clk100 5.000 [all_outputs]
 
 
 ################################
