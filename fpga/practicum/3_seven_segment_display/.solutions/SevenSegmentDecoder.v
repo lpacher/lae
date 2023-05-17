@@ -40,6 +40,36 @@ module SevenSegmentDecoder (
    //                                                     //a b c d e f g
    //assign {segA, segB, segC, segD, segE, segF, segG} = 7'b0_0_1_0_0_1_0 ;   // direct assignment of LED controls
 
+
+
+   /////////////////////////////////////////////////////////
+   //   logic equations implementation (COMMON CATHODE)   //
+   /////////////////////////////////////////////////////////
+
+   // Ref. also to: https://www.electronicshub.org/bcd-7-segment-led-display-decoder-circuit
+
+/*
+   wire A = BCD[3] ;
+   wire B = BCD[2] ;
+   wire C = BCD[1] ;
+   wire D = BCD[0] ;
+
+   assign segA = A | C | (B & D) | ((~B) & (~D)) ;
+   assign segB = ~B | ((~C) & (~D)) + (C & D) ;
+   assign segC = B | (~C) | D ;
+   assign segD = ((~B) & (~D)) | (C & (~D)) | (B & (~C) & D) | ((~B) & C) | A ;
+   assign segE = (~B & ~D) + (C & (~D)) ;
+   assign segF = A | ((~C) & (~D)) + (B & (~C)) | (B & (~D)) ;
+   assign segG = A | (B & (~C)) | ((~B) & C) | (C & (~D)) ;
+
+*/
+
+
+   ///////////////////////////////////
+   //   behavioral implementation   //
+   ///////////////////////////////////
+
+
    reg [6:0] LED ;
 
    always @(*) begin
