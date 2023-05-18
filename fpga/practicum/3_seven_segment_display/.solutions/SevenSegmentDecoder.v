@@ -26,9 +26,13 @@ module SevenSegmentDecoder (
    output wire segD,
    output wire segE,
    output wire segF,
-   output wire segG
+   output wire segG,
+
+   output wire [3:0] LED   // optionally, display the BCD binary value on standard LEDs
 
    ) ;
+
+   assign LED = BCD ;
 
 
    // you can decide to tie-high or tie-down the unused decimal point (DP)
