@@ -23,10 +23,10 @@ set_property -dict { PACKAGE_PIN G13  IOSTANDARD LVCMOS33 } [get_ports segA] ;  
 set_property -dict { PACKAGE_PIN B11  IOSTANDARD LVCMOS33 } [get_ports segB] ;   ## JA[2]
 set_property -dict { PACKAGE_PIN A11  IOSTANDARD LVCMOS33 } [get_ports segC] ;   ## JA[3]
 set_property -dict { PACKAGE_PIN D12  IOSTANDARD LVCMOS33 } [get_ports segD] ;   ## JA[4]
-set_property -dict { PACKAGE_PIN D13  IOSTANDARD LVCMOS33 } [get_ports segE] ;   ## JA[5]
-set_property -dict { PACKAGE_PIN B18  IOSTANDARD LVCMOS33 } [get_ports segF] ;   ## JA[6]
-set_property -dict { PACKAGE_PIN A18  IOSTANDARD LVCMOS33 } [get_ports segG] ;   ## JA[7]
-set_property -dict { PACKAGE_PIN K16  IOSTANDARD LVCMOS33 } [get_ports DP  ] ;   ## JA[8]
+set_property -dict { PACKAGE_PIN D13  IOSTANDARD LVCMOS33 } [get_ports segE] ;   ## JA[7]
+set_property -dict { PACKAGE_PIN B18  IOSTANDARD LVCMOS33 } [get_ports segF] ;   ## JA[8]
+set_property -dict { PACKAGE_PIN A18  IOSTANDARD LVCMOS33 } [get_ports segG] ;   ## JA[9]
+set_property -dict { PACKAGE_PIN K16  IOSTANDARD LVCMOS33 } [get_ports DP  ] ;   ## JA[10]
 
 
 ################################
