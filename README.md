@@ -609,3 +609,6 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/2802c71dda
 
 * Lecture 16 - Wed 24/05/2023<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/dbcbdaaedc6b103bbff9aa82ce138ead>_
+
+* Lecture 17 - Wed 24/05/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/856e4cdde01d103bbff8aa82ce138ead>_
