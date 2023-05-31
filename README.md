@@ -531,6 +531,8 @@ Step-by-step instructions explaining how to run this test flow can be found [**h
 * _<https://www.so-logic.net/documents/knowledge/tutorial/Basic_FPGA_Tutorial_VHDL>_
 * _<https://www.hackster.io/xilinx/projects>_
 * _<https://web.archive.org/web/20190115230224/http://hamsterworks.co.nz/mediawiki/index.php/FPGA_Projects>_
+* _<https://www.01signal.com>_
+
 
 #### List of acronyms and abbreviations
 
