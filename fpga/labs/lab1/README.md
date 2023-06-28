@@ -28,6 +28,12 @@
 In the first lab we will implement and simulate a simple **NOT-gate (inverter)** using the **Verilog Hardware Description Language (HDL)** <br />
 and the **XSim simulator** that comes with the **Xilinx Vivado design suite**.<br/>
 
+<br />
+
+<img src="doc/pictures/Inverter.png" alt="drawing" width="800"/>
+
+<br />
+
 We will also learn how to write a [**GNU Makefile**](https://www.gnu.org/software/make/manual/make.html)
 to **automate the simulation flow** at the command line.
 
@@ -1272,6 +1278,10 @@ assign ZN = (X == 1'b1) ? 1'b0 : 1'b1 ;
 
 <br />
 
+<img src="doc/pictures/InverterAsMux.png" alt="drawing" width="500"/>
+
+<br />
+
 Save the file once done. Re-compile and re-simulate the code.
 Verify if the functionality of the NOT gate has changed.
 
@@ -1316,8 +1326,12 @@ Create a new source file `BufferTri.v` and try yourself to implement a **three-s
 **conditional assignment** and an active-high output-enable `OE` control port:
 
 ```verilog
-assign Z = (OE == 1'b1) ? X : 1'b1z ;
+assign ZT = (OE == 1'b1) ? X : 1'b1z ;
 ```
+
+<br />
+
+<img src="doc/pictures/BufferTri.png" alt="drawing" width="800"/>
 
 <br />
 

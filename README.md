@@ -6,7 +6,8 @@
 
 <br />
 
-Git repository for the first part (40 hours, 4 CFU) of the [_Advanced Electronics Laboratory_](https://www.fisicamagistrale.unito.it/do/corsi.pl/Show?_id=70d4) (MFN1324) course<br /> 
+Git repository for the first part (40 hours, 4 CFU) of the
+[_Advanced Electronics Laboratory_](https://www.fisicamagistrale.unito.it/do/corsi.pl/Show?_id=70d4) (MFN1324) course
 at University of Torino, Physics Department.
 
 <br />
@@ -67,6 +68,13 @@ The course covers:
 * gate-level simulations with back-annotated delays (SDF)
 * practical implementation and test of small digital systems targeting a Xilinx Artix-7 FPGA device
 
+>
+> **IMPORTANT !**
+>
+> All students are requested to **complete the preparatory work** before attending practical lectures !<br/>
+> Please go through detailed step-by-step instructions presented in [**labs/lab0/README.md**](labs/lab0/README.md)
+>
+
 <br />
 <!--------------------------------------------------------------------->
 
@@ -103,6 +111,8 @@ The course is organized in form of [**virtual laboratories**](fpga/labs/README.m
 and simulation using the **Verilog Hardware Description Language (HDL)** and **Xilinx Vivado**.<br />
 Each "lab" consists of step-by-step instructions to guide the student in running the simulation and implementation flows using Xilinx tools from the command-line.
 The only requirement for these labs is to have a personal computer with [all necessary development tools properly installed and configured](fpga/labs/lab0/README.md).
+
+The complete list of proposed labs can be found [**here**](https://github.com/lpacher/lae/tree/master/labs).
 
 Virtual laboratories are then supported by [**practical examples**](fpga/practicum/README.md) in the electronics lab in order to let students to physically experiment
 with a real FPGA and digital circuits using real hardware and instrumentation. 
@@ -235,6 +245,8 @@ your official `name.surname@edu.unito.it` address. You can then check your confi
 ```
 
 <br />
+<!--------------------------------------------------------------------->
+
 
 # Clone and update the Git repository for the course
 [**[Contents]**](#contents)
@@ -316,6 +328,7 @@ Each time you will need to **update your local copy of the repository** simply p
 >
 
 <br />
+<!--------------------------------------------------------------------->
 
 
 # Basic git commands
@@ -328,8 +341,9 @@ If you are interested in using Git for other projects a small collection of the 
 day-to-day work and common tasks can be found [**here**](doc/git/README.md).
 A more complete guide to the basic `git` commands can be found [**here**](http://doc.gitlab.com/ee/gitlab-basics/start-using-git.html).
 
-
 <br />
+<!--------------------------------------------------------------------->
+
 
 # Sample Xilinx Vivado simulation and implementation flows
 [**[Contents]**](#contents)
@@ -340,6 +354,8 @@ their overall **command-line environment setup** and all **software installation
 Step-by-step instructions explaining how to run this test flow can be found [**here**](fpga/test/README.md).
 
 <br />
+<!--------------------------------------------------------------------->
+
 
 # Reference documentation
 [**[Contents]**](#contents)
@@ -373,7 +389,7 @@ Step-by-step instructions explaining how to run this test flow can be found [**h
 
 <p>
 
-* B. Mealy and F. Tappero, [_Free Range VHDL_](http://freerangefactory.org/pdf/df344hdh4h8kjfh3500ft2/free_range_vhdl.pdf) (open source)
+* B. Mealy and F. Tappero, [_Free Range VHDL_](https://github.com/fabriziotappero/Free-Range-VHDL-book/blob/master/free_range_vhdl.pdf) (open source)
 * C.H. Roth Jr, _Digital Systems Design Using VHDL_
 * V.A. Pedroni, _Circuit Design with VHDL_
 * R.E. Haskell and D.M. Hanna, _Introduction to Digital Design Using Digilent FPGA Boards / VHDL Examples_
@@ -540,6 +556,8 @@ A list of of common acronyms and abbreviations relevant to electronics engineeri
 can be found [**here**](doc/LOA.md).
 
 <br />
+<!--------------------------------------------------------------------->
+
 
 # Webex lectures
 [**[Contents]**](#contents)

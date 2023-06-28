@@ -12,13 +12,13 @@
 module BufferTri (
 
    input  wire X, OE,
-   output wire Z ) ;
+   output wire ZT ) ;
 
    // conditional assignment (MUX-style)
-   assign Z = (OE == 1'b1) ? X : 1'bz ;   // **NOTE: same as Z = (OE) ? X : 1'bz ;
+   assign ZT = (OE == 1'b1) ? X : 1'bz ;   // **NOTE: same as ZT = (OE) ? X : 1'bz ;
 
    // gate-primitive instantiation
-   //bufif1 u1 (Z,X,OE) ;                 // bufif1 = active-high output-enable, bufif0 = active-low. Additional notif0/notif1 exist for three-state inverters
+   //bufif1 u1 (ZT,X,OE) ;                 // bufif1 = active-high output-enable, bufif0 = active-low. Additional notif0/notif1 exist for three-state inverters
 
 endmodule
 
