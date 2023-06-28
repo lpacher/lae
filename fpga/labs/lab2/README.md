@@ -425,7 +425,7 @@ A Verilog `case` statement within an `always` sequential block can be used for t
 <br />
 
 
-Create a new file e.g. `GatesCase.v` and try to **complete** the following **code skeleton**:
+Create a new file e.g. `GatesTruthTable.v` and try to **complete** the following **code skeleton**:
 
 ```Verilog
 //
@@ -434,7 +434,7 @@ Create a new file e.g. `GatesCase.v` and try to **complete** the following **cod
 
 `timescale 1ns / 100ps
 
-module GatesCase (
+module GatesTruthTable (
 
    input  wire A
    input  wire B,
@@ -468,19 +468,19 @@ in the `tb_Gates.v` file:
 // device under test (DUT)
 
 //Gates DUT (.A(count[0]), .B(count[1]), .Z(Z)) ;       **COMMENT** the previous DUT !
-GatesCase DUT (.A(count[0]), .B(count[1]), .Z(Z)) ;
+GatesTruthTable DUT (.A(count[0]), .B(count[1]), .Z(Z)) ;
 
 ```
 
 <br />
 
 To speed up the simulation you can use the `Makefile` already prepared for you.
-With a **text editor** update your `Makefile` to parse and compile `GatesCase.v` instead of `Gates.v` as follows:
+With a **text editor** update your `Makefile` to parse and compile `GatesTruthTable.v` instead of `Gates.v` as follows:
 
 
 ```make
-#SOURCES := Gates.v tb_Gates,v
-SOURCES := GatesCase.v tb_Gates.v
+#SOURCES := Gates.v tb_Gates.v
+SOURCES := GatesTruthTable.v tb_Gates.v
 ```
 
 <br />
@@ -550,7 +550,7 @@ Update the testbench code in order to instantiate the new `GatesPrimitives` modu
 // device under test (DUT)
 
 //Gates DUT (.A(count[0]), .B(count[1]), .Z(Z)) ;
-//GatesCase DUT (.A(count[0]), .B(count[1]), .Z(Z)) ;
+//GatesTruthTable DUT (.A(count[0]), .B(count[1]), .Z(Z)) ;
 GatesPrimitives DUT (.A(count[0]), .B(count[1]), .Z(Z)) ;
 
 ```

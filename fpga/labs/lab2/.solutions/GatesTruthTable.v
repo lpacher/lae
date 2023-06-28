@@ -8,7 +8,7 @@
 
 `timescale 1ns / 100ps
 
-module GatesCase (
+module GatesTruthTable (
 
    input  wire A
    input  wire B,
