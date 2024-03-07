@@ -1375,6 +1375,19 @@ In order to **download the repository** for the first time use:
 % git clone https://github.com/lpacher/lae.git [optional target directory]
 ```
 
+<br />
+
+>
+> **IMPORTANT**
+>
+> All cut-and-paste instructions in `README` files assume that you clone the repository as `lae` on your Desktop.
+> If you decide to clone the repository **either with a different name or into a different location** it will be up to you
+> to properly change the path to the repository wherever required.
+> Please, also keep in mind that all `git` commands **must be invoked** inside the top `lae/` directory or
+> from any other sub-directory of the repository!
+
+<br />
+
 By default a new `lae/` directory containing the repository will be created
 where you invoked the above `git` command, unless you specify a different target directory as optional parameter.
 
@@ -1390,14 +1403,37 @@ Feel free to use a different target directory. As an example:
 >
 > **IMPORTANT**
 >
-> All cut-and-paste instructions in `README` files assume that you clone the repository as `lae` on your Desktop.
-> If you decide to clone the repository **either with a different name or into a different location** it will be up to you
-> to properly change the path to the repository wherever required.
-> Please, also keep in mind that all `git` commands **must be invoked** inside the top `lae/` directory or
-> from any other sub-directory of the repository!
+> For Windows users. Starting from Windows 10 all personal documents and stuff can be accessed
+> using the **Microsoft OneDrive cloud storage**. This is also true for folders and documents
+> placed on the main "desktop". As a result the actual absolute path that locates the `Desktop`
+> directory is not `C:\Users\username\Desktop` but `C:\Users\username\OneDrive\Desktop`.
+>
+> Please, be aware that if you type
+>
+> ```
+> % cd C:\Users\username\Desktop
+> % ls
+> ```
+>
+> <br />
+>
+> into your Windows _Command Prompt_ and you don't see the content placed on you actual "desktop"
+> this is due to the fact that OneDrive is used (this is the default behaviour).
+>
+> If this is the case in order to access the real "desktop" you have to use: 
+>
+> ```
+> cd C:\Users\username\OneDrive\Desktop
+> ```
+>
+> <br />
+>
+> If you don't use OneDrive you can also move your Desktop outside OneDrive. See also:
+>
+> _<https://www.addictivetips.com/windows-tips/move-the-desktop-folder-out-of-onedrive-on-windows-10>_
+>
 
 <br />
-
 
 ## Create your personal development branch
 [**[Contents]**](#contents)
