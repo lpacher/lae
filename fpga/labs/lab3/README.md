@@ -128,7 +128,7 @@ List the content of the directory to understand the new sources organization:
 | `scripts/sim/`     | Tcl scripts for compilation/elaboration/simulation |
 | `scripts/build/`   | Tcl scripts for physical implementation to target FPGA |
 | `scripts/install/` | Tcl scripts for firmware installation |
-| `work/sim/`        | scratch simulation working area where `xvhdl/xelab/xsim` executables are invoked |
+| `work/sim/`        | scratch simulation working area where `xvlog/xvhdl/xelab/xsim` executables are invoked |
 | `work/build/`      | scratch implementation working area where `vivado` executable is invoked |
 | `bin/`             | additional directory for non-Tcl scripts and programs (e.g. Bash/Batch, Python) |
 | `log/`             | all log files |
@@ -214,6 +214,12 @@ Verify that all required scripts are in place:
 > % copy .solutions\scripts\sim\*.tcl   scripts\sim\
 > ```
 >
+> The are no issues in performing a recursive copy instead:
+>
+> ```
+> % cp -r .solutions\scripts\sim\ scripts\
+> ```
+>
 
 <br />
 <!--------------------------------------------------------------------->
@@ -271,7 +277,7 @@ It is therefore quite intuitive to think in terms of **open/closed switches** ac
 
 <br />
 
-A first possible implementation to implement this functionality is by using a **behavioural description** with
+A first possible coding solution to implement this functionality is therefore by using a **behavioural description** with
 a **software-like** `if/else` statement inside an `always` procedural block:
 
 ```verilog
@@ -370,8 +376,8 @@ end   // always
 
 **LOGIC EQUATION**
 
-A forth possibility is to explicitly write the **logic equation** as it can be derived from the **truth table**:
-
+A forth possibility is to explicitly write the **logic equation** as it can be derived from the **truth table**.
+If a **sum-of-products (SoP)** approach is used the resulting circuit is the following:
 <br />
 
 <img src="doc/pictures/mux_gates.png" alt="drawing" width="800"/>
