@@ -70,7 +70,7 @@ using a dual-boot or a virtualization software (VirtualBox is fine)
 or find another computer running a Linux distribution or Windows 7/10.
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > Most of screenshots included in this guide are mainly from a _Windows 7 Ultimate_ operating system. 
 > Small differences can arise from Windows 7 and Windows 10.
@@ -188,7 +188,7 @@ See also:
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > For students using Windows it is **highly recommended to create a shortcut** to the Windows terminal and
 > to **place it on the desktop** for easier and faster access during lectures.
@@ -222,7 +222,7 @@ Familiarity with a good **text editor** for coding is therefore assumed for the 
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > The source code will be always in form of **plain-text** files. That is, you need a **text editor** application
 > to open, write and edit them, **NOT  a word processor** application with text formatting capabilities!
@@ -296,7 +296,7 @@ and improving the _Command Prompt_ environment for an effective usage.
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > The usual software installation procedure under Windows is to download some **automated installer** (either `.exe` or `.msi` file) for the
 > application and then to launch **with administrator privileges** a guided **installation wizard** with a double left-click on the executable.
@@ -653,7 +653,7 @@ have already installed it without redirecting the output of the command to `nul`
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > Do not forget to **always SAVE** the `login.bat` file after **modifications** in order to later load new customizations in the _Command Prompt_ !
 >
@@ -784,7 +784,7 @@ to the Windows command line.
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > Windows 10 comes with the so called **Windows Subsystem for Linux (WSL)** layer that allows to natively run
 > Linux binary executables on Windows, providing also a Bash shell and all basic commands used in the course. <br />
@@ -931,7 +931,7 @@ Try the following commands to check that the new environment is properly configu
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > The `cd` command is a **built-in command** part of the shell program itself, not a standalone executable!
 > That is, there is no `cd.exe` executable as part of the GNU Win package:
@@ -1387,7 +1387,7 @@ Feel free to use a different target directory. As an example:
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > All cut-and-paste instructions in `README` files assume that you clone the repository as `lae` on your Desktop.
 > If you decide to clone the repository **either with a different name or into a different location** it will be up to you
@@ -1501,7 +1501,7 @@ _<http://prdownloads.sourceforge.net/wintcltk/WinTclTk-8.5.6.exe>_
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > At the end of the automated installation process the **name of the executable** that comes with the above installer is **NOT** `tclsh.exe`
 > but `tclsh85.exe` tracing the version number in the name!
@@ -1762,7 +1762,7 @@ using either `where` or `which` commands:
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > The software **version** used by the instructor during remote lectures will be **2019.2** !
 >
@@ -1808,7 +1808,7 @@ support for new complex devices. Indeed, the final installation will consume les
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > If you have **space issues on your disk** you can install an older version of the tool.
 > As an example, the size of the installer for the **2015.4** version was about 10 GB.
@@ -1856,7 +1856,7 @@ the _Extract Here_ option under the 7-Zip sub-menu.
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > Do not forget to **DELETE all compressed files and the extracted directory**
 > at the end of the installation process in order to **recover several GB of disk space**!
@@ -1936,7 +1936,7 @@ all **SoC**  and **UltraScale** devices, leaving the check only on the **7-Serie
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > In order to be able to **connect your PC to a real FPGA board** in the lab to install programming files
 > be sure that the **_Install Cable Drivers_** option is selected in the wizard!
@@ -1967,7 +1967,7 @@ if available (e.g. `D:\Xilinx`) without cluttering the system partition `C:\` wi
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > Later in this guide we will assume that a `XILINX_DIR` **environment variable** will be used to locate
 > the **main installation directory** as specified in the wizard during the installation setup.
@@ -2066,7 +2066,7 @@ https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug973-vivad
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > The following instructions are provided **only for reference**, you will check your actual cable drivers installation in the lab.
 > However **you MUST have cable drivers installed** on your machine in order to be able to physically connect your PC 
@@ -2454,7 +2454,7 @@ List all available `Makefile` targets with:
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > Each target in the `Makefile` is actually executed invoking a `bash` shell. Windows users might notice that
 > a strange warning is generated when executing `make` targets:
@@ -2538,6 +2538,31 @@ Compile and elaborate the example HDL design and run the resulting simulation ex
 % make elaborate
 % make simulate
 ```
+
+<br />
+
+>
+> **IMPORTANT**
+>
+> Students working with **Linux Ubuntu** reported that by default `make elaborate` fails with the following error:
+>
+> ```
+> ERROR: [XSIM 43-3409] Failed to compile generated C file xsim.dir/tb_Counter/obj/xsim_1.c.
+> ERROR: [XSIM 43-3915] Encountered a fatal error. Cannot continue.
+> Exiting...
+> ```
+>
+> The source of the error is due to **missing dependencies** installed on the system.
+> In particular the `clang` compiler that comes with the Vivado installation requires `libncurses.so`
+> which might be not installed. This can be easily solved by installing the following packages:
+>
+> ```
+> sudo apt-get install libncurses5 libtinfo5
+> ```
+> <br />
+>
+> Ref. also to: _<https://support.xilinx.com/s/question/0D52E00006iHlpQSAS/vivado-20172-simulation-xsim-433409-failed-to-compile-generated-c-file?language=en_US>_
+>
 
 <br />
 
@@ -2661,7 +2686,7 @@ program the FPGA or to write the firmware into the external 128-MB Quad SPI Flas
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > The following instructions are provided **only for reference**, you can test firmware installation flows
 > only if you have a Digilent Arty A7 board attached to your personal computer!
