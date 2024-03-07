@@ -73,9 +73,10 @@ or find another computer running a Linux distribution or Windows 7/10.
 > **IMPORTANT**
 >
 > Most of screenshots included in this guide are mainly from a _Windows 7 Ultimate_ operating system. 
-> Small differences can arise from Windows 7 and Windows 10.
-> Additionally, screenshots referring Xilinx Vivado installation steps are from a **2019.2 installer**. The content of the wizard for
-> the latest version available for download on the Xilinx website can be slightly different.
+> Small differences can arise from Windows 7 and new versions Windows 10 and Windows 11.
+> Additionally, screenshots referring Xilinx Vivado installation steps are from a **2019.2 installer**.
+> The content of the wizard for the latest version available for download on the Xilinx website can be
+> slightly different.
 >
 
 <br />
@@ -1764,7 +1765,10 @@ using either `where` or `which` commands:
 >
 > **IMPORTANT**
 >
-> The software **version** used by the instructor during remote lectures will be **2019.2** !
+> The software **version** used by the instructor during remote lectures will be **2019.2**
+> and screenshots referring to Xilinx Vivado installation steps are from the **2019.2 installer**.
+> The content of the wizard for another version available for download on the Xilinx website
+> can be slightly different.
 >
 
 <br />
@@ -1776,33 +1780,43 @@ Xilinx softwares can be downloaded free of charge from the official Xilinx websi
 
 _<https://www.xilinx.com/support/download.html>_
 
-The package to be downloaded is called **Vivado Design Suite - HLx Editions**. As already mentioned the software is
-available **_only_ for Linux and Windows operating systems**. Both Windows 7 and Windows 10 are supported.
+<br />
+
 In order to download the software and to obtain a free license you must **register and create an account** on the Xilinx website.
 
-At the time of writing the latest version of the software available on the site is **2020.2**.
-The version used during lectures will be **2019.2**. Other versions can be downloaded from:
+At the time of writing the latest version of the software available on the site is **2023.2**. Older versions
+can be downloaded from:
 
 _<https://www.xilinx.com/support/download/index.html/content/xilinx/en/downloadNav/vivado-design-tools/archive.html>_
 
 <br />
 
+Unless special requirements in your research work (e.g. backward compatibility with some old FPGA board) it is always
+recommended to install and use the **latest available version of the software** but if you already installed Xilinx Vivado
+in the past **any older version of the tool will be fine for the course**. The version used during lectures will be **2019.2**.
+
+Starting from version 2021.2 the package to be downloaded is called **Vivado ML Edition**. For older versions
+of the tool the name of the package was  **Vivado Design Suite - HLx Editions** instead. 
+
+As already mentioned the software is available **_only_ for Linux and Windows operating systems**.
+Both Windows 7 and Windows 10 as well as the new Windows 11 are supported.
+
+<br />
+
 >
-> **NOTE**
+> **IMPORTANT**
 >
-> Screenshots referring Xilinx Vivado installation steps are from the **2019.2** installer.
-> The content of the wizard for another version available for download on the Xilinx website can be slightly different.
+> Windows 11 is only supported starting from version **2022.2** !
+> 
+> _<https://support.xilinx.com/s/question/0D54U00005ZMhHxSAL/does-windows-11-support-vivado-software?language=en_US>_
 >
 
 <br />
 
-Unless special requirements in your research work (e.g. backward compatibility
-with some old FPGA board) it is always recommended to install and use the latest available version of the software,
-but if you already installed Xilinx Vivado in the past **any older version of the tool will be fine for the course**.
-It is also recommended to download the file called **Vivado HLx _\<version\>_: All OS installer Single-File Download**.
-In fact many times splitted downloads or downloads using the _Self Extracting Web Installer_ option just gave troubles.
+It is recommended to prefer a **single-file download** (largest file in the list) with respect to a _Self Extracting Web Installer_
+(smaller file). In fact many times splitted downloads or downloads using the _Self Extracting Web Installer_ option just gave troubles.
 
-Please, be aware that **the size of file to be downloaded is EXTREMELY HUGE** (approx. 35 GB) due to the increasing
+Please, be aware that **the size of file to be downloaded is EXTREMELY HUGE** (several tens of GB) due to the increasing
 support for new complex devices. Indeed, the final installation will consume less disk space.
 
 <br />
