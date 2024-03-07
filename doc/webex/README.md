@@ -2,6 +2,61 @@
 # List of Webex video-recorded lectures (in Italian)
 [[**Home**](../../README.md)]
 
+## Spring 2023
+
+* Lecture 1 - Fri 10/03/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/f58dd9ada174103b9fdf00505681416f>_
+
+* Lecture 2 - Mon 20/03/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/0e0d0b56a924103bbbbb00505681b634>_
+
+* Lecture 3 - Mon 27/03/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/9184017dae9b103b9ffb0050568124e2>_
+
+* Lecture 4 - Wed 29/03/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/3bce5d52b06a103bbfd9005056829d03>_
+
+* Lecture 5 - Mon 03/04/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/efa51e57b41b103bb9b2005056812fe7>_ (link1) <br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/f2cda9d4b42d103baffe005056812bc8>_ (link2)
+
+* Lecture 6 - Mon 17/04/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/e5bf72e9bf1b103ba8ff86793e577aa7>_
+
+* Lecture 7 - Wed 19/04/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/ea549431c0ea103bbf7ffa16ad552dd4>_
+
+* Lecture 8 - Wed 26/04/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/84866933c66b103bbe27b69c4113f4ba>_
+
+* Lecture 9 - Fri 28/04/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/61bf5801c7eb103bbfef96a0c9e9fcf4>_
+
+* Lecture 10 - Wed 03/05/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/8cb0408bcbec103bbfbffaa05028cd17>_
+
+* Lecture 11 - Mon 08/05/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/9d76c54acf9d103bbeff2243352c8e87>_
+
+* Lecture 12 - Wed 10/05/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/561d624dd16b103bb9ebf23fea10416b>_
+
+* Lecture 13 - Mon 15/05/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/d24b5974d51d103bbf731ad9164a5e18>_
+
+* Lecture 14 - Wed 17/05/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/4a83ab5fd6eb103bbff75a9f8a80f520>_
+
+* Lecture 15 - Mon 22/05/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/2802c71dda9d103bbffdde3a6b5ffee6>_
+
+* Lecture 16 - Wed 24/05/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/dbcbdaaedc6b103bbff9aa82ce138ead>_
+
+* Lecture 17 - Mon 29/05/2023<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/856e4cdde01d103bbff8aa82ce138ead>_
+
+
 ## Spring 2022
 
 * Lecture 1 - Fri 08/04/2022<br />
