@@ -21,6 +21,16 @@ module DFF (
 
    // **NOTE: can be replaced by 'always_ff' in SystemVerilog
 
+/*
+
+   // simple FlipFlop without reset
+   always @(posedge clk) begin
+      Q <= D ;
+   end ;
+
+*/
+
+
    //always @(posedge clk) begin                       // synchronous reset
    always @(posedge clk or posedge rst) begin      // asynchronous reset
 

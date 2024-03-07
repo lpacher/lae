@@ -1,6 +1,6 @@
 //
 // Example Verilog implementation for a simple 4-bit synchronous up-counter using
-// either behavioral or structural coding styles.
+// either structural or behavioral coding styles.
 //
 // Luca Pacher - pacher@to.infn.it
 // Spring 2022
@@ -132,21 +132,21 @@ module SyncCounter4b (
    ////////////////////
 
    // 4-bit bus for internal wiring
-   wire [3:0] T ;
+   wire [3:0] Tint ;
 
-   assign T[0] = en ;
-   //assign T[1] = Q[0] & T[0] ;
-   //assign T[2] = Q[1] & T[1] ;
-   //assign T[3] = Q[2] & T[2] ;
+   assign Tint[0] = en ;
+   //assign Tint[1] = Q[0] & Tint[0] ;
+   //assign Tint[2] = Q[1] & Tint[1] ;
+   //assign Tint[3] = Q[2] & Tint[2] ;
 
-   AND  u0 ( .A(Q[0]), .B(T[0]), .Z(T[1]) ) ;
-   AND  u1 ( .A(Q[1]), .B(T[1]), .Z(T[2]) ) ;
-   AND  u2 ( .A(Q[2]), .B(T[2]), .Z(T[3]) ) ;
+   AND  u0 ( .A(Q[0]), .B(Tint[0]), .Z(Tint[1]) ) ;
+   AND  u1 ( .A(Q[1]), .B(Tint[1]), .Z(Tint[2]) ) ;
+   AND  u2 ( .A(Q[2]), .B(Tint[2]), .Z(Tint[3]) ) ;
 
-   TFF  ff_0 ( .clk(clk), .rst(rst), .T(T[0]), .Q(Q[0]) ) ;
-   TFF  ff_1 ( .clk(clk), .rst(rst), .T(T[1]), .Q(Q[1]) ) ;
-   TFF  ff_2 ( .clk(clk), .rst(rst), .T(T[2]), .Q(Q[2]) ) ;
-   TFF  ff_3 ( .clk(clk), .rst(rst), .T(T[3]), .Q(Q[3]) ) ;
+   TFF  ff_0 ( .clk(clk), .rst(rst), .T(Tint[0]), .Q(Q[0]) ) ;
+   TFF  ff_1 ( .clk(clk), .rst(rst), .T(Tint[1]), .Q(Q[1]) ) ;
+   TFF  ff_2 ( .clk(clk), .rst(rst), .T(Tint[2]), .Q(Q[2]) ) ;
+   TFF  ff_3 ( .clk(clk), .rst(rst), .T(Tint[3]), .Q(Q[3]) ) ;
 
 
    ////////////////////
