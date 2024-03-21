@@ -575,3 +575,72 @@ Save your changes and re-run the simulation with:
 % make sim
 ```
 
+<br />
+
+Alternatively you can also override the value of the `SOURCES` Makefile variable when invoking `make` at the command line:
+
+```
+% make clean
+% make sim SOURCES="GatesPrimitives.v tb_Gates.v"
+```
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+**EXERCISE 4**
+
+Create a new Verilog file e.g. `RingOscillator.v` and try implement a simple **ring oscillator** circuit
+One possible coding style is to use **structural code** and to implement the circuit in form of a **gate-level schematic**
+using Verilog gate primitives `nand` and `not` with **propagation delays**.
+
+<br />
+
+<img src="doc/pictures/RingOscillator.png" alt="drawing" width="980"/>
+
+<br />
+
+Complete the following code skeleton:
+
+```Verilog
+
+`timescale 1ns / 100ps
+
+module RingOscillator (
+
+   input  wire start,
+   output wire clk
+
+   ) ;
+
+
+   // wires for internal connections
+   wire [4:0] w ;
+
+   nand #(...) g0 (...) ;
+
+   not ...
+   not ...
+
+   assign clk = w[4] ;
+
+endmodule
+```
+
+<br />
+
+Create also a suitable testbench file `tb_RingOscillator.v` to drive the `start` signal of the ring-oscillator and simulate
+the circuit.
+
+<br />
+
+>
+> **QUESTION**
+>
+> Which is the **period** of the resulting toggle ?
+>
+>   \____________________________________________________________________________________________________
+>
+
+<br />
+<!--------------------------------------------------------------------->

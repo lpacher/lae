@@ -7,10 +7,12 @@
 
 ## list of Verilog sources to be compiled
 SOURCES := Gates.v tb_Gates.v
+#SOURCES := RingOscillator.v tb_RingOscillator.v
 
 
 ## top-level module (testbench)
 TOP := tb_Gates
+#TOP := tb_RingOscillator
 
 
 ## some useful aliases
@@ -42,3 +44,6 @@ clean :
 	@$(RM) *.log *.jou *.pb *.wdb *.wcfg
 	@$(RMDIR) xsim.dir .Xil
 
+
+## none of the above implemented targets are on-disk files, declare them as PHONY
+.PHONY : compile elaborate simulate sim clean 
