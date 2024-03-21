@@ -621,6 +621,11 @@ The complete list of past video-recorded lectures can be accessed [**here**](doc
 * Lecture 1 - Fri 01/03/2024<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/277c3e7db9fc103cb7dda26ab625032e>_
 
-* Lecture 2 - Mon 05/03/2024<br />
+* Lecture 2 - Tue 05/03/2024<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/622b7602bd2a103cb5f79eac1f5119ad>_
 
+* Lecture 3 - Tue 12/03/2024<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/b6bc94fbc29f103cafffe232ae8727ef>_
+
+* Lecture 4 - Tue 19/03/2024<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/498ad39fc821103cbffe0e36293a8bb5>_
