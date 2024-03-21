@@ -47,3 +47,6 @@ clean :
 	@$(RM) *.log *.jou *.pb *.wdb *.wcfg
 	@$(RMDIR) xsim.dir .Xil
 
+
+## none of the above implemented targets are on-disk files, declare them as PHONY
+.PHONY : compile elaborate simulate sim clean
