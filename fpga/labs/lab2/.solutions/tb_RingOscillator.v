@@ -10,9 +10,9 @@
 module tb_RingOscillator ;
 
    reg start = 1'b0 ;
-
    wire clk ;
 
+   // device under test (DUT)
    RingOscillator  DUT (.start(start), .clk(clk)) ;
 
    // main stimulus

@@ -590,9 +590,10 @@ Alternatively you can also override the value of the `SOURCES` Makefile variable
 
 **EXERCISE 4**
 
-Create a new Verilog file e.g. `RingOscillator.v` and try implement a simple **ring oscillator** circuit
-One possible coding style is to use **structural code** and to implement the circuit in form of a **gate-level schematic**
-using Verilog gate primitives `nand` and `not` with **propagation delays**.
+Create a new Verilog file `RingOscillator.v` and try to implement and simulate a simple **ring oscillator** circuit as in figure.
+One possible coding style is to use **structural code** to implement the circuit in form of a **gate-level schematic**
+using Verilog gate primitives `nand` and `not` with **propagation delays**. Alternatively continuous assignments with propagation
+delays can be used too.
 
 <br />
 
@@ -630,7 +631,7 @@ endmodule
 <br />
 
 Create also a suitable testbench file `tb_RingOscillator.v` to drive the `start` signal of the ring-oscillator and simulate
-the circuit.
+the circuit. Later in the course we will also implement and debug the above circuit on real FPGA hardware.
 
 <br />
 
