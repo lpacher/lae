@@ -31,4 +31,20 @@ module tb_Inverter ;   // empty port declaration for a testbench
       #500 $finish ;     // stop the simulation (this is a Verilog "task")
    end
 
+
+   /*   **EXTRA: instantiate and simulate a 3-state buffer
+
+   reg enable = 1'b0 ;    // output-enable
+   wire triOut ;
+
+   BufferTri  DUT_2 ( .X(out), .OE(enable), .ZT(triOut) ) ;
+
+   // **IMPORTANT: this initial block runs IN PARALLEL with the previous block  => HDL coding is intrinsically PARALLEL PROGRAMMING
+   initial begin
+      #750  enable = 1'b1 ;
+      #1200 enable = 1'b0 ;
+   end
+
+   */
+
 endmodule
