@@ -32,10 +32,19 @@ module tb_Gates ;
    //   2-bits counter   //
    ////////////////////////
 
-   reg [1:0] count = 2'b00 ;
+   reg [1:0] count = 2'b00 ;   // same as 2'd0 or 2'h0
 
    always @(posedge clk)
       count <= count + 1 ;    // **WARN: be aware of the implicit casting! This is count[1:0] <= count[1:0] + 32'b1 since 1 is a 32-bit integer! Use + 1'b1 to avoid bad surprises!
+
+
+   // **EXTRA: generate some "count-overflow" flag to indicate that count = max. value has been reached
+   wire overflow ;
+
+   assign overflow = &count ;     // example usage of AND-operator as UNARY REDUCTION OPERATOR (same as count[0] & count[1] & ... & count[N-1] ) 
+
+   // alternatively use a conditional assignment
+   //assign overflow = (count == 2'b11) ? 1'b1 : 1'b0 ;
 
 
    /////////////////////////////////
