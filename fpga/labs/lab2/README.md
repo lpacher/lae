@@ -519,10 +519,10 @@ module GatesPrimitives (
    ) ;
 
    // AND
-   and u0 (Z[0], A, B) ;
+   and g0 (Z[0], A, B) ;
 
    // NAND
-   nand u1 ( ... ) ;
+   nand g1 ( ... ) ;
 
    // OR
    ...

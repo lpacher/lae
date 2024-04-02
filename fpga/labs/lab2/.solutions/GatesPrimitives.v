@@ -29,22 +29,22 @@ module GatesPrimitives (
    ) ;
 
    // AND gate
-   and u0 (Z[0], A, B) ;
+   and g0 (Z[0], A, B) ;
 
    // NAND gate
-   nand u1 (Z[1], A, B);
+   nand g1 (Z[1], A, B);
 
    // OR gate
-   or u2 (Z[2], A, B) ;
+   or g2 (Z[2], A, B) ;
 
    // NOR gate
-   nor u3 (Z[3], A, B) ;
+   nor g3 (Z[3], A, B) ;
 
    // XOR gate
-   xor u4 (Z[4], A, B) ;
+   xor g4 (Z[4], A, B) ;
 
    // XNOR gate
-   xnor u5 (Z[5], A, B) ;
+   xnor g5 (Z[5], A, B) ;
 
 
 endmodule
