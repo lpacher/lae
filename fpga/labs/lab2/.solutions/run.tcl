@@ -9,6 +9,9 @@
 ## profiling
 set tclStart [clock seconds]
 
+## dump all waveforms into XSim Waveform Database (WDB)
+log_wave -recursive /*
+
 ## add all top-level signals to the Wave window
 add_wave /*
 
@@ -22,4 +25,4 @@ puts "\nSimulation finished at [current_time]\n"
 set tclStop [clock seconds]
 set seconds [expr ${tclStop} - ${tclStart} ]
 
-puts "\nTotal elapsed-time for [info script]: [format "%.2f" [expr ${seconds}/60.]] minutes\n"
+puts "\nTotal elapsed-time for [file normalize [info script]]: [format "%.2f" [expr ${seconds}/60.]] minutes\n"
