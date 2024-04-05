@@ -43,7 +43,7 @@ module Gates (
 
    // XOR
    assign Z[4] = A ^ B ;
-   //assign Z[4] = (~A &B ) | (A & (~B)) ;     // XOR logic equation
+   //assign Z[4] = ((~A) & B) | (A & (~B)) ;   // XOR logic equation
 
    // XNOR
    assign Z[5] = ~(A ^ B) ;
