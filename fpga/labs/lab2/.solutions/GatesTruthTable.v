@@ -24,7 +24,7 @@ module GatesTruthTable (
          2'b00 :  Z = 6'b101010 ;
          2'b01 :  Z = 6'b010110 ;
          2'b10 :  Z = 6'b010110 ;
-         2'b11 :  Z = 6'b110101 ;
+         2'b11 :  Z = 6'b100101 ;
 
       endcase
    end  // always
