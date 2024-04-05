@@ -7,6 +7,8 @@
 
 ## list of Verilog sources to be compiled
 SOURCES := Gates.v tb_Gates.v
+#SOURCES := GatesTruthTable.v tb_Gates.v
+#SOURCES := GatesPrimitives.v tb_Gates.v
 #SOURCES := RingOscillator.v tb_RingOscillator.v
 
 

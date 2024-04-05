@@ -54,8 +54,8 @@ module tb_Gates ;
    wire [5:0] Z;
 
    Gates           DUT (.A(count[0]), .B(count[1]), .Z(Z)) ;      // **UNCOMMENT** here the DUT that you want to simulate
-   //GatesCase       DUT (.A(count[0]), .B(count[1]), .Z(Z)) ;
-   //GatesPrimitives DUT (.A(count[0]), .B(count[1]), .Z(Z)) ;
+   //GatesTruthTable  DUT (.A(count[0]), .B(count[1]), .Z(Z)) ;
+   //GatesPrimitives  DUT (.A(count[0]), .B(count[1]), .Z(Z)) ;
 
 
    ///////////////////////
