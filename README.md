@@ -634,3 +634,6 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/498ad39fc8
 * Lecture 5 - Tue 26/03/2024<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/f524ea8ccd9f103c9efeaa20e1c333b9>_
 
+* Lecture 6 - Fri 05/04/2024<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/9bce902ad573103cb77d9a9fe571ff8f>_
+
