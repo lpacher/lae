@@ -37,6 +37,8 @@
 
 **ADC** - Analog-to-Digital Converter
 
+**AI** - Artificial Intelligence
+
 **AMBA** - Advanced Microcontroller Bus Architecture
 
 **AoT** - Analog on Top
@@ -352,6 +354,7 @@
 
 **ISP** - In-System Programming (same as _ICSP, In-Circuit Serial Programming_)
 
+**IT** - Internet of Things
 
 
 ## J
@@ -428,6 +431,8 @@
 **MOS** - Metal-Oxide-Semiconductor
 
 **MOSFET** - Metal-Oxide-Semiconductor Field Effect Transistor
+
+**MOST** - MOS Transistor
 
 **MPW** - Multi-Project Wafer
 
