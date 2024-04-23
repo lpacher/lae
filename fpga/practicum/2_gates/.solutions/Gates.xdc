@@ -1,3 +1,4 @@
+################################################################################
 ##
 ## Implementation constraints for the Gates.v Verilog example.
 ## All pin positions and electrical properties refer to the
@@ -16,6 +17,7 @@
 ## Luca Pacher - pacher@to.infn.it
 ## Fall 2020
 ##
+################################################################################
 
 
 ###############

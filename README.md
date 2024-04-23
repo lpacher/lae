@@ -637,3 +637,6 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/f524ea8ccd
 * Lecture 6 - Fri 05/04/2024<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/9bce902ad573103cb77d9a9fe571ff8f>_
 
+* Lecture 7 - Thu 18/04/2024 (blackboard only lecture, no record)<br />
+
+

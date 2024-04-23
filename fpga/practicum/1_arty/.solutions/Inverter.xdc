@@ -1,9 +1,11 @@
+################################################################################
 ##
-## Example implementation constraints for the Inverter module. 
+## Example implementation constraints for the Inverter.v Verilog module. 
 ##
 ## Luca Pacher - pacher@to.infn.it
 ## Spring 2021
 ##
+################################################################################
 
 
 ################################
