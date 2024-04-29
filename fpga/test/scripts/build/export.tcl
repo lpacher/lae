@@ -76,7 +76,7 @@ foreach corner [list slow fast] {
 ##   generate bitstream   ##
 ############################
 
-puts "\n\nINFO: \[TCL\] Write bitsream...\n"
+puts "\n\nINFO: \[TCL\] Write bitstream...\n"
 
 ##
 ## **IMPORTANT
