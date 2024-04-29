@@ -1,3 +1,5 @@
+<!-- To contribute to the repo, clone with SSH passphrase: git clone git@github.com:lpacher/lae.git -->
+
 ![](doc/etc/logo.png)
 
 # Advanced Electronics Laboratory - Part I
