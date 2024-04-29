@@ -11,6 +11,9 @@
 
 `timescale 1ns / 100ps
 
+`default_nettype none   // force the user to declare the data type for all nets
+
+
 // choose here the implementation that you want to simulate
 
 `define IF_ELSE
