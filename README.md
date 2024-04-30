@@ -644,3 +644,5 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/9bce902ad5
 * Lecture 8 - Tue 23/04/2024<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/053bababe39f103cbfb82ec04e5edd0f>_
 
+* Lecture 9 - Tue 30/04/2024<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/23786513e92a103cbdeb9e443b30e8e9>_
