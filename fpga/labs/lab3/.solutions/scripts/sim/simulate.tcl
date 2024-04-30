@@ -88,8 +88,12 @@ proc simulate { {mode "gui"} } {
       puts "**WARN \[TCL\]: WORK_DIR environment variable not defined, assuming ./work/sim to run simulation flows."
 
       if { ![file exists work] } { file mkdir work/sim }
+
       cd work/sim
    }
+
+   file mkdir vcd
+   file mkdir wdb
 
 
    #############################################
@@ -125,21 +129,21 @@ proc simulate { {mode "gui"} } {
 
       puts "**INFO: \[TCL\] Running simulation in GUI mode\n\n"
 
-      exec xsim ${xelabTop} -gui -wdb ${xelabTop}.wdb \
+      exec xsim ${xelabTop} -gui -wdb [pwd]/wdb/${xelabTop}.wdb \
          -onerror stop -stats -tclbatch [pwd]/../../scripts/sim/run.tcl -log ${logFile} &
 
    } elseif { ${mode} == "tcl" } {
 
       puts "**INFO: \[TCL\] Running simulation in TCL mode\n\n"
 
-      exec xsim ${xelabTop} -wdb ${xelabTop}.wdb \
+      exec xsim ${xelabTop} -wdb [pwd]/wdb/${xelabTop}.wdb \
          -onerror stop -stats -tclbatch [pwd]/../../scripts/sim/run.tcl -log ${logFile} >@stdout 2>@stdout
 
    } elseif { ${mode} == "batch" } {
 
       puts "**INFO: \[TCL\] Running simulation in BATCH mode\n\n"
 
-      exec xsim ${xelabTop} -wdb ${xelabTop}.wdb -onfinish quit \
+      exec xsim ${xelabTop} -wdb [pwd]/wdb/${xelabTop}.wdb -onfinish quit \
          -onerror stop -stats -tclbatch [pwd]/../../scripts/sim/run.tcl -log ${logFile} >@stdout 2>@stdout
 
    } else {

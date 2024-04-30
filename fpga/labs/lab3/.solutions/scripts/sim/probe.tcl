@@ -54,14 +54,11 @@ if { ![file exists ${vcdDir}] } {
 }
 
 
-if { ${rdi::mode} != "gui" } {
-
-   ## open VCD file
-   open_vcd ${vcdDir}/waveforms.vcd
-
-   ## use 'log_vcd' to select signals to trace
-   log_vcd /*
-}
+## open VCD file
+#open_vcd ${vcdDir}/waveforms.vcd
+#
+## use 'log_vcd' to select signals to trace
+#log_vcd /*
 
 
 #################################################################

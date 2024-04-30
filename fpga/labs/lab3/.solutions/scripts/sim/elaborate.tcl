@@ -123,12 +123,12 @@ proc elaborate {} {
 
    puts "\n-- Elaborating the design ...\n"
 
-   catch {exec xelab -relax -mt 2 \
+   catch {eval exec xelab -relax -mt 2 \
       -L work -L xil_defaultlib -L xpm -L unisims_ver -L unimacro_ver -L secureip \
       -debug all work.${xelabTop} -snapshot ${xelabTop} -nolog >@stdout 2>@stdout | tee ${logFile} }
 
    ## later in the course we will also enable the glbl module...
-   #catch {exec xelab -relax -mt 2 \
+   #catch {eval exec xelab -relax -mt 2 \
    #   -L work -L xil_defaultlib -L xpm -L unisims_ver -L unimacro_ver -L secureip \
    #   -debug all work.${xelabTop} work.glbl -snapshot ${xelabTop} -nolog >@stdout 2>@stdout | tee ${logFile} }
 

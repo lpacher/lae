@@ -14,13 +14,17 @@
 `default_nettype none   // force the user to declare the data type for all nets
 
 
-// choose here the implementation that you want to simulate
+// either choose here the implementation that you want to simulate or compile sources with 'xvlog -define MACRO_NAME'
 
-`define IF_ELSE
+//`define IF_ELSE
 //`define TRUTH_TABLE
 //`define CONDITIONAL_ASSIGN
 //`define LOGIC_EQUATION
 //`define STRUCTURAL
+
+// alternatively you can also collect all defines into a separate source file and include it into RTL code
+//`include "rtl/defines.v"
+
 
 module MUX2 (
 
@@ -37,9 +41,9 @@ module MUX2 (
    ) ;
 
 
-   ////////////////////////////////
-   //   behavioral description   //
-   ////////////////////////////////
+   //////////////////////////////////////////////////////
+   //   behavioral descriptions (if/else, case etc.)   //
+   //////////////////////////////////////////////////////
 
    // using an if/else statement
 
@@ -56,10 +60,7 @@ module MUX2 (
       end
    end  // always
 
-`endif
-
-
-`ifdef TRUTH_TABLE
+`elsif TRUTH_TABLE
 
    // using a case statement
 
@@ -75,39 +76,30 @@ module MUX2 (
          3'b101 : Z = 1'b1 ;  // B
          3'b110 : Z = 1'b0 ;  // B
          3'b111 : Z = 1'b1 ;  // B
+         //3'b111 : Z = 1'b0 ;        // **WRONG VALUE** => decomment to check if the self-checking testbench fails!
 
       endcase
    end  // always
 
-`endif
 
-   ////////////////////////////////
-   //   conditional assignment   //
-   ////////////////////////////////
+`elsif CONDITIONAL_ASSIGN
 
-`ifdef CONDITIONAL_ASSIGN
-
+   // conditional assignment
    assign Z = (S == 1'b0) ? A : B ;  
 
-`endif
 
 
-   //////////////////////////
-   //   boolean function   //
-   //////////////////////////
+`elsif LOGIC_EQUATION
 
-`ifdef LOGIC_EQUATION
-
+   // boolean function
    assign Z = (A & ~S) | (B & S) ;
 
-`endif
 
+   /////////////////////////////////////////////////////////////////////////
+   //   gate-level schematic (structural code) using Verilog primitives   //
+   /////////////////////////////////////////////////////////////////////////
 
-   ////////////////////////////////////
-   //   schematic using primitives   //
-   ////////////////////////////////////
-
-`ifdef STRUCTURAL
+`elsif STRUCTURAL
 
    wire w1, w2, Sbar ;
 

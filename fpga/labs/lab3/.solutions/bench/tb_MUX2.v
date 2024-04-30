@@ -1,5 +1,7 @@
 //
-// Testbench for different MUX implementations.
+// Testbench for different MUX implementations. The clock is generated
+// into a standalone reusable ClockGen module with parameterized clock
+// period.
 //
 // Luca Pacher - pacher@to.infn.it
 // Spring 2020
@@ -7,6 +9,12 @@
 
 
 `timescale 1ns / 100ps
+
+//
+// Dependencies:
+//
+//`include "bench/ClockGen.v"    // example usage of the C-style include directive
+
 
 module tb_MUX2 ;
 
@@ -74,9 +82,28 @@ module tb_MUX2 ;
 
 
    // dump waveforms into industry-standard Value Change Dump (VCD) database
+   // (but you can also use open_vcd/log_vcd/close_vcd XSim simulation commands)
    initial begin
-      $dumpfile ("waveforms.vcd") ;
+      $dumpfile ("vcd/waveforms.vcd") ;
       $dumpvars ;
+   end
+
+
+   //////////////////////////////////////////////////
+   //   **EXTRA: example self-checking testbench   //
+   //////////////////////////////////////////////////
+
+   always @(posedge clk) begin
+      if ( Z == ((count[0] & (~select)) | (count[1] & select))) begin
+         //check PASSED
+      end
+      else begin
+         // check FAILED
+         $display("\n**ERROR: Wrong MUX output detected! Force an exit now ...\n\n") ; $finish ;
+
+         //$error("Wrong MUX output detected! Force an exit now ...") ; $finish ;
+         //$fatal("Wrong MUX output detected! Force an exit now ...\n") ;
+      end
    end
 
 endmodule
