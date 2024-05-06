@@ -76,7 +76,7 @@ LOG_DIR  := log
 RTL_TOP_MODULE := OneHotDecoder
 
 ## specify top-level testbench module (this is the target module for the xelab executable)
-SIM_TOP_MODULE := OneHotDecoder
+SIM_TOP_MODULE := tb_OneHotDecoder
 
 ##
 ## **NOTE
