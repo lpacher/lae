@@ -76,7 +76,7 @@ LOG_DIR  := log
 RTL_TOP_MODULE := OneHotDecoder
 
 ## specify top-level testbench module (this is the target module for the xelab executable)
-SIM_TOP_MODULE := tb_OneHotDecoder
+SIM_TOP_MODULE := OneHotDecoder
 
 ##
 ## **NOTE
@@ -95,6 +95,14 @@ RTL_VLOG_SOURCES := $(RTL_DIR)/OneHotDecoder.v
 #RTL_VLOG_SOURCES := $(RTL_DIR)/ThermometerDecoder.v
 
 SIM_VLOG_SOURCES := $(SIM_DIR)/tb_OneHotDecoder.v $(SIM_DIR)/ClockGen.v
+
+## specify optional '-define' statements (Verilog-only)
+#VLOG_DEFINES :=
+#VLOG_DEFINES := -define IF_ELSE
+#VLOG_DEFINES := -define TRUTH_TABLE
+#VLOG_DEFINES := -define CONDITIONAL_ASSIGN
+#VLOG_DEFINES := -define LOGIC_EQUATION
+#VLOG_DEFINES := -define STRUCTURAL
 
 ## if no VHDL sources, you can either comment the below variables or just leave them empty
 RTL_VHDL_SOURCES :=
@@ -174,6 +182,11 @@ MKDIR := mkdir -p -v
 ##   Xilinx Vivado settings   ##
 ################################
 
+## installation check
+ifeq ($(shell which vivado 2> /dev/null),)
+   @$(error No 'vivado' executable found in searech path! Force an exit now...)
+endif 
+
 ##
 ## **NOTE
 ##
@@ -210,6 +223,10 @@ export SIM_TOP_MODULE
 
 ifneq ($(strip $(VLOG_SOURCES)),)
    export VLOG_SOURCES
+endif
+
+ifneq ($(strip $(VLOG_DEFINES)),)
+   export VLOG_DEFINES
 endif
 
 ifneq ($(strip $(VHDL_SOURCES)),)
@@ -265,7 +282,7 @@ help : ## Command line help
 	@$(ECHO) ""
 	@$(ECHO) "Available targets:"
 	@$(ECHO) ""
-	@grep -E '^[a-zA-Z_-]+ :.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "- make \033[36m%-15s\033[0m %s\n", $$1, $$2}'
+	@grep -E '^[a-zA-Z_-\/]+ :.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "- make \033[36m%-18s\033[0m %s\n", $$1, $$2}'
 	@$(ECHO) ""
 	@$(ECHO) "Examples:"
 	@$(ECHO) ""
@@ -298,6 +315,10 @@ area : ## Create a new fresh working area with all necessary directories used in
 	@$(MKDIR) $(XDC_DIR)
 
 	@$(MKDIR) $(WORK_DIR)/sim
+	@$(MKDIR) $(WORK_DIR)/sim/log
+	@$(MKDIR) $(WORK_DIR)/sim/vcd
+	@$(MKDIR) $(WORK_DIR)/sim/wdb
+
 	@$(MKDIR) $(WORK_DIR)/build
 
 	@$(MKDIR) $(TEMP_DIR)
@@ -352,23 +373,25 @@ sim : compile elaborate simulate ## One-step compilation, elaboration and simula
 ## Cleanup targets
 ##
 
-.PHONY : clean_log
-clean_log : ## Delete log files and journal files
+.PHONY : clean/log
+clean/log : ## Delete log files and journal files
 
 	@$(RM) *.log *.jou
 	@$(RM) $(LOG_DIR)/*
 ##____________________________________________________________________________________________________
 
 
-.PHONY : clean_sim
-clean_sim : ## Delete ALL files from work/sim
+.PHONY : clean/sim
+clean/sim : ## Delete ALL files from work/sim
 
-	@$(RMDIR) $(WORK_DIR)/sim/*
+	@$(RM)    $(WORK_DIR)/sim/*.log
+	@$(RM)    $(WORK_DIR)/sim/*.jou
+	@$(RMDIR) $(WORK_DIR)/sim/xsim.dir
 ##____________________________________________________________________________________________________
 
 
-.PHONY : clean_all
-clean_all : clean_log clean_sim ## Delete ALL temporary and garbage files
+.PHONY : clean/all
+clean/all : clean/log clean/sim ## Delete ALL temporary and garbage files
 
 	@$(RM) *.pb *.wdb *.log *.jou
 	@$(RMDIR) xsim.dir
@@ -377,6 +400,6 @@ clean_all : clean_log clean_sim ## Delete ALL temporary and garbage files
 
 
 .PHONY : clean
-clean : clean_all ## Alias, same as 'make clean_all'
+clean : clean/all ## Alias, same as 'make clean/all'
 ##____________________________________________________________________________________________________
 

@@ -42,7 +42,7 @@ set_property -dict { PACKAGE_PIN E15  IOSTANDARD LVCMOS33 } [get_ports clk] ;   
 ##   timing constraints   ##
 ############################
 
-## disable all timing paths
+## disable timing checks from all inputs to all outputs
 set_false_path -from [all_inputs] -to [all_outputs]
 
 
@@ -52,3 +52,18 @@ set_false_path -from [all_inputs] -to [all_outputs]
 
 set_property DONT_TOUCH TRUE [get_nets w* ]
 set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets w* ]
+
+
+################################
+##   additional constraints   ##
+################################
+
+##
+## additional XDC statements to optimize the memory configuration file (.bin)
+## to program the external 128 Mb Quad Serial Peripheral Interface (SPI) flash
+## memory in order to automatically load the FPGA configuration at power-up
+##
+
+set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 4  [current_design]
+set_property CONFIG_MODE SPIx4  [current_design]
+

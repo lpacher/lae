@@ -6,6 +6,11 @@
 //
 
 
+//
+// Dependencies:
+//
+//`include "bench/ClockGen.v"    // example usage of the C-style include directive
+
 `timescale 1ns / 100ps
 
 module tb_OneHotDecoder ;
