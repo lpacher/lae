@@ -98,11 +98,8 @@ SIM_VLOG_SOURCES := $(SIM_DIR)/tb_OneHotDecoder.v $(SIM_DIR)/ClockGen.v
 
 ## specify optional '-define' statements (Verilog-only)
 #VLOG_DEFINES :=
-#VLOG_DEFINES := -define IF_ELSE
-#VLOG_DEFINES := -define TRUTH_TABLE
-#VLOG_DEFINES := -define CONDITIONAL_ASSIGN
-#VLOG_DEFINES := -define LOGIC_EQUATION
-#VLOG_DEFINES := -define STRUCTURAL
+#VLOG_DEFINES := -define MACRO_NAME[=value]
+
 
 ## if no VHDL sources, you can either comment the below variables or just leave them empty
 RTL_VHDL_SOURCES :=
@@ -184,7 +181,7 @@ MKDIR := mkdir -p -v
 
 ## installation check
 ifeq ($(shell which vivado 2> /dev/null),)
-   @$(error No 'vivado' executable found in searech path! Force an exit now...)
+   @$(error ERROR: No 'vivado' executable found in search path! Force an exit now...)
 endif 
 
 ##
