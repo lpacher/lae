@@ -282,12 +282,13 @@ help : ## Command line help
 	@$(ECHO) ""
 	@$(ECHO) "Available targets:"
 	@$(ECHO) ""
-	@grep -E '^[a-zA-Z_-\/]+ :.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "- make \033[36m%-18s\033[0m %s\n", $$1, $$2}'
+	@grep -E '^[a-zA-Z_-|/]+ :.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "- make \033[36m%-18s\033[0m %s\n", $$1, $$2}'
 	@$(ECHO) ""
 	@$(ECHO) "Examples:"
 	@$(ECHO) ""
 	@$(ECHO) "   % make compile [hdl=/path/to/verilog.v|hdl=/path/to/vhdl.vhd]"
-	@$(ECHO) "   % make sim"
+	@$(ECHO) "   % make clean sim"
+	@$(ECHO) "   % make sim mode=batch"
 	@$(ECHO) ""
 ##____________________________________________________________________________________________________
 

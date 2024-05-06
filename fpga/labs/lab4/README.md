@@ -351,7 +351,7 @@ assign GrayOut[N-2] = Bin[N-2] ^ Bin[N-1] ;
 <br />
 
 which is equivalent to a XOR between the binary input word `Bin` and the same word right-shifted by one position
-using the right-shift `>>` operator:
+either using the right-shift `>>` operator
 
 <br />
 
@@ -360,6 +360,17 @@ assign GrayOut = (Bin >> 1) ^ Bin ;
 ``` 
 
 <br />
+
+or using the concatenation parentheses `{}` as follows:
+
+<br />
+
+``` verilog
+assign GrayOut = { 1'b0 , Bin[Nbit-1:1] } ^ Bin ;   // same as (Bin >> 1) ^ Bin
+``` 
+
+<br />
+
 
 Indeed since there is a recursive formula a for-loop statement can be also used to implement this functionality.
 The following code-snippet can be used as an example starting point:

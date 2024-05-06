@@ -45,6 +45,7 @@ module tb_OneHotDecoder ;
 
    OneHotDecoder DUT (.Bin(count[4:0]), .Bout(code[31:0]) ) ;
    //ThermometerDecoder DUT (.Bin(count[4:0]), .Bout(code[31:0]) ) ;
+   //GrayDecoder DUT (.Bin(count[4:0]), .GrayOut(code[4:0]) ) ;
 
 
    //////////////////

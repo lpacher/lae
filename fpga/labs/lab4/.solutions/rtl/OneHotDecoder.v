@@ -5,6 +5,9 @@
 // Spring 2020
 //
 
+`ifndef ONE_HOT_DECODER__V   // include guard
+`define ONE_HOT_DECODER__V
+
 
 `timescale 1ns / 100ps
 
@@ -59,7 +62,7 @@ module OneHotDecoder (
    end   // always
 */
 
-   integer i ;
+   integer i ;   // **WARN: this is a 32-bit integer!
 
    always @(*) begin
 
@@ -79,3 +82,4 @@ module OneHotDecoder (
 
 endmodule
 
+`endif   // include guard
