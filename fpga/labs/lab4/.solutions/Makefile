@@ -93,6 +93,7 @@ SIM_TOP_MODULE := tb_OneHotDecoder
 
 RTL_VLOG_SOURCES := $(RTL_DIR)/OneHotDecoder.v
 #RTL_VLOG_SOURCES := $(RTL_DIR)/ThermometerDecoder.v
+#RTL_VLOG_SOURCES := $(RTL_DIR)/GrayDecoder.v
 
 SIM_VLOG_SOURCES := $(SIM_DIR)/tb_OneHotDecoder.v $(SIM_DIR)/ClockGen.v
 

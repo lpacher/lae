@@ -1,41 +1,40 @@
+
 //
-// Behavioural implementation of a parameterizable N-bit binary/Gray decoder.
-//
-// Luca Pacher - pacher@to.infn.it
-// Spring 2022
+// Example Verilog code for a N-bit parameterized binary oto Gray decoder
 //
 
+`ifndef GRAY_DECODER__V   //include guard
+`define GRAY_DECODER__V
 
 `timescale 1ns / 100ps
 
-module GrayDecoder #(parameter integer N = 4) (
+module GrayDecoder #(parameter integer NBIT = 5)(
 
-   input  wire [N-1:0] Bin,         // N-bit base-2 binary input code
-   output reg  [N-1:0] GrayOut      // N-bit Gray output code
- 
+   input  wire [NBIT-1:0] Bin,         // N-bit BASE-2 binary input code
+   output wire  [NBIT-1:0] GrayOut      // N-bit Gray output code
+
    ) ;
 
-   integer i ;
+   integer i ;    // 32-bit integer
 
    always @(*) begin
 
-      GrayOut[N-1] = Bin[N-1] ;    // **NOTE: same as Bin[N-1] ^ 1'b0
+      // MSB
+      GrayOut[NBIT-1] = Bin[NBIT-1] ;
 
-      for(i=0; i < N-1; i=i+1) begin
+      // LSB to MSB-1
+      for(i=0; i < NBIT-1 ; i=i+1) begin
+
          GrayOut[i] = Bin[i] ^ Bin[i+1] ;
-      end  // for
-   end  // always
+   
+      end //for
+   end  //always
 
-   /*
+   //assign GrayOut = (Bin >> 1) ^ Bin ;                   // right-shift operator
+   //assign GrayOut = { 1'b0 , Bin[NBIT-1:1]} ^ Bin ;
 
-   //   **IMPORTANT NOTE**
-   // The same functionality can be implemented in a more compact way using the right-shift operator >> as follows:
 
-   always @(*) begin
-      GrayOut[N-1:0] = (Bin[N-1:0] >> 1) ^ Bin[N-1:0] ;    // where Bin[N-1:0] >> 1 is { 1'b0 , Bin[N-1] , Bin[N-2] , .... , Bin[1] }
-   end
-
-   */
 
 endmodule
 
+`endif
