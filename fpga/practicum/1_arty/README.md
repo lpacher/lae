@@ -113,6 +113,41 @@ If you prefer a non-administrator installation a `.zip` of the software is also 
 
 _<http://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/Evince.zip>_
 
+<br />
+
+>
+> **NOTE**
+>
+> You can quickly download and extract the provided zip file from the Command Prompt using `wget` and `unzip` utilities as follows:
+>
+> ```
+> % cd C:\Users\username
+> % mkdir -p local
+> % cd local
+> % wget http://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/Evince.zip
+> % unzip Evince.zip
+> % rm Evince.zip
+> ```
+>
+> <br />
+>
+> After this, update your `login.bat` setup script in order to add the `evince.exe` executable to the search path:
+>
+> ```
+> :: add Evince executable to search path
+> set PATH=C:\Users\username\local\Evince\bin;%PATH%
+>
+> :: redirect garbage 'No display font' errors to NUL (but DosKey ignores the usual > redirection character, needs the $G special character for this)
+> doskey evince=evince.exe $* $G nul
+> ```
+>
+> <br />
+>
+> Do not forget to save and re-load the script once done:
+>
+> ```
+> % call login.bat
+> ```
 
 <br />
 <!--------------------------------------------------------------------->
