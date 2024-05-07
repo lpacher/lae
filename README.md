@@ -650,3 +650,5 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/23786513e9
 * Lecture 10 - Mon 06/05/2024<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/3b58bbc1edd0103cb7ffcae14fa5ca18>_
 
+* Lecture 11 - Tue 07/05/2024<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/0300d939ee9a103c9e9cba30bd92c975>_
