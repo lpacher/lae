@@ -333,8 +333,15 @@ Re-compile and re-simulate the design:
 **EXERCISE 2**
 
 Create a new Verilog source file `rtl/GrayDecoder.v`. Try yourself to implement and
-simulate a **parameterizable binary-to-Gray decoder**. This functionality can be implemented using
-simple `assign` statements:
+simulate a **parameterizable binary-to-Gray decoder**.
+
+
+<img src="doc/pictures/Bin2GrayDecoder4bit.png" alt="drawing" width="450"/>
+
+<img src="doc/pictures/Bin2GrayDecoderNbit.png" alt="drawing" width="450"/>
+
+
+This functionality can be implemented using simple `assign` statements:
 
 ```verilog
 // MSB
