@@ -397,5 +397,15 @@ always @(*) begin
 end   //always
 ```
 
+
 <br />
+
+**EXERCISE 3**
+
+Create a new Verilog source file `rtl/GrayEncoder.v`. Try yourself to implement and
+simulate a **parameterizable Gray-to-binary encoder**.
+
+
+<img src="doc/pictures/Gray2BinEncoderNbit.png" alt="drawing" width="850"/>
+
 
