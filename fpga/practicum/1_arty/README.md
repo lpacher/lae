@@ -472,6 +472,36 @@ refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7a35t_0] 0]
 
 <br />
 
+Observe at the oscilloscope what happens to JTAG signals when you "uto connect" the PC to the Digilent board.
+
+
+<br />
+
+<img src="doc/pictures/JTAG_TCK.png" alt="drawing" width="650"/>
+<img src="doc/pictures/JTAG_TCK_zoom.png" alt="drawing" width="650"/>
+
+<br />
+
+
+JTAG TCK and TMS signals:
+
+<br />
+<img src="doc/pictures/JTAG_TCK_TMS.png" alt="drawing" width="650"/>
+<br />
+
+JTAG TCK and TDI signals:
+
+<br />
+<img src="doc/pictures/JTAG_TCK_TDI.png" alt="drawing" width="650"/>
+<br />
+
+Finally, JTAG TCK and TDO signals:
+
+<br />
+<img src="doc/pictures/JTAG_TCK_TDO.png" alt="drawing" width="650"/>
+<br />
+
+
 If cable drivers are properly installed the _Hardware Manager_ automatically recognizes the Artix-7 A35T on the board as `xc7a35t_0`. <br />
 Left-click on `xc7a35t_0` to select the device, then left-click on _Properties_ to display the _Hardware Device Properties_ form:
 
