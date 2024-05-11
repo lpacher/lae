@@ -622,25 +622,34 @@ Create also a new `Inverter.xdc` file with your **text-editor** application:
 <br />
 
 Try to **write yourself design constraints** required to implement the design on real hardware.
-As an example, map the inverter input to some slide-switch or a push-button, while the inverter output on a simple LED.
-Use the main `arty_all.xdc` as a reference for the syntax.
+As an example, map the inverter input `X` to the `SW0` slide-switch, while assign the inverter output `ZN` to the general-purpose
+LED `LD4` available on the Digilent board as shown below. Use the main `arty_all.xdc` as a reference for the syntax.
 
-Once ready, open Vivado in graphical mode and try to run the FPGA implementation flow in _Project Mode_ up to bitstream generation.
+<br />
 
-If you run out of time you can also run the _Project Mode_ flow using a Tcl script. Copy from the `.solutions/` directory
-the sample `project.tcl` script:
+<img src="doc/pictures/InverterFPGA.png" alt="drawing" width="750"/>
+
+<br />
+
+Once ready, open Vivado in graphical mode
 
 ```
-% cp .solutions/project.tcl .
+% vivado -mode gui &                               (for Linux users)
+
+% echo "exec vivado -mode gui &" | tclsh -norc     (for Windows users)
 ```
 
 <br />
 
-You can then `source` the script from the Vivado Tcl console:
+and try to run the FPGA implementation flow in _Project Mode_ up to bitstream generation:
 
-```
-source project.tcl
-```
+* create into the current directory a new project named `Inverter` targeting the `xc7a35ticsg324-1L` FPGA device
+* add the `Inverter.v` Verilog file to the project
+* add `Inverter.xdc` design constraints to the project
+* run elaboration and inspect the RTL schematic
+* run synthesis and ispect the post-synthesis schematic
+* run implementation and inspect place-and-route results into the _Device_ view
+* generate the bitstream
 
 <br />
 
@@ -648,7 +657,7 @@ source project.tcl
 > **IMPORTANT !**
 >
 > In order to be able to program also the external Quad SPI Flash memory you must generate
-> the **raw binary version** (`.bin`) of the bitstream file (`.bit`). To do this when working in Project Mode
+> the **raw binary version** (`.bin`) of the bitstream file (`.bit`). To do this when working in _Project Mode_
 > right-click on **Generate Bitstream** in the **Flow Navigator** and select **Bitstream settings**, then
 > check the `-bin_file` in the table:
 >
@@ -662,6 +671,31 @@ source project.tcl
 >
 > before running the bitstream generation flow.
 >
+
+<br />
+
+If you run out of time you can also run the _Project Mode_ flow using a Tcl script. Copy from the `.solutions/` directory
+the sample `build.tcl` script prepared for you:
+
+```
+% cp .solutions/build.tcl .
+```
+
+<br />
+
+You can then run the Vivado flow in pure **batch mode** by running the following command in the console:
+
+```
+% vivado -mode batch -source build.tcl -notrace -log build.log
+```
+
+<br />
+
+Alternatively you can  `source` the script from the Vivado Tcl console:
+
+```
+source build.tcl
+```
 
 <br />
 <!--------------------------------------------------------------------->

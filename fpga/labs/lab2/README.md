@@ -28,7 +28,7 @@ The digital circuit that we are going to describe and simulate in Verilog is the
 
 <br />
 
-<img src="doc/pictures/schematic.png" alt="drawing" width="450"/>
+<img src="doc/pictures/Gates.png" alt="drawing" width="450"/>
 
 <br />
 

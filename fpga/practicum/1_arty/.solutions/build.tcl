@@ -46,7 +46,15 @@ add_files \
 ##
 set_property STEPS.WRITE_BITSTREAM.ARGS.BIN_FILE true [get_runs impl_1]
 
+#launch_runs impl_1 -to_step write_bitstream 
+
+## run synthesis
+launch_runs synth_1
+wait_on_run synth_1
+
+## run place-and-route and generate bitstream
 launch_runs impl_1 -to_step write_bitstream 
+wait_on_run impl_1
 
 
 ## report CPU time
