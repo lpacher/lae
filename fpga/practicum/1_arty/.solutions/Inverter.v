@@ -31,8 +31,8 @@ module Inverter (
    output wire ZN ) ;      // using 'wire' in the port declaration is redundant, by default I/O ports are already considered WIRES unless otherwise specified
 
    // continuous assignment
-   //assign ZN = ~X ;
-   assign #3 ZN = ~X ;    // include 3ns propagation delay between input and output
+   assign ZN = ~X ;
+   //assign #3 ZN = ~X ;    // include 3ns propagation delay between input and output
 
    // conditional assignment (MUX-style)
    //assign ZN = (X == 1'b1) ? 1'b0 : 1'b1 ;   // **NOTE: same as ZN = (X) ? 1'b1 : 1'b0 ;

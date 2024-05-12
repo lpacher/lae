@@ -11,16 +11,20 @@
 * [**Navigate to the practicum directory**](#navigate-to-the-practicum-directory)
 * [**Explore board schematics and master XDCs**](#explore-board-schematics-and-master-xdcs)
 * [**Power supplies**](#power-supplies)
+* [**JTAG interface**](#jtag-interface)
 * [**Check jumper settings**](#check-jumper-settings)
 * [**Connect the board to your personal computer**](#connect-the-board-to-your-personal-computer)
+* [**Probe JTAG signals at the oscilloscope**](#probe-jtag-signals-at-the-oscilloscope)
 * [**Check cable drivers installation**](#check-cable-drivers-installation)
 * [**Launch the Vivado Hardware Manager**](#launch-the-vivado-hardware-manager)
 * [**Interact with the board from the Hardware Manager**](#interact-with-the-board-from-the-hardware-manager)
 * [**Read the device DNA**](#read-the-device-dna)
 * [**Monitor the on-chip temperature through XADC**](#monitor-the-on-chip-temperature-through-xadc)
 * [**Implement a simple RTL design targeting the Arty board**](#implement-a-simple-rtl-design-targeting-the-arty-board)
+* [**Locate and review text reports**](#locate-and-review-text-reports)
 * [**Program the FPGA**](#program-the-fpga)
 * [**Program the external Quad SPI Flash memory**](#program-the-external-quad-spi-flash-memory)
+* [**Create a Makefile to automate FPGA implementation and programming flows**](#create-a-makefile-to-automate-FPGA-implementation-and-programming-flows)
 * [**Further readings**](#further-readings)
 
 <br />
@@ -37,7 +41,7 @@ and to learn how to program its Xilinx Artix-7 FPGA with a simple Verilog RTL de
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > All boards available in the lab mount a **Xilinx Artix-7 A35T** FPGA device. The original board by Digilent was referred to as _Arty_ while
 > the new revision of the same board is now referred to as _Arty A7_, still using an Artix-7 A35T device.
@@ -60,9 +64,15 @@ This introductory practicum should exercise the following concepts:
 * power the board from host computer using a simple USB cable
 * review the usage of fundamental lab instrumentation for measurements (DMM, digital oscilloscope)
 * check cable drivers installation and jumper settings
+* probe JTAG signals at the oscilloscope
 * use the Vivado _Hardware Manager_ to interact with the FPGA
+* get familiar with basic Xilinx Design Constraints (XDC) statements
 * run the Xilinx Vivado FPGA implementation flow on a simple RTL design
+* write a simple _Project Mode_ Tcl script to run Vivado synthesis and implementation flows in batch mode
+* locate and review post-synthesis and post-implmentation reports
 * program the FPGA and the external Quad SPI Flash memory
+* write a simple Tcl script to automate the FPGA programming flow in batch mode
+* write a `Makefile` to automate FPGA implementation and programming flows at the command line
 
 <br />
 <!--------------------------------------------------------------------->
@@ -91,19 +101,42 @@ PDF copies of all above documents are also part of this practicum and are availa
 For faster access to PDF documents from the command line it would be recommended to include in the search path
 of your operating system also the executable of your preferred PDF viewer application.
 
-As an example, Linux users should already have the `evince` executable available in the search path:
+Very likely Windows users have **Adobe Acrobat Reader** program already installed on their machines and
+can update the `PATH` environment variable in the `login.bat` script in order to include the `Acrobat.exe`
+(or `Acrord32.exe`) executable in the search path as follows:
 
 ```
-% evince doc/arty/arty_board_reference_manual.pdf &
+:: add Adobe Acrobat Reader executable to search path
+set PATH="C:\Program Files\Adobe\Acrobat DC\Acrobat";%PATH%       :: check the proper installation directory
 ```
 
 <br />
 
-Very likely Windows users have Adobe Acrobat Reader installed on their machine and can update the `PATH` environment variable
-in the `login.bat` script in order to include the `acroread.exe` executable in the search path:
+Do not forget to save and re-load the script once done:
 
 ```
-% acroread doc/arty/arty_board_reference_manual.pdf
+% call login.bat
+```
+
+<br />
+
+Once the executable is in the search path you can easily open a PDF document from the Windows _Command Prompt_ with:
+
+
+```
+% acrobat doc/arty/arty_board_reference_manual.pdf
+```
+
+<br />
+
+Linux users should already have the **Evince** PDF viewer installed instead, which usually already comes with its main
+`evince` executable available in the search path:
+
+```
+% which evince
+/usr/bin/evince
+
+% evince doc/arty/arty_board_reference_manual.pdf &
 ```
 
 <br />
@@ -179,7 +212,7 @@ List the content of the directory:
 ## Explore board schematics and master XDCs
 [**[Contents]**](#contents)
 
-Before connecting the board to your personal computer explore all board schematics. Try to recognize on the PCB
+Before connecting the board to your personal computer explore and study board schematics. Try to recognize on the PCB
 all schematic components. Open the proper PDF file according to the board you are working with:
 
 * `doc/arty/arty_board_schematics.pdf` for the original _Arty_ board
@@ -187,8 +220,8 @@ all schematic components. Open the proper PDF file according to the board you ar
 
 <br />
 
-With you preferred text editor application open also the main **Xilinx Design Constraints (XDC) file** provided by Digilent
-and available in the `.solutions/` directory:
+With you preferred text editor application open also the main sample **Xilinx Design Constraints (XDC) file**
+provided by Digilent and available in the `.solutions/` directory:
 
 ```
 % cp .solutions/arty_all.xdc .
@@ -202,23 +235,41 @@ and available in the `.solutions/` directory:
 
 <br />
 
-Get familiar with most important programmable I/O in the XDCs and locate physical resources on the board.
+Get familiar with most important programmable I/O in the sample XDC file and locate the corresponding physical
+resources on the board:
 
-Please, be aware that the on-board **USB-to-JTAG circuitry** has been left **UNDOCUMENTED** by Digilent!
-You can easily recognize the main **FTDI chip** near the micro-USB connector indeed, but circuit details
-are not available.
+* general-purpose standard LEDs
+* general-purpose RGB LEDs
+* slide switches
+* push-buttons
+* PMOD (Peripheral MODules) pin headers
+* Arduino/chipKIT pin headers
 
 
 <br />
 
 >
-> **QUESTION**
+> **QUESTIONS**
 >
-> A component on the PCB generates a 100 MHz clock signal. Which is the name of this component ? Where is placed on the PCB ?
+> Q.1 Which is the value of the supply voltage used to power general-purpose standard LEDs ? Is the same for RGB LEDs ?
 >
 >   \____________________________________________________________________________________________________
 >
-
+>
+> Q.2 Which is the most important difference between JA/JC and JB/JD PMOD pin headers ?
+>
+>   \____________________________________________________________________________________________________
+>
+>
+> Q.3 The push-buttons available on the board are normally-open (NO) or normally-closed (NC) buttons ?
+>
+>   \____________________________________________________________________________________________________
+>
+>
+> Q.4 A component on the PCB generates a 100 MHz clock signal. Which is the name of this component ? Where is placed on the PCB ?
+>
+>   \____________________________________________________________________________________________________
+>
 
 <br />
 <!--------------------------------------------------------------------->
@@ -227,20 +278,98 @@ are not available.
 ## Power supplies
 [**[Contents]**](#contents)
 
-Try to understand all possible **powering schemes** foreseen for the board. With a **digital multimeter (DMM)**
-perform  some basic **continuity tests** to verify that different same-potential test-points on the board are shorted
-together, e.g. **GND** or **VCC**.
+Try to understand all possible **powering schemes** foreseen for the board.
+For this purpose read carefully the **Power Supplies** section of the official
+_Arty Reference Manual_ by Digilent.
+
+Locate the following power-related pins:
+
+* **VCC**
+* **VIN**
+* **5V0**
+* **3V3**
+
+With a **digital multimeter (DMM)** perform  some basic **continuity tests** (the "beep" test) to verify
+that different same-potential test-points on the board are effectively shorted together, e.g. **GND** or **VCC**.
 
 <br />
 
 >
 > **QUESTION**
 >
-> The **J8** connector is a 6-pins through-hole (TH) header that provides test points to probe **JTAG signals**. Where are placed
-> **GND** and **VCC** on this connector ? Where are **TDI**, **TMS**, **TCK** and **TDO** signals ?
+> Which is the difference between **VIN** and **5V0** supply-voltages ?
 >
 >   \____________________________________________________________________________________________________
 >
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+## JTAG interface
+[**[Contents]**](#contents)
+
+Xilinx FPGAs are programmed using the [**JTAG protocol**](https://en.wikipedia.org/wiki/JTAG).
+JTAG (Join Test Action Group) is an industry-standard **serial-interface** protocol for integrated
+circuits configuration and debug as well as more complex PCB testing after manufacture.
+
+A JTAG connector uses the following signals:
+
+* **TCK** (Test Clock)
+* **TMS** (Test Mode Select)
+* **TDI** (Test Data Input)
+* **TDO** (Test Data Output)
+* **TRST** (Test Reset, optional)
+
+
+In the past a dedicated (and expensive) **programming cable**, namely _Xilinx USB Platform Cable_,
+was required to program FPGA boards from a host computer. This dedicated cable (still in use for particular applications)
+**connects to a host computer USB port** (in the past to the "old style" serial port instead)
+and converts USB data into JTAG data.<br />
+
+For easier programming, the majority of new modern FPGA boards equipped with a Xilinx device provides
+an **on-board dedicated circuitry** that **converts USB to JTAG without the need
+of a dedicated cable**. That is, you can easily program your board by using a simple **USB Type A/Type B** or **USB Type A/micro USB**
+cable connected between the host computer and the board without the need of a dedicated programming cable.
+
+On Digilent Arty/ Arty A7 boards this conversion is performed by an integrated circuit by **FTDI (Future Technology Devices International)**.
+You can easily recognize the FTDI chip on the board close to the micro-USB connector.
+
+<br />
+
+>
+> **IMPORTANT**
+>
+> Please, be aware that the on-board **USB-to-JTAG circuitry** has been left **UNDOCUMENTED** by Digilent!
+> You can easily recognize the main **FTDI chip** near the micro-USB connector indeed, but circuit details
+> are not available in PDF board schematics.
+>
+
+<br />
+
+Additionally the **J8 connector** on the board provides **test-points** to probe JTAG signals
+using a 6-pins **through-hole (TH)** header.
+Later in this practicum we will use these test-points to **observe JTAG signals at the oscilloscope**.
+
+<br />
+
+<img src="doc/pictures/JTAG_header.png" alt="drawing" width="600"/>
+
+<br />
+
+>
+> **QUESTION**
+>
+> Where is placed the **J8 connector** on the board ? Where are **TDI**, **TMS**, **TCK** and **TDO** signals ?
+>
+>   \____________________________________________________________________________________________________
+>
+
+<br />
+
+Try to understand all possible programming options supported for the board. For this purpose
+read carefully the **FPGA Configuration** section of the official _Arty Reference Manual_ by Digilent.
+
 
 <br />
 <!--------------------------------------------------------------------->
@@ -276,16 +405,35 @@ Verify that all jumpers are properly inserted.
 ## Connect the board to your personal computer
 [**[Contents]**](#contents)
 
-Despite the board can be powered from an external power supply, for this course we will simply power the board
-using 5V from USB cable. Connect the board to the USB port of your personal computer using a **USB A to micro USB cable**.
+Despite the board can be powered from an external bench power supply or any 7-15V AC adapter, for this course we will simply power the board
+using **5V from USB cable**. Connect the board to the USB port of your personal computer using a **USB A to micro USB cable**.
 Verify that the **POWER** status LED turns on.
 
-Use the DMM to perform basic power checks. Repeat all your measurements using the **oscilloscope**.
+Use the DMM to perform basic power measurements on the following pins:
+
+* **VCC**
+* **VIN**
+* **5V0**
+* **3V3**
 
 <br />
 
 >
-> **IMPORTANT !**
+> **QUESTION**
+>
+> Which is the voltage measured on pin **VIN** ? Is this value the expected one ? Motivate your answer.
+>
+>   \____________________________________________________________________________________________________
+>
+
+<br />
+
+Repeat all your power measurements using the **oscilloscope**.
+
+<br />
+
+>
+> **IMPORTANT**
 >
 > Before using an "unknown" oscilloscope **always** verify that **BNC probes** are properly **compensated** by connecting the probes to the
 > built-in oscilloscope square-wave generator. In case probes are over-compensated or under-compensated use a small screwdriver and operate
@@ -300,13 +448,37 @@ Use the DMM to perform basic power checks. Repeat all your measurements using th
 <!--------------------------------------------------------------------->
 
 
+## Probe JTAG signals at the oscilloscope
+[**[Contents]**](#contents)
+
+After connecting the board to the personal computer the USB only provides power/ground to the board.
+Apart from this there is no additional "data exchange" between the host PC and the FPGA.
+We can therefore expect that all JTAG signals should be at some default "idle" logic level.
+
+Connect a couple of BNC probes to the oscilloscope. With the board connected to the host PC and powered
+observe all JTAG signals **TCK**, **TMS**, **TDI** and **TDO** at the oscilloscope through **J8 test-points**.
+
+<br />
+
+>
+> **QUESTION**
+>
+> Which is the logic level of JTAG signals with the board still "unconnected" to a Vivado session ?
+>
+>   \____________________________________________________________________________________________________
+>
+
+<br />
+<!--------------------------------------------------------------------->
+
+
 ## Check cable drivers installation
 [**[Contents]**](#contents)
 
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > If you are running Vivado from a **virtual machine** be sure that USB devices are properly forwarded
 > to the virtual machine! As an example, if you use VirtualBox go through **Devices > USB** to make
@@ -314,31 +486,16 @@ Use the DMM to perform basic power checks. Repeat all your measurements using th
 
 <br />
 
-
-
-Xilinx FPGAs are programmed using the **JTAG protocol**. In the past a dedicated (and expensive)
-**programming cable**, namely _Xilinx USB Platform Cable_, was required
-to program FPGA boards from a host computer. This dedicated cable (still in use for particular applications)
-**connects to a host computer USB port** (in the past to the "old style" serial port instead) and converts
-USB data into JTAG data.<br />
-
-For easier programming, the majority of new modern FPGA boards equipped with a Xilinx device provides
-an **on-board dedicated circuitry** that **converts USB to JTAG without the need
-of a dedicated cable**. That is, you can easily program your board by using a simple **USB Type A/Type B** or **USB Type A/micro USB**
-cable connected between the host computer and the board without the need of a dedicated programming cable.
-
-On Digilent Arty/ Arty A7 boards this conversion is performed by an integrated circuit by **FTDI (Future Technology Devices International)**.
-As already mentioned this circuitry has been left undocumented, but you can easily recognize the FTDI chip on the board
-close to the micro-USB connector.
-
-In order to make the board visible to the host computer the operating system has to **properly recognize the on-board USB/JTAG hardware**
+In order to make the board visible to the host computer the operating system has to **properly recognize the on-board FTDI USB/JTAG hardware**
 requiring a specific **driver**. The **Xilinx USB/Digilent driver** is responsible for this.
 
 By default the _Install Cable Drivers_ option is already selected in the Xilinx Vivado installation wizard, thus
 at the end of the Vivado installation process cable drivers **should be automatically installed for you** on the system
 (this is the reason for which admin privileges are required to install the software).
 
-Follow below instructions to check proper cable drivers installation.
+Follow below instructions to check proper cable drivers installation. In case cable drivers are **NOT installed** on your machine
+you can **manually install cable drivers** without the need of a new scratch installation of the Vivado Design Suite
+as already described into [**fpga/labs/lab0/README.md**](../../labs/lab0/README.md) instructions.
 
 
 <br />
@@ -356,15 +513,21 @@ On Linux systems devices that are connected through USB can be listed using the 
 
 <br />
 
-Verify that a device from FTDI has been properly recognized by the system. In case `lsusb` is not installed, use:
+Verify that a device from FTDI has been properly recognized by the system. In case `lsusb` is not installed, either use
 
 ```
 % sudo apt-get install usbutils
 ```
 
+<br />
+
+or
+
 ```
 % sudo yum install usbutils
 ```
+
+<br />
 
 according to the Linux distribution you are working with.
 
@@ -461,9 +624,12 @@ on **Open target > Auto Connect**.
 
 <br />
 
-Observe the sequence of Tcl commands traced for you in the Tcl console:
+If cable drivers are properly installed the _Hardware Manager_ automatically recognizes the Artix-7 A35T on the board as `xc7a35t_0`.
+Observe the sequence of Tcl commands traced for you in the **Tcl Console** tab:
+
 
 ```
+open_hw_manager
 connect_hw_server -allow_non_jtag
 open_hw_target
 current_hw_device [get_hw_devices xc7a35t_0]
@@ -472,38 +638,135 @@ refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7a35t_0] 0]
 
 <br />
 
-Observe at the oscilloscope what happens to JTAG signals when you "uto connect" the PC to the Digilent board.
+You can start saving these commands into a Tcl script that can be later used to **automate the FPGA programming flow** in batch mode
+without the need of invoking the graphical interface. For this purpose create with your preferred **text-editor** application
+a new `install.tcl` script and copy-and-paste all above statements into the file:
+
+
+```
+% gedit install.tcl &   (for Linux users)
+
+% n++ install.tcl       (for Windows users)
+```
+
+<br />
+
+Save and exit once done. We will later complete the script with additional Tcl programming statements needed to load the
+firmware into the FPGA in batch mode.
+
+Once a connection is established between the _Hardware Manager_ and the FPGA the **JTAG chain** has been
+initialized and some digital activity can be now observed on JTAG signals.
+
+Verify this by probing **TCK**, **TMS**, **TDI** and **TDO** at the oscilloscope through **J8 test-points**
+after the connection has been established.
 
 
 <br />
 
+>
+> **HINT**
+>
+> Probe **TCK** on CH1 and always use this signal for the trigger. Press the _AUTO SET_ button if you are not able
+> to properly trigger and display a clock-like signal on a suitable time-scale. Adjust with the
+> time-base knob as needed.
+> Once **TCK** is clearly visible connect a second probe to trace **TMS**, **TDI** and **TDO**.
+> Try to observe all below waveforms.
+>
+
+<br />
 <img src="doc/pictures/JTAG_TCK.png" alt="drawing" width="650"/>
 <img src="doc/pictures/JTAG_TCK_zoom.png" alt="drawing" width="650"/>
+<br />
+
+As you can notice the JTAG **TCK** "clock" signal is **NOT a standard free-running clock waveform**.
+
+On the contrary **TCK** is a sequence of **clock-pulses** with a certain pattern as generated by the JTAG
+state-machine implemented in the FTDI USB-to-JTAG converter and this "clock" is running only when the JTAG
+machinery has something to do. Indeed, this is the expected behaviour and it is a feature that can be found also in other
+common **synchronous serial interfaces** such as **SPI** (Serial Peripheral Interface) and **I2C** (Inter Integrated Circuit)
+in which the "clock" signal of the protocol is generated by a state-machine placed in some "primary" (master) device
+and distributed to one or more "secondary" (slaves) devices.
 
 <br />
 
+>
+> **QUESTION**
+>
+> Which is the default frequency of the JTAG clock **TCK** ?
+>
+>   \____________________________________________________________________________________________________
+>
 
-JTAG TCK and TMS signals:
+<br />
+
+Compare your measurement at the oscilloscope with the output of the following Tcl command:
+
+```
+get_property PARAM.FREQUENCY [current_hw_target]
+```
+
+<br />
+
+Reduce the JTAG clock frequency to 5 MHz by executing the following command in the _Hardware Manager_ Tcl console:
+
+```
+set_property PARAM.FREQUENCY 5000000 [current_hw_target]
+```
+
+<br />
+
+Verify the result at the oscilloscope. Once done, restore the JTAG clock frequency back to its original
+default value and debug also **TMS**, **TDI** and **TDO** signals while keeping the trigger on **TCK**.
 
 <br />
 <img src="doc/pictures/JTAG_TCK_TMS.png" alt="drawing" width="650"/>
 <br />
 
-JTAG TCK and TDI signals:
 
 <br />
 <img src="doc/pictures/JTAG_TCK_TDI.png" alt="drawing" width="650"/>
 <br />
 
-Finally, JTAG TCK and TDO signals:
 
 <br />
 <img src="doc/pictures/JTAG_TCK_TDO.png" alt="drawing" width="650"/>
 <br />
 
 
-If cable drivers are properly installed the _Hardware Manager_ automatically recognizes the Artix-7 A35T on the board as `xc7a35t_0`. <br />
-Left-click on `xc7a35t_0` to select the device, then left-click on _Properties_ to display the _Hardware Device Properties_ form:
+<br />
+
+>
+> **QUESTION**
+>
+> On which edge of **TCK** the serial stream **TDO** is sent from the FPGA to the FTDI USB-to-JTAG converter ?
+>
+>   \____________________________________________________________________________________________________
+>
+
+<br />
+
+Try to **close the communication** between the FPGA and the computer by executing the following command in the _Hardware Manager_
+Tcl console:
+
+```
+disconnect_hw_server
+```
+
+<br />
+
+>
+> **QUESTION**
+>
+> What happens to JTAG signals at the oscilloscope after the connection has been closed ?
+>
+>   \____________________________________________________________________________________________________
+>
+
+<br />
+
+Left-click on **Open target > Auto Connect** to establish a new connection between the  _Hardware Manager_ and the
+board. Then left-click on `xc7a35t_0` to select the FPGA device and left-click on _Properties_ to display
+the _Hardware Device Properties_ form:
 
 <br />
 
@@ -511,15 +774,17 @@ Left-click on `xc7a35t_0` to select the device, then left-click on _Properties_ 
 
 <br />
 
-You can immediately detect if the FPGA is programmed by looking at the `DONE` status bit in the JTAG instruction register.
-Verify if the FPGA is already programmed using:
+You can immediately detect if the FPGA is programmed by looking at the **DONE** status LED on the board close to **PROG**
+push-button placed on the left-side of the JA PMOD connector.
+
+Alternatively you can query the `DONE` status bit in the JTAG instruction register. Verify if the FPGA is already
+programmed using:
 
 ```
 puts [get_property REGISTER.IR.BIT5_DONE [current_hw_device]]
 ```
 
 <br />
-
 
 Try to understand the meaning of the following Tcl commands:
 
@@ -528,7 +793,6 @@ puts [current_hw_server]
 puts [current_hw_target]
 puts [current_hw_device]
 ```
-
 
 <br />
 <!--------------------------------------------------------------------->
@@ -588,36 +852,6 @@ somewhere below `Temp` and select **Add Sensor(s)**.
 The data exchange between the FPGA and the computer uses the same JTAG protocol used for device programming.
 Observe at the oscilloscope JTAG signals **TCK**, **TMS**, **TDI** and **TDO** using through-hole test points on **J8**.
 
-<br />
-
->
-> **QUESTION**
->
-> Which is the default frequency of the JTAG clock **TCK** ?
->
->   \____________________________________________________________________________________________________
->
-
-<br />
-
-Compare your measurement at the oscilloscope with the output of the following Tcl command:
-
-```
-get_property PARAM.FREQUENCY [current_hw_target]
-```
-
-<br />
-
-Reduce the JTAG clock to 5 MHz with the following Tcl command:
-
-```
-set_property PARAM.FREQUENCY 5000000 [current_hw_target]
-```
-
-<br />
-
-Verify the result at the oscilloscope.
-
 Close the _Hardware Manager_ and exit from Vivado once happy:
 
 ```
@@ -632,7 +866,7 @@ exit
 ## Implement a simple RTL design targeting the Arty board
 [**[Contents]**](#contents)
 
-Map on the board the simple NOT-gate (inverter) already discussed in the first lab.
+Map on the board the simple NOT-gate (inverter) already discussed in the `lab1`.
 To save time, copy from the `.solutions/` directory the `Inverter.v` source file:
 
 ```
@@ -652,12 +886,88 @@ Create also a new `Inverter.xdc` file with your **text-editor** application:
 <br />
 
 Try to **write yourself design constraints** required to implement the design on real hardware.
-As an example, map the inverter input `X` to the `SW0` slide-switch, while assign the inverter output `ZN` to the general-purpose
-LED `LD4` available on the Digilent board as shown below. Use the main `arty_all.xdc` as a reference for the syntax.
+In the following you can find additional information to help you in writing the code.
+
+<br /><br />
+
+**PHYSICAL CONSTRAINTS (PORT MAPPING)**
+
+As an example, map the inverter input `X` to the `SW0` slide-switch, while assign the inverter output `ZN`
+to the general-purpose LED `LD4` available on the Digilent board as shown below.
+Use the main `arty_all.xdc` as a reference for the syntax.
 
 <br />
 
 <img src="doc/pictures/InverterFPGA.png" alt="drawing" width="750"/>
+
+<br />
+
+```
+set_property -dict { PACKAGE_PIN A8  IOSTANDARD LVCMOS33 } [get_ports X ] ;  # SW0
+set_property -dict { PACKAGE_PIN H5  IOSTANDARD LVCMOS33 } [get_ports ZN] ;  # LD4
+```
+
+<br />
+
+>
+> **IMPORTANT**
+>
+> Be sure that a **current-limiting series resistor** is always placed on the current path of a LED!
+> Feel free to drive with the NOT gate an external LED mounted on the breadboard and to map the
+> `ZN` output port to any other programmable I/O available on the board.<br />
+> However it will be **UP TO YOU** to place an approx. 100-300 ohm limiting resistor to protect the LED!
+>
+> **WITHOUT A LIMITING RESISTOR YOU WILL DESTROY ANY EXTERNAL LED CONNECTED TO PROGRAMMABLE I/O PINS !**
+>
+
+<br /><br />
+
+**ELECTRICAL CONSTRAINTS**
+
+Incorrect voltage supply for the configuration interfaces on board can result in configuration failure or device damage.
+Vivado has a **Design Rules Check (DRC)** tool that verifies if the configuration interfaces of the device have correct voltage
+support based on the **Configuration Bank Voltage Select** `CFGBVS`, `CONFIG_VOLTAGE`, and the `CONFIG_MODE` properties settings.
+
+Add these electrical constraints in order to instruct Vivado how the device configuration interfaces are used and connected on board.
+
+```
+set_property CFGBVS VCCO        [current_design]
+set_property CONFIG_VOLTAGE 3.3 [current_design]
+```
+
+<br />
+
+Ref. also to:
+
+* _<https://www.xilinx.com/support/answers/55660.html>_
+* _<https://forums.xilinx.com/t5/Other-FPGA-Architecture/set-property-CFGBVS-set-property-CONFIG-VOLTAGE/td-p/782750>_
+
+<br /><br />
+
+
+**TIMING CONSTRAINTS**
+
+Our first digital circuit is a pure combinational block, therefore **timing** is not of primary importance.
+That is, we can assume that after a certain **propagation delay** the output `ZN` settles to a **static logic value**
+by changing the corresponding inverter input `X`.
+
+For pure combinational timing paths you can define a **maximum delay constraint** between an input
+and an output using the `set_max_delay` constraint. As an example, you can constrain a max. 10 ns delay between
+input and output with the following syntax:
+
+```
+set_max_delay 10 -from [all_inputs] -to [all_outputs]
+```
+
+<br />
+
+You can also play with the delay value and verify the effect in Vivado **timing reports**.
+
+Alternatively you can also **disable all timing checks** with `set_false_path` as follows:
+
+```
+set_false_path -from [all_inputs] -to [all_outputs]
+```
 
 <br />
 
@@ -684,7 +994,7 @@ and try to run the FPGA implementation flow in _Project Mode_ up to bitstream ge
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > In order to be able to program also the external Quad SPI Flash memory you must generate
 > the **raw binary version** (`.bin`) of the bitstream file (`.bit`). To do this when working in _Project Mode_
@@ -704,28 +1014,131 @@ and try to run the FPGA implementation flow in _Project Mode_ up to bitstream ge
 
 <br />
 
-If you run out of time you can also run the _Project Mode_ flow using a Tcl script. Copy from the `.solutions/` directory
-the sample `build.tcl` script prepared for you:
+By default both bitstream (.bit) and raw-binary (.bin) programming files are written by Vivado
+into the `Inverter.runs/impl_1/` directory. Verify at the end of the flow that both files
+have been properly generated:
 
 ```
-% cp .solutions/build.tcl .
-```
-
-<br />
-
-You can then run the Vivado flow in pure **batch mode** by running the following command in the console:
-
-```
-% vivado -mode batch -source build.tcl -notrace -log build.log
+% ls -lh Inverter.runs/impl_1/Inverter.bit
+% ls -lh Inverter.runs/impl_1/Inverter.bin
 ```
 
 <br />
 
-Alternatively you can  `source` the script from the Vivado Tcl console:
+You might also have noticed that each step of the flow executed in the GUI has a corresponding
+"super-command" in Tcl. Review the sequence of commands traced for you by Vivado into the **Tcl Console** tab:
 
 ```
-source build.tcl
+create_project -verbose -force -part xc7a35ticsg324-1L Inverter
+add_files -norecurse -fileset sources_1 Inverter.v
+update_compile_order -fileset sources_1
+add_files -norecurse -fileset constrs_1 Inverter.xdc
+launch_runs synth_1
+wait_on_run synth_1
+set_property STEPS.WRITE_BITSTREAM.ARGS.BIN_FILE true [get_runs impl_1]
+launch_runs impl_1 -to_step write_bitstream
+wait_on_run impl_1
 ```
+
+<br />
+
+You can use these commands as a starting point to write a first simple _Project Mode_ Tcl script
+that can be later used to **automate the FPGA implementation flow** and run Vivado in **batch mode**
+without the need of invoking the graphical interface. For this purpose create with your preferred
+**text-editor** application a new `build.tcl` script and copy-and-paste all above statements
+into the file:
+
+
+```
+% gedit build.tcl &   (for Linux users)
+
+% n++ build.tcl       (for Windows users)
+```
+
+<br />
+
+Feel free of course to **add comments** to document your script. Save and close the test editor
+once done. Exit also from the Vivado application.
+
+Copy and run from the `.solutions/` directory the `cleanup.sh` (Linux) or the `cleanup.bat` (Windows) script
+to cleanup the practicum directory and start with a scratch working area containing only Verilog, XDC and Tcl sources.
+
+For Linux users:
+
+```
+% cp .solutions/cleanup.sh .
+% chmod +x cleanup.sh
+% ./cleanup.sh          (or simply 'source cleanup.sh' without x-permissions)
+```
+
+<br />
+
+For Windows users:
+
+```
+% cp .solutions/cleanup.bat .
+% call cleanup.bat
+```
+
+<br />
+
+You can then easily re-run the Vivado implementation flow from the command line in batch mode by executing the following
+command in the console:
+
+```
+% vivado -mode batch -source build.tcl -notrace -log build.log -nojournal
+```
+
+<br />
+
+Please use:
+
+```
+% vivado -help
+```
+
+<br />
+
+to understand all command options. In case of troubles or syntax errors review the complete script already
+prepared for you and available in the `.solutions/` directory:
+
+```
+% cat .solutions/build.tcl
+```
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+## Locate and review text reports
+[**[Contents]**](#contents)
+
+Several **text reports** are automatically generated for you at each flow step
+when running Vivado in _Project Mode_ (either in GUI mode or in batch mode using a Tcl script).
+
+Most important reports are:
+
+* utilization reports
+* timing reports
+* power reports
+
+<br />
+
+As an example, review in the console the content of the **post-placement utilization report**:
+
+```
+% less Inverter.runs/impl_1/Inverter_utilization_placed.rpt
+```
+
+<br />
+
+>
+> **QUESTION**
+>
+> Which FPFA device primitives have been used to implement the inverter on real hardware ?
+>
+>   \____________________________________________________________________________________________________
+>
 
 <br />
 <!--------------------------------------------------------------------->
@@ -753,7 +1166,74 @@ Debug your firmware on the board.
 You can also **observe the bitstream** at the oscilloscope through JTAG. To do this, probe the **TDI** signal
 at the oscilloscope on **J8** and then re-program the FPGA.
 
-Review all Tcl programming commands traced in the Tcl console.
+Review the sequence of Tcl programming commands traced for you in the _Hardware Manager_ Tcl console:
+
+```
+set_property PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property PROGRAM.FILE {Inverter.runs/impl_1/Inverter.bit} [get_hw_devices xc7a35t_0]
+program_hw_devices [get_hw_devices xc7a35t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
+```
+
+<br />
+
+With this additional information you can now complete the `install.tcl` script and fully
+automate the FPGA programming flow in batch mode without the need of running the Vivado
+graphical user interface. For this purpose re-open `install.tcl` with you preferred text editor
+and **update the script** by adding all above programming commands after the initial code
+used to connect to the board. As usual feel free of course to **add comments** to document your script.
+
+The final Tcl script should be something like this:
+
+```
+## open the Hardware Manager
+open_hw_manager
+
+## "auto-connect"
+connect_hw_server -allow_non_jtag
+open_hw_target
+current_hw_device [get_hw_devices xc7a35t_0]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7a35t_0] 0]
+
+## specify the bitstream file
+set_property PROGRAM.FILE {Inverter.runs/impl_1/Inverter.bit} [get_hw_devices xc7a35t_0]
+
+## empty entries
+set_property PROBES.FILE {} [get_hw_devices xc7a35t_0]
+set_property FULL_PROBES.FILE {} [get_hw_devices xc7a35t_0]
+
+## program the FPGA
+program_hw_devices [get_hw_devices xc7a35t_0]
+refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
+```
+
+<br />
+
+Save and exit once done.
+
+You can now try to re-install the "Inverter" firmware in batch mode. Close the _Hardware Manager_
+and **physically disconnect the USB cable** from your computer, then **reconnect it**.
+
+The firmware loaded into the FPGA is stored into a volatile RAM inside the chip. By default the FPGA configuration
+is therefore **non-persistent** across power cycles and you have to **re-program the FPGA** whenever
+you **disconnect the power** from the board.
+
+Since you disconnected the power from the board the previously installed "Inverter" firmware
+has been lost and the FPGA needs to be re-programmed. Try to run the following command in the console:
+
+```
+% vivado -mode batch -source install.tcl -notrace -log install.log -nojournal
+```
+
+<br />
+
+In case of troubles or syntax errors review the complete script already prepared for
+you and available in the `.solutions/` directory:
+
+```
+% cat .solutions/install.tcl
+```
 
 <br />
 <!--------------------------------------------------------------------->
@@ -762,11 +1242,28 @@ Review all Tcl programming commands traced in the Tcl console.
 ## Program the external Quad SPI Flash memory
 [**[Contents]**](#contents)
 
-The firmware loaded into the FPGA is stored into a volatile RAM inside the chip. By default the FPGA configuration is therefore **non-persistent**
-across power cycles and you have to **re-program the FPGA** whenever you **disconnect the power** from the board.
-
 In order to get the FPGA automatically programmed at power up you have to write the FPGA configuration into some dedicated
-**external flash memory**. The Digilent Arty board provided a **128 MB Quad SPI Flash memory** by Microsemi for this purpose.
+**external flash memory**. The Digilent Arty board provides a **128 MB Quad SPI Flash memory** by Microsemi for this purpose.
+
+As a first step restart Vivado in graphic mode, then open a new _Hardware Manager_ session and finally "auto-connect"
+with the board to initialize the JTAG chain. You can also do this using the `install.tcl` Tcl script, simply
+execute `vivado -mode gui` instead of `vivado -mode batch` in the console.
+
+For Linux users:
+
+```
+% vivado -mode gui -source install.tcl -notrace -log install.log -nojournal &
+```
+
+<br />
+
+For Windows users:
+
+```
+% echo "exec vivado -mode gui -source install.tcl -notrace -log install.log -nojournal &" | tclsh -norc
+```
+
+<br />
 
 To program the external memory we have to first add the memory to the JTAG chain from the _Hardware Manager_. To do this,
 right click on the  `xc7a35t_0` device and select **Add Configuration Memory Device**.
@@ -836,6 +1333,116 @@ Finally, disconnect and then riconnect the USB cable from the computer to verify
 <br />
 <!--------------------------------------------------------------------->
 
+
+## Create a Makefile to automate FPGA implementation and programming flows
+[**[Contents]**](#contents)
+
+Up to now you learned how to run Vivado flows in batch mode by executing
+
+```
+vivado -mode batch -source <script.tcl>
+```
+
+<br />
+
+at the command line targeting either `build.tcl` or `install.tcl` Tcl scripts. In order to better
+automate the execution of these commands you can use a simple shell script.
+
+Sample `runVivado.sh` (Linux) and `runVivado.bat` (Windows) shell scripts have been already
+prepared for you and can be found in the `.solutions/` directory for both the Linux Bash shell
+and the Windows _Command Prompt_.
+
+Indeed, a more efficient and portable solution is to automate the execution of these Tcl scripts 
+by running `vivado -mode batch`
+from a [**GNU Makefile**](https://www.gnu.org/software/make/manual/make.html) parsed by the `make` utility
+as already extensively used during lectures to automate simulation flows.
+
+For this purpose, create with your preferred text editor a new source
+file named `Makefile` (without extension):
+
+```
+% gedit Makefile &   (for Linux users)
+
+% n++ Makefile       (for Windows users)
+```
+
+<br />
+
+Then enter the following source code:
+
+```make
+#############################################################################
+##
+## A first Makefile example to automate FPGA implementation and programming
+## flows using Xilinx Vivado Tcl scripts.
+##
+#############################################################################
+
+
+## some useful aliases
+RM := rm -f -v
+RMDIR := rm -rf -v
+
+
+## run RTL to bitstream generation flows using a Project Mode Tcl script
+.PHONY : build
+build : build.tcl
+
+	@vivado -mode batch -source build.tcl -notrace -log build.log -nojournal
+
+
+## install bitstream to Arty board (Hardware Manager)
+.PHONY : install
+install : install.tcl
+
+	@vivado -mode batch -source install.tcl -notrace -log install.log -nojournal
+
+
+## delete all log files and project files generated by Vivado flows
+.PHONY : clean
+clean :
+
+	@$(RM) *.log *.jou *.str *.xpr *.bit *.bin
+	@$(RMDIR) *.cache *.hw *.ip_user_files *.runs *.sim *.srcs .Xil
+```
+
+<br />
+
+>
+> **IMPORTANT**
+>
+> As already discussed during lectures the `Makefile` syntax foresees that all instructions placed
+> inside each target implementation **MUST BE IDENTED USING A TAB CHARACTER !**
+>
+> ```
+> target : [optional dependencies to run the target]
+>
+> <TAB> @write here some cool stuff to be executed by typing 'make target' in the console
+> ```
+>
+> **DO NOT USE SPACES TO IDENT TARGET DIRECTIVES !**
+>
+
+<br />
+
+Save and exit once done. Try to run the flows from scratch with:
+
+```
+% make clean
+% make build
+% make install
+```
+
+<br />
+
+For less typing, this is equivalent to run:
+
+```
+% make clean build install
+```
+
+<br />
+<!--------------------------------------------------------------------->
 
 ## Further readings
 [**[Contents]**](#contents)

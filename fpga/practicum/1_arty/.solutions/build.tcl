@@ -1,64 +1,47 @@
-##
-## Example Tcl script to run the Vivado FPGA implementation flow in Project Mode using Tcl.
-##
-## Luca Pacher - pacher@to.infn.it
-## Fall 2020
-##
-
-## profiling
-set tclStart [clock seconds]
-
-
-################################################
-##   create Vivado project attached to Arty   ##
-################################################
-
-create_project -force -part xc7a35ticsg324-1L Inverter -verbose
-
-
-##################################
-##   load RTL and constraints   ##
-##################################
-
+###########################################################################
 #
-# **NOTE
-# By default, "sources_1", "constrs_1" and "sim_1" filesets are automatically created with the project
+# A first example Tcl script to run the Xilinx Vivado FPGA implementation
+# flow in batch (non-interactive) mode using a so-called "Project Mode"
+# script.
 #
+# Command line usage:
+#
+#   % cp .solutions/build.tcl .
+#   % vivado -mode batch -source build.tcl -notrace -log build.log -nojournal
+#
+# Luca Pacher - pacher@to.infn.it
+# Spring 2024
+#
+###########################################################################
 
-add_files \
-   -norecurse -fileset sources_1 Inverter.v
 
+## create new Vivado project targeting the Artix-7 A35T device mounted on Digilent Arty/Arty A7 boards
+create_project -verbose -force -part xc7a35ticsg324-1L Inverter
+
+## load RTL sources
+add_files -norecurse -fileset sources_1 Inverter.v
 update_compile_order -fileset sources_1
 
-add_files \
-   -norecurse -fileset constrs_1 Inverter.xdc
+## load design constraints (XDC)
+add_files -norecurse -fileset constrs_1 Inverter.xdc
 
-
-##############################################
-##   run RTL to bitstream generation flow   ##
-##############################################
-
-##
-## **IMPORTANT
-##
-## In order to be able to program the external Quad SPI Flash memory the raw
-## binary file (.bin) must be generated along with the bitsream (.bit) !
-##
-set_property STEPS.WRITE_BITSTREAM.ARGS.BIN_FILE true [get_runs impl_1]
-
-#launch_runs impl_1 -to_step write_bitstream 
-
-## run synthesis
+## run RTL elaboration and mapped synthesis flows
 launch_runs synth_1
 wait_on_run synth_1
 
-## run place-and-route and generate bitstream
-launch_runs impl_1 -to_step write_bitstream 
+## setting required to also generate a raw binary file (.bin) to program the external Quad SPI Flash memory
+set_property STEPS.WRITE_BITSTREAM.ARGS.BIN_FILE true [get_runs impl_1]
+
+## run implementation (place-and-route) flows and generate the FPGA configuration file (bitstream)
+launch_runs impl_1 -to_step write_bitstream
 wait_on_run impl_1
 
+## just for easier installation, copy FPGA and memory configuration files into the current working directory
+if { [file exists Inverter.runs/impl_1/Inverter.bit] } { file copy -force Inverter.runs/impl_1/Inverter.bit [pwd]/Inverter.bit }
+if { [file exists Inverter.runs/impl_1/Inverter.bin] } { file copy -force Inverter.runs/impl_1/Inverter.bin [pwd]/Inverter.bin }
 
-## report CPU time
-set tclStop [clock seconds]
-set tclSeconds [expr ${tclStop} - ${tclStart} ]
+puts "FPGA implementation flow completed!"
 
-puts "\nTotal elapsed-time for [file normalize [info script]]: [format "%.2f" [expr ${tclSeconds}/60.]] minutes\n"
+## **OPTIONAL: run also the firmware-installation flow from the main Vivado Tcl build script
+#source install.tcl
+
