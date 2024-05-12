@@ -43,6 +43,10 @@ Try yourself to implement and debug on real FPGA hardware **fundamental logic ga
 
 <br />
 
+HERE: note that standard LED different from RGB LEDs (schematic)
+
+![](./doc/pictures/LEDs_schematic.png)
+
 <br />
 <!--------------------------------------------------------------------->
 
