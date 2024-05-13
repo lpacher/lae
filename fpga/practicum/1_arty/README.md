@@ -915,7 +915,7 @@ set_property -dict { PACKAGE_PIN H5  IOSTANDARD LVCMOS33 } [get_ports ZN] ;  # L
 > Be sure that a **current-limiting series resistor** is always placed on the current path of a LED!
 > Feel free to drive with the NOT gate an external LED mounted on the breadboard and to map the
 > `ZN` output port to any other programmable I/O available on the board.<br />
-> However it will be **UP TO YOU** to place an approx. 100-300 ohm limiting resistor to protect the LED!
+> However it will be **UP TO YOU** to place an approx. 100-300 $\Omega$ limiting resistor to protect the LED!
 >
 > **WITHOUT A LIMITING RESISTOR YOU WILL DESTROY ANY EXTERNAL LED CONNECTED TO PROGRAMMABLE I/O PINS !**
 >
@@ -941,6 +941,17 @@ Ref. also to:
 
 * _<https://www.xilinx.com/support/answers/55660.html>_
 * _<https://forums.xilinx.com/t5/Other-FPGA-Architecture/set-property-CFGBVS-set-property-CONFIG-VOLTAGE/td-p/782750>_
+
+
+Optionally you can include the following additional XDC statements to **optimize the memory configuration file (.bin)**
+to program the external 128 Mb Quad Serial Peripheral Interface (SPI) flash memory in order to automatically load
+the FPGA configuration at power-up:
+
+```
+set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 4  [current_design]
+set_property CONFIG_MODE SPIx4                [current_design]
+```
+
 
 <br /><br />
 
@@ -987,7 +998,7 @@ and try to run the FPGA implementation flow in _Project Mode_ up to bitstream ge
 * add the `Inverter.v` Verilog file to the project
 * add `Inverter.xdc` design constraints to the project
 * run elaboration and inspect the RTL schematic
-* run synthesis and ispect the post-synthesis schematic
+* run synthesis and inspect the post-synthesis schematic
 * run implementation and inspect place-and-route results into the _Device_ view
 * generate the bitstream
 
@@ -1014,14 +1025,28 @@ and try to run the FPGA implementation flow in _Project Mode_ up to bitstream ge
 
 <br />
 
-By default both bitstream (.bit) and raw-binary (.bin) programming files are written by Vivado
-into the `Inverter.runs/impl_1/` directory. Verify at the end of the flow that both files
-have been properly generated:
+After the implementation flow has successfully completed **locate the bitstream file**
+to be used for firmware installation.
+
+By default both **bitstream (.bit)** and **raw-binary (.bin)** programming files are written by Vivado
+into the `*.runs/impl_1/` directory automatically created by the tool as part of the project tree setup.
+
+Verify at the end of the flow that both files have been properly generated:
 
 ```
-% ls -lh Inverter.runs/impl_1/Inverter.bit
-% ls -lh Inverter.runs/impl_1/Inverter.bin
+% ls -lh ./Inverter.runs/impl_1 | grep .bit
+% ls -lh ./Inverter.runs/impl_1 | grep .bin
 ```
+
+<br />
+
+>
+> **QUESTION**
+>
+> Which is the on-disk size of bitstream (.bit) and raw-binary (.bin) files ? Motivate the difference if any.
+>
+>   \____________________________________________________________________________________________________
+>
 
 <br />
 
@@ -1135,7 +1160,7 @@ As an example, review in the console the content of the **post-placement utiliza
 >
 > **QUESTION**
 >
-> Which FPFA device primitives have been used to implement the inverter on real hardware ?
+> Which FPGA device primitives have been used to map the design on real hardware ?
 >
 >   \____________________________________________________________________________________________________
 >
