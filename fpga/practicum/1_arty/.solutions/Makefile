@@ -3,6 +3,14 @@
 ## A first Makefile example to automate FPGA implementation and programming
 ## flows using Xilinx Vivado Tcl scripts.
 ##
+## Command line usage:
+##
+##   % cp .solutions/Makefile .
+##   % make clean
+##   % make build
+##   % make install
+##
+##
 ## Luca Pacher - pacher@to.infn.it
 ## Spring 2024
 ##
