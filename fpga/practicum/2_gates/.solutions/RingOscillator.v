@@ -24,7 +24,10 @@ module RingOscillator (
 
    input  wire start,
    output wire clk,
-   output wire led
+
+   // **DEBUG
+   output wire led,
+   output wire probe
 
    ) ;
 
@@ -54,6 +57,9 @@ module RingOscillator (
 
    // **DEBUG: drive a status LED with 'start'
    assign led = start ;
+
+   // **DEBUG: probe 'start' at the oscilloscope
+   assign probe = start ;
 
 endmodule
 

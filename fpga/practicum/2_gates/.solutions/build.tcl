@@ -26,7 +26,7 @@ set tclStart [clock seconds]
 #######################
 
 #set projectName    {Gates}
-#set projectDir     {}
+#set projectDir     {.}
 #set topModuleName  {Gates}
 #set targetFPGA     {xc7a35ticsg324-1L}
 

@@ -418,6 +418,12 @@ to the ring-oscillator implementation.
 
 <br />
 
+
+<br />
+<img src="doc/pictures/RingOscillatorOscilloscope.png" alt="drawing" width="650"/>
+<br />
+
+
 $$
 f_{osc} \sim \dfrac{1}{N}
 $$

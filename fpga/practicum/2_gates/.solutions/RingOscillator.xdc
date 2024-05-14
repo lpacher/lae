@@ -33,9 +33,15 @@ set_property -dict { PACKAGE_PIN A8  IOSTANDARD LVCMOS33 } [get_ports start] ;  
 ## status LED
 set_property -dict { PACKAGE_PIN H5  IOSTANDARD LVCMOS33 } [get_ports led]   ;  # LD4
 
+## auxiliary output to display 'start' also at the oscilloscope
+set_property -dict { PACKAGE_PIN F5  IOSTANDARD LVCMOS33 } [get_ports probe] ;  # A0 (chipKIT header)
+
 ## ring oscillator output
-#set_property -dict { PACKAGE_PIN G13  IOSTANDARD LVCMOS33 } [get_ports clk] ;   ## JA1 - 200 ohm series resistance
-set_property -dict { PACKAGE_PIN E15  IOSTANDARD LVCMOS33 } [get_ports clk] ;   ## JB1 - NO termination resistance
+#set_property PACKAGE_PIN G13 [get_ports clk] ;   # JA1 - 200 ohm series resistance
+#set_property PACKAGE_PIN E15 [get_ports clk] ;   # JB1 - NO termination resistance
+set_property PACKAGE_PIN D5  [get_ports clk] ;   # A5 (chipKIT header)
+
+set_property IOSTANDARD LVCMOS33 [get_ports clk]
 
 
 ############################
