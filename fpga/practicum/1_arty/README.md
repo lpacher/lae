@@ -69,7 +69,7 @@ This introductory practicum should exercise the following concepts:
 * get familiar with basic Xilinx Design Constraints (XDC) statements
 * run the Xilinx Vivado FPGA implementation flow on a simple RTL design
 * write a simple _Project Mode_ Tcl script to run Vivado synthesis and implementation flows in batch mode
-* locate and review post-synthesis and post-implmentation reports
+* locate and review post-synthesis and post-implementation reports
 * program the FPGA and the external Quad SPI Flash memory
 * write a simple Tcl script to automate the FPGA programming flow in batch mode
 * write a `Makefile` to automate FPGA implementation and programming flows at the command line
@@ -898,15 +898,25 @@ Copy from the `.solutions/` directory the reference XDC file for the Arty board:
 Try to **write yourself design constraints** required to implement the design on real hardware.
 In the following you can find additional information to help you in writing the code.
 
-<br /><br />
+<br />
+
+---
+<!-- horizontal divider -->
+
+<br />
+
 
 **PHYSICAL CONSTRAINTS (PORT MAPPING)**
 
---- TODO
-As a first step you have to write **pin constraints** required to map `A` and `B` Verilog
-inputs to slide-witches **SWO** and **SW1** and to map `Z[0]` ... `Z[5]` Verilog outputs
-to general-purpose LEDs as in figure. Use the main `arty_all.xdc` as a reference
-for the syntax.
+As a first step you have to write **pin constraints**. These constraints are required to:
+
+* define the mapping between **top-level Verilog I/O ports** and **FPGA physical pins**
+* specify the **I/O voltage** for each assigned pin.
+
+<br />
+
+These two information are referred to as `PACKAGE_PIN` and `IOSTANDARD` respectively.
+The Tcl statement to be used in the XDC file to perform this mapping is the following:
 
 ```
 set_property -dict { PACKAGE_PIN <FPGA pin> IOSTANDARD LVCMOS33 } [get_ports <HDL port name> ]
@@ -914,29 +924,45 @@ set_property -dict { PACKAGE_PIN <FPGA pin> IOSTANDARD LVCMOS33 } [get_ports <HD
 
 <br />
 
-As already discussed in the introductory practicum each HDL top-level port
-needs both an FPGA physical pin name and the I/O voltage to be specified
-in the constraints file by setting `PACKAGE_PIN` and `IOSTANDARD` properties.
+All configurable I/O pins available on the _Arty_ board are **CMOS 3.3V**
+identified as `LVCMOS33`. Other FPGA boards mounting different Xilinx devices
+might have other I/O voltage levels.
 
 The above syntax uses one single `set_property` statement to assign both 
 `PACKAGE_PIN` and `IOSTANDARD` in form of a "dictionary", that is a list
-of _(key,value)_ pairs.
+of _(key,value)_ pairs enclosed within curly brackets `{}` or double quotes `""`.
 
-Alternatively you can set `PACKAGE_PIN` and `IOSTANDARD` properties
-using two independent statements targeting the same HDL top-level port:
+A second possibility is to set `PACKAGE_PIN` and `IOSTANDARD` properties
+using two independent statements targeting the same top-level port as follows:
 
 ```
 set_property PACKAGE_PIN <FPGA pin> [get_ports <HDL port name> ]
 set_property IOSTANDARD LVCMOS33 [get_ports <HDL port name> ]
 ```
 
----
+<br />
+
+>
+> **IMPORTANT**
+>
+> Remind that **both information** are requested to run the FPGA implementation
+> flow in Xilinx Vivado!
+>
+> Moreover **ALL** top-level I/O ports must be assigned to a physical FPGA pin!
+> If you miss to specify both `PACKAGE_PIN` and `IOSTANDARD` properties for each
+> top-level port in your design the implementation flow will fail
+> rising a **Design Rule Check (DRC) error**. In case you have unused/unmapped
+> ports in the top-level module simply remove or comment-out them.
+>
+> **REMIND THAT YOU CAN'T LEAVE UNMAPPED I/O PORTS IN YOUR TOP-LEVEL MODULE !**
+>
+>
 
 <br />
 
-As an example, map the inverter input `X` to the `SW0` slide-switch, while assign the inverter output `ZN`
-to the general-purpose LED `LD4` available on the Digilent board as shown below.
-Use the main `arty_all.xdc` as a reference for the syntax.
+As an example, map the inverter input `X` to the slide-switch **SW0**, while assign the
+inverter output `ZN` to the general-purpose LED `LD4` available on the Digilent board
+as shown below. Use the main `arty_all.xdc` as a reference for the syntax.
 
 <br />
 
@@ -1017,7 +1043,7 @@ Ref. also to:
 <br />
 
 Optionally you can include the following additional XDC statements to **optimize the memory configuration file (.bin)**
-to program the external 128 Mb Quad Serial Peripheral Interface (SPI) flash memory in order to automatically load
+to program the external **128 Mb (16 MB) Quad Serial Peripheral Interface (SPI) Flash memory** in order to automatically load
 the FPGA configuration at power-up:
 
 ```
@@ -1027,7 +1053,13 @@ set_property CONFIG_MODE SPIx4                [current_design]
 
 <br />
 
-Once ready, open Vivado in graphical mode
+---
+<!-- horizontal divider -->
+
+<br />
+
+
+Once ready open Vivado in graphical mode
 
 ```
 % vivado -mode gui &                               (for Linux users)
@@ -1313,7 +1345,7 @@ you and available in the `.solutions/` directory:
 [**[Contents]**](#contents)
 
 In order to get the FPGA automatically programmed at power up you have to write the FPGA configuration into some dedicated
-**external flash memory**. The Digilent Arty board provides a **128 MB Quad SPI Flash memory** by Microsemi for this purpose.
+**external flash memory**. The Digilent Arty board provides a **128 Mb (16 MB) Quad SPI Flash memory** by Microsemi for this purpose.
 
 As a first step restart Vivado in graphic mode, then open a new _Hardware Manager_ session and finally "auto-connect"
 with the board to initialize the JTAG chain. You can also do this using the `install.tcl` Tcl script, simply
@@ -1482,7 +1514,7 @@ clean :
 > **IMPORTANT**
 >
 > As already discussed during lectures the `Makefile` syntax foresees that all instructions placed
-> inside each target implementation **MUST BE IDENTED USING A TAB CHARACTER !**
+> inside each target implementation **MUST BE INDENTED USING A TAB CHARACTER !**
 >
 > ```
 > target : [optional dependencies to run the target]
@@ -1490,7 +1522,7 @@ clean :
 > <TAB> @write here some cool stuff to be executed by typing 'make target' in the console
 > ```
 >
-> **DO NOT USE SPACES TO IDENT TARGET DIRECTIVES !**
+> **DO NOT USE SPACES TO INDENT TARGET DIRECTIVES !**
 >
 
 <br />

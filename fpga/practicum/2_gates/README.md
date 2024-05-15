@@ -473,20 +473,6 @@ prepared for you:
 
 <br />
 
-
-Vd
-
-
-
-Cosa mettere:
-
-- che il disegno e' facile ma da implementare non e' scontato => `dont_touch` synthesis pragmas
-
-- timing loops
-
-- automatizzare il flow per diversi valori di `NUM_INVERTERS`
-
-
 Before running the FPGA implementation flow modify with your preferred **text-editor**
 the project-setup script `setup.tcl` and update the values set for
 `projectName` and `toplModuleName` variables as follows:
@@ -570,58 +556,5 @@ that the oscillator is running or not.
 
 <br />
 
-
-$$
-f_{osc} \sim \dfrac{1}{N}
-$$
-
-In the proposed implementatio we have one additional propagation delay in the feedback loop
-due to the presence of the AND control gate.
-
-However we can assume that the AND and the inverters have comparable propagation delays.
-This is also a reasonable assumption since at end all cells are mapped to LUT primitives.
-
-$$
-f_{osc} \approx \dfrac{1}{2 t_p (N+1) } \sim \frac{1}{N+1}
-$$
-
-Given the large number of inverters in the chain we can also approximate $N + 1 approx N$.
-
-
-<br />
-<!--------------------------------------------------------------------->
-
-## Exercises
-[**[Contents]**](#contents)
-
-<br />
-
-**EXERCISE 1**
-
-Usare
-
-```
-`define NUM_INVERTERS 237 
-```
-
-and `NUM_INVERTERS
-
-al posto di un valore hard-coded.
-
-
-
-<br />
-
-**EXERCISE 2**
-
-Implementare un full-adder
-
-
-```
-assign Sum  =  ...
-assign Cout = ...
-```
-
-<br />
-<!--------------------------------------------------------------------->
+TBC
 

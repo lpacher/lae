@@ -285,13 +285,28 @@ functionality of the PLL. Measure at the oscilloscope the frequency of the MUX o
 >
 > **HINT**
 >
-> In order to display the PLL locking process it it recommended to trigger on the `pll_locked` signal and
-> set the oscilloscope acquisition mode to **RUN/STOP** with a time scale of a few tens <span>&#181;</span>s.
+> In order to "capture" the transition of the `pll_locked` signal from logic 0 to
+> logic 1 and observe the `pll_clk` output around this transition you have to
+> properly set **trigger options** of the oscilloscope you are working with in
+> order to use a _single-trigger_ or _single shot_ trigger mode.
 >
-> <br />
+> For this purpose open the **Trigger Menu** and switch the trigger-mode from **Auto** (default)
+> to **Normal**. Ensure that a positive-edge transition is used as
+> trigger condition. Finally select the channel used to display the
+> `pll_locked` Verilog output port for the trigger. Reset the PLL with the push-button.
 >
-> <img src="doc/pictures/oscilloscope1.png" alt="drawing" width="550"/>
+> In _Normal_ trigger mode in fact the trigger only occurs if the specified trigger
+> conditions are met, freezing the display after the trigger event.
+> In _Auto_ mode (default) a trigger is always forced instead, continuously updating
+> displayed waweforms.
 >
+> Do not forget to set the trigger mode back to _Auto_ once done.
+>
+
+<br />
+<img src="doc/pictures/oscilloscope1.png" alt="drawing" width="550"/>
+<br />
+
 
 <br />
 <!--------------------------------------------------------------------->
