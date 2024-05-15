@@ -875,12 +875,22 @@ To save time, copy from the `.solutions/` directory the `Inverter.v` source file
 
 <br />
 
-Create also a new `Inverter.xdc` file with your **text-editor** application:
+In order to map the Verilog code on real FPGA hardware you also need to write a **constraints file**
+using a **Xilinx Design Constraints (XDC) script**. Create therefore with your **text-editor** application
+a new source file named `Inverter.xdc` as follows:
 
 ```
 % gedit Inverter.xdc &   (for Linux users)
 
 % n++ Inverter.xdc       (for Windows users)
+```
+
+<br />
+
+Copy from the `.solutions/` directory the reference XDC file for the Arty board:
+
+```
+% cp .solutions/arty_all.xdc .
 ```
 
 <br />
@@ -891,6 +901,38 @@ In the following you can find additional information to help you in writing the 
 <br /><br />
 
 **PHYSICAL CONSTRAINTS (PORT MAPPING)**
+
+--- TODO
+As a first step you have to write **pin constraints** required to map `A` and `B` Verilog
+inputs to slide-witches **SWO** and **SW1** and to map `Z[0]` ... `Z[5]` Verilog outputs
+to general-purpose LEDs as in figure. Use the main `arty_all.xdc` as a reference
+for the syntax.
+
+```
+set_property -dict { PACKAGE_PIN <FPGA pin> IOSTANDARD LVCMOS33 } [get_ports <HDL port name> ]
+```
+
+<br />
+
+As already discussed in the introductory practicum each HDL top-level port
+needs both an FPGA physical pin name and the I/O voltage to be specified
+in the constraints file by setting `PACKAGE_PIN` and `IOSTANDARD` properties.
+
+The above syntax uses one single `set_property` statement to assign both 
+`PACKAGE_PIN` and `IOSTANDARD` in form of a "dictionary", that is a list
+of _(key,value)_ pairs.
+
+Alternatively you can set `PACKAGE_PIN` and `IOSTANDARD` properties
+using two independent statements targeting the same HDL top-level port:
+
+```
+set_property PACKAGE_PIN <FPGA pin> [get_ports <HDL port name> ]
+set_property IOSTANDARD LVCMOS33 [get_ports <HDL port name> ]
+```
+
+---
+
+<br />
 
 As an example, map the inverter input `X` to the `SW0` slide-switch, while assign the inverter output `ZN`
 to the general-purpose LED `LD4` available on the Digilent board as shown below.
@@ -922,6 +964,36 @@ set_property -dict { PACKAGE_PIN H5  IOSTANDARD LVCMOS33 } [get_ports ZN] ;  # L
 
 <br /><br />
 
+
+**TIMING CONSTRAINTS**
+
+Since this is a pure combinational circuit **timing constraints are relaxed**.
+That is, we can assume that after a certain **propagation delay** the output `ZN`
+settles to a **static logic value** by changing the corresponding inverter input `X`.
+
+For pure combinational **input-to-output (in2out) timing paths** you can
+define a **maximum delay constraint** between an input and an output using
+the `set_max_delay` constraint.
+
+As an example, you can constrain a max. 10 ns delay between input and output
+with the following syntax:
+
+```
+set_max_delay 10 -from [all_inputs] -to [all_outputs]
+```
+
+<br />
+
+You can also play with the delay value and verify the effect in Vivado **timing reports**.
+
+Alternatively you can also **disable all timing checks** with `set_false_path` as follows:
+
+```
+set_false_path -from [all_inputs] -to [all_outputs]
+```
+
+<br /><br />
+
 **ELECTRICAL CONSTRAINTS**
 
 Incorrect voltage supply for the configuration interfaces on board can result in configuration failure or device damage.
@@ -942,6 +1014,7 @@ Ref. also to:
 * _<https://www.xilinx.com/support/answers/55660.html>_
 * _<https://forums.xilinx.com/t5/Other-FPGA-Architecture/set-property-CFGBVS-set-property-CONFIG-VOLTAGE/td-p/782750>_
 
+<br />
 
 Optionally you can include the following additional XDC statements to **optimize the memory configuration file (.bin)**
 to program the external 128 Mb Quad Serial Peripheral Interface (SPI) flash memory in order to automatically load
@@ -950,34 +1023,6 @@ the FPGA configuration at power-up:
 ```
 set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 4  [current_design]
 set_property CONFIG_MODE SPIx4                [current_design]
-```
-
-
-<br /><br />
-
-
-**TIMING CONSTRAINTS**
-
-Our first digital circuit is a pure combinational block, therefore **timing** is not of primary importance.
-That is, we can assume that after a certain **propagation delay** the output `ZN` settles to a **static logic value**
-by changing the corresponding inverter input `X`.
-
-For pure combinational timing paths you can define a **maximum delay constraint** between an input
-and an output using the `set_max_delay` constraint. As an example, you can constrain a max. 10 ns delay between
-input and output with the following syntax:
-
-```
-set_max_delay 10 -from [all_inputs] -to [all_outputs]
-```
-
-<br />
-
-You can also play with the delay value and verify the effect in Vivado **timing reports**.
-
-Alternatively you can also **disable all timing checks** with `set_false_path` as follows:
-
-```
-set_false_path -from [all_inputs] -to [all_outputs]
 ```
 
 <br />

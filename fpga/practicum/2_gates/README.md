@@ -10,7 +10,8 @@
 * [**Map and debug fundamental logic gates**](#map-and-debug-fundamental-logic-gates)
 * [**Run FPGA implementation and programming flows from Makefile**](#run-fpga-implementation-and-programming-flows-from-makefile)
 * [**Restore a design checkpoint in Vivado**](#restore-a-design-checkpoint-in-vivado)
-* [**Implement a parameterized ring oscillator**](#implement-a-parameterized-ring-oscillator)
+* [**Implement a parameterized ring-oscillator**](#implement-a-parameterized-ring-oscillator)
+* [**Exercises**](#exercises)
 
 
 <br />
@@ -46,6 +47,7 @@ This practicum should exercise the following concepts:
 * implement a ring-oscillator circuit on real FPGA hardware
 * introduce the usage of _synthesis pragmas_ in RTL
 * identify and fix timing-loop issues in combinational circuits
+* review and understand the differece between _Auto_ and _Normal_ trigger modes at the oscilloscope
 * debug termination issues
 
 <br />
@@ -134,16 +136,40 @@ Copy from the `.solutions/` directory the reference XDC file for the Arty board:
 Try to **write yourself design constraints** required to implement the design on the actual board.
 In the following you can find useful information to help you in writing the code.
 
-<br /><br />
+<br />
+
+<!-- horizontal divider -->
+---
+
+<br />
 
 **PHYSICAL CONSTRAINTS (PORT MAPPING)**
 
-As a first step you have to write **pin constraints** required to map `A` and `B` Verilog inputs to slide-witches
-**SWO** and **SW1** and to map `Z[0]` ... `Z[5]` Verilog outputs to general-purpose LEDs as in figure.
-Use the main `arty_all.xdc` as a reference for the syntax.
+As a first step you have to write **pin constraints** required to map `A` and `B` Verilog
+inputs to slide-witches **SWO** and **SW1** and to map `Z[0]` ... `Z[5]` Verilog outputs
+to general-purpose LEDs as in figure. Use the main `arty_all.xdc` as a reference
+for the syntax.
 
 ```
-set_property -dict { PACKAGE_PIN ... IOSTANDARD LVCMOS33 } [get_ports ... ]
+set_property -dict { PACKAGE_PIN <FPGA pin> IOSTANDARD LVCMOS33 } [get_ports <HDL port name> ]
+```
+
+<br />
+
+As already discussed in the introductory practicum each HDL top-level port
+needs both an FPGA physical pin name and the I/O voltage to be specified
+in the constraints file by setting `PACKAGE_PIN` and `IOSTANDARD` properties.
+
+The above syntax uses one single `set_property` statement to assign both 
+`PACKAGE_PIN` and `IOSTANDARD` in form of a "dictionary", that is a list
+of _(key,value)_ pairs.
+
+Alternatively you can set `PACKAGE_PIN` and `IOSTANDARD` properties
+using two independent statements targeting the same HDL top-level port:
+
+```
+set_property PACKAGE_PIN <FPGA pin> [get_ports <HDL port name> ]
+set_property IOSTANDARD LVCMOS33 [get_ports <HDL port name> ]
 ```
 
 <br />
@@ -152,9 +178,12 @@ set_property -dict { PACKAGE_PIN ... IOSTANDARD LVCMOS33 } [get_ports ... ]
 > **IMPORTANT**
 >
 > Since everything in Tcl at the end is considered a string you need a way to **evaluate** Tcl commands.
-> Square brackets `[ ]` in Tcl are used for this purpose to indicate "command evaluation".
-> Of course this introduces issues when working with **signal buses** in Verilog that also use `[ ]` to
-> access bus items.
+> Square brackets `[ ]` are used for this purpose to indicate "command evaluation".
+> As you might expect this introduces issues when working with **signal buses** in Verilog
+> that also use `[ ]` to access bus items. This happens also if you use `std_logic_vector`
+> ports in VHDL, because
+> square brackets are used in XDC to access bus items despite the chosen HDL language used
+> for the top-level module.
 >
 > Usually in the XDC file we use `get_ports` to map top-level RTL ports into physical FPGA pins,
 > however in case of HDL signals declared as buses we have to prevent `[ ]` to be used for command evaluation.
@@ -216,13 +245,18 @@ set_property CONFIG_VOLTAGE 3.3 [current_design]
 <br />
 
 Optionally you can include the following additional XDC statements to **optimize the memory configuration file (.bin)**
-to program the external 128 Mb Quad Serial Peripheral Interface (SPI) flash memory in order to automatically load
+to program the external 128 MB Quad Serial Peripheral Interface (SPI) flash memory in order to automatically load
 the FPGA configuration at power-up:
 
 ```
 set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 4  [current_design]
 set_property CONFIG_MODE SPIx4                [current_design]
 ```
+
+<br />
+
+---
+<!-- horizontal divider -->
 
 <br />
 
@@ -409,18 +443,131 @@ to the ring-oscillator implementation.
 <!--------------------------------------------------------------------->
 
 
-## Implement a parameterized ring oscillator
+## Implement a parameterized ring-oscillator
 [**[Contents]**](#contents)
 
-<br />
+The second circuit that you are going to map and debug on real FPGA hardware
+in this practicum is a parameterized ring-oscillator as shown in figure.
 
+<br />
 <img src="doc/pictures/RingOscillatorFPGA.png" alt="drawing" width="2000"/>
+<br />
+
+The circuit uses an AND-gate into the feedback loop to enable/disable the
+output toggle, thus requiring an **odd number of inverters** in the chain
+to oscillate. A simpler version of this design as been already discussed
+and simulated  in `lab2` using a reduced and fixed number of inverters.
+
+Despite its apparent simplicity a ring-oscillator circuit offers a first
+example of a **non-trivial implementation** requiring **special synthesis directives**
+and **special timing constraints** in order to properly map the RTL code
+on real FPGA hardware.
+
+As a first step copy from the `.solutions/` directory both Verilog and XDC sources already
+prepared for you:
+
+```
+% cp .solutions/RingOscillator.v .
+% cp .solutions/RingOscillator.xdc .
+```
 
 <br />
 
+
+Vd
+
+
+
+Cosa mettere:
+
+- che il disegno e' facile ma da implementare non e' scontato => `dont_touch` synthesis pragmas
+
+- timing loops
+
+- automatizzare il flow per diversi valori di `NUM_INVERTERS`
+
+
+Before running the FPGA implementation flow modify with your preferred **text-editor**
+the project-setup script `setup.tcl` and update the values set for
+`projectName` and `toplModuleName` variables as follows:
+
+```
+#set projectName {Gates}
+set projectName {RingOscillator}
+
+...
+
+#set topModuleName {Gates}
+set topModuleName {RingOscillator}
+```
+
+<br />
+
+Save the file after modifications. Once ready launch the flow at the command line with:
+
+```
+% make clean
+% make build
+```
+
+<br />
+
+After the implementation has successfully completed install the firmware to the FPGA board
+with:
+
+```
+% make install
+```
+
+<br />
+
+Verify the functionality of the ring-oscillator you have mapped on real hardware.
+Use the **SW0** slide-switch assigned to the `start` Verilog input port
+to enable/disable the oscillator and probe the `clk` signal at the oscilloscope.
+Verify that the **LD4** general-purpose standard LED properly turns on/off to indicate
+that the oscillator is running or not.
+
+<br />
+
+>
+> **HINT**
+>
+> In order to "capture" the transition of the `start` signal from logic 0 to
+> logic 1 and observe the `clk` output starting oscillating you have to properly set
+> **trigger options** of the oscilloscope you are working with in order to
+> use a _single-trigger_ or _single shot_ trigger mode.
+>
+> Disable the ring-oscillator by setting `start` to 0 with the slide-switch
+> and ensure that the status-led turns off.
+> Then open the **Trigger Menu** and switch the trigger-mode from **Auto** (default)
+> to **Normal**. Ensure that a positive-edge transition is used as
+> trigger condition. Finally select the channel used to display the
+> `probe` Verilog output port for the trigger and enable the ring-oscillator.
+>
+> In _Normal_ trigger mode in fact the trigger only occurs if the specified trigger
+> conditions are met, freezing the display after the trigger event.
+> In _Auto_ mode (default) a trigger is always forced instead, continuously updating
+> displayed waweforms.
+>
+> Do not forget to set the trigger mode back to _Auto_ once done.
+>
+
+<br />
 
 <br />
 <img src="doc/pictures/RingOscillatorOscilloscope.png" alt="drawing" width="650"/>
+<br />
+
+<br />
+
+>
+> **QUESTION**
+>
+> Which is the frequency of the resulting clock waveformn ?
+>
+>   \____________________________________________________________________________________________________
+>
+
 <br />
 
 
@@ -428,5 +575,53 @@ $$
 f_{osc} \sim \dfrac{1}{N}
 $$
 
+In the proposed implementatio we have one additional propagation delay in the feedback loop
+due to the presence of the AND control gate.
+
+However we can assume that the AND and the inverters have comparable propagation delays.
+This is also a reasonable assumption since at end all cells are mapped to LUT primitives.
+
+$$
+f_{osc} \approx \dfrac{1}{2 t_p (N+1) } \sim \frac{1}{N+1}
+$$
+
+Given the large number of inverters in the chain we can also approximate $N + 1 approx N$.
+
+
 <br />
 <!--------------------------------------------------------------------->
+
+## Exercises
+[**[Contents]**](#contents)
+
+<br />
+
+**EXERCISE 1**
+
+Usare
+
+```
+`define NUM_INVERTERS 237 
+```
+
+and `NUM_INVERTERS
+
+al posto di un valore hard-coded.
+
+
+
+<br />
+
+**EXERCISE 2**
+
+Implementare un full-adder
+
+
+```
+assign Sum  =  ...
+assign Cout = ...
+```
+
+<br />
+<!--------------------------------------------------------------------->
+
