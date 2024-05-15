@@ -39,7 +39,7 @@ module RingOscillator (
    (* dont_touch = "yes" *) wire [NUM_INVERTERS:0] w ;
 
    // start/stop AND gate
-   and en_and (w[0], w[NUM_INVERTERS], start) ;
+   and AND_INST (w[0], w[NUM_INVERTERS], start) ;
 
    // inverters chain
    generate 
@@ -48,7 +48,7 @@ module RingOscillator (
 
       for(k=0; k < NUM_INVERTERS; k=k+1) begin
 
-         (* dont_touch = "yes" *) not inv (w[k+1], w[k]) ;
+         (* dont_touch = "yes" *) not NOT_INST (w[k+1], w[k]) ;
    
       end  //for
    endgenerate

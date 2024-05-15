@@ -21,15 +21,19 @@
 ## Introduction
 [**[Contents]**](#contents)
 
-In this practicum you are going to implement and debug fundamental **logic gates** such
-as AND, NAND, OR, NOR, XOR and XNOR as already discussed in `lab2` and `lab5`.
-For this purpose you will use simple **slide switches** and **general-purpose LEDs** available
-on the _Digilent Arty Board_.
+<p align="justify">
+In this practicum you are going to implement and debug fundamental <b>logic gates</b> such
+as AND, NAND, OR, NOR, XOR and XNOR as already discussed in <code>lab2</code> and <code>lab5</code>.
+For this purpose you will use simple <b>slide switches</b> and <b>general-purpose LEDs</b>
+available on the <i>Digilent Arty Board</i>.
+</p>
 
-Additionally you will implement and verify a **parameterized ring-oscillator** circuit.
+<p align="justify">
+Additionally you will implement and verify a <b>parameterized ring-oscillator</b> circuit.
 Despite the circuit is pretty simple to be coded in Verilog you will need
-additional `dont_touch` **synthesis directives** and **special timing constraints** in order
-to properly map the RTL code on real FPGA hardware.
+additional <code>dont_touch</code> <b>synthesis directives</b> and <b>special timing constraints</b>
+in order to properly map the RTL code on real FPGA hardware.
+</p>
 
 <br />
 <!--------------------------------------------------------------------->
@@ -59,18 +63,20 @@ This practicum should exercise the following concepts:
 
 As a first step, open a **terminal** window and change to the practicum directory:
 
-```
+<pre>
 % cd Desktop/lae/fpga/practicum/2_gates
-```
+</pre>
 
 <br />
 
 List the content of the directory:
 
-```
+
+<pre><code>
 % ls -l
 % ls -l .solutions
-```
+</code></pre>
+
 
 <br />
 <!--------------------------------------------------------------------->
@@ -85,20 +91,23 @@ The circuit that you are going to implement and debug is shown in figure.
 
 <img src="doc/pictures/GatesFPGA.png" alt="drawing" width="850"/>
 
-
 <br />
 
->
-> **NOTE**
->
-> As you can inspect from board schematics general-purpose **RGB LEDs** are connected to the main 5V supply
-> voltage through inverters implemented with BJT transistors, while general-purpose **standard LEDs** simply
-> connect to ground with 330 $\Omega$ series limiting resistors. 
->
-> The circuit schematic depicted in figure is therefore a simplified reference circuit diagram. 
->
-> ![](./doc/pictures/LEDs_schematic.png)
->
+<blockquote><b>NOTE</b>
+
+<p align="justify">
+As you can inspect from board schematics general-purpose <b>RGB LEDs</b> are connected to the main 5V supply
+voltage through inverters implemented with BJT transistors, while general-purpose <b>standard LEDs</b> simply
+connect to ground with 330 $\Omega$ series limiting resistors.
+</p>
+
+<p align="justify">
+The circuit schematic depicted in figure is therefore a simplified reference circuit diagram. 
+</p>
+
+![](./doc/pictures/LEDs_schematic.png)
+
+</blockquote>
 
 <br />
 
@@ -174,36 +183,45 @@ set_property IOSTANDARD LVCMOS33 [get_ports <HDL port name> ]
 
 <br />
 
->
-> **IMPORTANT**
->
-> Since everything in Tcl at the end is considered a string you need a way to **evaluate** Tcl commands.
-> Square brackets `[ ]` are used for this purpose to indicate "command evaluation".
-> As you might expect this introduces issues when working with **signal buses** in Verilog
-> that also use `[ ]` to access bus items. This happens also if you use `std_logic_vector`
-> ports in VHDL, because
-> square brackets are used in XDC to access bus items despite the chosen HDL language used
-> for the top-level module.
->
-> Usually in the XDC file we use `get_ports` to map top-level RTL ports into physical FPGA pins,
-> however in case of HDL signals declared as buses we have to prevent `[ ]` to be used for command evaluation.
-> This is done by **adding curly brackets** `{ }` around the signal name.
->
-> As an example,
->
-> ```
-> get_ports Z[0]
-> ```
->
-> <br />
->
-> would rise an error, because `[0]` for Tcl means "evaluate" what is between `[` and `]` (nothing in this case).
-> The following command works fine instead, because curly brackets `{ }` means "this is just a string":
->
-> ```
-> get_ports {Z[0]}
-> ```
->
+<blockquote>
+
+<p><b>IMPORTANT</b></p>
+
+<p align="justify">
+Since everything in Tcl at the end is considered a string you need a way to </b>evaluate</b> Tcl commands.
+Square brackets <code>[ ]</code> are used for this purpose to indicate "command evaluation".
+As you might expect this introduces issues when working with <b>signal buses</b> in Verilog
+that also use <code>[ ]</code> to access bus items. This happens also if you use <code>std_logic_vector</code>
+ports in VHDL, because square brackets are used in XDC to access bus items despite the chosen HDL language used
+for the top-level module.
+</p>
+
+<p align="justify">
+Usually in the XDC file we use <code>get_ports</code> to map top-level RTL ports into physical FPGA pins,
+however in case of HDL signals declared as buses we have to prevent <code>[ ]</code> to be used for command
+evaluation. This is done by <b>adding curly brackets</b> <code>{ }</code> around the signal name.
+</p>
+
+As an example,
+
+```
+get_ports Z[0]
+```
+
+<br />
+
+<p align="justify">
+would rise an error, because <code>[0]</code> for Tcl means "evaluate" what is between <code>[</code>
+and <code>]</code> (nothing in this case).
+The following command works fine instead, because curly brackets <code>{ }</code> means "this is just a string":
+</p>
+
+```
+get_ports {Z[0]}
+```
+
+</blockquote>
+
 
 <br /><br />
 
@@ -446,32 +464,111 @@ to the ring-oscillator implementation.
 ## Implement a parameterized ring-oscillator
 [**[Contents]**](#contents)
 
-The second circuit that you are going to map and debug on real FPGA hardware
-in this practicum is a parameterized ring-oscillator as shown in figure.
+<p align="justify">
+The second circuit that you are going to map and debug to the <i>Arty</i> board
+in this practicum is a parameterized <b>ring-oscillator</b> as shown in figure.
+</p>
 
 <br />
 <img src="doc/pictures/RingOscillatorFPGA.png" alt="drawing" width="2000"/>
 <br />
 
-The circuit uses an AND-gate into the feedback loop to enable/disable the
-output toggle, thus requiring an **odd number of inverters** in the chain
+<p align="justify">
+The proposed circuit uses an AND-gate into the feedback loop to enable/disable the
+output toggle, thus requiring an <b>odd number of inverters</b> in the chain
 to oscillate. A simpler version of this design as been already discussed
-and simulated  in `lab2` using a reduced and fixed number of inverters.
+and simulated  in <code>lab2</code> using a reduced and fixed number of inverters.
+</p>
 
-Despite its apparent simplicity a ring-oscillator circuit offers a first
-example of a **non-trivial implementation** requiring **special synthesis directives**
-and **special timing constraints** in order to properly map the RTL code
-on real FPGA hardware.
+<p align="justify">
+Despite its apparent simplicity a ring-oscillator offers a first example of a <b>non-trivial implementation</b>
+requiring both <b>special synthesis directives</b> and <b>special timing constraints</b> in order to properly
+implement this circuit on real FPGA hardware.
+</p>
 
-As a first step copy from the `.solutions/` directory both Verilog and XDC sources already
-prepared for you:
 
-```
+<p align="justify">
+Copy from the <code>.solutions/</code> directory both Verilog and XDC files already prepared for you:
+</p>
+
+<pre>
 % cp .solutions/RingOscillator.v .
 % cp .solutions/RingOscillator.xdc .
-```
+</pre>
 
 <br />
+
+<p align="justify">
+Inspect yourself the proposed code with your preferred <b>text-editor</b> application and review
+most important syntax features, new constructs and special statements summarized below.
+</p>
+
+<br />
+
+<p>
+<b>RTL IMPLEMENTATION AND SYNTHESIS PRAGMAS</b>
+</p>
+
+<p align="justify">
+In order to easily change the <b>number of inverters</b> in the ring-oscillator chain
+(and therefore the <b>frequency</b> of the <code>clk</code> output toggle) the module
+uses <code>NUM_INVERTERS</code> declared as a <code>parameter</code>.
+A Verilog <code>generate</code> <b>for-loop</b> is then used to automatically replicate
+and interconnect the chosen number of inverters.
+</p>
+
+<br />
+
+<p align="justify">
+Most important, you should have noticed the usage of the following <b>non-Verilog syntax</b>
+in the code:
+</p>
+
+<pre>
+(* dont_touch = "yes" *) wire [NUM_INVERTERS:0] w ;
+
+...
+...
+
+(* dont_touch = "yes" *) not inv (w[k+1], w[k]) ;
+</pre>
+
+<br />
+ 
+<p align="justify">
+This is a first example of so called <b>synthesis pragmas</b>, also referred to as <b>synthesis attributes</b>
+or <b>synthesis directives</b>.
+Synthesis pragmas are tool-specific <b>extra comment-like HDL statements</b> (ignored by the compiler when you run the
+simulation flow) to "guide" the synthesis tool in generating the desired hardware.
+</p>
+
+<p align="justify">
+When you run the FPGA implementation flow the <b>synthesis engine</b> translates the RTL code
+into FPGA primitives. During this process the tool also performs several <b>optimizations</b>
+to obtain best <b>timing</b>, <b>power</b> and <b>area</b> <b>quality-of-results (QoR)</b>.
+</p>
+
+<p align="justify">
+A ring oscillator needs $N = 2k +1$ (even number) inverters to oscillate. However if you cascade $2 k$ (odd number)
+inverters the resulting <b>logic</b> combinational function is a simple identity and the synthesis tool properly
+recognizes this. As a result from a design-optimization point of view there is no reason for the synthesis engine
+to keep $2 k$ un-necessary inverters out of $2k + 1$ and after its logic optimization the initial circuit
+would reduce to a simple AND gate plus an inverter connected in feedback, or equivalently one single NAND gate
+connected in feedback.
+</p>
+
+
+<br />
+
+<p>
+<b>DESIGN CONSTRAINTS</b>
+</p>
+
+
+
+- timing loops
+
+
 
 Before running the FPGA implementation flow modify with your preferred **text-editor**
 the project-setup script `setup.tcl` and update the values set for
@@ -515,46 +612,105 @@ that the oscillator is running or not.
 
 <br />
 
->
-> **HINT**
->
-> In order to "capture" the transition of the `start` signal from logic 0 to
-> logic 1 and observe the `clk` output starting oscillating you have to properly set
-> **trigger options** of the oscilloscope you are working with in order to
-> use a _single-trigger_ or _single shot_ trigger mode.
->
-> Disable the ring-oscillator by setting `start` to 0 with the slide-switch
-> and ensure that the status-led turns off.
-> Then open the **Trigger Menu** and switch the trigger-mode from **Auto** (default)
-> to **Normal**. Ensure that a positive-edge transition is used as
-> trigger condition. Finally select the channel used to display the
-> `probe` Verilog output port for the trigger and enable the ring-oscillator.
->
-> In _Normal_ trigger mode in fact the trigger only occurs if the specified trigger
-> conditions are met, freezing the display after the trigger event.
-> In _Auto_ mode (default) a trigger is always forced instead, continuously updating
-> displayed waweforms.
->
-> Do not forget to set the trigger mode back to _Auto_ once done.
->
+<blockquote>
+
+<p><b>HINT</b></p>
+
+<p align="justify">
+In order to "capture" the transition of the <code>start</code> signal from logic 0 to
+logic 1 and observe the <code>clk</code> output starting oscillating you have to properly set
+<b>trigger options</b> of the oscilloscope you are working with in order to
+use a <i>single-trigger</i> or <i>single shot</i> trigger mode.
+</p>
+
+<p align="justify">
+Disable the ring-oscillator by setting <code>start</code> to 0 with the slide-switch
+and ensure that the status-led turns off.
+Then open the <b>Trigger Menu</b> and switch the trigger-mode from <b>Auto</b> (default)
+to <b>Normal</b>. Ensure that a positive-edge transition is used as
+trigger condition. Finally select the channel used to display the
+<code>probe</code> Verilog output port for the trigger and enable the ring-oscillator.
+</p>
+
+<p align="justify">
+In <i>Normal</i> trigger mode in fact the trigger only occurs if the specified trigger
+conditions are met, freezing the display after the trigger event.
+In <i>Auto</i> mode (default) a trigger is always forced instead, continuously updating
+displayed waveforms.
+</p>
+
+<p align="justify">
+Do not forget to set the trigger mode back to <i>Auto</i> once done.
+</p>
+
+</blockquote>
 
 <br />
 
-<br />
-<img src="doc/pictures/RingOscillatorOscilloscope.png" alt="drawing" width="650"/>
-<br />
+<br /><img src="doc/pictures/RingOscillatorOscilloscope.png" alt="drawing" width="650"/><br /><br />
+
+
+<blockquote>
+<p><b>QUESTION</b><p>
+<p>Which is the frequency of the resulting clock waveform ?</p>
+<p>____________________________________________________________________________________________________</p>
+</blockquote>
+
 
 <br />
 
->
-> **QUESTION**
->
-> Which is the frequency of the resulting clock waveformn ?
->
->   \____________________________________________________________________________________________________
->
+
+$$
+f_{osc} \sim \dfrac{1}{N}
+$$
+
+In the proposed implementatio we have one additional propagation delay in the feedback loop
+due to the presence of the AND control gate.
+
+However we can assume that the AND and the inverters have comparable propagation delays.
+This is also a reasonable assumption since at end all cells are mapped to LUT primitives.
+
+$$
+f_{osc} \approx \dfrac{1}{2 t_p (N+1) } \sim \frac{1}{N+1}
+$$
+
+Given the large number of inverters in the chain we can also approximate $N + 1 approx N$.
+
+
+<br />
+<!--------------------------------------------------------------------->
+
+## Exercises
+[**[Contents]**](#contents)
 
 <br />
 
-TBC
+**EXERCISE 1**
+
+Usare
+
+```
+`define NUM_INVERTERS 237 
+```
+
+and `NUM_INVERTERS
+
+al posto di un valore hard-coded.
+
+
+
+<br />
+
+**EXERCISE 2**
+
+Implementare un full-adder
+
+
+```
+assign Sum  =  ...
+assign Cout = ...
+```
+
+<br />
+<!--------------------------------------------------------------------->
 
