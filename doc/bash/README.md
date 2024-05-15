@@ -13,8 +13,17 @@ See also:
 * _<https://maker.pro/linux/tutorial/basic-linux-commands-for-beginners>_
 * _<https://www.guru99.com/must-know-linux-commands.html>_
 
+<br />
+
+If you want to have all most important Linux shell commands listed into a single page
+don't miss the
+[**Linux Command Line Cheat Sheat**](https://appletree.or.kr/quick_reference_cards/unix-linux/Linux%20Command%20Line%20Cheat%20Sheet.pdf)
+by DaveChild:
+
+_<https://cheatography.com/davechild/cheat-sheets/linux-command-line>_
 
 <br />
+<!--------------------------------------------------------------------->
 
 ## Jargon terms
 
@@ -32,6 +41,7 @@ See also:
 * _<https://askubuntu.com/questions/506510/what-is-the-difference-between-terminal-console-shell-and-command-line>_
 
 <br />
+<!--------------------------------------------------------------------->
 
 
 **PROMPT**
@@ -68,6 +78,8 @@ command line applications:
 >
 
 <br />
+<!--------------------------------------------------------------------->
+
 
 **STANDARD OUTPUT (stdout)**
 
@@ -76,6 +88,8 @@ the "standard output" (stdout). If a command generates errors this information g
 
 
 <br />
+<!--------------------------------------------------------------------->
+
 
 **TAB COMPLETION**
 
@@ -102,6 +116,7 @@ Example:
 >
 
 <br />
+<!--------------------------------------------------------------------->
 
 
 **SEARCH PATH**
@@ -138,6 +153,8 @@ If a command exists but is not found then you have to **extend the search path**
 variable in order to include also the directory containing the executable that you want to run.
 
 <br />
+<!--------------------------------------------------------------------->
+
 
 **HOME DIRECTORY**
 
@@ -170,7 +187,6 @@ and `USERPROFILE` on Windows:
 > In Linux the home directory is also identified by tilde character `~`, however this syntax doesn't work natively
 > in the Windows _Command Prompt_. You can use `~` on Windows only if you start a `bash` session.
 >
-<br />
 
 <br />
 <!--------------------------------------------------------------------->
@@ -462,6 +478,7 @@ You can also use the `echo` command along with the `>` redirection operator:
 > If `filename` already exists the `touch` command simply changes the time of the last access/modification to the file. 
 > Be aware that the above `echo` command **deletes** the entire content of `filename` if the file already exists!
 >
+
 <br />
 <!--------------------------------------------------------------------->
 

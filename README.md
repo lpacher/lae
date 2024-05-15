@@ -165,7 +165,8 @@ to help students to setup a suitable development environment for both Linux and 
 > **NOTE**
 >
 > The number of Linux shell commands used through the course is very small indeed.
-> If you are unfamiliar to work with the Linux command line a complete list of basic commands used in the course can be reviewed [**here**](doc/bash/README.md).
+> If you are unfamiliar to work with the Linux command line a complete list of basic commands used in the course
+> can be reviewed [**here**](doc/bash/README.md).
 >
 > An endless number of online tutorials and examples is available otherwise, just search for "Linux basic commands" or similar.<br />
 > As an example:
@@ -176,6 +177,13 @@ to help students to setup a suitable development environment for both Linux and 
 > * _<https://www.hostinger.com/tutorials/linux-commands>_
 > * _<https://maker.pro/linux/tutorial/basic-linux-commands-for-beginners>_
 > * _<https://www.guru99.com/must-know-linux-commands.html>_
+>
+> If you want to have all most important Linux shell commands listed into a single page
+> don't miss the
+> [**Linux Command Line Cheat Sheat**](https://appletree.or.kr/quick_reference_cards/unix-linux/Linux%20Command%20Line%20Cheat%20Sheet.pdf)
+> by DaveChild:
+>
+> _<https://cheatography.com/davechild/cheat-sheets/linux-command-line>_
 >
 
 <br />
