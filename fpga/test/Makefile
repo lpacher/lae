@@ -188,6 +188,11 @@ MKDIR := mkdir -p -v
 ##   Xilinx Vivado settings   ##
 ################################
 
+## installation check
+ifeq ($(shell which vivado 2> /dev/null),)
+   @$(error No 'vivado' executable found in searech path! Force an exit now...)
+endif
+
 ##
 ## **NOTE
 ##
@@ -546,8 +551,8 @@ endif
 ##____________________________________________________________________________________________________
 
 
-.PHONY : install_flash
-install_flash : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/install/install_flash.tcl ## Program external Quad SPI Flash memory with FPGA configuration
+.PHONY : install/flash
+install/flash : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/install/install_flash.tcl ## Program external Quad SPI Flash memory with FPGA configuration
 
 ifeq ($(mode),gui)
 

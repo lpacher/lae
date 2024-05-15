@@ -1,4 +1,6 @@
 
+<!-- TODO: add k-Maps solution ... -->
+
 # Practicum 3
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/practicum)]
 

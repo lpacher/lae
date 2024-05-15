@@ -183,7 +183,7 @@ MKDIR := mkdir -p -v
 ## installation check
 ifeq ($(shell which vivado 2> /dev/null),)
    @$(error ERROR: No 'vivado' executable found in search path! Force an exit now...)
-endif 
+endif
 
 ##
 ## **NOTE
