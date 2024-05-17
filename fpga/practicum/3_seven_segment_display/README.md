@@ -134,8 +134,13 @@ As an example, the main `module` declaration could be the following:
 ```verilog
 module SevenSegmentDecoder (
 
+   // BDC input code
    input wire [3:0] BCD,
 
+   // **DEBUG: display BCD binary values to general-purpose LEDs
+   output wire [3:0] LED,
+
+   // 7-segment display control pins
    output wire DP,
    output ... segA,
    output ... segB,
@@ -144,6 +149,8 @@ module SevenSegmentDecoder (
    output ... segE,
    output ... segF,
    output ... segG ) ;
+
+   assign LED = BCD ;
 
    assign DP = 1'b0 ;
 

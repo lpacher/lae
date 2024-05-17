@@ -28,10 +28,12 @@ module SevenSegmentDecoder (
    output wire segF,
    output wire segG,
 
-   output wire [3:0] LED   // optionally, display the BCD binary value on standard LEDs
+   output wire [3:0] LED   // optionally, display the BCD binary value on general-purpose standard LEDs
 
    ) ;
 
+
+   //**DEBUG: display the BCD binary value on general-purpose standard LEDs
    assign LED = BCD ;
 
 
