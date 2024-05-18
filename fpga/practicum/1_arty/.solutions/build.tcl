@@ -14,6 +14,26 @@
 #
 ###########################################################################
 
+##
+## **IMPORTANT
+##
+## By default Vivado only outputs to the console (stdout) the log file for
+## those jobs that are explicitly "waited on" with the 'wait_on_run' command.
+##
+## That is, you can certainly run the full flow in batch mode using a Project
+## Mode Tcl script with a "single click" equivalent 
+##
+##    launch_runs impl_1 -to write_bitstream
+##
+## HOWEVER Vivado will launch the flow in background and then it will exit
+## without tracing what's happening (the contents of the log files) in the
+## console. 
+##
+## In order to get both synthesis and implementation jobs logged and traced
+## in the console we have to at first launch the job with 'launch_run' and
+## then to "wait" on the run with the 'wait_on_run' command.
+##
+
 
 ## create new Vivado project targeting the Artix-7 A35T device mounted on Digilent Arty/Arty A7 boards
 create_project -verbose -force -part xc7a35ticsg324-1L Inverter
