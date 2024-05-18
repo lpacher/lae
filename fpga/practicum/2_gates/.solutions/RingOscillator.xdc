@@ -34,7 +34,7 @@ set_property -dict { PACKAGE_PIN A8  IOSTANDARD LVCMOS33 } [get_ports start] ;  
 set_property -dict { PACKAGE_PIN H5  IOSTANDARD LVCMOS33 } [get_ports led]   ;  # LD4
 
 ## auxiliary output to display 'start' also at the oscilloscope
-set_property -dict { PACKAGE_PIN F5  IOSTANDARD LVCMOS33 } [get_ports probe] ;  # A0 (chipKIT header)
+set_property -dict { PACKAGE_PIN F5  IOSTANDARD LVCMOS33 } [get_ports start_probe] ;  # A0 (chipKIT header)
 
 ## ring oscillator output
 #set_property PACKAGE_PIN G13 [get_ports clk] ;   # JA1 - 200 ohm series resistance
@@ -56,8 +56,8 @@ set_false_path -from [all_inputs] -to [all_outputs]
 ##   exceptions   ##
 ####################
 
-set_property DONT_TOUCH TRUE [get_nets w* ]
-set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets w* ]
+#set_property DONT_TOUCH TRUE [get_nets w* ]
+#set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets w* ]
 
 
 ################################

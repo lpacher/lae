@@ -27,7 +27,7 @@ module RingOscillator (
 
    // **DEBUG
    output wire led,
-   output wire probe
+   output wire start_probe
 
    ) ;
 
@@ -59,7 +59,7 @@ module RingOscillator (
    assign led = start ;
 
    // **DEBUG: probe 'start' at the oscilloscope
-   assign probe = start ;
+   assign start_probe = start ;
 
 endmodule
 
