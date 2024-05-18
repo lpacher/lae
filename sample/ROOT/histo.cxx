@@ -3,14 +3,14 @@
 // Command line usage:
 //
 //   % cd Desktop/lae
-//   % root sample/histo.cxx
+//   % root sample/ROOT/histo.cxx
 //
 // You can also start an interactive ROOT session and then execute
 // the script at the ROOT command prompt:
 //
 //   % cd Desktop/lae
 //   % root
-//   root[] .x sample/histo.cxx
+//   root[] .x sample/ROOT/histo.cxx
 //
 // Luca Pacher - pacher@to.infn.it
 // Spring 2020
