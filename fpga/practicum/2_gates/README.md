@@ -825,7 +825,7 @@ As an example:
 
 The overall procedure can be summarized as follows:
 
-* stop the ring-oscillator on the _Arty_ board
+* **stop** the ring-oscillator on the _Arty_ board
 * change `NUM_INVERTERS` in the `RingOscillator.v` Verilog code
 * save the modified Verilog file after your changes
 * cleanup the working area (`make clean`)
@@ -840,10 +840,10 @@ The overall procedure can be summarized as follows:
 >
 > **IMPORTANT**
 >
-> After each measurement **disable the ring-oscillator** by setting `start` to logic 0 with the corresponding slide
+> After each measurement **stop the ring-oscillator** by setting `start` to logic 0 with the corresponding slide
 > switch and ensure that the status led turns-off. At the end of the `make install` flow restart the oscillator.
-> If you don't restart the oscillator whenever a new firmware is installed the output toggle seen at the oscilloscope
-> remains corrupted!
+> If you don't stop/restart the oscillator whenever a new firmware is installed the output toggle seen at the
+> oscilloscope might be not properly updated!
 >
 
 <br />
