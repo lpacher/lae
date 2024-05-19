@@ -828,6 +828,7 @@ The overall procedure can be summarized as follows:
 * stop the ring-oscillator on the _Arty_ board
 * change `NUM_INVERTERS` in the `RingOscillator.v` Verilog code
 * save the modified Verilog file after your changes
+* cleanup the working area (`make clean`)
 * generate the bitstream (`make build`)
 * install the firmware (`make install`)
 * enable the ring-oscillator
