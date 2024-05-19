@@ -1,3 +1,4 @@
+<div align="justify">
 
 # Practicum 1
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/practicum)]
@@ -1504,8 +1505,8 @@ install : install.tcl
 .PHONY : clean
 clean :
 
-	@$(RM) *.log *.jou *.str *.xpr *.bit *.bin
-	@$(RMDIR) *.cache *.hw *.ip_user_files *.runs *.sim *.srcs .Xil
+	@$(RM) *.log *.jou *.str *.xpr *.xml *.bit *.bin
+	@$(RMDIR) *.cache *.hbs *.hw *.ip_user_files *.runs *.sim *.srcs .Xil
 ```
 
 <br />
@@ -1559,3 +1560,4 @@ features, please refer to Xilinx official documentation:
 <br />
 <!--------------------------------------------------------------------->
 
+</div>

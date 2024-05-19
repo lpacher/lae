@@ -9,11 +9,11 @@
 ##     on the system before running Makefile targets
 ##
 ##   - a new setup.tcl common to both FPGA implementation and programming
-##     flows can be used to store global Tcl variables related to the
+##     flows can be used to define global Tcl variables related to the
 ##     project setup
 ##
 ##   - a new 'make gui' target to easily start a Vivado GUI session
-##     and keep the skell alive on both Linux and Windows systems.
+##     and keep the shell alive on both Linux and Windows systems.
 ##
 ##
 ## Command line usage:
@@ -64,5 +64,5 @@ install : install.tcl setup.tcl
 .PHONY : clean
 clean :
 
-	@$(RM) *.log *.jou *.str *.xpr *.bit *.bin
-	@$(RMDIR) *.cache *.hw *.ip_user_files *.runs *.sim *.srcs .Xil
+	@$(RM) *.log *.jou *.str *.xpr *.xml *.bit *.bin
+	@$(RMDIR) *.cache *.hbs *.hw *.ip_user_files *.runs *.sim *.srcs .Xil
