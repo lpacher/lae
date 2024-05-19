@@ -567,7 +567,8 @@ There are many other synthesis attributes supported by Xilinx Vivado. A few exam
 Most of these special synthesis directives can be either placed into the RTL code or into the XDC file, however
 there are also RTL-only and XDC-only attributes. In Xilinx Vivado these statements are **case-insensitive** and you can
 write them either all-capital or lowercase. For a complete list of synthesis attributes supported by Xilinx Vivado
-refer to the _Synthesis Attributes_ chapter of the _Vivado Design Suite User Guide: Synthesis (UG901)_:
+refer to the _Synthesis Attributes_ chapter of the
+[_Vivado Design Suite User Guide: Synthesis (UG901)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug901-vivado-synthesis.pdf):
 
 _<https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug901-vivado-synthesis.pdf>_
 
@@ -613,8 +614,9 @@ Without this statement the flow runs up to synthesis but later Vivado rises an e
 You can easily confirm this by running the `build` flow at the command-line using the `make`
 utility with/without this `ALLOW_COMBINATORIAL_LOOPS` property as described below.
 
-Please refer to the _Vivado Design Suite User Guide: Design Analysis and Closure Techniques (UG906)_ for more details
-about timing analysis and results in Xilinx Vivado:
+Please refer to the
+[_Vivado Design Suite User Guide: Design Analysis and Closure Techniques (UG906)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug906-vivado-design-analysis.pdf)
+for more details about timing analysis and results in Xilinx Vivado:
 
 _<https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug906-vivado-design-analysis.pdf>_
 
