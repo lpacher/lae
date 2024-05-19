@@ -1,3 +1,5 @@
+<div align="justify">
+
 <!-- To contribute to the repo, clone with SSH passphrase: git clone git@github.com:lpacher/lae.git -->
 
 ![](doc/etc/logo.png)
@@ -51,7 +53,7 @@ Webex: _<https://unito.webex.com/meet/luca.pacher>_
 # Course program
 [**[Contents]**](#contents)
 
-This is a postgraduate introductory course about digital design and FPGA programming using **Xilinx Vivado** <br />
+This is a postgraduate introductory course about digital design and FPGA programming using **Xilinx Vivado**
 and the **Verilog Hardware Description Language (HDL)**.
 
 The course covers:
@@ -73,7 +75,7 @@ The course covers:
 >
 > **IMPORTANT !**
 >
-> All students are requested to **complete the preparatory work** before attending practical lectures !<br/>
+> All students are requested to **complete the preparatory work** before attending practical lectures!
 > Please go through detailed step-by-step instructions presented in [**labs/lab0/README.md**](labs/lab0/README.md)
 >
 
@@ -85,11 +87,13 @@ The course covers:
 [**[Contents]**](#contents)
 
 Lecture slides are available on the main [**CampusNet course material page**](https://fisica.campusnet.unito.it/do/didattica.pl/Quest?corso=70d4).
-A complete list of reference documentation and online resources is available in the [**Reference documentation**](#reference-documentation) section instead.<br />
+A complete list of reference documentation and online resources is available in the
+[**Reference documentation**](#reference-documentation) section instead.
 
-Board schematics can be found in the main `doc/` directory of the repository.<br />
+Board schematics can be found in the main `doc/` directory of the repository.
 
 <br />
+
 Additional software components for Windows can be downloaded from:
 
 <p>
@@ -109,15 +113,16 @@ Links to **recorded video lectures** are listed in the [**Webex lectures**](#web
 # Hands-on laboratories
 [**[Contents]**](#contents)
 
-The course is organized in form of [**virtual laboratories**](fpga/labs/README.md) to introduce fundamental concepts in FPGA design
-and simulation using the **Verilog Hardware Description Language (HDL)** and **Xilinx Vivado**.<br />
-Each "lab" consists of step-by-step instructions to guide the student in running the simulation and implementation flows using Xilinx tools from the command-line.
-The only requirement for these labs is to have a personal computer with [all necessary development tools properly installed and configured](fpga/labs/lab0/README.md).
+The course is organized in form of [**virtual laboratories**](fpga/labs/README.md) to introduce fundamental
+concepts in FPGA design and simulation using the **Verilog Hardware Description Language (HDL)** and **Xilinx Vivado**.
+Each "lab" consists of step-by-step instructions to guide the student in running the simulation and implementation flows
+using Xilinx tools from the command-line. The only requirement for these labs is to have a personal computer
+with [all necessary development tools properly installed and configured](fpga/labs/lab0/README.md).
 
 The complete list of proposed labs can be found [**here**](https://github.com/lpacher/lae/tree/master/labs).
 
-Virtual laboratories are then supported by [**practical examples**](fpga/practicum/README.md) in the electronics lab in order to let students to physically experiment
-with a real FPGA and digital circuits using real hardware and instrumentation. 
+Virtual laboratories are then supported by [**practical examples**](fpga/practicum/README.md) in the electronics lab
+in order to let students to physically experiment with a real FPGA and digital circuits using real hardware and instrumentation. 
 
 <br />
 <!--------------------------------------------------------------------->
@@ -128,20 +133,19 @@ with a real FPGA and digital circuits using real hardware and instrumentation.
 
 <br />
 
-
 >
 > **IMPORTANT !**
 >
-> Each student is **requested** to have a **fully-working FPGA development environment** installed on his/her <br />
-> personal computer in terms of software installations, licensing, command-line setup etc.<br /><br />
-> Please complete the **preparatory work** by going through detailed **step-by-step instructions** presented<br />
-> in [**_fpga/labs/lab0/README.md_**](fpga/labs/lab0/README.md) well **before** attending the first lecture! <br />
+> Each student is **requested** to have a **fully-working FPGA development environment** installed on his/her
+> personal computer in terms of software installations, licensing, command-line setup etc.
+>
+> Please complete the **preparatory work** by going through detailed **step-by-step instructions** presented
+> in [**_fpga/labs/lab0/README.md_**](fpga/labs/lab0/README.md) well **before** attending the first lecture!
 >
 > Be aware that <b>Xilinx <u><i>only</i></u> supports Linux and Windows platforms</b>, not MacOS.
-> Students using a MacOS personal computer must either install
-> a supported operating system (Linux Ubuntu would be preferable)
-> using a dual-boot or a virtualization software (VirtualBox is fine)
-> or find another computer running a Linux distribution or Windows 7/10.
+> Students using a MacOS personal computer must either install a supported operating system (Linux Ubuntu
+> would be preferable) using a dual-boot or a virtualization software (VirtualBox is fine) or find another
+> computer running a Linux distribution or Windows 7/10.
 >
 
 <br />
@@ -168,10 +172,8 @@ to help students to setup a suitable development environment for both Linux and 
 > If you are unfamiliar to work with the Linux command line a complete list of basic commands used in the course
 > can be reviewed [**here**](doc/bash/README.md).
 >
-> An endless number of online tutorials and examples is available otherwise, just search for "Linux basic commands" or similar.<br />
-> As an example:
->
->
+> An endless number of online tutorials and examples is available otherwise, just search for "Linux basic commands"
+> or similar. As an example:
 >
 > * _<https://linuxize.com/post/basic-linux-commands>_
 > * _<https://www.hostinger.com/tutorials/linux-commands>_
@@ -301,12 +303,12 @@ Feel free to use a different target directory. As an example:
 > For Windows users. Starting from Windows 10 all personal documents and stuff can be accessed
 > using the **Microsoft OneDrive cloud storage**. This is also true for folders and documents
 > placed on the main "desktop". As a result the actual absolute path that locates the `Desktop`
-> directory is not `C:\Users\username\Desktop` but `C:\Users\username\OneDrive\Desktop`.
+> directory is not `C:\Users\<username>\Desktop` but `C:\Users\<username>\OneDrive\Desktop`.
 >
 > Please, be aware that if you type
 >
 > ```
-> % cd C:\Users\username\Desktop
+> % cd C:\Users\<username>\Desktop
 > % ls
 > ```
 >
@@ -318,7 +320,7 @@ Feel free to use a different target directory. As an example:
 > If this is the case in order to access the real "desktop" you have to use: 
 >
 > ```
-> cd C:\Users\username\OneDrive\Desktop
+> cd C:\Users\<username>\OneDrive\Desktop
 > ```
 >
 > <br />
@@ -396,7 +398,7 @@ A more complete guide to the basic `git` commands can be found [**here**](http:/
 [**[Contents]**](#contents)
 
 A small **mixed-language** HDL design example is provided to help students in testing
-their overall **command-line environment setup** and all **software installations** required for the course.<br />
+their overall **command-line environment setup** and all **software installations** required for the course.
 
 Step-by-step instructions explaining how to run this test flow can be found [**here**](fpga/test/README.md).
 
@@ -664,3 +666,5 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/0300d939ee
 * Lecture 12 - Tue 11/05/2024<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/47822d10f425103c8b32c2390b451b11>_
 
+
+</div>

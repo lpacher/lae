@@ -9,8 +9,9 @@ If GNU Win is properly installed you can use `wget` and `unzip` utilities at the
 line as follows:
 
 ```
-% mkdir -p C:\users\<username>\local
-% cd C:\users\<username>\local
+% cd C:\Users\<username>
+% mkdir -p local
+% cd local
 % wget http://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/ROOT.zip
 % unzip ROOT.zip
 ```
@@ -20,7 +21,7 @@ line as follows:
 Then update the `login.bat` initialization file with the following setup:
 
 ```
-:: ROOT package setup for data analysis
+:: ROOT setup for data analysis
 set ROOTSYS=C:\users\<username>\local\ROOT\5.34.32
 call %ROOTSYS%\bin\thisroot.bat
 ```
