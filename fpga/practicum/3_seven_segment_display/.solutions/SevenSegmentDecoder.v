@@ -8,14 +8,15 @@
 // Spring 2021
 //
 
-
-`timescale 1ns / 100ps
-
 `define COMMON_CATHODE           // POSITIVE-LOGIC  => segX = 1'b1 LED is ON, segX = 1'b0 LED is OFF
 //`define COMMON_ANODE           // NEGATIVE-LOGIC  => segX = 1'b0 LED is ON, segX = 1'b1 LED is OFF 
 
+
+`timescale 1ns / 100ps
+
 module SevenSegmentDecoder (
 
+   // BCD input code
    input wire [3:0] BCD,
 
    output wire DP,
@@ -76,7 +77,7 @@ module SevenSegmentDecoder (
    ///////////////////////////////////
 
 
-   reg [6:0] LED ;
+   reg [6:0] seg ;
 
    always @(*) begin
 
@@ -99,58 +100,58 @@ module SevenSegmentDecoder (
 */
 
          // COMMON CATHODE
-         4'b0000  :  LED = 7'b1111110 ;  //  0
-         4'b0001  :  LED = 7'b0110000 ;  //  1
-         4'b0010  :  LED = 7'b1101101 ;  //  2
-         4'b0011  :  LED = 7'b1111001 ;  //  3
-         4'b0100  :  LED = 7'b1001100 ;  //  4
-         4'b0101  :  LED = 7'b1011011 ;  //  5
-         4'b0110  :  LED = 7'b1011111 ;  //  6
-         4'b0111  :  LED = 7'b1110000 ;  //  7
-         4'b1000  :  LED = 7'b1111111 ;  //  8
-         4'b1001  :  LED = 7'b1111011 ;  //  9
+         4'b0000  :  seg = 7'b1111110 ;  //  0
+         4'b0001  :  seg = 7'b0110000 ;  //  1
+         4'b0010  :  seg = 7'b1101101 ;  //  2
+         4'b0011  :  seg = 7'b1111001 ;  //  3
+         4'b0100  :  seg = 7'b1001100 ;  //  4
+         4'b0101  :  seg = 7'b1011011 ;  //  5
+         4'b0110  :  seg = 7'b1011111 ;  //  6
+         4'b0111  :  seg = 7'b1110000 ;  //  7
+         4'b1000  :  seg = 7'b1111111 ;  //  8
+         4'b1001  :  seg = 7'b1111011 ;  //  9
 
          // **IMPORTANT: latches inferred otherwise !
-         default  :  LED = 7'b0000001 ;  // minus sign otherwise
+         default  :  seg = 7'b0000001 ;  // minus sign otherwise
 
          // COMMON ANODE (just for reference)
-         //4'b0000  :  LED = 7'b0000001 ;  //  0
-         //4'b0001  :  LED = 7'b1001111 ;  //  1
-         //4'b0010  :  LED = 7'b0010010 ;  //  2
-         //4'b0011  :  LED = 7'b0000110 ;  //  3
-         //4'b0100  :  LED = 7'b1001100 ;  //  4
-         //4'b0101  :  LED = 7'b0100100 ;  //  5
-         //4'b0110  :  LED = 7'b0100000 ;  //  6
-         //4'b0111  :  LED = 7'b0001111 ;  //  7
-         //4'b1000  :  LED = 7'b0000000 ;  //  8
-         //4'b1001  :  LED = 7'b0000100 ;  //  9
+         //4'b0000  :  seg = 7'b0000001 ;  //  0
+         //4'b0001  :  seg = 7'b1001111 ;  //  1
+         //4'b0010  :  seg = 7'b0010010 ;  //  2
+         //4'b0011  :  seg = 7'b0000110 ;  //  3
+         //4'b0100  :  seg = 7'b1001100 ;  //  4
+         //4'b0101  :  seg = 7'b0100100 ;  //  5
+         //4'b0110  :  seg = 7'b0100000 ;  //  6
+         //4'b0111  :  seg = 7'b0001111 ;  //  7
+         //4'b1000  :  seg = 7'b0000000 ;  //  8
+         //4'b1001  :  seg = 7'b0000100 ;  //  9
 
       endcase
    end
 
 `ifdef COMMON_CATHODE
 
-   assign {segA, segB, segC, segD, segE, segF, segG} = LED[6:0] ;
+   assign {segA, segB, segC, segD, segE, segF, segG} = seg[6:0] ;
 
-   //assign segA = LED[6] ;
-   //assign segB = LED[5] ;
-   //assign segC = LED[4] ;
-   //assign segD = LED[3] ;
-   //assign segE = LED[2] ;
-   //assign segF = LED[1] ;
-   //assign segG = LED[0] ;
+   //assign segA = seg[6] ;
+   //assign segB = seg[5] ;
+   //assign segC = seg[4] ;
+   //assign segD = seg[3] ;
+   //assign segE = seg[2] ;
+   //assign segF = seg[1] ;
+   //assign segG = seg[0] ;
 
 `elsif COMMON_ANODE
 
-   assign {segA, segB, segC, segD, segE, segF, segG} = ~LED[6:0] ;   // **IMPORTANT: here the BITWISE logic negation is mandatory, the ! operator would be wrong
+   assign {segA, segB, segC, segD, segE, segF, segG} = ~seg[6:0] ;   // **IMPORTANT: here the BITWISE logic negation is mandatory, the ! operator would be wrong
 
-   //assign segA = ~LED[6] ;
-   //assign segB = ~LED[5] ;
-   //assign segC = ~LED[4] ;
-   //assign segD = ~LED[3] ;
-   //assign segE = ~LED[2] ;
-   //assign segF = ~LED[1] ;
-   //assign segG = ~LED[0] ;
+   //assign segA = ~seg[6] ;
+   //assign segB = ~seg[5] ;
+   //assign segC = ~seg[4] ;
+   //assign segD = ~seg[3] ;
+   //assign segE = ~seg[2] ;
+   //assign segF = ~seg[1] ;
+   //assign segG = ~seg[0] ;
 
 `endif
 

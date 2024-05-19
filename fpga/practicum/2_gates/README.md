@@ -48,7 +48,7 @@ This practicum should exercise the following concepts:
 * implement a ring-oscillator circuit on real FPGA hardware
 * introduce the usage of _synthesis pragmas_ in RTL
 * identify and fix timing-loop issues in combinational circuits
-* review and understand the differece between _Auto_ and _Normal_ trigger modes at the oscilloscope
+* review and understand the difference between _Auto_ and _Normal_ trigger modes at the oscilloscope
 * debug termination issues
 
 <br />
