@@ -1,3 +1,5 @@
+<div align="justify">
+
 <!-- To contribute to the repo, clone with SSH passphrase: git clone git@github.com:lpacher/lae.git -->
 
 ![](doc/etc/logo.png)
@@ -301,12 +303,12 @@ Feel free to use a different target directory. As an example:
 > For Windows users. Starting from Windows 10 all personal documents and stuff can be accessed
 > using the **Microsoft OneDrive cloud storage**. This is also true for folders and documents
 > placed on the main "desktop". As a result the actual absolute path that locates the `Desktop`
-> directory is not `C:\Users\username\Desktop` but `C:\Users\username\OneDrive\Desktop`.
+> directory is not `C:\Users\<username>\Desktop` but `C:\Users\<username>\OneDrive\Desktop`.
 >
 > Please, be aware that if you type
 >
 > ```
-> % cd C:\Users\username\Desktop
+> % cd C:\Users\<username>\Desktop
 > % ls
 > ```
 >
@@ -318,7 +320,7 @@ Feel free to use a different target directory. As an example:
 > If this is the case in order to access the real "desktop" you have to use: 
 >
 > ```
-> cd C:\Users\username\OneDrive\Desktop
+> cd C:\Users\<username>\OneDrive\Desktop
 > ```
 >
 > <br />
@@ -664,3 +666,5 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/0300d939ee
 * Lecture 12 - Tue 11/05/2024<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/47822d10f425103c8b32c2390b451b11>_
 
+
+</div>
