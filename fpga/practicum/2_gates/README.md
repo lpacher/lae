@@ -103,6 +103,8 @@ The circuit that you are going to implement and debug is shown in figure.
 
 <br />
 
+**RTL IMPLEMENTATION**
+
 To save time, copy from the `.solutions/` directory the `Gates.v` source file already
 discussed during lectures in `lab2` and `lab5` as follows:
 
@@ -120,6 +122,18 @@ discussed during lectures in `lab2` and `lab5` as follows:
 >
 
 <br />
+
+Review the code using your preferred text-editor application:
+
+```
+% gedit Gates.v &   (for Linux users)
+
+% n++ Gates.v       (for Windows users)
+```
+
+<br />
+
+**DESIGN CONSTRAINTS (XDC)**
 
 In order to map the Verilog code on real FPGA hardware you also need to write a **constraints file**
 using a **Xilinx Design Constraints (XDC) script**. Create therefore with your **text-editor** application
@@ -143,10 +157,6 @@ Copy from the `.solutions/` directory the reference XDC file for the _Arty_ boar
 
 Try to **write yourself design constraints** required to implement the design on the actual board.
 In the following you can find useful information to help you in writing the code.
-
-<br />
-
-<hr><!-- horizontal divider -->
 
 <br />
 
@@ -258,9 +268,7 @@ set_property CONFIG_MODE SPIx4                [current_design]
 
 <br />
 
-<hr><!-- horizontal divider -->
-
-<br />
+**FPGA IMPLEMENTATION AND FIRMWARE DEBUG**
 
 Once ready, open Vivado in graphical mode with
 
@@ -568,7 +576,7 @@ _<https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug901-viv
 Please be aware that synthesis pragmas are always tool-specific, therefore always refer to the
 official documentation of the synthesis tool that you are working with.
 
-<br /><br />
+<br />
 
 **DESIGN CONSTRAINTS**
 
@@ -667,10 +675,9 @@ is available to also display `start` at the oscilloscope.
 >
 > **HINT**
 >
-> In order to "capture" the transition of the `start` signal from logic 0 to
-> logic 1 and observe the `clk` output starting oscillating you have to properly set
-> **trigger options** of the oscilloscope you are working with in order to
-> use a _single-trigger_ or _single shot_ trigger mode.
+> In order to "capture" the transition of the `start` signal from logic 0 to logic 1
+> and observe the `clk` output starting oscillating you have to properly set **trigger options**
+> of the oscilloscope you are working with to use a _single-trigger_ or _single shot_ trigger mode.
 >
 > Disable the ring-oscillator by setting `start` to logic 0 with the slide-switch
 > and ensure that the status-led turns off.
@@ -918,8 +925,52 @@ can copy a first example code from the `sample/` directory at the top of the Git
 Ask to the teacher if you are not confident in using the ROOT software.
 
 <br />
+<!--------------------------------------------------------------------->
 
-**EXERCISE 2**
+
+**EXERCISE 3**
+
+
+By default the ring-oscillator output toggle has been assigned to the **A5** pin of the **chipKIT** header
+but you can decide to map this output to any other programmable I/O pin available on the _Arty_ board.
+
+Edit the `RingOscillator.xdc` constraints file and change to **JA1** he target pin for the `clk` output toggle as follows:
+
+```
+set_property PACKAGE_PIN G13 [get_ports clk] ;   # JA1 - 200 ohm series resistance
+#set_property PACKAGE_PIN E15 [get_ports clk] ;   # JB1 - NO termination resistance
+#set_property PACKAGE_PIN D5  [get_ports clk] ;   # A5 (chipKIT header)
+```
+
+<br />
+
+Save your changes and re-run from scratch all flows in batch mode at the command-line:
+
+```
+% make clean build
+% make install
+```
+
+<br />
+
+>
+> **QUESTION**
+>
+> What happens if you probe at the oscilloscope the ring-oscillator output assigned to a programmable I/O pin
+> **with or without a series resistor** already integrated into the I/O electrical path ?
+>
+>   \___________________________________________________________________________________
+>
+
+<br />
+
+Repeat the test targeting the **JB1** PMOD pin and experiment yourself with **termination issues**.
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+**EXERCISE 3**
 
 The proposed ring-oscillator implementation uses `NUM_INVERTERS` specified as a Verilog **module parameter**.
 Another possibility to easily change the number of inverters in the chain is to define and later use `NUM_INVERTERS`
@@ -940,8 +991,9 @@ by the **name** of the macro. As an example:
 ```
 
 <br />
+<!--------------------------------------------------------------------->
 
-**EXERCISE 3**
+**EXERCISE 4**
 
 Try yourself to implement and debug a simple **full-adder** combinational block.
 
