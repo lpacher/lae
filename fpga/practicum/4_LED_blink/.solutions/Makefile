@@ -131,18 +131,28 @@ SIM_VHDL_SOURCES :=
 #endif
 #
 
-
-## group together all Verilog/SystemVerilog and VHDL sources
-VLOG_SOURCES := $(RTL_VLOG_SOURCES) $(SIM_VLOG_SOURCES)
-VHDL_SOURCES := $(RTL_VHDL_SOURCES) $(SIM_VHDL_SOURCES)
-
-
 ############################
 ##   gate-level netlist   ##
 ############################
 
-ifneq ($(wildcard $(WORK_DIR)/build/outputs/signoff.v ),)
-   VLOG_NETLIST := $(WORK_DIR)/build/outputs/signoff.v
+#ifneq ($(wildcard $(WORK_DIR)/build/outputs/mapped.v ),)
+#   VLOG_NETLIST := $(WORK_DIR)/build/outputs/mapped.v
+#endif
+
+VLOG_NETLIST := $(WORK_DIR)/build/outputs/mapped.v
+#VLOG_NETLIST := $(WORK_DIR)/build/outputs/signoff.v
+
+
+###################################################################
+##   group together all Verilog/SystemVerilog and VHDL sources   ##
+###################################################################
+
+ifneq ($(strip $(VLOG_NETLIST)),)
+   VLOG_SOURCES := $(RTL_VLOG_SOURCES) $(SIM_VLOG_SOURCES)
+   VHDL_SOURCES := $(RTL_VHDL_SOURCES) $(SIM_VHDL_SOURCES)
+else
+   VLOG_SOURCES := $(VLOG_NETLIST) $(SIM_VLOG_SOURCES)
+   VHDL_SOURCES := $(SIM_VHDL_SOURCES)
 endif
 
 
@@ -202,6 +212,11 @@ MKDIR := mkdir -p -v
 ################################
 ##   Xilinx Vivado settings   ##
 ################################
+
+## installation check
+ifeq ($(shell which vivado 2> /dev/null),)
+   @$(error ERROR: No 'vivado' executable found in search path! Force an exit now...)
+endif
 
 ##
 ## **NOTE
@@ -298,7 +313,7 @@ help : ## Command line help
 	@$(ECHO) ""
 	@$(ECHO) "Available targets:"
 	@$(ECHO) ""
-	@grep -E '^[a-zA-Z_-]+ :.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "- make \033[36m%-15s\033[0m %s\n", $$1, $$2}'
+	@grep -E '^[a-zA-Z_-|/]+ :.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "- make \033[36m%-18s\033[0m %s\n", $$1, $$2}'
 	@$(ECHO) ""
 	@$(ECHO) "Target Xilinx device:            $(XILINX_DEVICE)"
 	@$(ECHO) "External Quad SPI Flash memory:  $(QFLASH_MEMORY)"
@@ -343,6 +358,11 @@ area : ## Create a new fresh working area with all necessary directories used in
 	@$(ECHO) "\n   -- Working area setup completed !\n\n"
 ##____________________________________________________________________________________________________
 
+
+.PHONY : gui
+gui : ## Start Vivado in GUI mode and keep the shell alive
+
+	@echo "exec vivado -mode gui &" | tclsh -norc
 
 ##
 ## IP-generation target
@@ -420,7 +440,7 @@ sim : compile elaborate simulate ## One-step compilation, elaboration and simula
 ##
 
 .PHONY : build/import
-build/import :
+build/import : ## Design import and RTL elaboration
 
 ifeq ($(wildcard $(WORK_DIR)/build/.*),)
 	@$(error ERROR: Missing implementation working area $(WORK_DIR)/build ! Run 'make area' before running the flows.)
@@ -437,7 +457,7 @@ else
 endif
 
 .PHONY : build/syn
-build/syn :
+build/syn : ## Mapped synthesis
 
 ifeq ($(mode),gui)
 	@echo "exec vivado -mode gui \
@@ -451,7 +471,7 @@ endif
 
 
 .PHONY : build/place
-build/place :
+build/place : ## Placement flow
 
 ifeq ($(mode),gui)
 	@echo "exec vivado -mode gui \
@@ -464,7 +484,7 @@ else
 endif
 
 .PHONY : build/route
-build/route :
+build/route : ## Routing flow
 
 ifeq ($(mode),gui)
 	@echo "exec vivado -mode gui \
@@ -477,7 +497,7 @@ else
 endif
 
 .PHONY : build/export
-build/export :
+build/export : ## Signoff and design-export flow
 
 ifeq ($(mode),gui)
 	@echo "exec vivado -mode gui \
@@ -545,37 +565,42 @@ endif
 ##____________________________________________________________________________________________________
 
 
+.PHONY : install/fpga
+install/fpga : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/install/install.tcl ## Upload bitstream to target FPGA using Vivado Hardware Manager
+
+ifeq ($(mode),gui)
+
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/install/install.tcl \
+	   -notrace -log $(LOG_DIR)/install.log -nojournal &" | tclsh -norc
+else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/install/install.tcl \
+	   -notrace -log $(LOG_DIR)/install.log -nojournal 
+endif
+##____________________________________________________________________________________________________
+
+
+.PHONY : install/flash
+install/flash : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/install/install_flash.tcl ## Program external Quad SPI Flash memory with FPGA configuration
+
+ifeq ($(mode),gui)
+
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/install/install_flash.tcl \
+	   -notrace -log $(LOG_DIR)/install_flash.log -nojournal &" | tclsh -norc
+else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/install/install_flash.tcl \
+	   -notrace -log $(LOG_DIR)/install_flash.log -nojournal
+endif
+##____________________________________________________________________________________________________
+
+
 .PHONY : install
-install : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/install/install.tcl ## Upload bitstream to target FPGA using Vivado Hardware Manager
+install : install/fpga ## Alias, same as 'make install/fpga'
 
-ifeq ($(mode),gui)
-
-	@echo "exec vivado -mode gui \
-	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/install/install.tcl \
-	   -notrace -log $(LOG_DIR)/$@.log -nojournal &" | tclsh -norc
-else
-	@vivado -mode $(mode) \
-	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/install/install.tcl \
-	   -notrace -log $(LOG_DIR)/$@.log -nojournal 
-endif
 ##____________________________________________________________________________________________________
-
-
-.PHONY : install_flash
-install_flash : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/install/install_flash.tcl ## Program external Quad SPI Flash memory with FPGA configuration
-
-ifeq ($(mode),gui)
-
-	@echo "exec vivado -mode gui \
-	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/install/install_flash.tcl \
-	   -notrace -log $(LOG_DIR)/$@.log -nojournal &" | tclsh -norc
-else
-	@vivado -mode $(mode) \
-	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/install/install_flash.tcl \
-	   -notrace -log $(LOG_DIR)/$@.log -nojournal
-endif
-##____________________________________________________________________________________________________
-
 
 ##
 ## Other targets

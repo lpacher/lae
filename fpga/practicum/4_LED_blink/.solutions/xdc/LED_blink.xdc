@@ -38,13 +38,13 @@
 set_property -dict [list PACKAGE_PIN E3 IOSTANDARD LVCMOS33] [get_ports clk]
 
 ## standard LEDs
-#set_property -dict { PACKAGE_PIN H5  IOSTANDARD LVCMOS33 } [get_ports LED]   ; ## LD4
-#set_property -dict { PACKAGE_PIN J5  IOSTANDARD LVCMOS33 } [get_ports LED]   ; ## LD5
-#set_property -dict { PACKAGE_PIN T9  IOSTANDARD LVCMOS33 } [get_ports LED]   ; ## LD6
-set_property -dict {PACKAGE_PIN T10 IOSTANDARD LVCMOS33} [get_ports LED] ;   ## LD7
+set_property -dict { PACKAGE_PIN H5  IOSTANDARD LVCMOS33 } [get_ports LED] ;   ## LD4
+#set_property -dict { PACKAGE_PIN J5  IOSTANDARD LVCMOS33 } [get_ports LED] ;   ## LD5
+#set_property -dict { PACKAGE_PIN T9  IOSTANDARD LVCMOS33 } [get_ports LED] ;   ## LD6
+#set_property -dict { PACKAGE_PIN T10 IOSTANDARD LVCMOS33 } [get_ports LED] ;   ## LD7
 
-## **EXERCISE: probe the divided clock at the oscilloscope on pin JA1
-#set_property -dict { PACKAGE_PIN G13  IOSTANDARD LVCMOS33 } [get_ports LED]
+## **DEBUG: probe the divided clock at the oscilloscope on pin JA1
+set_property -dict { PACKAGE_PIN G13  IOSTANDARD LVCMOS33 } [get_ports LED]
 
 ## **OPTIONAL: drive 7-segment display module as in practicum #3 (JA header mapping with 200 ohm series resistor on each pin)
 #set_property -dict { PACKAGE_PIN G13  IOSTANDARD LVCMOS33 } [get_ports segA] ;   ## JA[1]
@@ -57,15 +57,6 @@ set_property -dict {PACKAGE_PIN T10 IOSTANDARD LVCMOS33} [get_ports LED] ;   ## 
 #set_property -dict { PACKAGE_PIN K16  IOSTANDARD LVCMOS33 } [get_ports DP  ] ;   ## JA[8]
 
 
-################################
-##   electrical constraints   ##
-################################
-
-## voltage configurations
-set_property CFGBVS VCCO        [current_design]
-set_property CONFIG_VOLTAGE 3.3 [current_design]
-
-
 ############################
 ##   timing constraints   ##
 ############################
@@ -75,6 +66,15 @@ create_clock -period 10.000 -name clk100 -waveform {0.000 5.000} -add [get_ports
 
 ## constrain reg2out timing paths (assume approx. 1/2 clock period)
 set_output_delay -clock clk100 5.000 [all_outputs]
+
+
+################################
+##   electrical constraints   ##
+################################
+
+## voltage configurations
+set_property CFGBVS VCCO        [current_design]
+set_property CONFIG_VOLTAGE 3.3 [current_design]
 
 
 ################################

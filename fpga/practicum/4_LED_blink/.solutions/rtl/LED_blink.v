@@ -22,7 +22,9 @@ module LED_blink (
    //output reg segD,
    //output reg segE,
    //output reg segF,
-   //output reg segG
+   //output reg segG,
+
+   //input wire enable   // optionally, add an external count-enable control (e.g. slide-switch)
 
    ) ;
 
@@ -31,9 +33,16 @@ module LED_blink (
    //   free-running counter   //
    //////////////////////////////
 
-   reg [27:0] count = 'b0 ;
+   reg [27:0] count ;
+
+   //synopsys translate_off
+   initial
+      count = 'b0 ;.  // **QUESTION: what happens if 'count' is not initialized into RTL code ?
+   //synopsys translate_on
+
 
    always @(posedge clk) begin
+   //if(enable)
       count <= count + 'b1 ;            // **QUESTION: where is the reset for this counter ? 
    end
 
