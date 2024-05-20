@@ -112,7 +112,7 @@ module SevenSegmentDecoder (
          4'b1001  :  seg = 7'b1111011 ;  //  9
 
          // **IMPORTANT: latches inferred otherwise !
-         default  :  seg = 7'b0000001 ;  // minus sign otherwise
+         //default  :  seg = 7'b0000001 ;  // minus sign otherwise
 
          // COMMON ANODE (just for reference)
          //4'b0000  :  seg = 7'b0000001 ;  //  0
