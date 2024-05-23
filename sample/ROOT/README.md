@@ -1,8 +1,8 @@
 <div align="justify">
 
-# ROOT quick references
+# ROOT and PyROOT installation references
 
-## Quick installation (Windows)
+## Windows installation
 
 Simply download and extract the pre-compiled `.zip` file already prepared for you.
 If GNU Win is properly installed you can use `wget` and `unzip` utilities at the command
@@ -13,7 +13,9 @@ line as follows:
 % mkdir -p local
 % cd local
 % wget http://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/ROOT.zip
+% wget http://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/Python.zip
 % unzip ROOT.zip
+% unzip Python.zip
 ```
 
 <br />
@@ -21,9 +23,13 @@ line as follows:
 Then update the `login.bat` initialization file with the following setup:
 
 ```
-:: ROOT setup for data analysis
+:: Python 2.7 setup
+set PATH=C:\users\<username>\local\Python\2.7\x86;%PATH%
+
+:: ROOT/PyROOT setup for data analysis
 set ROOTSYS=C:\users\<username>\local\ROOT\5.34.32
 call %ROOTSYS%\bin\thisroot.bat
+set PYTHONPATH=%ROOTSYS%\bin;%PYTHONPATH%
 ```
 
 <br />
