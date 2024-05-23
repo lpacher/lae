@@ -13,6 +13,9 @@
 *.log
 log*
 
+## ROOT files
+*.root
+
 ## temporary directory (optional)
 tmp/*
 temp/*
