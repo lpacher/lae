@@ -314,7 +314,7 @@ Feel free to use a different target directory. As an example:
 >
 > <br />
 >
-> into your Windows _Command Prompt_ and you don't see the content placed on you actual "desktop"
+> into your Windows _Command Prompt_ and you don't see the content placed on your actual "desktop"
 > this is due to the fact that OneDrive is used (this is the default behaviour).
 >
 > If this is the case in order to access the real "desktop" you have to use: 
