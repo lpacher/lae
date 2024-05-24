@@ -1,3 +1,4 @@
+<div align="justify">
 
 # Lab 3 Instructions
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/labs)]
@@ -944,3 +945,4 @@ Compile and simulate the new design from scratch:
 
 Verify the proper functionality of the new digital block.
 
+</div>

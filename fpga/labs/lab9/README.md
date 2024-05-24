@@ -1,3 +1,4 @@
+<div align="justify">
 
 # Lab 9 Instructions
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/labs)]
@@ -687,3 +688,4 @@ wire feedback = q[7] ^ (q[6:0] == 7'b0000000) ;  // this modified feedback allow
 Recompile and re-simulate the design from scratch. Plot the new trend of random values in ROOT and
 verify that this new feedback implementation has fixed the range issue.
 
+</div>

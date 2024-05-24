@@ -1,3 +1,4 @@
+<div align="justify">
 
 # Lab 11 Instructions
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/labs)]
@@ -493,3 +494,4 @@ Save your changes and try to recompile and re-simulate the design from scratch:
 Write with your preferred programming language your own software routine to generate and record sampled sine values on a text file
 and initialize the ROM.
 
+</div>

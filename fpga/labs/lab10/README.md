@@ -1,3 +1,4 @@
+<div align="justify">
 
 # Lab 10 Instructions
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/labs)]
@@ -343,23 +344,6 @@ cp .solutions/bench/tb_uart_tx.v   bench/
 <br />
 
 Open new sources with a text editor application and inspect their contents.
+Run the simulation once ready.
 
-Before running the simulation flow
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</div>

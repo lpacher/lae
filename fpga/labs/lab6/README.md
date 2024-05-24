@@ -1,3 +1,4 @@
+<div align="justify">
 
 # Lab 6 Instructions
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/labs)]
@@ -416,3 +417,4 @@ always @(posedge clk) begin
 end   // always
 ```
 
+</div>

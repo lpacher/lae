@@ -1,3 +1,4 @@
+<div align="justify">
 
 # Lab 7 Instructions
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/labs)]
@@ -1423,3 +1424,4 @@ Xilinx official documentation:
 * [_Vivado Design Suite User Guide: Designing with IP (UG896)_](https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug896-vivado-ip.pdf)
 * [_Clocking Wizard v6.0 LogiCORE IP Product Guide_](https://www.xilinx.com/support/documentation/ip_documentation/clk_wiz/v6_0/pg065-clk-wiz.pdf)
 
+</div>

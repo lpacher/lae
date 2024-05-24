@@ -1,3 +1,4 @@
+<div align="justify">
 
 # Lab 8 Instructions
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/labs)]
@@ -405,4 +406,4 @@ Instantiate the IP in the RTL and try to re-simulate and re-implement the design
 * _<https://www.electronics-tutorials.ws/blog/pulse-width-modulation.html>_
 * _<https://circuitdigest.com/tutorial/what-is-pwm-pulse-width-modulation>_
 
-
+</div>

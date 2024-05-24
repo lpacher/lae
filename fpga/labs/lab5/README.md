@@ -1,3 +1,4 @@
+<div align="justify">
 
 # Lab 5 Instructions
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/labs)]
@@ -706,3 +707,4 @@ https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug892-vivad
 
 <br />
 
+</div>

@@ -1,3 +1,4 @@
+<div align="justify">
 
 # Lab 4 Instructions
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/labs)]
@@ -408,4 +409,4 @@ simulate a **parameterizable Gray-to-binary encoder**.
 
 <img src="doc/pictures/Gray2BinEncoderNbit.png" alt="drawing" width="850"/>
 
-
+</div>

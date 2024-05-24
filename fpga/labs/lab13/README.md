@@ -1,3 +1,4 @@
+<div align="justify">
 
 # Lab 13 Instructions
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/labs)]
@@ -484,5 +485,4 @@ In the proposed testbench the pseudo-random bit sequence is generated via softwa
 Modify the `bench/tb_SequenceDetector.v` in order to generate the pseudo-random bit sequence using a **Linear Feedback <br />
 Shift Register (LFSR)** as already discussed in `lab9`.
 
-
-
+</div>

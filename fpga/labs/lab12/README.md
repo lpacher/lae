@@ -1,3 +1,4 @@
+<div align="justify">
 
 # Lab 12 Instructions
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/labs)]
@@ -283,3 +284,4 @@ If you are interested in more in-depth details about the Xilinx Vivado **FIFO Ge
 
 * [_FIFO Generator v13.2 LogiCORE IP Product Guide_](https://www.xilinx.com/support/documentation/ip_documentation/fifo_generator/v13_2/pg057-fifo-generator.pdf)
 
+</div>
