@@ -67,22 +67,27 @@ synth_design \
 
 
 
-## generate post-synthesis reports
-report_utilization \
-   -file ${reportsDir}/post_syn_utilization.rpt
+#########################################
+##   generate post-synthesis reports   ##
+#########################################
 
-report_timing \
-   -file ${reportsDir}/post_syn_timing.rpt
+## utilization report
+report_utilization -file ${reportsDir}/post_syn_utilization.rpt
 
+## timing-summary report
+report_timing_summary -max_paths 100 -warn_on_violation -file ${reportsDir}/post_syn_timing.rpt
 
 
 ####################################
 ##   save synthesis output data   ##
 ####################################
 
-## save post-synthesis Verilog gate-level netlist for functional simulations
+## save post-synthesis Verilog netlist for post-synthesis functional/timing gate-level simulations
 write_verilog \
    -mode funcsim -force ${outputsDir}/mapped.v
+
+## save post-synthesis SDF for post-synthesis gate-level simulations
+write_sdf -force ${outputsDir}/mapped.sdf
 
 ## write a database for the synthesized design
 write_checkpoint \

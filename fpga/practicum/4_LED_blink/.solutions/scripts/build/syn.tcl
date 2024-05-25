@@ -66,14 +66,15 @@ synth_design \
    -name                syn_1
 
 
+#########################################
+##   generate post-synthesis reports   ##
+#########################################
 
-## generate post-synthesis reports
-report_utilization \
-   -file ${reportsDir}/post_syn_utilization.rpt
+## utilization report
+report_utilization -file ${reportsDir}/post_syn_utilization.rpt
 
-report_timing \
-   -file ${reportsDir}/post_syn_timing.rpt
-
+## timing-summary report
+report_timing_summary -max_paths 100 -warn_on_violation -file ${reportsDir}/post_syn_timing_summary.rpt
 
 
 ####################################

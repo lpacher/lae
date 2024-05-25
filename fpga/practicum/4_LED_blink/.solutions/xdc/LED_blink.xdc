@@ -1,3 +1,4 @@
+################################################################################
 ##
 ## Implementation constraints for LED_blink.v Verilog module.
 ##
@@ -17,6 +18,7 @@
 ## Luca Pacher - pacher@to.infn.it
 ## Spring 2020
 ##
+################################################################################
 
 
 ###############
@@ -43,10 +45,13 @@ set_property -dict { PACKAGE_PIN H5  IOSTANDARD LVCMOS33 } [get_ports LED] ;   #
 #set_property -dict { PACKAGE_PIN T9  IOSTANDARD LVCMOS33 } [get_ports LED] ;   ## LD6
 #set_property -dict { PACKAGE_PIN T10 IOSTANDARD LVCMOS33 } [get_ports LED] ;   ## LD7
 
-## **DEBUG: probe the divided clock at the oscilloscope on pin JA1
-set_property -dict { PACKAGE_PIN G13  IOSTANDARD LVCMOS33 } [get_ports LED]
+## **DEBUG: probe the divided clock at the oscilloscope
+set_property -dict { PACKAGE_PIN F5  IOSTANDARD LVCMOS33 } [get_ports LED_probe] ;  ## A0 (chipKIT header)
 
-## **OPTIONAL: drive 7-segment display module as in practicum #3 (JA header mapping with 200 ohm series resistor on each pin)
+## **EXERCISE: add an external count-enable control (e.g. slide-switch)
+#set_property -dict { PACKAGE_PIN A8  IOSTANDARD LVCMOS33 } [get_ports enable] ;   ## SW0
+
+## **EXERCISE: drive 7-segment display module as in practicum #3 (JA header mapping with 200 ohm series resistor on each pin)
 #set_property -dict { PACKAGE_PIN G13  IOSTANDARD LVCMOS33 } [get_ports segA] ;   ## JA[1]
 #set_property -dict { PACKAGE_PIN B11  IOSTANDARD LVCMOS33 } [get_ports segB] ;   ## JA[2]
 #set_property -dict { PACKAGE_PIN A11  IOSTANDARD LVCMOS33 } [get_ports segC] ;   ## JA[3]

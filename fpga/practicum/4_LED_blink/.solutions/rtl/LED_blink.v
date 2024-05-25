@@ -11,11 +11,15 @@
 
 module LED_blink (
 
-   input  wire clk,      // assume 100 MHz external clock from on-board oscillator
-   output wire LED
+   input  wire clk,         // assume 100 MHz external clock from on-board oscillator
 
-   // 7-segment display control pins
-   //output wire DP,
+   // **EXERCISE: add an external count-enable control (e.g. slide-switch)
+   //input wire enable,
+
+   output wire LED,
+   output wire LED_probe    // probe at the oscilloscope the LED control signal
+
+   // **EXERCISE: drive a 7-segment display module with a suitable 4-bit slice of the counter
    //output reg segA,
    //output reg segB,
    //output reg segC,
@@ -23,8 +27,7 @@ module LED_blink (
    //output reg segE,
    //output reg segF,
    //output reg segG,
-
-   //input wire enable   // optionally, add an external count-enable control (e.g. slide-switch)
+   //output reg DP
 
    ) ;
 
@@ -35,15 +38,14 @@ module LED_blink (
 
    reg [27:0] count ;
 
-   //synopsys translate_off
-   initial
-      count = 'b0 ;.  // **QUESTION: what happens if 'count' is not initialized into RTL code ?
-   //synopsys translate_on
+   //initial
+   //   count = 'b0 ;.  // **QUESTION: what happens if 'count' is not initialized into RTL code ?
 
 
    always @(posedge clk) begin
-   //if(enable)
-      count <= count + 'b1 ;            // **QUESTION: where is the reset for this counter ? 
+      //if(enable) begin
+         count <= count + 'b1 ;            // **QUESTION: where is the reset for this counter ? 
+      //end
    end
 
 
@@ -51,12 +53,15 @@ module LED_blink (
    //   drive the LED output   //
    //////////////////////////////
 
-   // simply turn on/off the LED with a count-slice
+   // simply turn on/off the LED with one bit of the output count
 
    assign LED = count[24] ;        // **QUESTION: which is the blink frequency of the LED ?
    //assign LED = count[25] ;
    //assign LED = count[26] ;
    //assign LED = count[27] ;
+
+   // **DEBUG: probe at the oscilloscope the LED control signal on some general-purpose I/O
+   assign LED_probe = LED ;
 
 
    ///////////////////////////////////////////////
@@ -64,9 +69,12 @@ module LED_blink (
    ///////////////////////////////////////////////
 
 /*
+
    wire [3:0] BCD = count[27:24] ;
 
    always @(*) begin
+
+      DP = 1'b0 ;   // simply tie-down the Decimal Point (DP) dot
 
       case( BCD[3:0] )
 
@@ -82,7 +90,7 @@ module LED_blink (
          4'b1000  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b1111111 ;  //  8
          4'b1001  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b1111011 ;  //  9
 
-         default  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b0000001 ;  //  minus-sign otherwise
+         default  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b0000000 ;  //  turned-off otherwise
 
          // COMMON ANODE
          //4'b0000  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b0000001 ;  //  0
@@ -95,6 +103,11 @@ module LED_blink (
          //4'b0111  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b0001111 ;  //  7
          //4'b1000  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b0000000 ;  //  8
          //4'b1001  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b0000100 ;  //  9
+         //default  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b1111111 ;  //  turned-off otherwise
+
+      endcase
+   end   // always
+
 */
 
 endmodule
