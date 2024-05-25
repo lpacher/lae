@@ -402,7 +402,7 @@ vivado% report_timing -from [get_ports SignalIn] -to [get_ports SignalOut]
 <br />
 
 Review the **timing report** in the console and identify the values for the input/output delay computed
-by the STA engine. iCompare this value with your fit results. Exit from Vivado once happy:
+by the STA engine. Compare this value with your fit results. Exit from Vivado once happy:
 
 ```
 vivado% exit
