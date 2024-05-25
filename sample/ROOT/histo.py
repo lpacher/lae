@@ -32,7 +32,7 @@ histo.Draw()
 histo.Fit("gaus")
 
 ## display fit results
-ROOT.gStyle->SetOptFit(1)
+ROOT.gStyle.SetOptFit(1)
 
 ## save histogram to ROOT file
 fout = ROOT.TFile("histo.root","RECREATE")

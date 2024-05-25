@@ -885,7 +885,8 @@ and for the frequency vs. $1/(N+1)$. Verify the expected linearity of the charac
 >
 > <br />
 >
-> Start an **interactive ROOT session** at the command line:
+> You can use as many blank characters as you want to indent your measurements. 
+> Once finished start an **interactive ROOT session** at the command line:
 >
 > ```
 > % root -l

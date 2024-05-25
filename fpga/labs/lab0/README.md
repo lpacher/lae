@@ -32,6 +32,7 @@
    * [Linux installation](#install-tcl-linux-installation)
    * [Windows installation](#install-tcl-windows-installation)
    * [tclsh init script](#tclsh-init-script)
+* [**Install ROOT and PyROOT**](#install-root-and-pyroot)
 * [**Install PuTTY**](#install-putty)
    * [Linux installation](#install-putty-linux-installation)
    * [Windows installation](#install-putty-windows-installation)
@@ -101,14 +102,16 @@ Apart from Vivado, students are **requested** to have the following programs ins
 
 For Windows:
 
-* **Notepad++** - text editor
-* **Nano**      - command line text editor
-* **7-Zip**     - archive utility to extract `.tar.gz` files under Windows
-* **Clink**     - Linux-like TAB completion for the Windows _Command Prompt_
-* **GNU Win**   - basic Bash and Linux shell executables for Windows
-* **Tcl/Tk**    - Tcl shell
-* **Git**       - versioning tool
-* **PuTTY**     - terminal emulator to work with serial communication
+* **Notepad++**  - text editor
+* **Nano**       - command line text editor
+* **7-Zip**      - archive utility to extract `.tar.gz` files under Windows
+* **Clink**      - Linux-like TAB completion for the Windows _Command Prompt_
+* **GNU Win**    - basic Bash and Linux shell executables for Windows
+* **Tcl/Tk**     - Tcl shell
+* **Git**        - versioning tool
+* **PuTTY**      - terminal emulator to work with serial communication
+* **ROOT**       - the ROOT data analysis framework by CERN
+* **Python**     - required to load ROOT libraries into Python (PyROOT)
 
 <br />
 
@@ -119,6 +122,8 @@ For Linux:
 * **Tcl/Tk**    - Tcl shell
 * **Git**       - versioning tool
 * **PuTTY**     - terminal emulator to work with serial communication
+* **ROOT**      - the ROOT data analysis framework by CERN
+* **Python**    - required to load ROOT libraries into Python (PyROOT)
 
 
 All required installation instructions are provided in the text.
@@ -1651,6 +1656,18 @@ tclsh$ exit
 
 ![](./pictures/windows/tclshrc.png)
 
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+# Install ROOT and PyROOT
+[**[Contents]**](#contents)
+
+The free and open-source **ROOT package by CERN** will be used for data analysis in this course.
+For all installation details please refer to the following README page:
+
+_<https://github.com/lpacher/lae/tree/master/sample/ROOT/README.md>_
 
 <br />
 <!--------------------------------------------------------------------->

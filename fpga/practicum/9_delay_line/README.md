@@ -295,7 +295,70 @@ at the oscilloscope the delay inserted between input and output signals.
 
 <br />
 
-Use **ROOT** for your data analysis and verify the expected linearity of the characteristic with a fit.
+Use **ROOT** for your data analysis and make a `TGraph` plot of collected _delay_ vs. _MUX code_ values.
+Verify the expected linearity of the characteristic with a fit. Feel free to use a **PyROOT** script instead.
+
+<br />
+
+> **HINT**
+>
+> Simple plots of experimental data in form of y-values vs. x-values in ROOT are implemented using the `TGraph` class,
+> which also allows to **read and plot measurements data from a text file**.
+>
+> With your text-editor application create a new text file e.g. `data/DelayLine.dat` and register your measurements
+> as follows:
+>
+> ```
+> # code   delay[ns]
+> 0        ...
+> 1        ...
+> 2        ...
+> ...      ...
+> ...      ...
+> 15       ...
+> ```
+>
+> <br />
+>
+> You can use as many blank characters as you want to indent your measurements. 
+> Once finished start an **interactive ROOT session** at the command line:
+>
+> ```
+> % root -l
+> ```
+>
+> <br />
+>
+> Plot the characteristic interactively with:
+>
+> ```
+> root[] TGraph gr("data/DelayLine.dat")
+> root[] gr.Draw("ALP")
+> ```
+>
+> <br />
+>
+> Finally perform a linear fit with:
+>
+> ```
+> root[] gr.Fit("pol1")
+> ```
+>
+> <br />
+>
+> Alternatively you can place your measurements into **standard C/C++ arrays** and use them
+> into the `TGraph` constructor:
+>
+> ```
+> root[] int Npt = 16
+> root[] double xData[Npt] = {0,1,2,3 ... 15}
+> root[] double yData[Npt] = { ... }
+> root[] TGraph gr(Npt,xData,yData)
+> root[] gr.Draw("ALP")
+> root[] gr.Fit("pol1")
+> ```
+
+<br />
 
 Sample **ROOT un-named scripts** have been already prepared for you as a reference starting point
 for your analysis, you can copy them from the `.solutions/bin/` directory as follows:
