@@ -49,6 +49,9 @@ set_property -dict { PACKAGE_PIN G13  IOSTANDARD LVCMOS33 } [get_ports pll_clk] 
 ## PLL locked status flag
 set_property -dict { PACKAGE_PIN N17  IOSTANDARD LVCMOS33 } [get_ports pll_locked] ;   ## IO41
 
+## **EXERCISE: drive a general-purpose standard LED to easily identify the PLL status
+#set_property -dict { PACKAGE_PIN H5  IOSTANDARD LVCMOS33 } [get_ports LED_locked] ;   ## LD4
+
 
 ################################
 ##   electrical constraints   ##
@@ -75,6 +78,9 @@ set_property CONFIG_VOLTAGE 3.3 [current_design]
 
 ## create a 100 MHz clock signal with 50% duty cycle for reg2reg Static Timing Analysis (STA)
 create_clock -period 10.000 -name clk100 -waveform {0.000 5.000} -add [get_ports clk]
+
+## disable timing checks for all reg2out paths
+set_false_path -to [all_outputs]
 
 
 ####################

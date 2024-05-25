@@ -21,6 +21,9 @@ module PLL_wrapper (
    // PLL signals
    output wire pll_clk, pll_locked   // observe PLL output signals at the oscilloscope
 
+   // **EXERCISE: drive a general-purpose standard LED to easily identify the PLL status
+   //output wire LED_locked
+
    ) ;
 
 
@@ -102,6 +105,10 @@ module PLL_wrapper (
    //assign pll_clk = pll_clk_1 ;
    //assign pll_clk = pll_clk_2 ;
    //assign pll_clk = pll_clk_3 ;
+
+
+   // **EXERCISE: drive a general-purpose standard LED to easily identify the PLL status
+   //assign LED_locked = pll_locked ;
 
 endmodule
 
