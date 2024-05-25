@@ -396,7 +396,7 @@ Then execute interactively the following commands in the Vivado Tcl console:
 
 ```
 vivado% set_case_analysis 0 [get_ports DelaySelect*]
-vivado% report_timing -from [get_port SignalIn] -to [get_port SiganlOut]
+vivado% report_timing -from [get_ports SignalIn] -to [get_ports SignalOut]
 ```
 
 <br />
