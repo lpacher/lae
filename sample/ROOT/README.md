@@ -109,6 +109,7 @@ line as follows:
 % wget http://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/Python.zip
 % unzip ROOT.zip
 % unzip Python.zip
+% rm -f ROOT.zip Python.zip
 ```
 
 <br />
