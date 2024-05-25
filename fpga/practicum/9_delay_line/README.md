@@ -279,18 +279,19 @@ the expected functionality of the firmware.
 ## Data analysis
 [**[Contents]**](#contents)
 
-Explore all possible MUX selection codes and derive the _delay vs. MUX code_ characteristic. For each MUX code measure
+Explore all possible MUX selection codes and derive the **_delay vs. MUX code_ characteristic**. For each MUX code measure
 at the oscilloscope the delay inserted between input and output signals. 
 
 <br />
 
-|   MUX code   |   delay  |
-|:------------------:|:-------:|
-|     0              |   ...   |
-|     1              |   ...   |
-|     2              |   ...   |
-|     ...            |   ...   |
-|     ...            |   ...   |
+|   MUX code   |  delay  |
+|:------------:|:-------:|
+|     0        |   ...   |
+|     1        |   ...   |
+|     2        |   ...   |
+|     ...      |   ...   |
+|     ...      |   ...   |
+|     15       |   ...   |
 
 <br />
 
@@ -306,6 +307,44 @@ for your analysis, you can copy them from the `.solutions/bin/` directory as fol
 <br />
 
 Ask to the teacher if you are not confident in using the ROOT software.
+
+<br />
+
+>
+> **QUESTION**
+>
+> The linear fit on the experimental data shows a **non-zero input/output delay** when the digital code is `4'b0000`.
+> Is this "offset" expected ? How much is this extra delay ?
+>
+>   \___________________________________________________________________________________
+>
+
+<br />
+
+Compare your answer with a quick **timing analysis** in Vivado. For this purpose restore into a **Vivado interactive Tcl session**
+the final "routed" design checkpoint automatically created for you by the `make build` flow:
+
+```
+% vivado -mode tcl -nolog -nojournal work/build/outputs/routed.dcp
+```
+<br />
+
+Then execute interactively the following commands in the Vivado Tcl console:
+
+```
+vivado% set_case_analysis 0 [get_ports DelaySelect*]
+vivado% report_timing -from [get_port SignalIn] -to [get_port SiganlOut]
+```
+
+<br />
+
+Review the **timing report** in the console and identify the values for the input/output delay computed
+by the STA engine. iCompare this value with your fit results. Exit from Vivado once happy:
+
+```
+vivado% exit
+```
+
 
 <br />
 <!--------------------------------------------------------------------->
