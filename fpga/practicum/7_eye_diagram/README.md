@@ -1,3 +1,4 @@
+<div align="justify">
 
 # Practicum 7
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/practicum)]
@@ -384,3 +385,4 @@ Once done, save the file and try to re-run the flows from scratch up to FPGA pro
 
 <br />
 
+</div>

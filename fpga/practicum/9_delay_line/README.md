@@ -1,3 +1,4 @@
+<div align="justify">
 
 # Practicum 9
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/practicum)]
@@ -439,4 +440,4 @@ Once done, save the file and try to re-run the flows from scratch up to FPGA pro
 Verify at the oscilloscope the functionality of the new firmware. If you have time
 re-measure the _delay vs. MUX code_ characteristic and perform a linear fit on experimental data using ROOT.
 
-
+</div>

@@ -1,3 +1,4 @@
+<div align="justify">
 
 # Practicum 6
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/practicum)]
@@ -320,3 +321,4 @@ verify the functionality of the new firmware after your changes.
 <br />
 <!--------------------------------------------------------------------->
 
+</div>

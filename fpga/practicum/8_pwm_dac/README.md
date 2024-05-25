@@ -1,3 +1,4 @@
+<div align="justify">
 
 # Practicum 8
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/practicum)]
@@ -394,3 +395,4 @@ for your analysis, you can copy them from the `.solutions/bin/` directory as fol
 
 Ask to the teacher if you are not confident in using the ROOT software.
 
+</div>
