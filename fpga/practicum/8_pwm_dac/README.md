@@ -299,22 +299,26 @@ Create a new directory for your data analysis:
 
 <br />
 
-Explore all possible threshold values and derive the **DAC characteristic**. For each code measure at the oscilloscope the
-**DC output voltage** and the **duty-cycle** of the PWM signal. Plot output voltage vs. threshold code and duty-cycle vs. threshold code.
+Explore all possible threshold values and derive the **DAC characteristic**. For each code measure
+the **DC output voltage** with a digital multimeter (DMM) and the **duty-cycle** of the PWM signal
+at the oscilloscope. Plot output voltage vs. threshold code and duty-cycle vs. threshold code.
+
 
 <br />
 
-|   threshold code   |   Vout  |   Ton    |   Ton/T  |
-|:------------------:|:-------:|:--------:|:--------:|
-|     0              |   ...   |   ...          |  ...    |
-|     1              |   ...   |   ...          |  ...    |
-|     2              |   ...   |   ...          |  ...    |
-|     ...            |   ...   |   ...          |  ...    |
-|     ...            |   ...   |   ...          |  ...    |
+|   threshold code   |   Vout   |   Ton   |   Ton/T   |
+|:------------------:|:--------:|:-------:|:---------:|
+|        0           |   ...    |   ...   |    ...    |
+|        1           |   ...    |   ...   |    ...    |
+|        2           |   ...    |   ...   |    ...    |
+|        ...         |   ...    |   ...   |    ...    |
+|        ...         |   ...    |   ...   |    ...    |
+|        15          |   ...    |   ...   |    ...    |
 
 <br />
 
-Use **ROOT** for your data analysis and verify the expected linearity of the characteristic with a fit.
+Use **ROOT** for your data analysis and make a `TGraph` plot of collected _output voltage_ vs. _code_ values.
+Verify the expected linearity of the characteristic with a fit. Feel free to use a **PyROOT** script instead.
 
 <br />
 
@@ -328,27 +332,53 @@ Use **ROOT** for your data analysis and verify the expected linearity of the cha
 >
 > ```
 > # code  Vout  Ton  Ton/T
-> 0   ...   ...   ...
-> 1   ...   ...   ...
-> 2   ...   ...   ...
-> ...
+> 0       ...   ...   ...
+> 1       ...   ...   ...
+> 2       ...   ...   ...
+> ...     ...   ...   ...
+> ...     ...   ...   ...
+> 15      ...   ...   ...
 > ```
 >
-> Start an **interactive ROOT session** at the command line:
+> <br />
+>
+> You can use as many blank characters as you want to indent your measurements. 
+> Once finished start an **interactive ROOT session** at the command line:
 >
 > ```
 > % root -l
 > ````
+>
+> <br />
 >
 > Plot and fit the characteristic interactively with:
 >
 > ```
 > root[] TGraph gr("data/pwm_dac.txt")
 > root[] gr.Draw("ALP")
+> ```
+>
+> <br />
+>
+> Finally perform a linear fit with:
+>
+> ```
 > root[] gr.Fit("pol1")
 > ```
 >
-> You can also perform a quick fit using the ROOT **Fit Panel**.
+> <br />
+>
+> Alternatively you can place your measurements into **standard C/C++ arrays** and use them
+> into the `TGraph` constructor:
+>
+> ```
+> root[] int Npt = 16
+> root[] double xData[Npt] = {0,1,2,3 ... 15}
+> root[] double yData[Npt] = { ... }
+> root[] TGraph gr(Npt,xData,yData)
+> root[] gr.Draw("ALP")
+> root[] gr.Fit("pol1")
+> ```
 >
 
 <br />
