@@ -57,7 +57,8 @@ You can easily perform the installation at the command line as follows:
 % cd local/ROOT
 % wget https://root.cern/download/root_v5.34.32.Linux-ubuntu14-x86_64-gcc4.8.tar.gz
 % tar -xzf root_v5.34.32.Linux-ubuntu14-x86_64-gcc4.8.tar.gz
-% mv root_v5.34.32 5.34.32
+% ls -l
+% mv root 5.34.32
 % rm root_v5.34.32.Linux-ubuntu14-x86_64-gcc4.8.tar.gz
 ```
 
