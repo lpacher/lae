@@ -91,8 +91,9 @@ module TFF (
    ////////////////////
 
    wire Dint ;
+   wire QBAR_UNCONNECTED ;  // good coding practice!
 
-   DFF  u1 (.clk(clk), .rst(rst), .D(Dint), .Q(Q) ) ;
+   DFF  u1 (.clk(clk), .rst(rst), .D(Dint), .Q(Q), .Qbar(QBAR_UNCONNECTED) ) ;
    XOR  u2 (.A(T), .B(Q), .Z(Dint) ) ;
 
 

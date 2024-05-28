@@ -89,7 +89,7 @@ proc elaborate {} {
    ####################################
 
    ## log directory
-   set logDir  [pwd]/../../log ; if { ![file exists ${logDir}] } { file mkdir ${logDir} }
+   set logDir  [pwd]/log ; if { ![file exists ${logDir}] } { file mkdir ${logDir} }
 
    ## log file
    set logFile ${logDir}/elaborate.log
@@ -123,12 +123,15 @@ proc elaborate {} {
 
    puts "\n-- Elaborating the design ...\n"
 
-   #catch {exec xelab -relax -mt 2 \
-   #   -L work -L xil_defaultlib -L xpm -L unisims_ver -L unimacro_ver -L secureip \
-   #   -debug all work.${xelabTop} -snapshot ${xelabTop} -nolog >@stdout 2>@stdout | tee ${logFile} }
+   ## standard elaboration (includign GL primitives)
+   #catch {eval exec xelab -relax -mt 2 \
+   #    -L work -L xil_defaultlib -L xpm -L unisims_ver -L unimacro_ver -L secureip \
+   #    -debug all work.${xelabTop} work.glbl -snapshot ${xelabTop} -nolog >@stdout 2>@stdout | tee ${logFile} }
 
-   catch {exec xelab -relax -mt 2 \
-      -L work -L xil_defaultlib -L xpm -L unisims_ver -L unimacro_ver -L secureip \
+   ## GL simulations with SDF => https://support.xilinx.com/s/article/63988?language=en_US (use simprims_ver instead of unisims_ver)
+   catch {eval exec xelab -relax -mt 2 \
+      -L work -L xil_defaultlib -L xpm -L simprims_ver -L unimacro_ver -L secureip \
+      -transport_int_delays -pulse_r 0 -pulse_int_r 0 \
       -debug all work.${xelabTop} work.glbl -snapshot ${xelabTop} -nolog >@stdout 2>@stdout | tee ${logFile} }
 
    ## report CPU time

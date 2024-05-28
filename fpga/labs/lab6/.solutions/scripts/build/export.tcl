@@ -5,21 +5,20 @@
 ##
 ## The script can be also executed standalone from Makefile using:
 ##
-##    % make build/import [mode=gui|tcl|batch]
+##    % make build/export [mode=gui|tcl|batch]
 ##
 ## Luca Pacher - pacher@to.infn.it
 ## Fall 2020
 ##
 
 
+################################################################
 ## **DEBUG
 puts "\nINFO: \[TCL\] Running [file normalize [info script]]\n"
+################################################################
 
 
-##
 ## save/restore flow
-##
-
 if { [current_project -quiet] eq "" } {
 
    ## load common variables and preferences
@@ -47,59 +46,117 @@ if { [current_project -quiet] eq "" } {
 }
 
 
-puts "#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n# FLOW INFO: EXPORT\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n"
+if { [catch {
 
 
-## profiling
-set tclStart [clock seconds]
+   ###################################
+   ## profiling
+   set tclStart [clock seconds]
+   ###################################
+
+   puts "#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n# FLOW INFO: EXPORT\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n"
 
 
-##################################################################
-##   export gate-level netlist and SDF for timing simulations   ##
-##################################################################
+   ##################################################################
+   ##   export gate-level netlist and SDF for timing simulations   ##
+   ##################################################################
 
-puts "\n\nINFO: \[TCL\] Final signoff Verilog gate-level netlist is ${outputsDir}/signoff.v\n"
+   puts "\n\nINFO: \[TCL\] Final signoff Verilog gate-level netlist is ${outputsDir}/signoff.v\n"
 
-write_verilog \
-   -mode timesim -nolib -sdf_anno false -force -file ${outputsDir}/signoff.v
+   write_verilog -mode timesim -nolib -sdf_anno true -force -file ${outputsDir}/signoff.v
+
+   ## export SDF for all corners
+   foreach corner [list slow fast] {
+
+      write_sdf -mode timesim -process_corner ${corner} -force -file ${outputsDir}/signoff\_${corner}.sdf
+   }
 
 
-## export SDF for all corners
-foreach corner [list slow fast] {
+   ############################
+   ##   generate bitstream   ##
+   ############################
 
-   write_sdf \
-      -mode timesim -process_corner ${corner} -force -file ${outputsDir}/signoff\_${corner}.sdf
+   puts "\n\nINFO: \[TCL\] Write bitsream...\n"
+
+   ##
+   ## **IMPORTANT
+   ##
+   ## In order to be able to write the FPGA configuration into a dedicated
+   ## external memory you must generate a pure BINARY (.bin) file, not
+   ## only the BIT (.bit) file.
+   ##
+
+
+   ## optimize the programming of the Quad SPI Flash
+   set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 4 [current_design]
+   set_property CONFIG_MODE SPIx4               [current_design]
+
+
+   ## generate FPGA and memory configuration files
+   write_bitstream \
+      -verbose -force -bin_file ${outputsDir}/[get_property top [current_design]].bit
+
+
+   puts "\n"
+   puts "\t======================================="
+   puts "\t   EXPORT FLOW SUCCESSFULLY COMPLETED  "
+   puts "\t======================================="
+   puts "\n"
+
+
+   ###################################
+   set tclStop [clock seconds]
+   set seconds [expr ${tclStop} - ${tclStart} ]
+   ###################################
+
+   ## profiling
+   puts "\nINFO: \[TCL\] Total elapsed-time for [file normalize [info script]]: [format "%.2f" [expr $seconds/60.]] minutes\n"
+
+   ## normal exit
+   #exit 0
+
+## errors catched otherwise... abort the flow!
+}]} {
+
+   puts "\n"
+   puts "\t============================="
+   puts "\t   EXPORT FLOW **FAILED** !  "
+   puts "\t============================="
+   puts "\n"
+
+
+   ###################################
+   set tclStop [clock seconds]
+   set seconds [expr ${tclStop} - ${tclStart} ]
+   ###################################
+
+   ## profiling
+   puts "\n**INFO: \[TCL\] Total elapsed-time for [file normalize [info script]]: [format "%.2f" [expr $seconds/60.]] minutes.\n"
+
+
+   if { [file exists ${logDir}/build.log] } {
+
+      set logFile [file normalize ${logDir}/build.log] ;   ## 'make build' executed => build.log 
+
+   } else {
+
+      set logFile [file normalize ${logDir}/export.log] ;   ## 'make build/export' executed otherwise => export.log
+   }
+
+   puts "\n\n**ERROR \[TCL\]: Export flow did not complete successfully! Force an exit."
+   puts "               Please review and fix all errors found in the log file.\n"
+
+   ## script failure
+   if { ${rdi::mode} eq "gui" } {
+
+      return -code break
+
+   } else {
+
+      puts "------------------------------------------------------------"
+      catch {exec grep --color "^ERROR" ${logFile} >@stdout 2>@stdout}
+      puts "------------------------------------------------------------\n\n"
+
+      exit 1
+   }
 }
-
-
-############################
-##   generate bitstream   ##
-############################
-
-puts "\n\nINFO: \[TCL\] Write bitsream...\n"
-
-##
-## **IMPORTANT
-##
-## In order to be able to write the FPGA configuration into a dedicated
-## external memory you must generate a pure BINARY (.bin) file, not
-## only the BIT (.bit) file.
-##
-
-
-## optimize the programming of the Quad SPI Flash
-set_property BITSTREAM.CONFIG.SPI_BUSWIDTH 4 [current_design]
-set_property CONFIG_MODE SPIx4               [current_design]
-
-
-## generate FPGA and memory configuration files
-write_bitstream \
-   -verbose -force -bin_file ${outputsDir}/[get_property top [current_design]].bit
-
-
-## report CPU time
-set tclStop [clock seconds]
-set seconds [expr ${tclStop} - ${tclStart} ]
-
-puts "\nINFO: \[TCL\] Total elapsed-time for [file normalize [info script]]: [format "%.2f" [expr $seconds/60.]] minutes\n"
-

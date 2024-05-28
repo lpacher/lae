@@ -58,5 +58,12 @@ module tb_SyncCounter4b ;
 
    end
 
+
+`ifdef SDF_ANNOTATE
+   initial begin
+      $sdf_annotate("../build/outputs/mapped.sdf", tb_SyncCounter4b.DUT) ;
+   end
+`endif
+
 endmodule
 

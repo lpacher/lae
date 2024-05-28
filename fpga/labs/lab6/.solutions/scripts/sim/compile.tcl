@@ -41,6 +41,7 @@
 
 proc compile {} {
 
+
    ## profiling
    set tclStart [clock seconds]
 
@@ -65,9 +66,14 @@ proc compile {} {
    ## simulation sources (assume to write the testbench in Verilog or SystemVerilog)
    #set SIM_SOURCES [concat [glob -nocomplain ${SIM_DIR}/*.v] [glob -nocomplain ${SIM_DIR}/*.sv]]
 
+
    set vlogSources {}
    set vhdlSources {}
    set ipsSources  {}
+
+   ## **NEW: -define statements from Makefile
+   set vlogDefines {}
+
 
    ## single HDL file to be compiled
    if { [info exists ::env(HDL_FILE)] } {
@@ -124,6 +130,18 @@ proc compile {} {
    }
 
 
+   ## **NEW: parse VLOG_DEFINES from Makefile if any
+   if { [info exists ::env(VLOG_DEFINES)] } {
+
+      set vlogDefines ${::env(VLOG_DEFINES)} ; puts "\n**INFO \[RTL\]: Verilog defines detected: ${vlogDefines}\n"
+
+   } else {
+
+      #set vlogDefines "-define NO_DEFINES"
+      set vlogDefines {}
+   }
+
+
    #########################################
    ##   move to simulation working area   ##
    #########################################
@@ -156,7 +174,7 @@ proc compile {} {
 
 
    ## log directory
-   set logDir  [pwd]/../../log ; if { ![file exists ${logDir}] } { file mkdir ${logDir} }
+   set logDir  [pwd]/log ; if { ![file exists ${logDir}] } { file mkdir ${logDir} }
 
    ## log file
    set logFile ${logDir}/compile.log
@@ -168,7 +186,7 @@ proc compile {} {
    }
 
 
-   ## compile Verilog sources (xvlog)
+   ## compile Verilog/SystemVerilog sources (xvlog)
    if { [llength ${vlogSources}] != 0 } {
 
       puts "\n"
@@ -177,11 +195,24 @@ proc compile {} {
 
          if { [file exists ${src}] } {
 
-            puts "Compiling Verilog source file ${src} ..."
+            ## SystemVerilog file (.sv) detected, compile with 'xvlog -sv'
+            if { [file extension ${src} ] == ".sv" } {
 
-            ## launch the xvlog executable from Tcl (force xvlog -sv to compile all sources as SystemVerilog files)
-            catch {exec xvlog -relax -sv -work work ${src} -nolog | tee -a ${logFile} }
+               puts "Compiling SystemVerilog source file ${src} ..."
 
+               ## launch the xvlog executable from Tcl (force xvlog -sv to compile sources as SystemVerilog files)
+               catch {eval exec xvlog -sv ${vlogDefines} -relax -include [file normalize [pwd]/../..] -work work ${src} -nolog | tee -a ${logFile} }
+
+            } else {
+
+
+               ## standard Verilog file (.v) otherwise
+               puts "Compiling Verilog source file ${src} ..."
+
+               ## launch the xvlog executable from Tcl (force xvlog -sv to compile all sources as SystemVerilog files)
+               catch {eval exec xvlog ${vlogDefines} -relax -include [file normalize [pwd]/../.. ] -work work ${src} -nolog | tee -a ${logFile} }
+
+            }
          } else {
 
             puts "**ERROR: ${src} not found!"
@@ -205,7 +236,7 @@ proc compile {} {
             puts "Compiling VHDL source file ${src} ..."
 
             ## launch the xvhdl executable from Tcl
-            catch {exec xvhdl -2008 -relax -work work ${src} -nolog | tee -a ${logFile} }
+            catch {eval exec xvhdl -2008 -relax -work work ${src} -nolog | tee -a ${logFile} }
 
          } else {
 
@@ -230,7 +261,7 @@ proc compile {} {
             puts "Compiling IP Verilog netlist ${src} ..."
 
             ## launch the xvlog executable from Tcl
-            catch {exec xvlog -relax -sv -work work ${src} -nolog | tee -a ${logFile} }
+            catch {eval exec xvlog -relax -work work ${src} -nolog | tee -a ${logFile} }
 
          } else {
 

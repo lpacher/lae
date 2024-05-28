@@ -1,5 +1,5 @@
 ##
-## Example synthesis script for a non-project mode Vivado implementation flow.
+## Example synthesis script for a Non-Project Mode Vivado implementation flow.
 ## Parse all Xilinx Design Constraints (XDC) files and map the RTL into real
 ## FPGA device primitives. At the end of the flow save a design-checkpoint
 ## of the design for later restore and debug.
@@ -13,91 +13,159 @@
 ##
 
 
+################################################################
+## **DEBUG
 puts "\nINFO: \[TCL\] Running [file normalize [info script]]\n"
+################################################################
 
-##
+
 ## save/restore flow
-##
-
-## **WARN: you can't save a "checkpoint" until the design is synthesized, thus no .dcp database to restore here
 if { [current_project -quiet] eq "" } {
 
+   ## **WARN: you can't save a "checkpoint" until the design is synthesized, thus no .dcp database to restore here
    source ${scriptsDir}/build/import.tcl
 }
 
 
-puts "#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n# FLOW INFO: SYNTHESIS\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n"
-
-## profiling
-set tclStart [clock seconds]
+if { [catch {
 
 
-##################################
-##   parse design constraints   ##
-##################################
+   ###################################
+   ## profiling
+   set tclStart [clock seconds]
+   ###################################
 
-puts "\n-- Parsing design constraints..."
+   puts "#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n# FLOW INFO: SYNTHESIS\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n"
 
-if { [llength [glob -nocomplain [pwd]/xdc/*.xdc]] != 0 } {
 
-   foreach src [glob -nocomplain [pwd]/xdc/*.xdc] {
+   ##################################
+   ##   parse design constraints   ##
+   ##################################
 
-      puts "\n\nLoading Xilinx Design Constraint (XDC) source file ${src} ...\n" ; read_xdc -unmanaged ${src}
+   puts "\n-- Parsing design constraints..."
+
+   if { [llength [glob -nocomplain [pwd]/xdc/*.xdc]] != 0 } {
+
+      foreach src [glob -nocomplain [pwd]/xdc/*.xdc] {
+
+         puts "\n\nLoading Xilinx Design Constraint (XDC) source file ${src} ...\n" ; read_xdc -unmanaged ${src}
+      }
+
+   } else {
+
+      puts "\nERROR: No constraints specified for FPGA implementation! Force an exit."
+
+      ## script failure
+      return -code error
    }
 
-} else {
 
-   puts "\n**ERROR: No constraints specified for FPGA implementation, aborting."
+   ##########################
+   ##   mapped synthesis   ##
+   ##########################
+
+   ## synthesize the design
+   synth_design \
+      -top                 ${RTL_TOP_MODULE}     \
+      -part                ${targetXilinxDevice} \
+      -flatten_hierarchy   full                  \
+      -name                syn_1
+
+
+
+   #########################################
+   ##   generate post-synthesis reports   ##
+   #########################################
+
+   ## utilization report
+   report_utilization -file ${reportsDir}/post_syn_utilization.rpt
+
+   ## timing-summary report
+   report_timing_summary -max_paths 100 -warn_on_violation -file ${reportsDir}/post_syn_timing_summary.rpt
+
+
+   ####################################
+   ##   save synthesis output data   ##
+   ####################################
+
+   ## save post-synthesis Verilog netlist for post-synthesis functional/timing gate-level simulations
+   #write_verilog -mode funcsim -force ${outputsDir}/mapped.v
+   #write_verilog -mode timesim -sdf_anno true -force ${outputsDir}/mapped.v
+   write_verilog -mode timesim -sdf_anno false -force ${outputsDir}/mapped.v
+
+   ## save post-synthesis SDF for post-synthesis gate-level simulations
+   write_sdf -mode timesim -force ${outputsDir}/mapped.sdf
+
+   ## write a database for the synthesized design
+   write_checkpoint -force ${outputsDir}/mapped.dcp
+
+   ## if running in GUI mode, save to PDF the gate-level schematic for later debug or project documentation
+   if { ${rdi::mode} eq "gui" } {
+
+      show_schematic [concat [get_cells] [get_ports]]
+      write_schematic -force -format pdf -scope all -orientation landscape ${outputsDir}/syn_schematic.pdf
+   }
+
+   puts "\n"
+   puts "\t=========================================="
+   puts "\t   SYNTHESIS FLOW SUCCESSFULLY COMPLETED  "
+   puts "\t=========================================="
+   puts "\n"
+
+
+   ###################################
+   set tclStop [clock seconds]
+   set seconds [expr ${tclStop} - ${tclStart} ]
+   ###################################
+
+   ## profiling
+   puts "\n**INFO: \[TCL\] Total elapsed-time for [file normalize [info script]]: [format "%.2f" [expr $seconds/60.]] minutes.\n"
+
+   ## normal exit
+   #exit 0
+
+## errors catched otherwise... abort the flow!
+}]} {
+
+   puts "\n"
+   puts "\t================================"
+   puts "\t   SYNTHESIS FLOW **FAILED** !  "
+   puts "\t================================"
+   puts "\n"
+
+
+   ###################################
+   set tclStop [clock seconds]
+   set seconds [expr ${tclStop} - ${tclStart} ]
+   ###################################
+
+   ## profiling
+   puts "\n**INFO: \[TCL\] Total elapsed-time for [file normalize [info script]]: [format "%.2f" [expr $seconds/60.]] minutes.\n"
+
+
+   if { [file exists ${logDir}/build.log] } {
+
+      set logFile [file normalize ${logDir}/build.log] ;   ## 'make build' executed => build.log 
+
+   } else {
+
+      set logFile [file normalize ${logDir}/syn.log] ;   ## 'make build/syn' executed otherwise => syn.log
+   }
+
+   puts "\n\n**ERROR \[TCL\]: Mapped synthesis flow did not complete successfully! Force an exit."
+   puts "               Please review and fix all errors found in the log file.\n"
 
    ## script failure
-   exit 1
+   if { ${rdi::mode} eq "gui" } {
+
+      return -code break
+
+   } else {
+
+      puts "------------------------------------------------------------"
+      catch {exec grep --color "^ERROR" ${logFile} >@stdout 2>@stdout}
+      puts "------------------------------------------------------------\n\n"
+
+      exit 1
+   }
 }
-
-
-##########################
-##   mapped synthesis   ##
-##########################
-
-## synthesize the design
-synth_design \
-   -top                 ${RTL_TOP_MODULE}     \
-   -part                ${targetXilinxDevice} \
-   -flatten_hierarchy   full                  \
-   -name                syn_1
-
-
-
-#########################################
-##   generate post-synthesis reports   ##
-#########################################
-
-## utilization report
-report_utilization -file ${reportsDir}/post_syn_utilization.rpt
-
-## timing-summary report
-report_timing_summary -max_paths 100 -warn_on_violation -file ${reportsDir}/post_syn_timing.rpt
-
-
-####################################
-##   save synthesis output data   ##
-####################################
-
-## save post-synthesis Verilog netlist for post-synthesis functional/timing gate-level simulations
-write_verilog \
-   -mode funcsim -force ${outputsDir}/mapped.v
-
-## save post-synthesis SDF for post-synthesis gate-level simulations
-write_sdf -force ${outputsDir}/mapped.sdf
-
-## write a database for the synthesized design
-write_checkpoint \
-   -force ${outputsDir}/mapped.dcp
-
-
-## if running in GUI mode, save to PDF the gate-level schematic for later debug or project documentation
-if { ${rdi::mode} eq "gui" } {
-
-   show_schematic [concat [get_cells] [get_ports]]
-   write_schematic -force -format pdf -scope all -orientation landscape ${outputsDir}/syn_schematic.pdf
-}
-
