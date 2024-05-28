@@ -55,15 +55,6 @@ module tb_SyncCounter4b ;
       #(20*100 + 17) rst = 1'b1 ;    // explore all possible output codes, then assert an asynchronous reset and check what happens
 
       #500 $finish ;
-
    end
-
-
-`ifdef SDF_ANNOTATE
-   initial begin
-      $sdf_annotate("../build/outputs/mapped.sdf", tb_SyncCounter4b.DUT) ;
-   end
-`endif
 
 endmodule
-

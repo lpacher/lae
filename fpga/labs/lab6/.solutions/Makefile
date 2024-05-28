@@ -442,33 +442,42 @@ ifneq ($(hdl),)
    export HDL_FILE=$(hdl)
 endif
 
-.PHONY : compile
-compile : $(TCL_DIR)/sim/compile.tcl ## Parse and compile RTL and simulation sources
+.PHONY : sim/compile
+sim/compile : $(TCL_DIR)/sim/compile.tcl ## Parse and compile RTL and simulation sources
 
 ifeq ($(wildcard $(WORK_DIR)/sim/.*),)
 	@$(error ERROR: Missing simulation working area $(WORK_DIR)/sim ! Run 'make area' before running the flows.)
 else
-	@tclsh $(TCL_DIR)/sim/compile.tcl $@
+	@tclsh $(TCL_DIR)/sim/compile.tcl compile
 endif
 ##____________________________________________________________________________________________________
 
 
-.PHONY : elaborate
-elaborate : $(TCL_DIR)/sim/elaborate.tcl ## Elaborate the design
+.PHONY : sim/elaborate
+sim/elaborate : $(TCL_DIR)/sim/elaborate.tcl ## Elaborate the design
 
-	@tclsh $(TCL_DIR)/sim/elaborate.tcl $@
+	@tclsh $(TCL_DIR)/sim/elaborate.tcl elaborate
 ##____________________________________________________________________________________________________
 
+
+.PHONY : sim/simulate
+sim/simulate : $(TCL_DIR)/sim/simulate.tcl $(WORK_DIR)/sim/xsim.dir ## Run simulation executable
+
+	@tclsh $(TCL_DIR)/sim/simulate.tcl simulate $(mode)
+##____________________________________________________________________________________________________
+
+
+.PHONY : compile
+compile : sim/compile ## Alias, same as 'make sim/compile'
+
+.PHONY : elaborate
+elaborate : sim/elaborate ## Alias, same as 'make sim/elaborate'
 
 .PHONY : simulate
-simulate : $(TCL_DIR)/sim/simulate.tcl $(WORK_DIR)/sim/xsim.dir ## Run simulation executable
-
-	@tclsh $(TCL_DIR)/sim/simulate.tcl $@ $(mode)
-##____________________________________________________________________________________________________
-
+simulate : sim/simulate ## Alias, same as 'make sim/simulate'
 
 .PHONY : sim
-sim : compile elaborate simulate ## One-step compilation, elaboration and simulation (same as 'make compile elaborate simulate')
+sim : sim/compile sim/elaborate sim/simulate ## Alias, same as 'make compile elaborate simulate'
 ##____________________________________________________________________________________________________
 
 
@@ -538,6 +547,11 @@ else
 	   -log $(WORK_DIR)/build/log/syn.log -nojournal -verbose -notrace
    endif
 endif
+##_______________________________________________________________________________________
+
+
+.PHONY : syn
+syn : build/syn ## Alias, same as 'make build/syn'
 ##_______________________________________________________________________________________
 
 
@@ -701,8 +715,8 @@ endif
 ## Cleanup targets
 ##
 
-.PHONY : clean/sim
-clean/sim : ## Delete ALL files from work/sim
+.PHONY : sim/clean
+sim/clean : ## Delete ALL files from work/sim
 
 	@$(RM)    $(WORK_DIR)/sim/*.log
 	@$(RM)    $(WORK_DIR)/sim/*.jou
@@ -714,8 +728,8 @@ clean/sim : ## Delete ALL files from work/sim
 ##____________________________________________________________________________________________________
 
 
-.PHONY : clean/build
-clean/build : ## Delete ALL files from work/build
+.PHONY : build/clean
+build/clean : ## Delete ALL files from work/build
 
 	@$(RMDIR) $(WORK_DIR)/build/log/*
 	@$(RMDIR) $(WORK_DIR)/build/reports/*
@@ -723,16 +737,10 @@ clean/build : ## Delete ALL files from work/build
 ##____________________________________________________________________________________________________
 
 
-.PHONY : clean/all
-clean/all : clean/sim clean/build ## Delete ALL temporary and garbage files
+.PHONY : clean
+clean : sim/clean build/clean ## Delete ALL temporary and garbage files
 
 	@$(RM) *.pb *.wdb *.log *.jou *.str *xpr *.xml *.bit *.bin
 	@$(RMDIR) xsim.dir
 	@$(RMDIR) .Xil
 ##____________________________________________________________________________________________________
-
-
-.PHONY : clean
-clean : clean/all ## Alias, same as 'make clean/all'
-##____________________________________________________________________________________________________
-

@@ -128,7 +128,7 @@ proc elaborate {} {
    #    -L work -L xil_defaultlib -L xpm -L unisims_ver -L unimacro_ver -L secureip \
    #    -debug all work.${xelabTop} work.glbl -snapshot ${xelabTop} -nolog >@stdout 2>@stdout | tee ${logFile} }
 
-   ## GL simulations with SDF => https://support.xilinx.com/s/article/63988?language=en_US (use simprims_ver instead of unisims_ver)
+   ## GL simulations with SDF (use simprims_ver instead of unisims_ver, ref. to https://support.xilinx.com/s/article/63988?language=en_US)
    catch {eval exec xelab -relax -mt 2 \
       -L work -L xil_defaultlib -L xpm -L simprims_ver -L unimacro_ver -L secureip \
       -transport_int_delays -pulse_r 0 -pulse_int_r 0 \

@@ -57,19 +57,46 @@ if { [catch {
    puts "#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n# FLOW INFO: EXPORT\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n"
 
 
-   ##################################################################
-   ##   export gate-level netlist and SDF for timing simulations   ##
-   ##################################################################
+   ##############################################################################
+   ##   export gate-level netlist and SDF for **SIGNOFF** timing simulations   ##
+   ##############################################################################
 
-   puts "\n\nINFO: \[TCL\] Final signoff Verilog gate-level netlist is ${outputsDir}/signoff.v\n"
+   ##
+   ## **NOTE
+   ##
+   ## For setting up and running GL + SDF simulations ref. to the
+   ## following article:
+   ##
+   ##    https://support.xilinx.com/s/article/63988?language=en_US
+   ##
 
-   write_verilog -mode timesim -nolib -sdf_anno true -force -file ${outputsDir}/signoff.v
+   ## save final post-routing SDF for **SIGNOFF** gate-level simulations
+   write_sdf -mode timesim -force ${outputsDir}/signoff.sdf
 
-   ## export SDF for all corners
-   foreach corner [list slow fast] {
+   set sdfFileAbsolutePath [file normalize ${outputsDir}/signoff.sdf]
 
-      write_sdf -mode timesim -process_corner ${corner} -force -file ${outputsDir}/signoff\_${corner}.sdf
-   }
+   puts "Successfully generated SDF file ${sdfFileAbsolutePath}"
+
+   ## save final post-routing Verilog netlist for **SIGNOFF** functional/timing gate-level simulations
+   #write_verilog -mode timesim -sdf_anno true -force ${outputsDir}/signoff.v -sdf_file [file normalize ${outputsDir}/signoff.sdf]
+   write_verilog -mode funcsim -force ${outputsDir}/signoff.v
+
+   ##################################################################################################################
+   ## **EXTRA: automatically append $sdf_annotate() task within `ifdef SDF_ANNOTATE/`endif check
+
+   exec sed -i {/endmodule/,$d} ${outputsDir}/signoff.v ;   #deletes everything after the first 'endmodule' (match included)
+
+   exec echo ""                                                                            >> ${outputsDir}/signoff.v
+   exec echo "`ifdef SDF_ANNOTATE"                                                         >> ${outputsDir}/signoff.v
+   exec echo "  initial \$sdf_annotate(\"${sdfFileAbsolutePath}\",,,,\"tool_control\");"   >> ${outputsDir}/signoff.v
+   exec echo "`endif"                                                                      >> ${outputsDir}/signoff.v
+   exec echo ""                                                                            >> ${outputsDir}/signoff.v
+   exec echo "endmodule"                                                                   >> ${outputsDir}/signoff.v
+   exec echo ""                                                                            >> ${outputsDir}/signoff.v
+
+   ##################################################################################################################
+
+   puts "Successfully generated Verilog netlist [file normalize ${outputsDir}/signoff.v]"
 
 
    ############################
