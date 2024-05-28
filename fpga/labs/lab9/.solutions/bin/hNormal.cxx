@@ -42,7 +42,8 @@ void hNormal (char *fileName="work/sim/gaus.txt") {
       exit(1) ;
     }
 
-   int Ntrials = 100000 ;   // number of simulated random values
+   //int Ntrials = 100000 ;   // number of simulated random values
+   int Ntrials = 0 ;
 
    int nMin = 0 ;
    int nMax = 8188 ;   // the exact max. number achievable by summing 4x LFSR outputs is 4*(2^11 -1) = 8188 
@@ -57,9 +58,8 @@ void hNormal (char *fileName="work/sim/gaus.txt") {
    while (filePtr >> value) {
 
       //std::cout << value << endl ;
-
+      Ntrials++ ;
       hRandom->Fill(value) ;
-
    }
 
    filePtr.close() ;
