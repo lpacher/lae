@@ -125,6 +125,19 @@ Virtual laboratories are then supported by [**practical examples**](fpga/practic
 in order to let students to physically experiment with a real FPGA and digital circuits using real hardware and instrumentation. 
 
 <br />
+
+>
+> **IMPORTANT**
+>
+> Due to insurance reasons students that are not yet enrolled to the Master's Degree (Laurea Magistrale)
+>
+> &nbsp;&nbsp;&nbsp;** WILL BE NOT ALLOWED TO ACCESS THE LABORATORIES**
+>
+> in agreement with present official safety and healthy security laws at work. There are no restrictions
+> to attend public lectures in the classroom instead.
+>
+
+<br />
 <!--------------------------------------------------------------------->
 
 
