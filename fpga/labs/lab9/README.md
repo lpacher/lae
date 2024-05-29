@@ -357,7 +357,7 @@ The Verilog testbench writes into a text file `work/sim/LFSR.txt` the integer eq
 Determine the number of values registered in the file with the following command:
 
 ```
-% cat worl/sim/LFSR.txt | wc -l
+% cat work/sim/LFSR.txt | wc -l
 ```
 
 <br />
