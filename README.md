@@ -72,8 +72,10 @@ The course covers:
 * gate-level simulations with back-annotated delays (SDF)
 * practical implementation and test of small digital systems targeting a Xilinx Artix-7 FPGA device
 
+<br />
+
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > All students are requested to **complete the preparatory work** before attending practical lectures!
 > Please go through detailed step-by-step instructions presented in [**labs/lab0/README.md**](labs/lab0/README.md)
@@ -129,9 +131,9 @@ in order to let students to physically experiment with a real FPGA and digital c
 >
 > **IMPORTANT**
 >
-> Due to insurance reasons students that are not yet enrolled to the Master's Degree (Laurea Magistrale)
+> Due to **insurance reasons** students that are **not yet enrolled** to the Master's Degree (Laurea Magistrale)
 >
-> &nbsp;&nbsp;&nbsp;** WILL BE NOT ALLOWED TO ACCESS THE LABORATORIES**
+> &nbsp;&nbsp;&nbsp;&nbsp; <b>\*\*WILL BE NOT ALLOWED TO ACCESS THE LABORATORIES\*\*</b>
 >
 > in agreement with present official safety and healthy security laws at work. There are no restrictions
 > to attend public lectures in the classroom instead.
@@ -147,7 +149,7 @@ in order to let students to physically experiment with a real FPGA and digital c
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > Each student is **requested** to have a **fully-working FPGA development environment** installed on his/her
 > personal computer in terms of software installations, licensing, command-line setup etc.
@@ -384,7 +386,7 @@ Each time you will need to **update your local copy of the repository** simply p
 <br />
 
 >
-> **IMPORTANT !**
+> **IMPORTANT**
 >
 > All `git` commands **must be invoked** inside the top `lae/` directory or from any other sub-directory of the repository!
 >
