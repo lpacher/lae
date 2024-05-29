@@ -86,7 +86,7 @@ The course covers:
 # Course material
 [**[Contents]**](#contents)
 
-Lecture slides are available on the main [**CampusNet course material page**](https://fisica.campusnet.unito.it/do/didattica.pl/Quest?corso=70d4).
+Lecture slides are available on the main [**CampusNet course material page**](https://www.fisicamagistrale.unito.it/do/didattica.pl/Quest?corso=70d4).
 A complete list of reference documentation and online resources is available in the
 [**Reference documentation**](#reference-documentation) section instead.
 
