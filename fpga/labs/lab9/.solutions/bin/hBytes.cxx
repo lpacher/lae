@@ -43,10 +43,10 @@ void hBytes (char *fileName="work/sim/LFSR.txt") {
 
 
    // histogram the "trend" of shift-register outputs (not a true histogram indeed, just a trend)
-   TH1F *hRandom = new TH1F("hRandom", "LFSR output-code vs. tick", 256*4, -0.5, 256*4 + 0.5) ;   // extra values simply goes into overflow bin
+   TH1I *hRandom = new TH1I("hRandom", "LFSR output-code vs. tick", 256*4, -0.5, 256*4 + 0.5) ;   // extra values simply goes into overflow bin
 
    // histogram of the distribution
-   TH1F*hCode = new TH1F("hCode", "LFSR output-code distribution", 256, -0.5, 255 + 0.5) ;
+   TH1I *hCode = new TH1I("hCode", "LFSR output-code distribution", 256, -0.5, 255 + 0.5) ;
 
    int bin = 1 ;
 

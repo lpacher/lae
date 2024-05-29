@@ -142,6 +142,9 @@ void hNormal (char *fileName="work/sim/gaus.txt") {
 
    hRandom->SetStats(1) ; 
 
+   // optionally, set y-axis log scale for easier HW-data vs. MC-data comparison
+   //gPad->SetLogy() ;
+
    gPad->Modified() ;
    gPad->Update() ;
 
