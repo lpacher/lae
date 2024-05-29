@@ -95,7 +95,7 @@ set SERVER   localhost
 set PORT     3121
 
 ## connect to hardware server
-connect_hw_server -url ${SERVER}:${PORT} -allow_non_jtag -verbose
+connect_hw_server -url ${SERVER}:${PORT} -verbose
 
 puts "Current hardware server set to [current_hw_server]" ;   ## [current_hw_server] simply returns $SERVER:$PORT
 

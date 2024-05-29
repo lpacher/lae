@@ -20,8 +20,11 @@ global scriptsDir ; set scriptsDir [pwd]/scripts
 
 if { [catch {
 
-   ## start global timer
+   ###################################
+   ## profiling
    set buildStart [clock seconds]
+   ###################################
+
    puts "Start at: [clock format ${buildStart} -format {%x %X}]"
 
    ## parse RTL and IP sources
@@ -39,16 +42,20 @@ if { [catch {
    ## generate bitsream and memory configuration files, export SDF, XDC and gate-level netlist for timing simulations
    source ${scriptsDir}/build/export.tcl
 
-   ## end global timer
+   ###################################
    set buildStop [clock seconds]
    set buildSeconds [expr ${buildStop} - ${buildStart} ]
+   ###################################
 
+   ## profiling
    puts "\nINFO: \[TCL\] Total elapsed-time: [format "%.2f" [expr ${buildSeconds}/60.]] minutes\n"
 
 
-   puts "============================================"
-   puts "   FPGA implementation flow **COMPLETED**   "
-   puts "============================================\n\n"
+   puts "\n"
+   puts "\t============================================"
+   puts "\t   FPGA implementation flow **COMPLETED**   "
+   puts "\t============================================\n\n"
+   puts "\n"
 
    ## normal exit
    #exit 0
@@ -57,10 +64,22 @@ if { [catch {
 } msg]} {
 
 
-   puts "\n **ERROR: FPGA implementation could not finish successfully. Force an exit now. ($msg)\n"
+   puts "\n"
+   puts "\t========================================="
+   puts "\t   FPGA implementation flow **FAILED**   "
+   puts "\t=========================================\n\n"
+   puts "\n"
+
+   puts "**ERROR: FPGA implementation could not finish successfully! Force an exit.\n"
 
    ## script failure
-   exit 1
+   if { ${rdi::mode} eq "gui" } {
 
+      ## keep the GUI session alive
+      return -code break
+
+   } else {
+
+      exit 1
+   }
 }
-

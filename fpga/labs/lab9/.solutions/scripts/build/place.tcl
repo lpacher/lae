@@ -10,13 +10,13 @@
 ##
 
 
-
+################################################################
+## **DEBUG
 puts "\nINFO: \[TCL\] Running [file normalize [info script]]\n"
+################################################################
 
-##
+
 ## save/restore flow
-##
-
 if { [current_project -quiet] eq "" } {
 
    ## load common variables and preferences
@@ -44,51 +44,122 @@ if { [current_project -quiet] eq "" } {
 }
 
 
-puts "#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n# FLOW INFO: PLACEMENT\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n"
+
+if { [catch {
 
 
-## profiling
-set tclStart [clock seconds]
+   ###################################
+   ## profiling
+   set tclStart [clock seconds]
+   ###################################
+
+   puts "#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n# FLOW INFO: PLACEMENT\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n#\n"
 
 
-###########################################
-##   pre-placement design optimization   ##
-###########################################
+   ##########################
+   ##   **SANITY CHECK**   ##
+   ##########################
 
-opt_design -remap
-
-report_utilization -file ${reportsDir}/post_opt_utilization.rpt
-
-
-#######################
-##   run placement   ##
-#######################
-
-## propagate clock latency through clock network to improve skew and timing results
-set_propagated_clock [all_clocks]
-
-place_design \
-   -verbose -timing_summary
-
-#place_design -no_timing_driven -verbose
+   ## placement/routing flows should be immediately ABORTED of no PACKAGE_PIN and wrong IOSTANDARD are assigned to pins!
+   source ${scriptsDir}/build/drc.tcl
 
 
-##########################
-##   save design data   ##
-##########################
+   ###########################################
+   ##   pre-placement design optimization   ##
+   ###########################################
 
-## write a database for the placed design
-write_checkpoint \
-   -force ${outputsDir}/placed.dcp
+   opt_design -remap
 
-## generate post-routing reports
-report_utilization -file ${reportsDir}/post_place_utilization.rpt
-report_timing -file ${reportsDir}/post_place_timing.rpt
+   report_utilization -file ${reportsDir}/post_opt_utilization.rpt
 
 
-## report CPU time
-set tclStop [clock seconds]
-set seconds [expr ${tclStop} - ${tclStart} ]
+   #######################
+   ##   run placement   ##
+   #######################
 
-puts "\nINFO: \[TCL\] Total elapsed-time for [file normalize [info script]]: [format "%.2f" [expr $seconds/60.]] minutes\n"
+   ## propagate clock latency through clock network to improve skew and timing results
+   set_propagated_clock [all_clocks]
 
+   place_design \
+      -verbose -timing_summary
+
+   #place_design -no_timing_driven -verbose
+
+
+   ##########################
+   ##   save design data   ##
+   ##########################
+
+   ## write a database for the placed design
+   write_checkpoint \
+      -force ${outputsDir}/placed.dcp
+
+   ## generate post-placement reports
+   report_utilization -file ${reportsDir}/post_place_utilization.rpt
+   report_timing_summary -file ${reportsDir}/post_place_timing_summary.rpt
+
+   #report_drc
+
+   puts "\n"
+   puts "\t=========================================="
+   puts "\t   PLACEMENT FLOW SUCCESSFULLY COMPLETED  "
+   puts "\t=========================================="
+   puts "\n"
+
+
+   ###################################
+   set tclStop [clock seconds]
+   set seconds [expr ${tclStop} - ${tclStart} ]
+   ###################################
+
+   ## profiling
+   puts "\n**INFO: \[TCL\] Total elapsed-time for [file normalize [info script]]: [format "%.2f" [expr $seconds/60.]] minutes.\n"
+
+   ## normal exit
+   #exit 0
+
+## errors catched otherwise... abort the flow!
+}]} {
+
+   puts "\n"
+   puts "\t================================"
+   puts "\t   PLACEMENT FLOW **FAILED** !  "
+   puts "\t================================"
+   puts "\n"
+
+
+   ###################################
+   set tclStop [clock seconds]
+   set seconds [expr ${tclStop} - ${tclStart} ]
+   ###################################
+
+   ## profiling
+   puts "\n**INFO: \[TCL\] Total elapsed-time for [file normalize [info script]]: [format "%.2f" [expr $seconds/60.]] minutes.\n"
+
+
+   if { [file exists ${logDir}/build.log] } {
+
+      set logFile [file normalize ${logDir}/build.log] ;   ## 'make build' executed => build.log 
+
+   } else {
+
+      set logFile [file normalize ${logDir}/place.log] ;   ## 'make build/place' executed otherwise => place.log
+   }
+
+   puts "\n\n**ERROR \[TCL\]: Placement flow did not complete successfully! Force an exit."
+   puts "               Please review and fix all errors found in the log file.\n"
+
+   ## script failure
+   if { ${rdi::mode} eq "gui" } {
+
+      return -code break
+
+   } else {
+
+      puts "------------------------------------------------------------"
+      catch {exec grep --color "^ERROR" ${logFile} >@stdout 2>@stdout}
+      puts "------------------------------------------------------------\n\n"
+
+      exit 1
+   }
+}

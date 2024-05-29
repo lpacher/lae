@@ -174,7 +174,7 @@ proc compile {} {
 
 
    ## log directory
-   set logDir  [pwd]/../../log ; if { ![file exists ${logDir}] } { file mkdir ${logDir} }
+   set logDir  [pwd]/log ; if { ![file exists ${logDir}] } { file mkdir ${logDir} }
 
    ## log file
    set logFile ${logDir}/compile.log

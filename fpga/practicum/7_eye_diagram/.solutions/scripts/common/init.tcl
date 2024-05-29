@@ -35,34 +35,15 @@ set DATE [clock format [clock seconds] -format "%Y.%m.%d_%R"]
 ##   custom routines   ##
 #########################
 
-## custom procedure to automatically detect Vivado invokation mode
+## custom procedure to automatically detect Vivado invocation mode
 ## (https://forums.xilinx.com/t5/Vivado-TCL-Community/How-to-detect-if-GUI-is-open-from-TCL/td-p/984258)
 proc launch_mode {} {
 
    return ${rdi::mode}
 }
 
-
-## custom procedure get the command-line back if working in GUI mode
-proc get_console {} {
-
-
-   if { $::tcl_platform(platform) == "windows" } {
-
-      ## star new cmd.exe prompt on Windows
-      exec cmd.exe /k {$::env(USERPROFILE)/login.bat & prompt=[type exit before closing the GUI]% } &
-
-   } else {
-
-      ## start new bash prompt on Linux
-      set ::env(PS1) {[type exit before closing the GUI]% }
-      exec bash --norc &
-   }
-}
-
-
 ## custom procedure to open a new terminal in the current working directory (Command Prompt in Windows, GNOME Terminal in Linux)
-proc terminal {} {
+proc open_terminal {} {
 
    if { $::tcl_platform(platform) == "windows" } {
 
@@ -74,4 +55,38 @@ proc terminal {} {
       exec gnome-terminal &
    }
 }
+
+####################################################################################
+## Credits: https://stackoverflow.com/questions/41737315/can-we-color-code-or-have-colored-display-for-puts-in-tcl
+####################################################################################
+
+proc puts_error { "message" } {
+
+   ## RED text message
+   puts -nonewline "\033\[1;31m"
+   puts "\n**ERROR: $message\033\[0m\n"
+}
+
+proc puts_info { "message" } {
+
+   ## GREEN text message
+   puts -nonewline "\033\[0;32m"
+   puts "\n**INFO: $message\033\[0m\n"
+}
+
+proc puts_warn { "message" } {
+
+   ## YELLOW text message
+   puts -nonewline "\033\[0;33m"
+   puts "\n**WARN: $message\033\[0m\n"
+}
+
+proc puts_debug { "message" } {
+
+   ## BLUE text message
+   puts -nonewline "\033\[1;34m"
+   puts "\n**DEBUG: $message\033\[0m\n"
+}
+
+####################################################################################
 

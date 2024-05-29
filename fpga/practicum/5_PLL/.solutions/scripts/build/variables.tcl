@@ -53,3 +53,15 @@ if { ![file exists ${outputsDir}] } {
    file mkdir ${outputsDir}
 }
 
+
+########################
+##   logs directory   ##
+########################
+
+global logDir ; set logDir ${workDir}/log
+
+if { ![file exists ${logDir}] } {
+
+   file mkdir ${logDir}
+}
+

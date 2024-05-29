@@ -33,15 +33,13 @@ log_wave -r /*
 #create_wave_config "Waveforms"
 
 create_wave_config "Testbench waveforms"
-#create_wave_config "DUT waveforms"
+create_wave_config "DUT waveforms"
 
 ## probe all top-level signals (testbench signals)
 add_wave [current_scope]/* -into [lindex [get_wave_config] 0]
-#add_wave /glbl/GSR -into [lindex [get_wave_config] 0]
 
 ## probe also all DUT signals into additional Wave window
-#add_wave [current_scope]/DUT/* -into  [lindex [get_wave_config] 1]
-#add_wave /glbl/GSR -into [lindex [get_wave_config] 1]
+add_wave [current_scope]/DUT/* -into  [lindex [get_wave_config] 1]
 
 
 #######################################################
@@ -54,6 +52,7 @@ if { ![file exists ${vcdDir}] } {
 
    file mkdir ${vcdDir}
 }
+
 
 ## open VCD file
 #open_vcd ${vcdDir}/waveforms.vcd
