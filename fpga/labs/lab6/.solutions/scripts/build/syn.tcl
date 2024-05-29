@@ -88,13 +88,41 @@ if { [catch {
    ##   save synthesis output data   ##
    ####################################
 
-   ## save post-synthesis Verilog netlist for post-synthesis functional/timing gate-level simulations
-   #write_verilog -mode funcsim -force ${outputsDir}/mapped.v
-   #write_verilog -mode timesim -sdf_anno true -force ${outputsDir}/mapped.v
-   write_verilog -mode timesim -sdf_anno false -force ${outputsDir}/mapped.v
+   ##
+   ## **NOTE
+   ##
+   ## For setting up and running GL + SDF simulations ref. to the
+   ## following article:
+   ##
+   ##    https://support.xilinx.com/s/article/63988?language=en_US
+   ##
 
    ## save post-synthesis SDF for post-synthesis gate-level simulations
    write_sdf -mode timesim -force ${outputsDir}/mapped.sdf
+
+   set sdfFileAbsolutePath [file normalize ${outputsDir}/mapped.sdf]
+   puts "Successfully generated SDF file ${sdfFileAbsolutePath}"
+
+   ## save post-synthesis Verilog netlist for post-synthesis functional/timing gate-level simulations
+   #write_verilog -mode timesim -sdf_anno true -force ${outputsDir}/mapped.v -sdf_file [file normalize ${outputsDir}/mapped.sdf]
+   write_verilog -mode funcsim -force ${outputsDir}/mapped.v
+
+   ##################################################################################################################
+   ## **EXTRA: automatically append $sdf_annotate() task within `ifdef SDF_ANNOTATE/`endif check
+
+   exec sed -i {/endmodule/,$d} ${outputsDir}/mapped.v ;   #deletes everything after the first 'endmodule' (match included)
+
+   exec echo ""                                                                            >> ${outputsDir}/mapped.v
+   exec echo "`ifdef SDF_ANNOTATE"                                                         >> ${outputsDir}/mapped.v
+   exec echo "  initial \$sdf_annotate(\"${sdfFileAbsolutePath}\",,,,\"tool_control\");"   >> ${outputsDir}/mapped.v
+   exec echo "`endif"                                                                      >> ${outputsDir}/mapped.v
+   exec echo ""                                                                            >> ${outputsDir}/mapped.v
+   exec echo "endmodule"                                                                   >> ${outputsDir}/mapped.v
+   exec echo ""                                                                            >> ${outputsDir}/mapped.v
+
+   ##################################################################################################################
+
+   puts "Successfully generated Verilog netlist [file normalize ${outputsDir}/mapped.v]"
 
    ## write a database for the synthesized design
    write_checkpoint -force ${outputsDir}/mapped.dcp

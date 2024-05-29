@@ -43,7 +43,7 @@ module tb_LFSR ;
 
       f = $fopen("LFSR.txt") ;      // open the file handler
 
-      #100000 $fclose(f) ; $finish ;   // simply run for some time and observe the pseudo-random output bit pattern
+      #150000 $fclose(f) ; $finish ;   // simply run for some time and observe the pseudo-random output bit pattern
    end
 
 

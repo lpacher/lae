@@ -43,27 +43,39 @@ void hBytes (char *fileName="work/sim/LFSR.txt") {
 
 
    // histogram the "trend" of shift-register outputs (not a true histogram indeed, just a trend)
-   TH1F *hRandom = new TH1F("hRandom", "LFSR output-code distribution", 256*4, -0.5, 256*4 + 0.5) ;   // extra values simply goes into overflow bin
+   TH1F *hRandom = new TH1F("hRandom", "LFSR output-code vs. tick", 256*4, -0.5, 256*4 + 0.5) ;   // extra values simply goes into overflow bin
+
+   // histogram of the distribution
+   TH1F*hCode = new TH1F("hCode", "LFSR output-code distribution", 256, -0.5, 255 + 0.5) ;
 
    int bin = 1 ;
 
    while (filePtr >> value) {
 
+      // **DEBUG
       //std::cout << value << endl ;
 
       hRandom->SetBinContent(bin,value) ;
+      hCode->Fill(value) ;
 
       bin++ ;
    }
 
+   // close file handler
    filePtr.close() ;
 
-   hRandom->Draw() ;
 
+   ////////////////////////////////
+   //   "trend" histogram plot   //
+   ////////////////////////////////
+
+   TCanvas *c1 = new TCanvas("c1") ;
+
+   c1->cd() ;
+   hRandom->Draw() ;
 
    // the "random" sequence repeats after 256 values, show only 4 repeated sequences
    hRandom->GetXaxis()->SetRangeUser(0, 256*4) ;
-
 
    // cosmetics
    hRandom->GetXaxis()->SetTitle("tick") ;
@@ -77,6 +89,38 @@ void hBytes (char *fileName="work/sim/LFSR.txt") {
    //gPad->SetLogy() ;
    gPad->Modified() ;
    gPad->Update() ;
+
+   /////////////////////////////////////////
+   //  code distribution histogram plot   //
+   /////////////////////////////////////////
+
+   TCanvas *c2 = new TCanvas("c2") ;
+   c2->cd() ;
+
+   hCode->SetStats(1) ;   // display the statistics box
+   gStyle->SetOptStat("emrou") ;   // only show number of entries, mean, RMS and underflow/overflow in the statistics box
+
+   hCode->SetFillStyle(0) ;
+   hCode->Draw("BAR") ;
+
+   // cosmetics
+   hCode->GetXaxis()->SetTitle("LFSR[7:0] integer value") ;
+   hCode->GetYaxis()->SetTitle("entries / code") ;
+   hCode->GetYaxis()->CenterTitle() ;
+
+   int Nentries = hCode->GetEntries() ;
+
+   hCode->GetYaxis()->SetRangeUser(0, int(Nentries/255) + 20)  ;
+
+   //gPad->SetGridx() ;
+   //gPad->SetGridy() ;
+
+   gPad->RedrawAxis() ;
+
+   gPad->Modified() ;
+   gPad->Update() ;
+
+   printf("\nINFO: Number of events in the hCode histogram outside the 255 repetition period: %d\n", Nentries%255) ;
 
 }
 

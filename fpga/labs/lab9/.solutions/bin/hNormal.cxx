@@ -62,6 +62,7 @@ void hNormal (char *fileName="work/sim/gaus.txt") {
       hRandom->Fill(value) ;
    }
 
+   // close file handler
    filePtr.close() ;
 
    // display histogram
