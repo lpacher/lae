@@ -22,8 +22,6 @@
 
 void hBytes (char *fileName="work/sim/LFSR.txt") {
 
-   gROOT->Reset() ;
-
    gStyle->SetOptStat(0) ;   // don't show the statistics box 
 
    int value ;   // integer pseudo-random value from ASCII file

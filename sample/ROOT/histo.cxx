@@ -19,7 +19,8 @@
 
 {
 
-   gROOT->Reset() ;
+   // reset the ROOT interactive environment 
+   gROOT->Reset() ;   // **NOTE: useful at the beginning of an un-named script that you want to execute multiple times interactively
 
    const int Ntrials = 10000 ;
 
@@ -34,18 +35,22 @@
    // normalize the distribution to unit area
    histo.Scale(1.0/histo.GetEntries()) ;
 
-   histo.Draw() ;
+   // draw the histogram with error bars
+   histo.Draw("E") ;
 
+   // gaussian fit
    histo.Fit("gaus") ;
 
    // display fit results
    gStyle->SetOptFit(1) ;
 
-   // save histogram to ROOT file
+   // create new ROOT file
    TFile fout("histo.root","RECREATE") ;
 
+   // save the histogram to ROOT file
    histo.Write() ;
 
+   // close the file handler
    fout.Close() ;
 
 }

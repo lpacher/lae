@@ -21,8 +21,6 @@
 
 void hNormal (char *fileName="work/sim/gaus.txt") {
 
-   gROOT -> Reset() ;
-
    gStyle->SetOptStat("emr") ;   // only show number of entries, mean and RMS in the statistics box
    gStyle->SetOptFit(1) ;        // display also fit results into stats box
 
