@@ -1171,7 +1171,7 @@ into the file:
 
 <br />
 
-Feel free of course to **add comments** to document your script. Save and close the test editor
+Feel free of course to **add comments** to document your script. Save and close the text editor
 once done. Exit also from the Vivado application.
 
 Copy and run from the `.solutions/` directory the `cleanup.sh` (Linux) or the `cleanup.bat` (Windows) script
