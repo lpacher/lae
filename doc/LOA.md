@@ -654,6 +654,8 @@
 
 **SOI** - (process) Silicon On Insulator
 
+**SOM** - System On Module
+
 **SPI** - Serial Peripheral Interface
 
 **SPICE** - Simulation Program with Integrated Circuits Emphasis
