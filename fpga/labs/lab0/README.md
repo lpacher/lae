@@ -344,7 +344,7 @@ file and perform a **non-administrator installation**.
 Alternatively a `.zip` file containing both 32- and 64-bit versions of the tool has been **already prepared for you**
 and tested on both Windows 7 and Windows 10 systems:
 
-_<https://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/Notepad++.zip>_
+_<https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/Notepad++.zip>_
 
 Download and extract the `.zip` file in some meaningful place on your machine. Once the extraction process is completed
 you will find the `notepad++.exe` executable in `Notepad++\x86` and `Notepad++\x86_64` directories.
@@ -838,7 +838,7 @@ For this course we will use the **GNU Win** package. Despite you can download an
 install the package from the official website it is **highly recommended**
 to download the following `.zip` file **already prepared for you**:
 
-_<https://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/GnuWin.zip>_
+_<https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/GnuWin.zip>_
 
 The main reason for this is that the proposed `.zip` file contains fully verified executables on both
 Windows 7 and Windows 10 systems. Some commands from other installations showed in the past different behaviours
@@ -1052,7 +1052,7 @@ A few short tutorials can be also found at:
 Moreover a `.zip` file containing both 32- and 64-bit versions of the tool has been **already prepared for you** and tested
 on both Windows 7 and Windows 10 systems:
 
-_<https://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/Nano.zip>_
+_<https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/Nano.zip>_
 
 Download and extract the `.zip` file in some meaningful place on your machine. Once the extraction process is completed
 you will find the `nano.exe` executable in `Nano\x86\bin` and `Nano\x86_64\bin` directories.
@@ -1158,7 +1158,7 @@ _<https://www.vim.org/download.php>_
 
 Alternatively also for Vim a `.zip` has been already prepared for you and tested on both Windows 7 and Windows 10 systems:
 
-_<https://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/Vim.zip>_
+_<https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/Vim.zip>_
 
 Either if you install Vim using the official installer or if you decide to simply extract the `.zip` file
 then you have to **update the search path** in `login.bat` to include in the `PATH` environment variable also
@@ -1276,7 +1276,7 @@ _<https://phoenixnap.com/kb/how-to-install-git-windows>_
 Alternatively a `.zip` file containing both 32- and 64-bit executables (approx. 50 MB) has been **already prepared for you** and tested
 on both Windows 7 and Windows 10 systems,
 
-_<https://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/MinGit.zip>_
+_<https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/MinGit.zip>_
 
 simply download and extract the file in some meaningful place on your machine.
 Once the extraction process is completed you will find the `git.exe` executable in `MinGit\x86\cmd` and `MinGit\x86_64\cmd` directories.
@@ -1567,7 +1567,7 @@ _<http://prdownloads.sourceforge.net/wintcltk/WinTclTk-8.5.6.exe>_
 If you prefer a **non-administrator installation** instead a portable `.zip` file has been
 **already prepared for you** and is available at:
 
-_<https://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/WinTclTk.zip>_
+_<https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/WinTclTk.zip>_
 
 
 <br />
@@ -1748,7 +1748,7 @@ file and perform a **non-administrator installation**.
 
 A `.zip` file containing all PuTTY utilities has been **already prepared for you** and is available at:
 
-_<https://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/PuTTY.zip>_
+_<https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/PuTTY.zip>_
 
 Download and extract the file in some meaningful place on your machine. Once the extraction process is completed you will
 find the `putty.exe` executable in the `PuTTY` directory, along with additional command line utilities such as `pscp.exe` and `psftp.exe`
