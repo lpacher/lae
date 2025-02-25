@@ -288,7 +288,8 @@ command line text editors also under Windows.
 
 <hr>
 
-**Students working with a Linux system can skip the following details and jump to the [Install Git](#install-git) section.**
+**Students working with a Linux system can skip the following details and jump to the
+[Install Nano and Vim command-line text editors](#install-nano-and-vim-command-line-text-editors) section.**
 
 <hr>
 
