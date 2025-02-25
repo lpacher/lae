@@ -19,8 +19,12 @@
    * [Add a login script for the Command Prompt](#add-a-login-script-for-the-command-prompt)
    * [Add Notepad++ executable to search path](#add-notepad-executable-to-search-path)
    * [Add Linux executables to search path](#add-linux-executables-to-search-path)
-   * [Install Nano and Vim command-line text editors](#install-nano-and-vim-command-line-text-editors)
+* [**Install Nano and Vim command-line text editors**](#install-nano-and-vim-command-line-text-editors)
+   * [Linux installation](#install-nano-and-vim-linux-installation)
+   * [Windows installation](#install-nano-and-vim-windows-installation)
 * [**Install Git**](#install-git)
+## <a name="install-tcl-windows-installation"></a>Windows installation
+[**[Contents]**](#contents)
    * [Linux installation](#install-git-linux-installation)
    * [Windows installation](#install-git-windows-installation)
 * [**Clone and update the Git repository for the course**](#clone-and-update-the-git-repository-for-the-course)
@@ -998,10 +1002,10 @@ at the top of the Git repository.
 
 <br />
 
-## Install Nano and Vim command-line text editors
+# Install Nano and Vim command-line text editors
 [**[Contents]**](#contents)
 
-Notepad++ is an excellent text-editor for programming under Windows. However there are several
+Notepad++ and Gedit are excellent text-editors for programming under Windows and Linux respectively. However there are several
 situations for which the usage of a **command line text editor** is simply faster and more efficient. <br />
 As an example, if you want to make small changes to some HDL source file while working in the
 terminal it might be faster to open the file in the terminal itself, make the modifications
@@ -1013,11 +1017,8 @@ Command line text editors are also extensively used in the **professional ASIC a
 thus it is highly recommended for students to learn how to use **at least one popular Linux command line text editor**
 between `nano` and `vim`. <br />
 Windows users have to install them as additional software components and then
-**update the system search path** in order to be able to invoke the executable from the terminal.
-
-
-### Install Nano
-[**[Contents]**](#contents)
+**update the system search path** in order to be able to invoke the executable from the terminal. Linux users might have these
+utilities already pre-installed but most recent Linux distributions come without them by default.
 
 [GNU Nano](https://en.wikipedia.org/wiki/GNU_nano) is a free and open-source command line text editor part of the GNU Project.
 It is **much much easier to learn and to use** with respect to Vim, thus this is the **recommended command line text editor** to start
@@ -1026,6 +1027,23 @@ with for non experienced users.
 Sources, documentation and HowTo's are available starting from the project official page at:
 
 _<https://www.nano-editor.org>_
+
+Beside Nano, [Vim](https://en.wikipedia.org/wiki/Vim_(text_editor)) is the second most widespread command-line text-editor
+on Linux systems. In the software programming community it is considered one of the **most powerful and efficient**
+text editors for coding. However it is certainly **more difficult and hard to learn** for non experienced users with respect to Nano.
+
+<br />
+
+## <a name="install-nano-and-vim-linux-installation"></a>Linux installation
+
+```
+sudo apt-get install vim nano
+```
+
+<br />
+
+## <a name="install-nano-and-vim-windows-installation"></a>Windows installation
+[**[Contents]**](#contents)
 
 To install Nano on Windows you can simply download **pre-compiled binaries** from the project official download area,
 
@@ -1142,16 +1160,7 @@ Here a few examples:
 
 <br />
 
-### Install Vim (optional)
-[**[Contents]**](#contents)
-
-Beside Nano, [Vim](https://en.wikipedia.org/wiki/Vim_(text_editor)) is the second most widespread command-line text-editor
-on Linux systems. In the software programming community it is considered one of the **most powerful and efficient**
-text editors for coding. However it is certainly **more difficult and hard to learn** for non experienced users with respect to Nano. The
-installation of Vim under Windows is therefore left **optional** for the student, despite it might be useful to learn how to use `vim`
-for your future research work.
-
-Vim is free and open-source. Similar to Nano, you can install **pre-compiled binaries** for Windows downloading
+Similar to Nano, you can also install **Vim pre-compiled binaries** for Windows downloading
 the automated installer from the official website:
 
 _<https://www.vim.org/download.php>_

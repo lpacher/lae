@@ -106,8 +106,8 @@ line as follows:
 % cd C:\Users\<username>
 % mkdir -p local
 % cd local
-% wget http://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/ROOT.zip
-% wget http://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/Python.zip
+% wget https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/ROOT.zip
+% wget https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/Python.zip
 % unzip ROOT.zip
 % unzip Python.zip
 % rm -f ROOT.zip Python.zip
