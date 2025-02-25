@@ -1390,6 +1390,7 @@ Before starting to use `git` you are requested to do some **initial configuratio
 ```
 % git config --global user.name "Your Name"
 % git config --global user.email your.email@example.com
+% git config --global pull.rebase false
 ```
 
 These settings are internal to Git and local to your machine. For the email address you can use
