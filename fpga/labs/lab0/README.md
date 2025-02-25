@@ -1,3 +1,4 @@
+<div align="justify">
 
 # Setting up the Xilinx Vivado development environment <br /> for Linux/Windows operating systems
 [[**Home**](../../../README.md)] [[**Back**](../README.md)] [[**Tips&Tricks**]](TIPS.md) [[**KPAS**]](KPAS.md)
@@ -23,8 +24,6 @@
    * [Linux installation](#install-nano-and-vim-linux-installation)
    * [Windows installation](#install-nano-and-vim-windows-installation)
 * [**Install Git**](#install-git)
-## <a name="install-tcl-windows-installation"></a>Windows installation
-[**[Contents]**](#contents)
    * [Linux installation](#install-git-linux-installation)
    * [Windows installation](#install-git-windows-installation)
 * [**Clone and update the Git repository for the course**](#clone-and-update-the-git-repository-for-the-course)
@@ -1035,12 +1034,33 @@ text editors for coding. However it is certainly **more difficult and hard to le
 <br />
 
 ## <a name="install-nano-and-vim-linux-installation"></a>Linux installation
+[**[Contents]**](#contents)
+
+Usually in most recent Linux distributions neither `nano` nor `vim` executables are pre-installed by default.
+In order to verify if you already have these command-line text editors in your search path **open a terminal** and type:
 
 ```
-sudo apt-get install vim nano
+% which nano
+% which vim
 ```
+
+If already installed the outputs of the above commands should be `/usr/bin/nano` or `/usr/bin/vim`.
+In case these packages are not installed on your Linux system, use
+
+```
+% sudo yum install nano vim
+```
+
+or
+
+```
+% sudo apt-get install nano vim
+```
+
+according to the package manager of the Linux distribution you are working with.
 
 <br />
+
 
 ## <a name="install-nano-and-vim-windows-installation"></a>Windows installation
 [**[Contents]**](#contents)
@@ -1088,6 +1108,7 @@ Please **add and customize** the following code to the `login.bat` using Notepad
 :: add Nano executable to search path
 set PATH=\path\to\Nano\<architecture>\bin;%PATH%
 ```
+
 
 <br />
 
@@ -2794,3 +2815,4 @@ In order to get the FPGA automatically programmed at power up you have to write 
 Please note that the firmware installation is a typical example of a very **automated and repetitive flow**, thus
 working in **batch mode** with a **command-line approach** becomes more efficient than opening a graphical interface.
 
+</div>
