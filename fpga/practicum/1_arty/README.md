@@ -147,7 +147,7 @@ Linux users should already have the **Evince** PDF viewer installed instead, whi
 The Evince PDF viewer is also available for Windows systems and can be installed from the [official website](https://evince.en.uptodown.com/windows).
 If you prefer a non-administrator installation a `.zip` of the software is also available at:
 
-_<http://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/Evince.zip>_
+_<https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/Evince.zip>_
 
 <br />
 
@@ -160,7 +160,7 @@ _<http://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/Evince.
 > % cd C:\Users\<username>
 > % mkdir -p local
 > % cd local
-> % wget http://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/Evince.zip
+> % wget https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/Evince.zip
 > % unzip Evince.zip
 > % rm Evince.zip
 > ```
@@ -1692,7 +1692,7 @@ which is already a git repository!) and play yourself in building the project:
 > If you want to inspect the Verilog code for this demo please refer to this **training workshop**
 > by _Avnet_ available at the following link:
 >
-> _<http://personalpages.to.infn.it/~pacher/teaching/FPGA/doc/workshops/avnet/Avnet_Speedway_Vivado_Arty_Training_Workshop_2015.zip>_
+> _<https://www.to.infn.it/~pacher/teaching/FPGA/doc/workshops/avnet/Avnet_Speedway_Vivado_Arty_Training_Workshop_2015.zip>_
 >
 
 <br />

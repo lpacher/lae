@@ -100,7 +100,7 @@ Additional software components for Windows can be downloaded from:
 
 <p>
 
-_<http://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows>_
+_<https://www.to.infn.it/~pacher/teaching/FPGA/software/windows>_
 
 </p>
 
