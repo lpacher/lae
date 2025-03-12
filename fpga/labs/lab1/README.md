@@ -26,8 +26,9 @@
 ## Introduction
 [**[Contents]**](#contents)
 
-In the first lab we will implement and simulate a simple **NOT-gate (inverter)** using the **Verilog Hardware Description Language (HDL)** <br />
-and the **XSim simulator** that comes with the **Xilinx Vivado design suite**.<br/>
+In the first lab we will implement and simulate a simple **NOT-gate (inverter)** using
+the **Verilog Hardware Description Language (HDL)** and the **XSim simulator** that comes
+with the **Xilinx Vivado design suite**.<br/>
 
 <br />
 
