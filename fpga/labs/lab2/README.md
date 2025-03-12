@@ -1,3 +1,4 @@
+<div align="justify">
 
 # Lab 2 Instructions
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/labs)]
@@ -645,3 +646,5 @@ the circuit. Later in the course we will also implement and debug the above circ
 
 <br />
 <!--------------------------------------------------------------------->
+
+</div>
