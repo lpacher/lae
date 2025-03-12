@@ -1,3 +1,4 @@
+<div align="justify">
 
 # Lab 1 Instructions
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/labs)]
@@ -1413,3 +1414,5 @@ A nice tutorial discussing the usage of Xilinx XSim from the command line can be
 * _<https://www.itsembedded.com/dhd/vivado_sim_1>_
 * _<https://www.itsembedded.com/dhd/vivado_sim_2>_
 * _<https://www.itsembedded.com/dhd/vivado_sim_3>_
+
+</div>
