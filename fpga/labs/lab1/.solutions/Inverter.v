@@ -22,6 +22,8 @@ but distributed across multiple lines
 //
 // Verilog-95 port declaration, but we will use Verilog-2001 in the course
 //module Inverter (X, ZN) ;
+//   input X ;
+//   output ZN ;
 //   wire X, ZN ;
 //
 
