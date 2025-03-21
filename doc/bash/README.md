@@ -673,10 +673,11 @@ More in general, you can also change the name:
 
 ```
 % command > filename.log
+% command >> filename.log
 ```
 
 ```
-% command1 | command1 
+% command1 | command2 
 ```
 
 <br />
