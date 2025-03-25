@@ -1,6 +1,6 @@
 <div align="justify">
 
-<!-- To contribute to the repo, clone with SSH passphrase: git clone git@github.com:lpacher/lae.git -->
+<!-- To contribute to the repo, clone with SSH passphrase: git clone ssh://git@github.com/lpacher/lae.git [target directory] -->
 
 ![](doc/etc/logo.png)
 
@@ -660,6 +660,10 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/b443e820e3
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/16a8fbafe570103d9fbd668544139c5b>_
 
 * Lecture 5 - Fri 21/03/2025 16-18<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/0526f784e895103dbfd42e1d6b1f5271>_
+
+* Lecture 6 - Mon 24/03/2025 16-18<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/2a132fb2eaf0103db6bb8ab00874bebf>_
 
 
 </div>
