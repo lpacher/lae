@@ -32,6 +32,7 @@ The digital circuit that we are going to describe and simulate in Verilog is the
 <img src="doc/pictures/Gates.png" alt="drawing" width="450"/>
 
 <br />
+<br />
 
 Later in the course we will also **implement and debug** the above circuit on **real FPGA hardware** mapping gates outputs to some
 general-purpose LEDs available
