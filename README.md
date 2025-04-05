@@ -668,5 +668,7 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/2a132fb2ea
 * Lecture 7 - Mon 31/03/2025 16-18<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/323401bcf068103dbafdc24ba91df5b2>_
 
+* Lecture 8 - Fri 04/04/2025 16-18<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/445f5819f38c103d8fbfbe63f5d1dbab>_
 
 </div>
