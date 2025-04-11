@@ -47,6 +47,7 @@ This lab should exercise the following concepts:
 * introduce a better working area organization
 * introduce new Verilog HDL constructs and statements
 * use an improved Makefile-based simulation flow
+* understand the concept of self-checking testbench
 * re-launch a simulation from the XSim graphical interface after HDL modifications
 * debug timing-hazards in combinational circuits
 

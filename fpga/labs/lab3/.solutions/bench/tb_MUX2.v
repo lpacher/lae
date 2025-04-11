@@ -74,7 +74,10 @@ module tb_MUX2 ;
    end
 
 
-   // text-based simulation output
+   //////////////////////////////////////
+   //   text-based simulation output   //
+   //////////////////////////////////////
+
    initial begin
       $display("\t\t\t\t   time   S   A   B   Z") ;
       $monitor("%d ns   %b   %b   %b   %b",$time, select, count[0], count[1], Z) ;
@@ -84,7 +87,7 @@ module tb_MUX2 ;
    // dump waveforms into industry-standard Value Change Dump (VCD) database
    // (but you can also use open_vcd/log_vcd/close_vcd XSim simulation commands)
    initial begin
-      $dumpfile ("vcd/waveforms.vcd") ;
+      $dumpfile ("vcd/waveforms.vcd") ;    // **NOTE: the actual path is work/sim/vcd/waveforms.vcd since simulation runs into work/sim
       $dumpvars ;
    end
 
@@ -93,18 +96,26 @@ module tb_MUX2 ;
    //   **EXTRA: example self-checking testbench   //
    //////////////////////////////////////////////////
 
+   //
+   // **NOTE
+   //
+   // $finish => Verilog task to definitely conclude the simulation (no possibility to continue running after a $finish)
+   //
+   // $stop => Verilog task to "pause" the simulation, with the possibility to continue running the testbench after its execution
+   //
+
    always @(posedge clk) begin
       if ( Z == ((count[0] & (~select)) | (count[1] & select))) begin
          //check PASSED
       end
       else begin
-         // check FAILED
-         $display("\n**ERROR: Wrong MUX output detected! Force an exit now ...\n\n") ; $finish ;
+         // check FAILED (inform the user on the console and "pause" the simulation)
+         $display("\n**ERROR: Wrong MUX output detected! Force a stop now ...\n\n") ; $stop ;
 
          //$error("Wrong MUX output detected! Force an exit now ...") ; $finish ;
          //$fatal("Wrong MUX output detected! Force an exit now ...\n") ;
       end
-   end
+   end   //always
 
 endmodule
 

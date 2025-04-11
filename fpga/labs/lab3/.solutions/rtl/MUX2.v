@@ -17,7 +17,7 @@
 // either choose here the implementation that you want to simulate or compile sources with 'xvlog -define MACRO_NAME'
 
 //`define IF_ELSE
-//`define TRUTH_TABLE
+`define TRUTH_TABLE
 //`define CONDITIONAL_ASSIGN
 //`define LOGIC_EQUATION
 //`define STRUCTURAL
@@ -28,7 +28,9 @@
 
 module MUX2 (
 
-   input wire A, B, S,
+   input wire A,
+   input wire B,
+   input wire S,
 
 `ifdef IF_ELSE
    output reg Z         // the net type must be 'reg' if Z is used within a procedural block such as 'always' 
@@ -41,11 +43,9 @@ module MUX2 (
    ) ;
 
 
-   //////////////////////////////////////////////////////
-   //   behavioral descriptions (if/else, case etc.)   //
-   //////////////////////////////////////////////////////
-
-   // using an if/else statement
+   ///////////////////////////////////////////
+   //   behavioral descriptions (if/else)   //
+   ///////////////////////////////////////////
 
 `ifdef IF_ELSE 
 
@@ -60,9 +60,12 @@ module MUX2 (
       end
    end  // always
 
-`elsif TRUTH_TABLE
 
-   // using a case statement
+   //////////////////////////////////////
+   //   truth-table (case statement)   //
+   //////////////////////////////////////
+
+`elsif TRUTH_TABLE
 
    always @(*) begin              // as recommended by the Verilog standard, use always @(*) to describe COMBINATIONAL blocks
 
@@ -75,23 +78,39 @@ module MUX2 (
          3'b100 : Z = 1'b0 ;  // B
          3'b101 : Z = 1'b1 ;  // B
          3'b110 : Z = 1'b0 ;  // B
-         3'b111 : Z = 1'b1 ;  // B
-         //3'b111 : Z = 1'b0 ;        // **WRONG VALUE** => decomment to check if the self-checking testbench fails!
+         //3'b111 : Z = 1'b1 ;  // B
+         3'b111 : Z = 1'b0 ;        // **WRONG VALUE** => decomment to check if the self-checking testbench fails!
+
+         /*
+         3'd0 : Z = 1'b0 ;  // A      // alternatively you can specify case-values in decimal radix
+         3'd1 : Z = 1'b0 ;  // A
+         3'd2 : Z = 1'b1 ;  // A
+         3'd3 : Z = 1'b1 ;  // A
+         3'd4 : Z = 1'b0 ;  // B
+         3'd5 : Z = 1'b1 ;  // B
+         3'd6 : Z = 1'b0 ;  // B
+         3'd7 : Z = 1'b1 ;  // B
+         */
 
       endcase
    end  // always
 
 
+   ////////////////////////////////
+   //   conditional assignment   //
+   ////////////////////////////////
+
 `elsif CONDITIONAL_ASSIGN
 
-   // conditional assignment
    assign Z = (S == 1'b0) ? A : B ;  
 
 
+   ///////////////////////////////////////////////
+   //   boolean function (as from SOP design)   //
+   ///////////////////////////////////////////////
 
 `elsif LOGIC_EQUATION
 
-   // boolean function
    assign Z = (A & ~S) | (B & S) ;
 
 
@@ -125,6 +144,15 @@ module MUX2 (
    //
    //and #(1) u5 (w3, A, B) ;
    //or  #(1) u4 (Z, w1, w2, w3) ;
+
+
+   /////////////////////////////////////////////////
+   //   empty stub otherwise (Verilog abstract)   //
+   /////////////////////////////////////////////////
+
+`else
+
+   //no actual implementation
 
 `endif
 
