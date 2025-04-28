@@ -680,5 +680,7 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/9e86d96efb
 * Lecture 11 - Wed 23/04/2025 11-13<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/4c0bfc1a0250103e9f2b12ac3ddc958a>_
 
+* Lecture 12 - Mon 28/04/2025 16-18<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/9fd69f960151483eaf865b378803a3cc>_
 
 </div>
