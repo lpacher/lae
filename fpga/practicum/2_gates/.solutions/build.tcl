@@ -101,7 +101,6 @@ if { [get_property PROGRESS [get_runs synth_1]] != "100%" } {
 
    ## script failure
    exit 1
-
 }
 
 

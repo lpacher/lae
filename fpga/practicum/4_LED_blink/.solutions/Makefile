@@ -93,6 +93,8 @@ SIM_TOP_MODULE := tb_LED_blink
 ##
 
 RTL_VLOG_SOURCES := $(RTL_DIR)/LED_blink.v
+#RTL_VLOG_SOURCES := $(RTL_DIR)/LED_blink.v $(RTL_DIR)/SevenSegmentDecoder.v
+
 SIM_VLOG_SOURCES := $(SIM_DIR)/ClockGen.v $(SIM_DIR)/glbl.v $(SIM_DIR)/tb_LED_blink.v
 
 

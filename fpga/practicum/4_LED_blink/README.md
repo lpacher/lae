@@ -219,7 +219,7 @@ module LED_blink (
    assign LED = ... ;
 
    // **DEBUG: probe at the oscilloscope the LED control signal on some general-purpose I/O
-   assign LED_probe = ... ;
+   assign LED_probe = LED ;
 
 endmodule
 ```
@@ -533,6 +533,11 @@ a dedicated reset signal.
 Modify the `LED_blink` module in order to add an `enable` Verilog input port to be used as external
 **count-enable** control for your free-running counter:
 
+<br />
+
+<img src="doc/pictures/led_blink_enable.png" alt="drawing" width="650"/>
+
+<br />
 
 ```verilog
 if ( enable ) begin
@@ -565,6 +570,22 @@ Debug the functionality of the new firmware.
 Extend your initial design and **drive a 7-segment display** module with a suitable
 **4-bit count-slice** extracted from the free-running counter itself:
 
+<br />
+
+<img src="doc/pictures/led_blink_display.png" alt="drawing" width="1050"/>
+
+<br />
+
+For this purpose simply **re-use** the same `SevenSegmentDecoder` module and pin constraints for the **BCD/7-segment decoder**
+already developed and tested in the previous practicum:
+
+```
+% cp ../3_seven_segment_display/rtl/SevenSegmentDecoder.v ./rtl/
+```
+
+<br />
+
+Complete yourself the following code skeleton:
 
 ```verilog
 module LED_blink (
@@ -572,8 +593,9 @@ module LED_blink (
    input  wire clk,         // assume 100 MHz external clock from on-board oscillator
    input  wire enable,      // external count-enable control (e.g. slide-switch)
 
-   output wire LED,
-   output wire LED_probe    // probe at the oscilloscope the LED control signal
+   // **REMOVE this ports (and update XDC properly...)
+   //output wire LED,
+   //output wire LED_probe    // probe at the oscilloscope the LED control signal
 
    // drive a 7-segment display module with a suitable 4-bit slice of the counter
    output reg segA,
@@ -594,21 +616,35 @@ module LED_blink (
    wire [3:0] BCD ;
    assign BCD = { count[...] , count[...] , count[...] , count[...] } ;
 
-   ...
-   ...
+   SevenSegmentDecoder  SevenSegmentDecoderInst (
+
+      .BCD  ( BCD[3:0] ),
+      .segA ( segA     ),
+      .segB ( segB     ),
+
+      ...
+      ...
+
+   );
 
 endmodule
 ```
 
 <br />
 
-For this purpose simply **re-use** the same HDL code and pin constraints for the **BCD/7-segment decoder** already developed and
-tested in the previous practicum.
-
 Compile the file to check for syntax errors:
 
 ```
 % make compile hdl=rtl/LED_blink.v
+```
+
+<br />
+
+In order to elaborate the design update also the `RTL_VLOG_SOURCES` variable into `Makefile` as follows:
+
+```
+#RTL_VLOG_SOURCES := $(RTL_DIR)/LED_blink.v
+RTL_VLOG_SOURCES := $(RTL_DIR)/LED_blink.v $(RTL_DIR)/SevenSegmentDecoder.v
 ```
 
 <br />
@@ -631,6 +667,12 @@ Connect with jumper wires the 7-segment display to the board and install the bit
 <br />
 
 Debug the functionality of the new firmware.
+
+<br />
+
+**EXERCISE 4**
+
+Further extend your design and add a **reset signal** for the free-running counter.
 
 <br />
 <!--------------------------------------------------------------------->

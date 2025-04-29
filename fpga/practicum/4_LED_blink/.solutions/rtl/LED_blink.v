@@ -6,6 +6,7 @@
 // Spring 2021
 //
 
+//`include "rtl/SevenSegmentDecoder.v"
 
 `timescale 1ns / 100ps
 
@@ -20,14 +21,14 @@ module LED_blink (
    output wire LED_probe    // probe at the oscilloscope the LED control signal
 
    // **EXERCISE: drive a 7-segment display module with a suitable 4-bit slice of the counter
-   //output reg segA,
-   //output reg segB,
-   //output reg segC,
-   //output reg segD,
-   //output reg segE,
-   //output reg segF,
-   //output reg segG,
-   //output reg DP
+   //output wire segA,
+   //output wire segB,
+   //output wire segC,
+   //output wire segD,
+   //output wire segE,
+   //output wire segF,
+   //output wire segG,
+   //output wire DP
 
    ) ;
 
@@ -64,49 +65,27 @@ module LED_blink (
    assign LED_probe = LED ;
 
 
-   ///////////////////////////////////////////////
-   //   optionally, drive a 7-segment display   //
-   ///////////////////////////////////////////////
+   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   //   optionally, drive a 7-segment display (simply re-use the module already implemented into practicum #3)   //
+   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /*
 
    wire [3:0] BCD = count[27:24] ;
 
-   always @(*) begin
+   SevenSegmentDecoder SevenSegmentDecoderInst (
 
-      DP = 1'b0 ;   // simply tie-down the Decimal Point (DP) dot
-
-      case( BCD[3:0] )
-
-         // COMMON CATHODE
-         4'b0000  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b1111110 ;  //  0
-         4'b0001  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b0110000 ;  //  1
-         4'b0010  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b1101101 ;  //  2
-         4'b0011  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b1111001 ;  //  3
-         4'b0100  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b1001100 ;  //  4
-         4'b0101  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b1011011 ;  //  5
-         4'b0110  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b1011111 ;  //  6
-         4'b0111  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b1110000 ;  //  7
-         4'b1000  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b1111111 ;  //  8
-         4'b1001  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b1111011 ;  //  9
-
-         default  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b0000000 ;  //  turned-off otherwise
-
-         // COMMON ANODE
-         //4'b0000  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b0000001 ;  //  0
-         //4'b0001  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b1001111 ;  //  1
-         //4'b0010  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b0010010 ;  //  2
-         //4'b0011  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b0000110 ;  //  3
-         //4'b0100  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b1001100 ;  //  4
-         //4'b0101  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b0100100 ;  //  5
-         //4'b0110  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b0100000 ;  //  6
-         //4'b0111  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b0001111 ;  //  7
-         //4'b1000  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b0000000 ;  //  8
-         //4'b1001  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b0000100 ;  //  9
-         //default  :  {segA, segB, segC, segD, segE, segF, segG} = 7'b1111111 ;  //  turned-off otherwise
-
-      endcase
-   end   // always
+       .BCD  ( BCD[3:0] ),
+       .DP   ( DP       ),
+       .segA ( segA     ),
+       .segB ( segB     ),
+       .segC ( segC     ),
+       .segD ( segD     ),
+       .segE ( segE     ),
+       .segF ( segF     ),
+       .segG ( segG     ),
+       .LED  (          )    // leave **UNCONNECTED**
+   ) ;
 
 */
 

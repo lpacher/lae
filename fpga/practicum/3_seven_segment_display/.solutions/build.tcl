@@ -45,9 +45,9 @@ set tclStart [clock seconds]
 ##   project setup   ##
 #######################
 
-#set projectName    {Gates}
+#set projectName    {SevenSegmentDecoder}
 #set projectDir     {.}
-#set topModuleName  {Gates}
+#set topModuleName  {SevenSegmentDecoder}
 #set targetFPGA     {xc7a35ticsg324-1L}
 
 ## load global variables common to both FPGA implementation and programming flows from external Tcl script

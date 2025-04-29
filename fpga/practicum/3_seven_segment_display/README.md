@@ -149,9 +149,10 @@ If you want you can also decide to simply tie-down the decimal point (DP) LED of
 
 <br />
 
-<img src="doc/pictures/module.png" alt="drawing" width="550"/>
+<img src="doc/pictures/7segmentFPGA.png" alt="drawing" width="750"/>
 
 <br />
+
 
 As an example, the main `module` declaration could be the following: 
 
@@ -435,6 +436,8 @@ At the end of the implementation flow review in the console the content of the *
 >
 > Which FPGA device primitives have been used to map the design on real hardware ?
 >
+>   \___________________________________________________________________________________
+>
 
 <br />
 
@@ -475,6 +478,7 @@ open_checkpoint ./SevenSegmentDecoder.runs/synth_1/SevenSegmentDecoder.dcp
 
 Plug the 7-segment display module on your breadboard and use **jumper wires** to make all necessary connections between the
 breadboard and the FPGA according to output pins that you use in XDCs. Use the datasheet to understand the pinout of the module.
+
 
 <br />
 
