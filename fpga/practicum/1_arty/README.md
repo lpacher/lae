@@ -283,7 +283,7 @@ resources on the board:
 
 Try to understand all possible **powering schemes** foreseen for the board.
 For this purpose read carefully the **Power Supplies** section of the official
-_Arty Reference Manual_ by Digilent.
+_Arty Reference Manual_ by Digilent. Cross-check all information with **board schematics**.
 
 Locate the following power-related pins:
 
