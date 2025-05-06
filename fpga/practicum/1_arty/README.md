@@ -215,11 +215,21 @@ List the content of the directory:
 ## Explore board schematics and master XDCs
 [**[Contents]**](#contents)
 
-Before connecting the board to your personal computer explore and study board schematics. Try to recognize on the PCB
+Before connecting the board to your personal computer explore and study **board schematics**. Try to recognize on the PCB
 all schematic components. Open the proper PDF file according to the board you are working with:
 
 * `doc/arty/arty_board_schematics.pdf` for the original _Arty_ board
 * `doc/arty/arty_a7_board_schematics.pdf` for the new revision of the board referred to as _Arty A7_ 
+
+<br />
+
+As an example:
+
+```
+% acrobat doc/arty/arty_board_schematics.pdf       # for Windows users
+
+% evince doc/arty/arty_board_schematics.pdf &      # for Linux users
+```
 
 <br />
 
