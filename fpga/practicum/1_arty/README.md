@@ -226,9 +226,9 @@ all schematic components. Open the proper PDF file according to the board you ar
 As an example:
 
 ```
-% acrobat doc/arty/arty_board_schematics.pdf       # for Windows users
+% evince doc/arty/arty_board_schematics.pdf &   (for Linux users)
 
-% evince doc/arty/arty_board_schematics.pdf &      # for Linux users
+% acrobat doc/arty/arty_board_schematics.pdf    (for Windows users)
 ```
 
 <br />
