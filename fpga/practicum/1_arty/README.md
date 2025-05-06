@@ -452,7 +452,7 @@ Repeat all your power measurements using the **oscilloscope**.
 > built-in oscilloscope square-wave generator. In case probes are over-compensated or under-compensated use a small screwdriver and operate
 > on the probe trimmer.
 >
-> If you fill completely lost at this point ask to the teacher or ref. to:
+> If you feel completely lost at this point ask to the teacher or ref. to:
 >
 > _<https://www.electronics-notes.com/articles/test-methods/oscilloscope/scope-probe-compensation.php>_
 >
