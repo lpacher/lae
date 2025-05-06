@@ -549,7 +549,7 @@ according to the Linux distribution you are working with.
 Beside `lsusb` you can use `dmesg` to query **kernel messages** (whatever happens on your PC can be traced using `dmesg`):
 
 ```
-% dmesg
+% sudo dmesg
 ...
 ...
 usb 1-1.3: FTDI USB Serial Device converter now attached to ttyUSB1
@@ -557,6 +557,9 @@ usbcore: registered new interface driver ftdi_sio
 ftdi_sio: v1.5.0:USB FTDI Serial Converters Driver
 ```
 
+<br />
+
+Please note that the above command needs administrator privileges to access kernel information, therefore you need to run it with `sudo`.
 
 <br />
 
