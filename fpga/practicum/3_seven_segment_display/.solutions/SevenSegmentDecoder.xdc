@@ -12,7 +12,7 @@
 ##   physical constraints (port mapping)   ##
 #############################################
 
-## slide swiches
+## slide switches
 set_property -dict { PACKAGE_PIN A8   IOSTANDARD LVCMOS33} [get_ports {BCD[0]} ]
 set_property -dict { PACKAGE_PIN C11  IOSTANDARD LVCMOS33} [get_ports {BCD[1]} ]
 set_property -dict { PACKAGE_PIN C10  IOSTANDARD LVCMOS33} [get_ports {BCD[2]} ]
