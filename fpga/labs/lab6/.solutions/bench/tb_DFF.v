@@ -33,9 +33,10 @@ module tb_DFF ;
    reg D = 1'b1 ;
    reg rst = 1'b1 ;
 
-   wire Q ;
+   wire Qlatch, Qff ;
 
-   DFF DUT (.clk(clk_buf), .rst(rst), .D(D), .Q(Q) ) ;
+   DLATCH  DUT_0 (.D(D)), .EN(clk), .Q(Qlatch) ) ;                 // D-latch
+   DFF     DUT_1 (.clk(clk_buf), .rst(rst), .D(D), .Q(Qff) ) ;     // D-FlipFlop
 
 
    //////////////////

@@ -185,7 +185,23 @@ endmodule
 
 <br />
 
-Create also a second Verilog file `rtl/DFF.v` and write the RTL code for a **D-FlipFlop**:
+Compile the source file and check for syntax errors:
+
+```
+% make compile hdl=rtl/DLATCH.v
+```
+
+<br />
+
+Once done make a copy of the `DLATCH.v` source file as follows
+
+```
+% cp rtl/DLATCH.v rtl/DFF.v
+```
+
+<br />
+
+and update the RTL code in order to implement a **D-FlipFlop** as follows:
 
 ```verilog
 //
@@ -275,9 +291,10 @@ module tb_DFF ;
    reg D = 1'b1 ;
    reg rst = 1'b1 ;
 
-   wire Q ;
+   wire Qlatch, Qff ;
 
-   DFF DUT (.clk(clk_buf), .rst(rst), .D(D), .Q(Q) ) ;
+   DLATCH  DUT_0 (.D(D)), .EN(clk), .Q(Qlatch) ) ;                 // D-latch
+   DFF     DUT_1 (.clk(clk_buf), .rst(rst), .D(D), .Q(Qff) ) ;     // D-FlipFlop
 
 
    //////////////////
