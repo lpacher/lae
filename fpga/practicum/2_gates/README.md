@@ -766,8 +766,8 @@ The number of inverters in the ring-oscillator chain determines the **frequency*
 output toggle. Since `NUM_INVERTERS` is a Verilog `parameter` you can easily change this number
 and perform a study of the **frequency vs. number of inverters** relationship.
 
-Let suppose $t_p$ the propagation delay of a single inverter cell. The total input-to-output propagation delay (half-period)
-for a cascade of $N$ inverters is therefore:
+Let suppose $t_p$ the propagation delay of a single inverter cell. The total input-to-output
+propagation delay (half-period) for a cascade of $N$ inverters is therefore:
 
 $$
 \frac{T}{2} = N t_p
@@ -779,7 +779,7 @@ $$
 f_{osc} = \frac{1}{T} = \dfrac{1}{2 N t_p}
 $$
 
-Hence the frequency shoul be proportional to $1/N$:
+Hence the frequency should be proportional to $1/N$:
 
 $$
 f_{osc} \propto \frac{1}{N}
@@ -842,10 +842,11 @@ The overall procedure can be summarized as follows:
 >
 > **IMPORTANT**
 >
-> After each measurement **stop the ring-oscillator** by setting `start` to logic 0 with the corresponding slide
-> switch and ensure that the status led turns-off. At the end of the `make install` flow restart the oscillator.
-> If you don't stop/restart the oscillator whenever a new firmware is installed the output toggle seen at the
-> oscilloscope might be not properly updated!
+> After each measurement **stop the ring-oscillator** by setting `start` to logic 0
+> with the corresponding slide switch and ensure that the status led turns-off.
+> At the end of the `make install` flow restart the oscillator.
+> If you don't stop/restart the oscillator whenever a new firmware is installed
+> the output toggle seen at the oscilloscope might be not properly updated!
 >
 
 <br />
