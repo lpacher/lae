@@ -988,7 +988,7 @@ as a Verilog **macro** with the following syntax:
 <br />
 
 Try yourself to modify the `RingOscillator.v` code in order to use this Verilog feature. For this purpose it might be useful
-to remind that the **value** of a Verilog macro is accessed in the code with the **back-tick** character ``` followed
+to remind that the **value** of a Verilog macro is accessed in the code with the **back-tick** character <code>`</code> followed
 by the **name** of the macro. As an example:
 
 ```
