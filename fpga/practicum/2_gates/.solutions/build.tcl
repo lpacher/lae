@@ -49,6 +49,7 @@ set tclStart [clock seconds]
 #set projectDir     {.}
 #set topModuleName  {Gates}
 #set targetFPGA     {xc7a35ticsg324-1L}
+#set numCpu         {4}
 
 ## load global variables common to both FPGA implementation and programming flows from external Tcl script
 #source [pwd]/setup.tcl
@@ -85,7 +86,7 @@ add_files -norecurse -fileset constrs_1 $topModuleName.xdc
 ##   run RTL elaboration and mapped synthesis flows   ##
 ########################################################
 
-launch_runs synth_1
+launch_runs synth_1 -jobs $numCpu
 wait_on_run synth_1
 
 
@@ -133,7 +134,7 @@ close_design
 ## setting required to also generate a raw binary file (.bin) to program the external Quad SPI Flash memory
 set_property STEPS.WRITE_BITSTREAM.ARGS.BIN_FILE true [get_runs impl_1]
 
-launch_runs impl_1 -to_step write_bitstream
+launch_runs impl_1 -to_step write_bitstream -jobs $numCpu
 wait_on_run impl_1
 
 
