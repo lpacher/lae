@@ -648,6 +648,35 @@ set topModuleName {RingOscillator}
 
 <br />
 
+>
+> **IMPORTANT**
+>
+> By default Vivado implementation flows executed with the `launch_runs` super-command
+> assume to use one single CPU. The `-jobs` switch can be used to increase the number
+> of parallel jobs and therefore to speed-up the flow.
+>
+> Example:
+>
+> `launch_runs synth_1 -jobs 4`
+>
+> <br />
+>
+> The additional `numCpu` Tcl variable can be used to specify the number of jobs
+> according to the machine you are working with:
+>
+> ```
+> set numCpu <integer>
+> ```
+>
+> <br />
+>
+> Please **edit and customize yourself** this number into the `setup.tcl` script in order
+> to fit your laptop performance.
+>
+
+<br />
+
+
 Save the file after modifications. Once ready launch the flow at the command line with:
 
 ```
