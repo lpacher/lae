@@ -1,17 +1,17 @@
-###########################################################################
-#
-# A first example Tcl script to run the Xilinx Vivado FPGA implementation
-# flow in batch (non-interactive) mode using a so-called "Project Mode"
-# script.
-#
-# Command line usage:
-#
-#   % cp .solutions/build.tcl .
-#   % vivado -mode batch -source build.tcl -notrace -log build.log -nojournal
-#
-# Luca Pacher - pacher@to.infn.it
-# Spring 2024
-#
+############################################################################
+##
+## A first example Tcl script to run the Xilinx Vivado FPGA implementation
+## flow in batch (non-interactive) mode using a so-called "Project Mode"
+## script.
+##
+## Command line usage:
+##
+##   % cp .solutions/build.tcl .
+##   % vivado -mode batch -source build.tcl -notrace -log build.log -nojournal
+##
+## Luca Pacher - pacher@to.infn.it
+## Spring 2024
+##
 ###########################################################################
 
 ##
@@ -46,6 +46,7 @@ update_compile_order -fileset sources_1
 add_files -norecurse -fileset constrs_1 Inverter.xdc
 
 ## run RTL elaboration and mapped synthesis flows
+#launch_runs synth_1 -jobs 4
 launch_runs synth_1
 wait_on_run synth_1
 
@@ -53,6 +54,7 @@ wait_on_run synth_1
 set_property STEPS.WRITE_BITSTREAM.ARGS.BIN_FILE true [get_runs impl_1]
 
 ## run implementation (place-and-route) flows and generate the FPGA configuration file (bitstream)
+#launch_runs impl_1 -to_step write_bitstream -jobs 4
 launch_runs impl_1 -to_step write_bitstream
 wait_on_run impl_1
 
