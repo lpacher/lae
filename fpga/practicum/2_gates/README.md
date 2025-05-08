@@ -1029,11 +1029,26 @@ by the **name** of the macro. As an example:
 
 **EXERCISE 4**
 
-Try yourself to implement and debug a simple **full-adder** combinational block.
+Implement and debug a simple **full-adder** combinational block. For this purpose you can simply
+use the standard sum operaror `+` as in other programming languages:
 
 ```
 assign {Cout, Sum}  = A + B + Cin ;
 ```
+
+<br />
+
+The synthesis tool will be then responsible to infer necessary logic gates to implement the binary
+addition in real hardware. Try yourself to:
+
+* create new `FullAdder.v` and `FullAdder.xdc` source files from scratch
+* implement a `FullAdder` module that performs a 2-bit binary addition with both input and output carry
+* use XDC statements to map full-adder inputs to slide-switches **SW2**, **SW1** and **SW0** (use the left-most switch for the input-carry)
+and outputs to **LD1** and **LD0** (use the left-most LED for the outut carry)
+* update project settings with the `setup.tcl` script
+* run the implementation flow from `Makefile`
+* install and debug the firmware
+
 
 <br />
 <!--------------------------------------------------------------------->
