@@ -49,14 +49,14 @@ LOG_DIR  := log
 ##########################################
 
 ## specify top-level RTL (this is used for implementation and firmware installation)
-#RTL_TOP_MODULE := DFF
+RTL_TOP_MODULE := DFF
 #RTL_TOP_MODULE := RippleCounter4b
-RTL_TOP_MODULE := SyncCounter4b
+#RTL_TOP_MODULE := SyncCounter4b
 
 ## specify top-level testbench module (this is the target module for the xelab executable)
-#SIM_TOP_MODULE := tb_DFF
+SIM_TOP_MODULE := tb_DFF
 #SIM_TOP_MODULE := tb_RippleCounter4b
-SIM_TOP_MODULE := tb_SyncCounter4b
+#SIM_TOP_MODULE := tb_SyncCounter4b
 
 
 ##
@@ -72,52 +72,20 @@ SIM_TOP_MODULE := tb_SyncCounter4b
 ## specify RTL sources by hand (more in general can be Verilog + VHDL code)
 ##
 
-#RTL_VLOG_SOURCES := $(RTL_DIR)/DLATCH.v $(RTL_DIR)/DFF.v
+RTL_VLOG_SOURCES := $(RTL_DIR)/DLATCH.v $(RTL_DIR)/DFF.v
 #RTL_VLOG_SOURCES := $(RTL_DIR)/RippleCounter4b.v
-RTL_VLOG_SOURCES := $(RTL_DIR)/SyncCounter4b.v
+#RTL_VLOG_SOURCES := $(RTL_DIR)/SyncCounter4b.v
 
-#SIM_VLOG_SOURCES := $(SIM_DIR)/glbl.v $(SIM_DIR)/ClockGen.v $(SIM_DIR)/tb_DLATCH.v
-#SIM_VLOG_SOURCES := $(SIM_DIR)/glbl.v $(SIM_DIR)/ClockGen.v $(SIM_DIR)/tb_DFF.v
+SIM_VLOG_SOURCES := $(SIM_DIR)/glbl.v $(SIM_DIR)/ClockGen.v $(SIM_DIR)/tb_DFF.v
 #SIM_VLOG_SOURCES := $(SIM_DIR)/glbl.v $(SIM_DIR)/ClockGen.v $(SIM_DIR)/tb_RippleCounter4b.v
-SIM_VLOG_SOURCES := $(SIM_DIR)/glbl.v $(SIM_DIR)/ClockGen.v $(SIM_DIR)/tb_SyncCounter4b.v
+#SIM_VLOG_SOURCES := $(SIM_DIR)/glbl.v $(SIM_DIR)/ClockGen.v $(SIM_DIR)/tb_SyncCounter4b.v
 
 ## if no VHDL sources, you can either comment the below variables or just leave them empty
 RTL_VHDL_SOURCES :=
 SIM_VHDL_SOURCES :=
 
 ## specify optional '-define' statements (Verilog-only)
-VLOG_DEFINES := -define SDF_ANNOTATE
-
-
-##
-## or automatically find all *.(s)v and *.vhd source files
-##
-
-#
-#ifneq ($(wildcard $(RTL_DIR)/*.v ),)
-#   RTL_VLOG_SOURCES += $(wildcard $(RTL_DIR)/*.v )
-#endif
-#
-#ifneq ($(wildcard $(RTL_DIR)/*.sv ),)
-#   RTL_VLOG_SOURCES += $(wildcard $(RTL_DIR)/*.sv )
-#endif
-#
-#ifneq ($(wildcard $(RTL_DIR)/*.vhd ),)
-#   RTL_VHDL_SOURCES += $(wildcard $(RTL_DIR)/*.vhd )
-#endif
-#
-#ifneq ($(wildcard $(SIM_DIR)/*.v ),)
-#   SIM_VLOG_SOURCES += $(wildcard $(SIM_DIR)/*.v )
-#endif
-#
-#ifneq ($(wildcard $(SIM_DIR)/*.sv ),)
-#   SIM_VLOG_SOURCES += $(wildcard $(SIM_DIR)/*.sv )
-#endif
-#
-#ifneq ($(wildcard $(SIM_DIR)/*.vhd ),)
-#   SIM_VHDL_SOURCES += $(wildcard $(SIM_DIR)/*.vhd )
-#endif
-#
+#VLOG_DEFINES := -define SDF_ANNOTATE
 
 
 ############################
@@ -165,7 +133,15 @@ endif
 ##   targets implementation   ##
 ################################
 
-## common targets
+##
+## **NOTE
+##
+## In order to shorten the main Makefile you can also decide to move
+## the implementation of all targets into flow-specific sub-makefiles
+## and then include them in this Makefile.
+##
+
+## common variables and targets
 include scripts/common/Makefile.common
 
 ## simulation targets
@@ -176,11 +152,4 @@ include scripts/build/Makefile.build
 
 ## programming targets
 include scripts/install/Makefile.install
-
-.PHONY : clean
-clean : sim/clean build/clean ## Delete ALL temporary and garbage files
-
-	@$(RM) *.pb *.wdb *.log *.jou *.str *xpr *.xml *.bit *.bin
-	@$(RMDIR) xsim.dir
-	@$(RMDIR) .Xil
 

@@ -35,7 +35,7 @@ module tb_DFF ;
 
    wire Qlatch, Qff ;
 
-   DLATCH  DUT_0 (.D(D)), .EN(clk), .Q(Qlatch) ) ;                 // D-latch
+   DLATCH  DUT_0 (.D(D), .EN(clk), .Q(Qlatch) ) ;                 // D-latch
    DFF     DUT_1 (.clk(clk_buf), .rst(rst), .D(D), .Q(Qff) ) ;     // D-FlipFlop
 
 
