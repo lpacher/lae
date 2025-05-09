@@ -883,7 +883,9 @@ somewhere below **Temp** and select **Add Sensor(s)**.
 The data exchange between the FPGA and the computer uses the same JTAG protocol used for device programming.
 Observe at the oscilloscope JTAG signals **TCK**, **TMS**, **TDI** and **TDO** using through-hole test points on **J8**.
 
+Try to **blow with your mouth** on the FPGA and check what happens to the monitored temperature.
 Close the _Hardware Manager_ and exit from Vivado once happy:
+
 
 ```
 close_hw_manager

@@ -1035,7 +1035,11 @@ Implement and debug a simple **Full-Adder (FA)** combinational block as depicted
 <img src="doc/pictures/FullAdder.png" alt="drawing" width="480"/>
 <br />
 
-For this purpose you can simply use the standard sum operaror `+` as in other programming languages:
+The block is a pure **combinational circuit**, therefore you can use a **truth-table** implemented using a Verilog `case` statement.
+Alternatively, from the truth-table you can also write a **Karnaugh map** for each full-adder output and derive **logic equations**
+for `Sum` and `Cout`.
+
+Indeed, you can simply use the standard sum operaror `+` as in other programming languages for this purpose:
 
 ```
 assign {Cout, Sum}  = A + B + Cin ;
@@ -1043,9 +1047,8 @@ assign {Cout, Sum}  = A + B + Cin ;
 
 <br />
 
-The synthesis tool will be then responsible to infer necessary logic gates to implement the binary
-addition in real hardware. Alternatively you can derive logic equations from the true-table of the
-circuit.
+The **synthesis tool** will be then responsible to infer necessary logic gates to implement the binary
+addition in real hardware.
 
 Try yourself to:
 
