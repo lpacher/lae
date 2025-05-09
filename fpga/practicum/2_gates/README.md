@@ -1055,7 +1055,7 @@ Try yourself to:
 * create new `FullAdder.v` and `FullAdder.xdc` source files from scratch
 * implement a `FullAdder` module that performs a 2-bit binary addition with both input and output carry
 * use XDC statements to map full-adder inputs to slide-switches **SW2**, **SW1** and **SW0** (use the left-most switch for the input-carry)
-and outputs to **LD1** and **LD0** (use the left-most LED for the outut carry)
+and outputs to **LD1** and **LD0** (use the left-most LED for the output carry)
 * update project settings with the `setup.tcl` script
 * run the implementation flow from `Makefile`
 * install and debug the firmware
