@@ -1029,8 +1029,13 @@ by the **name** of the macro. As an example:
 
 **EXERCISE 4**
 
-Implement and debug a simple **full-adder** combinational block. For this purpose you can simply
-use the standard sum operaror `+` as in other programming languages:
+Implement and debug a simple **Full-Adder (FA)** combinational block as depicted in figure:
+
+<br />
+<img src="doc/pictures/FullAdder.png" alt="drawing" width="480"/>
+<br />
+
+For this purpose you can simply use the standard sum operaror `+` as in other programming languages:
 
 ```
 assign {Cout, Sum}  = A + B + Cin ;
@@ -1039,7 +1044,10 @@ assign {Cout, Sum}  = A + B + Cin ;
 <br />
 
 The synthesis tool will be then responsible to infer necessary logic gates to implement the binary
-addition in real hardware. Try yourself to:
+addition in real hardware. Alternatively you can derive logic equations from the true-table of the
+circuit.
+
+Try yourself to:
 
 * create new `FullAdder.v` and `FullAdder.xdc` source files from scratch
 * implement a `FullAdder` module that performs a 2-bit binary addition with both input and output carry
