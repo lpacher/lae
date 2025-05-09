@@ -293,7 +293,8 @@ resources on the board:
 
 Try to understand all possible **powering schemes** foreseen for the board.
 For this purpose read carefully the **Power Supplies** section of the official
-_Arty Reference Manual_ by Digilent. Cross-check all information with **board schematics**.
+_Arty Reference Manual_ by Digilent. Cross-check all information with the **Power Regulation** section
+from board schematics and identify most important **voltage regulators** available on the board.
 
 Locate the following power-related pins:
 
@@ -310,7 +311,8 @@ that different same-potential test-points on the board are effectively shorted t
 >
 > **QUESTION**
 >
-> Which is the difference between **VIN** and **5V0** supply-voltages ?
+> Which is the difference between **VIN** and **5V0** supply-voltages available on the Arduino/chipKIT
+> pin header ? Which is the difference between **VU** and **VIN** ?
 >
 >   \___________________________________________________________________________________
 >
