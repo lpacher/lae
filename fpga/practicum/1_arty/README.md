@@ -264,12 +264,12 @@ resources on the board:
 >
 > **QUESTIONS**
 >
-> Q.1 Which is the value of the supply voltage used to power general-purpose standard LEDs ? Is the same for RGB LEDs ?
+> Q.1 What is the value of the supply voltage used to power general-purpose standard LEDs ? Is the same for RGB LEDs ? Which component drives these LEDs ?
 >
 >   \___________________________________________________________________________________
 >
 >
-> Q.2 Which is the most important difference between JA/JC and JB/JD PMOD pin headers ?
+> Q.2 What is the most important difference between JA/JD and JB/JC PMOD pin headers ?
 >
 >   \___________________________________________________________________________________
 >
@@ -280,6 +280,10 @@ resources on the board:
 >
 >
 > Q.4 A component on the PCB generates a 100 MHz clock signal. Which is the name of this component ? Where is placed on the PCB ?
+>
+>   \___________________________________________________________________________________
+>
+> Q.5 Where is placed the external Quad SPI Flash memory used to optionally load a firmware to program the FPGA ?
 >
 >   \___________________________________________________________________________________
 >
