@@ -42,6 +42,9 @@ endmodule
 
 `timescale 1ns / 100ps
 
+`define COUNT_UP
+//`define COUNT_DOWN
+
 module RippleCounter4b (
 
    input  wire clk, rst,
@@ -57,6 +60,8 @@ module RippleCounter4b (
    //   up-counter   //
    ////////////////////
 
+`ifdef COUNT_UP
+
    DFF  ff_0 ( .rst( rst ), .clk( clk     ), .D( Qbar[0] ), .Q( Q[0] ), .Qbar( Qbar[0]) ) ;
    DFF  ff_1 ( .rst( rst ), .clk( Qbar[0] ), .D( Qbar[1] ), .Q( Q[1] ), .Qbar( Qbar[1]) ) ;
    DFF  ff_2 ( .rst( rst ), .clk( Qbar[1] ), .D( Qbar[2] ), .Q( Q[2] ), .Qbar( Qbar[2]) ) ;
@@ -67,9 +72,19 @@ module RippleCounter4b (
    //   down-counter   //
    //////////////////////
 
-   //DFF  ff_0 ( .rst( rst ), .clk( clk  ), .D( Qbar[0] ), .Q( Q[0] ), .Qbar( Qbar[0]) ) ;
-   //DFF  ff_1 ( .rst( rst ), .clk( Q[0] ), .D( Qbar[1] ), .Q( Q[1] ), .Qbar( Qbar[1]) ) ;
-   //DFF  ff_2 ( .rst( rst ), .clk( Q[1] ), .D( Qbar[2] ), .Q( Q[2] ), .Qbar( Qbar[2]) ) ;
-   //DFF  ff_3 ( .rst( rst ), .clk( Q[2] ), .D( Qbar[3] ), .Q( Q[3] ), .Qbar( Qbar[3]) ) ;
+`elsif COUNT_DOWN
+
+   DFF  ff_0 ( .rst( rst ), .clk( clk  ), .D( Qbar[0] ), .Q( Q[0] ), .Qbar( Qbar[0]) ) ;
+   DFF  ff_1 ( .rst( rst ), .clk( Q[0] ), .D( Qbar[1] ), .Q( Q[1] ), .Qbar( Qbar[1]) ) ;
+   DFF  ff_2 ( .rst( rst ), .clk( Q[1] ), .D( Qbar[2] ), .Q( Q[2] ), .Qbar( Qbar[2]) ) ;
+   DFF  ff_3 ( .rst( rst ), .clk( Q[2] ), .D( Qbar[3] ), .Q( Q[3] ), .Qbar( Qbar[3]) ) ;
+
+   //////////////////////////////////////////
+   //   empty Verilog abstract otherwise   //
+   //////////////////////////////////////////
+
+`else
+`endif
 
 endmodule
+
