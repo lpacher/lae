@@ -842,7 +842,7 @@ As an example:
 
 <br />
 
-|   $N$    |   $1/N$   |   $f_{osc}$   |
+|    N     |    1/N    |     freq      |
 |:--------:|:---------:|:-------------:|
 |   283    |    ...    |      ...      |
 |   567    |    ...    |      ...      |
@@ -903,7 +903,7 @@ and for the frequency vs. $1/(N+1)$. Verify the expected linearity of the charac
 > measurements as follows:
 >
 > ```
-> # N   1/N   Fosc
+> # N   1/N   freq
 > 283   ...   ...
 > 567   ...   ...
 > 849   ...   ...
@@ -915,7 +915,7 @@ and for the frequency vs. $1/(N+1)$. Verify the expected linearity of the charac
 >
 > <br />
 >
-> You can use as many blank characters as you want to indent your measurements. 
+> You can use as many blank characters as you want to indent your measurements.
 > Once finished start an **interactive ROOT session** at the command line:
 >
 > ```
@@ -936,15 +936,19 @@ and for the frequency vs. $1/(N+1)$. Verify the expected linearity of the charac
 >
 > <br />
 >
-> Alternatively you can place your measurements into **standard C/C++ arrays** and use them
+> As you might notice the second argument of this `TGraph` constructor can be used to select which columns
+> have to be plotted. Alternatively you can place your measurements into **standard C/C++ arrays** and use them
 > into the `TGraph` constructor:
 >
 > ```
 > root[] int Npt = ...
 > root[] double xData[Npt] = {283 , 567 , 849 , 1133 , 1415 ... }
 > root[] double yData[Npt] = { ... }
-> root[] TGraph gr(Npt,xData,yData)
-> root[] gr.Draw("ALP")
+> root[] TGraph gr1(Npt,xData,yData)
+> root[] gr1.Draw("ALP")
+> root[] TGraph gr2(Npt)
+> root[] for(int k=0; k<Npt; k++){ gr2.SetPoint(k,1/xData[k],yData[k]) }
+> root[] gr2.Draw("ALP")
 > ```
 >
 
@@ -959,6 +963,7 @@ can copy a first example code from the `sample/` directory at the top of the Git
 
 <br />
 
+Feel free to use **Python** and PyROOT** scripts instead of C/C++.
 Ask to the teacher if you are not confident in using the ROOT software.
 
 <br />
