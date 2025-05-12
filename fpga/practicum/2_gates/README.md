@@ -1035,7 +1035,11 @@ Implement and debug a simple **Full-Adder (FA)** combinational block as depicted
 <img src="doc/pictures/FullAdder.png" alt="drawing" width="480"/>
 <br />
 
-For this purpose you can simply use the standard sum operaror `+` as in other programming languages:
+The block is a pure **combinational circuit**, therefore you can use a **truth-table** implemented using a Verilog `case` statement.
+Alternatively, from the truth-table you can also write a **Karnaugh map** for each full-adder output and derive **logic equations**
+for `Sum` and `Cout`.
+
+Indeed, you can simply use the standard sum operaror `+` as in other programming languages for this purpose:
 
 ```
 assign {Cout, Sum}  = A + B + Cin ;
@@ -1043,16 +1047,15 @@ assign {Cout, Sum}  = A + B + Cin ;
 
 <br />
 
-The synthesis tool will be then responsible to infer necessary logic gates to implement the binary
-addition in real hardware. Alternatively you can derive logic equations from the true-table of the
-circuit.
+The **synthesis tool** will be then responsible to infer necessary logic gates to implement the binary
+addition in real hardware.
 
 Try yourself to:
 
 * create new `FullAdder.v` and `FullAdder.xdc` source files from scratch
 * implement a `FullAdder` module that performs a 2-bit binary addition with both input and output carry
 * use XDC statements to map full-adder inputs to slide-switches **SW2**, **SW1** and **SW0** (use the left-most switch for the input-carry)
-and outputs to **LD1** and **LD0** (use the left-most LED for the outut carry)
+and outputs to **LD1** and **LD0** (use the left-most LED for the output carry)
 * update project settings with the `setup.tcl` script
 * run the implementation flow from `Makefile`
 * install and debug the firmware

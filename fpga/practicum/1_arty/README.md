@@ -883,7 +883,9 @@ somewhere below **Temp** and select **Add Sensor(s)**.
 The data exchange between the FPGA and the computer uses the same JTAG protocol used for device programming.
 Observe at the oscilloscope JTAG signals **TCK**, **TMS**, **TDI** and **TDO** using through-hole test points on **J8**.
 
+Try to **blow with your mouth** on the FPGA and check what happens to the monitored temperature.
 Close the _Hardware Manager_ and exit from Vivado once happy:
+
 
 ```
 close_hw_manager
@@ -1139,7 +1141,16 @@ to be used for firmware installation.
 By default both **bitstream (.bit)** and **raw-binary (.bin)** programming files are written by Vivado
 into the `*.runs/impl_1/` directory automatically created by the tool as part of the project tree setup.
 
-Verify at the end of the flow that both files have been properly generated:
+Verify at the end of the flow that both files have been properly generated. Either use
+
+```
+% ls -lh ./Inverter/Inverter.runs/impl_1 | grep .bit
+% ls -lh ./Inverter/Inverter.runs/impl_1 | grep .bin
+```
+
+<br />
+
+or
 
 ```
 % ls -lh ./Inverter.runs/impl_1 | grep .bit
@@ -1148,10 +1159,14 @@ Verify at the end of the flow that both files have been properly generated:
 
 <br />
 
+depending if you enabled or not the _Create project subdirectory_ option in the Vivado _New Project_ wizard.
+
+<br />
+
 >
 > **QUESTION**
 >
-> Which is the on-disk size of bitstream (.bit) and raw-binary (.bin) files ? Motivate the difference if any.
+> What is the on-disk size of bitstream (.bit) and raw-binary (.bin) files ? Motivate the difference if any.
 >
 >   \___________________________________________________________________________________
 >
