@@ -41,8 +41,8 @@ set_property -dict { PACKAGE_PIN C11  IOSTANDARD LVCMOS33 } [get_ports B  ] ;   
 set_property -dict { PACKAGE_PIN C10  IOSTANDARD LVCMOS33 } [get_ports Cin] ;   ## SW2
 
 ## standard LEDs
-set_property -dict { PACKAGE_PIN H5  IOSTANDARD LVCMOS33 } [get_ports Sum ] ;   ## LD0
-set_property -dict { PACKAGE_PIN J5  IOSTANDARD LVCMOS33 } [get_ports Cout] ;   ## LD1
+set_property -dict { PACKAGE_PIN H5  IOSTANDARD LVCMOS33 } [get_ports Sum ] ;   ## LD4
+set_property -dict { PACKAGE_PIN J5  IOSTANDARD LVCMOS33 } [get_ports Cout] ;   ## LD5
 
 
 ################################

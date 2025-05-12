@@ -27,7 +27,7 @@
 #############################################
 
 set_property -dict { PACKAGE_PIN A8  IOSTANDARD LVCMOS33 } [get_ports X ] ;   ## SW0
-set_property -dict { PACKAGE_PIN H5  IOSTANDARD LVCMOS33 } [get_ports ZN] ;   ## LD0
+set_property -dict { PACKAGE_PIN H5  IOSTANDARD LVCMOS33 } [get_ports ZN] ;   ## LD4 (standard LED)
 
 ## alternatively, each property can be specified into a single statement
 #set_property PACKAGE_PIN A8       [get_ports X ]
