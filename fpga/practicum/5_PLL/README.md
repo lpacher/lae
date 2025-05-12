@@ -390,7 +390,7 @@ assign LED_locked = pll_locked ;
 
 <br />
 
-Update design constraints to assign the new port to the **LD4** general-purpose standard LED available on the _Arty_board.
+Update design constraints to assign the new port to the **LD4** general-purpose standard LED available on the _Arty_ board.
 Save all files once done and re-run the flows from scratch from the command line up to FPGA programming with:
 
 ```
