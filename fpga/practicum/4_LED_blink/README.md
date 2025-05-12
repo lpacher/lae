@@ -580,7 +580,7 @@ For this purpose simply **re-use** the same `SevenSegmentDecoder` module and pin
 already developed and tested in the previous practicum:
 
 ```
-% cp ../3_seven_segment_display/rtl/SevenSegmentDecoder.v ./rtl/
+% cp ../3_seven_segment_display/SevenSegmentDecoder.v ./rtl/
 ```
 
 <br />
@@ -598,14 +598,14 @@ module LED_blink (
    //output wire LED_probe    // probe at the oscilloscope the LED control signal
 
    // drive a 7-segment display module with a suitable 4-bit slice of the counter
-   output reg segA,
-   output reg segB,
-   output reg segC,
-   output reg segD,
-   output reg segE,
-   output reg segF,
-   output reg segG,
-   output reg DP
+   output wire segA,
+   output wire segB,
+   output wire segC,
+   output wire segD,
+   output wire segE,
+   output wire segF,
+   output wire segG,
+   output wire DP
 
    ) ;
 
