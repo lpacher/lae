@@ -93,14 +93,16 @@ SIM_TOP_MODULE := tb_LED_blink
 ##
 
 RTL_VLOG_SOURCES := $(RTL_DIR)/LED_blink.v
-#RTL_VLOG_SOURCES := $(RTL_DIR)/LED_blink.v $(RTL_DIR)/SevenSegmentDecoder.v
-
-SIM_VLOG_SOURCES := $(SIM_DIR)/ClockGen.v $(SIM_DIR)/glbl.v $(SIM_DIR)/tb_LED_blink.v
+SIM_VLOG_SOURCES := $(SIM_DIR)/glbl.v $(SIM_DIR)/ClockGen.v $(SIM_DIR)/tb_LED_blink.v
 
 
 ## if no VHDL sources, you can either comment the below variables or just leave them empty
-RTL_VHDL_SOURCES :=
-SIM_VHDL_SOURCES :=
+#RTL_VHDL_SOURCES :=
+#SIM_VHDL_SOURCES :=
+
+
+## specify optional '-define' statements (Verilog-only)
+#VLOG_DEFINES := -define SDF_ANNOTATE
 
 
 ##
@@ -133,13 +135,10 @@ SIM_VHDL_SOURCES :=
 #endif
 #
 
+
 ############################
 ##   gate-level netlist   ##
 ############################
-
-#ifneq ($(wildcard $(WORK_DIR)/build/outputs/mapped.v ),)
-#   VLOG_NETLIST := $(WORK_DIR)/build/outputs/mapped.v
-#endif
 
 VLOG_NETLIST := $(WORK_DIR)/build/outputs/mapped.v
 #VLOG_NETLIST := $(WORK_DIR)/build/outputs/signoff.v
@@ -149,13 +148,13 @@ VLOG_NETLIST := $(WORK_DIR)/build/outputs/mapped.v
 ##   group together all Verilog/SystemVerilog and VHDL sources   ##
 ###################################################################
 
-ifneq ($(strip $(VLOG_NETLIST)),)
-   VLOG_SOURCES := $(RTL_VLOG_SOURCES) $(SIM_VLOG_SOURCES)
-   VHDL_SOURCES := $(RTL_VHDL_SOURCES) $(SIM_VHDL_SOURCES)
-else
-   VLOG_SOURCES := $(VLOG_NETLIST) $(SIM_VLOG_SOURCES)
-   VHDL_SOURCES := $(SIM_VHDL_SOURCES)
-endif
+## RTL simulation
+VLOG_SOURCES := $(RTL_VLOG_SOURCES) $(SIM_VLOG_SOURCES)
+VHDL_SOURCES := $(RTL_VHDL_SOURCES) $(SIM_VHDL_SOURCES)
+
+## GL simulation (optionally with SDF)
+#VLOG_SOURCES := $(VLOG_NETLIST) $(SIM_VLOG_SOURCES)
+#VHDL_SOURCES := $(SIM_VHDL_SOURCES)
 
 
 ##########################
@@ -218,7 +217,8 @@ MKDIR := mkdir -p -v
 ## installation check
 ifeq ($(shell which vivado 2> /dev/null),)
    @$(error ERROR: No 'vivado' executable found in search path! Force an exit now...)
-endif
+endif 
+
 
 ##
 ## **NOTE
@@ -258,8 +258,28 @@ export WORK_DIR
 export RTL_TOP_MODULE
 export SIM_TOP_MODULE
 
+ifneq ($(strip $(RTL_VLOG_SOURCES)),)
+   export RTL_VLOG_SOURCES
+endif
+
+ifneq ($(strip $(SIM_VLOG_SOURCES)),)
+   export SIM_VLOG_SOURCES
+endif
+
 ifneq ($(strip $(VLOG_SOURCES)),)
    export VLOG_SOURCES
+endif
+
+ifneq ($(strip $(VLOG_DEFINES)),)
+   export VLOG_DEFINES
+endif
+
+ifneq ($(strip $(RTL_VHDL_SOURCES)),)
+   export RTL_VHDL_SOURCES
+endif
+
+ifneq ($(strip $(SIM_VHDL_SOURCES)),)
+   export SIM_VHDL_SOURCES
 endif
 
 ifneq ($(strip $(VHDL_SOURCES)),)
@@ -338,6 +358,7 @@ area : ## Create a new fresh working area with all necessary directories used in
 
 	@$(MKDIR) $(RTL_DIR)
 	@$(MKDIR) $(SIM_DIR)
+
 	@$(MKDIR) $(TCL_DIR)/common
 	@$(MKDIR) $(TCL_DIR)/sim
 	@$(MKDIR) $(TCL_DIR)/build
@@ -346,13 +367,23 @@ area : ## Create a new fresh working area with all necessary directories used in
 
 	@$(MKDIR) $(BIN_DIR)
 
-	@$(MKDIR) $(LOG_DIR)
 	@$(MKDIR) $(DOC_DIR)
 	@$(MKDIR) $(IPS_DIR)
 	@$(MKDIR) $(XDC_DIR)
 
 	@$(MKDIR) $(WORK_DIR)/sim
+	@$(MKDIR) $(WORK_DIR)/sim/log
+	@$(MKDIR) $(WORK_DIR)/sim/tmp
+	@$(MKDIR) $(WORK_DIR)/sim/test
+	@$(MKDIR) $(WORK_DIR)/sim/vcd
+	@$(MKDIR) $(WORK_DIR)/sim/wdb
+
 	@$(MKDIR) $(WORK_DIR)/build
+	@$(MKDIR) $(WORK_DIR)/build/log
+	@$(MKDIR) $(WORK_DIR)/build/tmp
+	@$(MKDIR) $(WORK_DIR)/build/test
+	@$(MKDIR) $(WORK_DIR)/build/outputs
+	@$(MKDIR) $(WORK_DIR)/build/reports
 
 	@$(MKDIR) $(TEMP_DIR)
 	@$(MKDIR) $(TEST_DIR)
@@ -360,11 +391,6 @@ area : ## Create a new fresh working area with all necessary directories used in
 	@$(ECHO) "\n   -- Working area setup completed !\n\n"
 ##____________________________________________________________________________________________________
 
-
-.PHONY : gui
-gui : ## Start Vivado in GUI mode and keep the shell alive
-
-	@echo "exec vivado -mode gui &" | tclsh -norc
 
 ##
 ## IP-generation target
@@ -407,109 +433,56 @@ ifneq ($(hdl),)
    export HDL_FILE=$(hdl)
 endif
 
-.PHONY : compile
-compile : $(TCL_DIR)/sim/compile.tcl ## Parse and compile RTL and simulation sources
+.PHONY : sim/compile
+sim/compile : $(TCL_DIR)/sim/compile.tcl ## Parse and compile RTL and simulation sources
 
 ifeq ($(wildcard $(WORK_DIR)/sim/.*),)
 	@$(error ERROR: Missing simulation working area $(WORK_DIR)/sim ! Run 'make area' before running the flows.)
 else
-	@tclsh $(TCL_DIR)/sim/compile.tcl $@
+	@tclsh $(TCL_DIR)/sim/compile.tcl compile
 endif
 ##____________________________________________________________________________________________________
 
 
-.PHONY : elaborate
-elaborate : $(TCL_DIR)/sim/elaborate.tcl ## Elaborate the design
+.PHONY : sim/elaborate
+sim/elaborate : $(TCL_DIR)/sim/elaborate.tcl ## Elaborate the design
 
-	@tclsh $(TCL_DIR)/sim/elaborate.tcl $@
+	@tclsh $(TCL_DIR)/sim/elaborate.tcl elaborate
 ##____________________________________________________________________________________________________
 
+
+.PHONY : sim/simulate
+sim/simulate : $(TCL_DIR)/sim/simulate.tcl $(WORK_DIR)/sim/xsim.dir ## Run simulation executable
+
+	@tclsh $(TCL_DIR)/sim/simulate.tcl simulate $(mode)
+##____________________________________________________________________________________________________
+
+
+.PHONY : compile
+compile : sim/compile ## Alias, same as 'make sim/compile'
+
+.PHONY : elaborate
+elaborate : sim/elaborate ## Alias, same as 'make sim/elaborate'
 
 .PHONY : simulate
-simulate : $(TCL_DIR)/sim/simulate.tcl $(WORK_DIR)/sim/xsim.dir ## Run simulation executable
+simulate : sim/simulate ## Alias, same as 'make sim/simulate'
 
-	@tclsh $(TCL_DIR)/sim/simulate.tcl $@ $(mode)
+.PHONY : sim
+sim : sim/compile sim/elaborate sim/simulate ## Alias, same as 'make compile elaborate simulate'
 ##____________________________________________________________________________________________________
 
 
-.PHONY : sim
-sim : compile elaborate simulate ## One-step compilation, elaboration and simulation (same as 'make compile elaborate simulate')
+.PHONY : timesim
+timesim :
+
+	@export 
+
 ##____________________________________________________________________________________________________
 
 
 ##
 ## Implementation targets (you can also run the flow step-by-step using escaped targets)
 ##
-
-.PHONY : build/import
-build/import : ## Design import and RTL elaboration
-
-ifeq ($(wildcard $(WORK_DIR)/build/.*),)
-	@$(error ERROR: Missing implementation working area $(WORK_DIR)/build ! Run 'make area' before running the flows.)
-else
-   ifeq ($(mode),gui)
-	@echo "exec vivado -mode gui \
-	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/import.tcl \
-	   -log $(LOG_DIR)/import.log -nojournal -verbose -notrace &" | tclsh -norc
-   else
-	@vivado -mode $(mode) \
-	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/import.tcl \
-	   -log $(LOG_DIR)/import.log -nojournal -verbose -notrace
-   endif
-endif
-
-.PHONY : build/syn
-build/syn : ## Mapped synthesis
-
-ifeq ($(mode),gui)
-	@echo "exec vivado -mode gui \
-	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/syn.tcl \
-	   -log $(LOG_DIR)/syn.log -nojournal -verbose -notrace &" | tclsh -norc
-else
-	@vivado -mode $(mode) \
-	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/syn.tcl \
-	   -log $(LOG_DIR)/syn.log -nojournal -verbose -notrace
-endif
-
-
-.PHONY : build/place
-build/place : ## Placement flow
-
-ifeq ($(mode),gui)
-	@echo "exec vivado -mode gui \
-	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/place.tcl \
-	   -log $(LOG_DIR)/place.log -nojournal -verbose -notrace &" | tclsh -norc
-else
-	@vivado -mode $(mode) \
-	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/place.tcl \
-	   -log $(LOG_DIR)/place.log -nojournal -verbose -notrace
-endif
-
-.PHONY : build/route
-build/route : ## Routing flow
-
-ifeq ($(mode),gui)
-	@echo "exec vivado -mode gui \
-	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/route.tcl \
-	   -log $(LOG_DIR)/route.log -nojournal -verbose -notrace &" | tclsh -norc
-else
-	@vivado -mode $(mode) \
-	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/route.tcl \
-	   -log $(LOG_DIR)/route.log -nojournal -verbose -notrace
-endif
-
-.PHONY : build/export
-build/export : ## Signoff and design-export flow
-
-ifeq ($(mode),gui)
-	@echo "exec vivado -mode gui \
-	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/export.tcl \
-	   -log $(LOG_DIR)/export.log -nojournal -verbose -notrace &" | tclsh -norc
-else
-	@vivado -mode $(mode) \
-	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/export.tcl \
-	   -log $(LOG_DIR)/export.log -nojournal -verbose -notrace
-endif
 
 .PHONY : build
 build : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/build/build.tcl ## Run the full Vivado FPGA implementation flow and generate bitstream (non-project mode)
@@ -520,11 +493,111 @@ else
    ifeq ($(mode),gui)
 	@echo "exec vivado -mode gui \
 	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/build.tcl \
-	   -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace &" | tclsh -norc
+	   -log $(WORK_DIR)/build/log/build.log -nojournal -verbose -notrace &" | tclsh -norc
    else
 	@vivado -mode $(mode) \
 	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/build.tcl \
-	   -log $(LOG_DIR)/$@.log -nojournal -verbose -notrace
+	   -log $(WORK_DIR)/build/log/build.log -nojournal -verbose -notrace
+   endif
+endif
+##_______________________________________________________________________________________
+
+
+.PHONY : build/import
+build/import : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/build/import.tcl ## Design import and RTL elaboration
+
+ifeq ($(wildcard $(WORK_DIR)/build/.*),)
+	@$(error ERROR: Missing implementation working area $(WORK_DIR)/build ! Run 'make area' before running the flows.)
+else
+   ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/import.tcl \
+	   -log $(WORK_DIR)/build/log/import.log -nojournal -verbose -notrace &" | tclsh -norc
+   else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/import.tcl \
+	   -log $(WORK_DIR)/build/log/import.log -nojournal -verbose -notrace
+   endif
+endif
+##_______________________________________________________________________________________
+
+
+.PHONY : build/syn
+build/syn : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/build/syn.tcl ## Mapped synthesis
+
+ifeq ($(wildcard $(WORK_DIR)/build/.*),)
+	@$(error ERROR: Missing implementation working area $(WORK_DIR)/build ! Run 'make area' before running the flows.)
+else
+   ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/syn.tcl \
+	   -log $(WORK_DIR)/build/log/syn.log -nojournal -verbose -notrace &" | tclsh -norc
+   else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/syn.tcl \
+	   -log $(WORK_DIR)/build/log/syn.log -nojournal -verbose -notrace
+   endif
+endif
+##_______________________________________________________________________________________
+
+
+.PHONY : syn
+syn : build/syn ## Alias, same as 'make build/syn'
+##_______________________________________________________________________________________
+
+
+.PHONY : build/place
+build/place : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/build/place.tcl ## Placement flow
+
+ifeq ($(wildcard $(WORK_DIR)/build/.*),)
+	@$(error ERROR: Missing implementation working area $(WORK_DIR)/build ! Run 'make area' before running the flows.)
+else
+   ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/place.tcl \
+	   -log $(WORK_DIR)/build/log/place.log -nojournal -verbose -notrace &" | tclsh -norc
+   else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/place.tcl \
+	   -log $(WORK_DIR)/build/log/place.log -nojournal -verbose -notrace
+   endif
+endif
+##_______________________________________________________________________________________
+
+
+.PHONY : build/route
+build/route : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/build/route.tcl ## Routing flow
+
+ifeq ($(wildcard $(WORK_DIR)/build/.*),)
+	@$(error ERROR: Missing implementation working area $(WORK_DIR)/build ! Run 'make area' before running the flows.)
+else
+   ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/route.tcl \
+	   -log $(WORK_DIR)/build/log/route.log -nojournal -verbose -notrace &" | tclsh -norc
+   else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/route.tcl \
+	   -log $(WORK_DIR)/build/log/route.log -nojournal -verbose -notrace
+   endif
+endif
+##_______________________________________________________________________________________
+
+
+.PHONY : build/export
+build/export : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/build/export.tcl ## Design export
+
+ifeq ($(wildcard $(WORK_DIR)/build/.*),)
+	@$(error ERROR: Missing implementation working area $(WORK_DIR)/build ! Run 'make area' before running the flows.)
+else
+   ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/export.tcl \
+	   -log $(WORK_DIR)/build/log/export.log -nojournal -verbose -notrace &" | tclsh -norc
+   else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/export.tcl \
+	   -log $(WORK_DIR)/build/log/export.log -nojournal -verbose -notrace
    endif
 endif
 ##_______________________________________________________________________________________
@@ -558,27 +631,27 @@ hw_manager : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/install/hw_manager.tcl ## Ope
 ifeq ($(mode),gui)
 	@echo "exec vivado -mode gui \
 	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/install/hw_manager.tcl -notrace \
-	   -log $(LOG_DIR)/$@.log -nojournal -verbose &" | tclsh -norc
+	   -nolog -nojournal -verbose &" | tclsh -norc
 else
 	@vivado -mode tcl \
 	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/install/hw_manager.tcl -notrace \
-	   -log $(LOG_DIR)/$@.log -nojournal -verbose
+	   -nolog -nojournal -verbose
 endif
 ##____________________________________________________________________________________________________
 
 
-.PHONY : install/fpga
-install/fpga : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/install/install.tcl ## Upload bitstream to target FPGA using Vivado Hardware Manager
+.PHONY : install
+install : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/install/install.tcl ## Upload bitstream to target FPGA using Vivado Hardware Manager
 
 ifeq ($(mode),gui)
 
 	@echo "exec vivado -mode gui \
 	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/install/install.tcl \
-	   -notrace -log $(LOG_DIR)/install.log -nojournal &" | tclsh -norc
+	   -notrace -log $(WORK_DIR)/build/log/install.log -nojournal &" | tclsh -norc
 else
 	@vivado -mode $(mode) \
 	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/install/install.tcl \
-	   -notrace -log $(LOG_DIR)/install.log -nojournal 
+	   -notrace -log $(WORK_DIR)/build/log/install.log -nojournal 
 endif
 ##____________________________________________________________________________________________________
 
@@ -590,23 +663,25 @@ ifeq ($(mode),gui)
 
 	@echo "exec vivado -mode gui \
 	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/install/install_flash.tcl \
-	   -notrace -log $(LOG_DIR)/install_flash.log -nojournal &" | tclsh -norc
+	   -notrace -log $(WORK_DIR)/build/log/install_flash.log -nojournal &" | tclsh -norc
 else
 	@vivado -mode $(mode) \
 	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/install/install_flash.tcl \
-	   -notrace -log $(LOG_DIR)/install_flash.log -nojournal
+	   -notrace -log $(WORK_DIR)/build/log/install_flash.log -nojournal
 endif
 ##____________________________________________________________________________________________________
 
 
-.PHONY : install
-install : install/fpga ## Alias, same as 'make install/fpga'
-
-##____________________________________________________________________________________________________
-
 ##
 ## Other targets
 ##
+
+.PHONY : gui
+gui : ## Start Vivado in GUI mode and keep the shell alive
+
+	@echo "exec vivado -mode gui &" | tclsh -norc
+##____________________________________________________________________________________________________
+
 
 ## empty variable to optionally specify a design checkpoint (.dcp) to be restored
 dcp :=
@@ -631,38 +706,32 @@ endif
 ## Cleanup targets
 ##
 
-.PHONY : clean_log
-clean_log : ## Delete log files and journal files
+.PHONY : sim/clean
+sim/clean : ## Delete ALL files from work/sim
 
-	@$(RM) *.log *.jou
-	@$(RM) $(LOG_DIR)/*
+	@$(RM)    $(WORK_DIR)/sim/*.log
+	@$(RM)    $(WORK_DIR)/sim/*.jou
+	@$(RM)    $(WORK_DIR)/sim/*.pb
+	@$(RM)    $(WORK_DIR)/sim/*.wdb
+	@$(RMDIR) $(WORK_DIR)/sim/log/*
+	@$(RMDIR) $(WORK_DIR)/sim/xsim.dir
+	@$(RMDIR) $(WORK_DIR)/sim/.Xil
 ##____________________________________________________________________________________________________
 
 
-.PHONY : clean_sim
-clean_sim : ## Delete ALL files from work/sim
+.PHONY : build/clean
+build/clean : ## Delete ALL files from work/build
 
-	@$(RMDIR) $(WORK_DIR)/sim/*
-##____________________________________________________________________________________________________
-
-
-.PHONY : clean_build
-clean_build : ## Delete ALL files from work/build
-
-	@$(RMDIR) $(WORK_DIR)/build/*
-##____________________________________________________________________________________________________
-
-
-.PHONY : clean_all
-clean_all : clean_log clean_sim clean_build ## Delete ALL temporary and garbage files
-
-	@$(RM) *.pb *.wdb *.log *.jou
-	@$(RMDIR) xsim.dir
-	@$(RMDIR) .Xil
+	@$(RMDIR) $(WORK_DIR)/build/log/*
+	@$(RMDIR) $(WORK_DIR)/build/reports/*
+	@$(RMDIR) $(WORK_DIR)/build/outputs/*
 ##____________________________________________________________________________________________________
 
 
 .PHONY : clean
-clean : clean_all ## Alias, same as 'make clean_all'
-##____________________________________________________________________________________________________
+clean : sim/clean build/clean ## Delete ALL temporary and garbage files
 
+	@$(RM) *.pb *.wdb *.log *.jou *.str *xpr *.xml *.bit *.bin
+	@$(RMDIR) xsim.dir
+	@$(RMDIR) .Xil
+##____________________________________________________________________________________________________
