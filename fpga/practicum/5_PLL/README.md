@@ -325,7 +325,7 @@ functionality of the PLL. Measure at the oscilloscope the frequency of the MUX o
 >
 
 <br />
-<img src="doc/pictures/oscilloscope1.png" alt="drawing" width="550"/>
+<img src="doc/pictures/oscilloscope1.png" alt="drawing" width="650"/>
 <br />
 
 
