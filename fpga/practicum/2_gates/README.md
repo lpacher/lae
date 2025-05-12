@@ -963,6 +963,7 @@ can copy a first example code from the `sample/` directory at the top of the Git
 
 <br />
 
+Feel free to use **Python** and PyROOT** scripts instead of C/C++.
 Ask to the teacher if you are not confident in using the ROOT software.
 
 <br />
