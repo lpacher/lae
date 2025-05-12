@@ -1,7 +1,6 @@
 ################################################################################
 ##
-## Example implementation constraints for the Inverter.v Verilog module. 
-##
+## Implementation constraints for the FullAdder.v Verilog example.
 ## All pin positions and electrical properties refer to the
 ## Digilent Arty-A7 development board.
 ##
@@ -11,32 +10,58 @@
 ##    https://github.com/Digilent/Arty/blob/master/Resources/XDC/Arty_Master.xdc
 ##
 ## To find actual physical locations of pins on the board, please check
-## board reference schematics:
+## board reference schematics :
 ##
 ##    https://reference.digilentinc.com/_media/arty:arty_sch.pdf
 ##
-##
 ## Luca Pacher - pacher@to.infn.it
-## Spring 2021
+## Fall 2020
 ##
 ################################################################################
+
+
+###############
+##   units   ##
+###############
+
+## just for reference, these are already default units
+#set_units -time          ns
+#set_units -voltage       V
+#set_units -power         mW
+#set_units -capacitance   pF
 
 
 #############################################
 ##   physical constraints (port mapping)   ##
 #############################################
 
-set_property -dict { PACKAGE_PIN A8  IOSTANDARD LVCMOS33 } [get_ports X ] ;   ## SW0
-set_property -dict { PACKAGE_PIN H5  IOSTANDARD LVCMOS33 } [get_ports ZN] ;   ## LD0
+## slide switches
+set_property -dict { PACKAGE_PIN A8   IOSTANDARD LVCMOS33 } [get_ports A  ] ;   ## SW0
+set_property -dict { PACKAGE_PIN C11  IOSTANDARD LVCMOS33 } [get_ports B  ] ;   ## SW1
+set_property -dict { PACKAGE_PIN C10  IOSTANDARD LVCMOS33 } [get_ports Cin] ;   ## SW2
 
-## alternatively, each property can be specified into a single statement
-#set_property PACKAGE_PIN A8       [get_ports X ]
-#set_property PACKAGE_PIN H5       [get_ports X ]
-#
-#set_property IOSTANDARD LVCMOS33  [get_ports X ]
-#set_property IOSTANDARD LVCMOS33  [get_ports ZN]
-#
-#set_property IOSTANDARD LVCMOS33  [concat [all_inputs] [all_outputs]]
+## standard LEDs
+set_property -dict { PACKAGE_PIN H5  IOSTANDARD LVCMOS33 } [get_ports Sum ] ;   ## LD0
+set_property -dict { PACKAGE_PIN J5  IOSTANDARD LVCMOS33 } [get_ports Cout] ;   ## LD1
+
+
+################################
+##   electrical constraints   ##
+################################
+
+## voltage configurations
+set_property CFGBVS VCCO        [current_design]
+set_property CONFIG_VOLTAGE 3.3 [current_design]
+
+
+##
+## **WARNING
+##
+## The load capacitance is used during power analysis when running the report_power
+## command, but it's not used during timing analysis
+##
+set_load 10 [all_outputs] -verbose
+
 
 
 ############################
@@ -48,15 +73,6 @@ set_property -dict { PACKAGE_PIN H5  IOSTANDARD LVCMOS33 } [get_ports ZN] ;   ##
 
 ## alternatively, disable timing checks from all inputs to all outputs
 set_false_path -from [all_inputs] -to [all_outputs]
-
-
-################################
-##   electrical constraints   ##
-################################
-
-## voltage configurations
-set_property CFGBVS VCCO        [current_design]
-set_property CONFIG_VOLTAGE 3.3 [current_design]
 
 
 ################################

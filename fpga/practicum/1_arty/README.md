@@ -989,7 +989,7 @@ set_property IOSTANDARD LVCMOS33 [get_ports <HDL port name> ]
 <br />
 
 As an example, map the inverter input `X` to the slide-switch **SW0**, while assign the
-inverter output `ZN` to the general-purpose LED `LD4` available on the Digilent board
+inverter output `ZN` to the general-purpose LED `LD0` available on the Digilent board
 as shown below. Use the main `arty_all.xdc` as a reference for the syntax.
 
 <br />
@@ -1000,7 +1000,7 @@ as shown below. Use the main `arty_all.xdc` as a reference for the syntax.
 
 ```
 set_property -dict { PACKAGE_PIN A8  IOSTANDARD LVCMOS33 } [get_ports X ] ;  # SW0
-set_property -dict { PACKAGE_PIN H5  IOSTANDARD LVCMOS33 } [get_ports ZN] ;  # LD4
+set_property -dict { PACKAGE_PIN H5  IOSTANDARD LVCMOS33 } [get_ports ZN] ;  # LD0
 ```
 
 <br />
