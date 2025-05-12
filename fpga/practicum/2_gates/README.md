@@ -842,15 +842,15 @@ As an example:
 
 <br />
 
-|   $N$    |   $f_{osc}$   |
-|:--------:|:-------------:|
-|   283    |      ...      |
-|   567    |      ...      |
-|   849    |      ...      |
-|   1133   |      ...      |
-|   1417   |      ...      |
-|   ...    |      ...      |
-|   ...    |      ...      |
+|   $N$    |   $1/N$   |   $f_{osc}$   |
+|:--------:|:---------:|:-------------:|
+|   283    |    ...    |      ...      |
+|   567    |    ...    |      ...      |
+|   849    |    ...    |      ...      |
+|   1133   |    ...    |      ...      |
+|   1417   |    ...    |      ...      |
+|   ...    |    ...    |      ...      |
+|   ...    |    ...    |      ...      |
 
 <br />
 
@@ -903,14 +903,14 @@ and for the frequency vs. $1/(N+1)$. Verify the expected linearity of the charac
 > measurements as follows:
 >
 > ```
-> # N   Fosc
-> 283   ...
-> 567   ...
-> 849   ...
-> 1133  ...
-> 1417  ...
-> ...   ...
-> ...   ...
+> # N   1/N   Fosc
+> 283   ...   ...
+> 567   ...   ...
+> 849   ...   ...
+> 1133  ...   ...
+> 1417  ...   ...
+> ...   ...   ...
+> ...   ...   ...
 > ```
 >
 > <br />
@@ -927,8 +927,11 @@ and for the frequency vs. $1/(N+1)$. Verify the expected linearity of the charac
 > Plot the characteristic interactively with:
 >
 > ```
-> root[] TGraph gr("data/RingOscillator.dat")
-> root[] gr.Draw("ALP")
+> root[] TGraph gr1("data/RingOscillator.dat","%lg %*lg %lg")
+> root[] gr1.Draw("ALP")
+> root[] TGraph gr2("data/RingOscillator.dat","%*lg %lg %lg")
+> root[] gr2.Draw("ALP")
+> root[] gr2.Fit("pol1")
 > ```
 >
 > <br />
