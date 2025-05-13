@@ -59,21 +59,21 @@ and read data from the FPGA. You already installed this additional software as p
 > to interact with the device: 
 >
 > ```
-> % sudo usermod -aG dialout $USER
+> % sudo usermod -a -G dialout $USER
 > ```
 >
 > <br />
 >
-> In order to update user permissions you have to **reboot** your machine:
+> In order to **refresh and update your user group membership** without rebooting the system
+> run the following command:
 >
 > ```
-> % sudo /sbin/reboot
+> % newgrp dialout
 > ```
 >
 > <br />
 >
-> Once the reboot process has completed open a new terminal window and verify that you user is part
-> of the `dialout` group:
+> Once done verify that your user is now part of the `dialout` group with:
 >
 > ```
 > % groups
