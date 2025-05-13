@@ -308,11 +308,23 @@ in _Project Mode_ by default both bitstream (.bit) and raw-binary (.bin) program
 files are written by Vivado into the `*.runs/impl_1/` directory automatically created
 by the tool as part of the project tree setup.
 
-Verify at the end of the flow that the bitstream file has been properly generated:
+Verify at the end of the flow that the bitstream file has been properly generated. Either use
+
+```
+% ls -lh ./Gates/Gates.runs/impl_1/ | grep .bit
+```
+
+<br />
+
+or
 
 ```
 % ls -lh ./Gates.runs/impl_1/ | grep .bit
 ```
+
+<br />
+
+depending if you enabled or not the _Create project subdirectory_ option in the Vivado _New Project_ wizard.
 
 <br />
 
