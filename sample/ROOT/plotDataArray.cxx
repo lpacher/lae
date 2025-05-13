@@ -32,7 +32,7 @@
    TGraph *gr2 = new TGraph(Npt) ;
 
    double xData[Npt] = { 283    , 567    , 849    , 1133    , 1415     } ;   // number of inverting stages in the loop
-   double yData[Npt] = { 3.35e6 , 2.11e6 , 1.42e6 , 1.088e6 , 836.8e3  } ;   // measured toggle frequency
+   double yData[Npt] = { 3.35e6 , 1.95e6 , 1.42e6 , 1.088e6 , 863.8e3  } ;   // measured toggle frequency
 
    for(int k=0; k < Npt; ++k) {
 
