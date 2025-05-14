@@ -1,0 +1,153 @@
+
+###############################################################################################
+##   IMPLEMENTATION targets (you can also run the flow step-by-step using escaped targets)   ##
+###############################################################################################
+
+
+.PHONY : build
+build : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/build/build.tcl ## Run the full Vivado FPGA implementation flow and generate bitstream (non-project mode)
+
+ifeq ($(wildcard $(WORK_DIR)/build/.*),)
+	@$(error ERROR: Missing implementation working area $(WORK_DIR)/build ! Run 'make area' before running the flows.)
+else
+   ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/build.tcl \
+	   -log $(WORK_DIR)/build/log/build.log -nojournal -verbose -notrace &" | tclsh -norc
+   else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/build.tcl \
+	   -log $(WORK_DIR)/build/log/build.log -nojournal -verbose -notrace
+   endif
+endif
+##_______________________________________________________________________________________
+
+
+.PHONY : build/import
+build/import : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/build/import.tcl ## Design import and RTL elaboration
+
+ifeq ($(wildcard $(WORK_DIR)/build/.*),)
+	@$(error ERROR: Missing implementation working area $(WORK_DIR)/build ! Run 'make area' before running the flows.)
+else
+   ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/import.tcl \
+	   -log $(WORK_DIR)/build/log/import.log -nojournal -verbose -notrace &" | tclsh -norc
+   else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/import.tcl \
+	   -log $(WORK_DIR)/build/log/import.log -nojournal -verbose -notrace
+   endif
+endif
+##_______________________________________________________________________________________
+
+
+.PHONY : build/syn
+build/syn : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/build/syn.tcl ## Mapped synthesis
+
+ifeq ($(wildcard $(WORK_DIR)/build/.*),)
+	@$(error ERROR: Missing implementation working area $(WORK_DIR)/build ! Run 'make area' before running the flows.)
+else
+   ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/syn.tcl \
+	   -log $(WORK_DIR)/build/log/syn.log -nojournal -verbose -notrace &" | tclsh -norc
+   else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/syn.tcl \
+	   -log $(WORK_DIR)/build/log/syn.log -nojournal -verbose -notrace
+   endif
+endif
+##_______________________________________________________________________________________
+
+
+.PHONY : syn
+syn : build/syn ## Alias, same as 'make build/syn'
+##_______________________________________________________________________________________
+
+
+.PHONY : build/place
+build/place : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/build/place.tcl ## Placement flow
+
+ifeq ($(wildcard $(WORK_DIR)/build/.*),)
+	@$(error ERROR: Missing implementation working area $(WORK_DIR)/build ! Run 'make area' before running the flows.)
+else
+   ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/place.tcl \
+	   -log $(WORK_DIR)/build/log/place.log -nojournal -verbose -notrace &" | tclsh -norc
+   else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/place.tcl \
+	   -log $(WORK_DIR)/build/log/place.log -nojournal -verbose -notrace
+   endif
+endif
+##_______________________________________________________________________________________
+
+
+.PHONY : build/route
+build/route : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/build/route.tcl ## Routing flow
+
+ifeq ($(wildcard $(WORK_DIR)/build/.*),)
+	@$(error ERROR: Missing implementation working area $(WORK_DIR)/build ! Run 'make area' before running the flows.)
+else
+   ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/route.tcl \
+	   -log $(WORK_DIR)/build/log/route.log -nojournal -verbose -notrace &" | tclsh -norc
+   else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/route.tcl \
+	   -log $(WORK_DIR)/build/log/route.log -nojournal -verbose -notrace
+   endif
+endif
+##_______________________________________________________________________________________
+
+
+.PHONY : build/export
+build/export : $(TCL_DIR)/common/init.tcl $(TCL_DIR)/build/export.tcl ## Design export
+
+ifeq ($(wildcard $(WORK_DIR)/build/.*),)
+	@$(error ERROR: Missing implementation working area $(WORK_DIR)/build ! Run 'make area' before running the flows.)
+else
+   ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/export.tcl \
+	   -log $(WORK_DIR)/build/log/export.log -nojournal -verbose -notrace &" | tclsh -norc
+   else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -source $(TCL_DIR)/build/export.tcl \
+	   -log $(WORK_DIR)/build/log/export.log -nojournal -verbose -notrace
+   endif
+endif
+##_______________________________________________________________________________________
+
+
+## empty variable to optionally specify a design checkpoint (.dcp) to be restored
+dcp :=
+
+.PHONY : build/restore
+build/restore : ## Restore Vivado project from XML project file (.xpr) or design checkpoint (.dcp)
+
+ifeq ($(dcp),)
+	@$(error ERROR: Missing design checkpoint to be restored! Usage: 'make restore dcp=/path/to/filename.dcp'.)
+else
+   ifeq ($(mode),gui)
+	@echo "exec vivado -mode gui \
+	   -source $(TCL_DIR)/common/init.tcl -nolog -nojournal -verbose -notrace $(dcp) &" | tclsh -norc
+   else
+	@vivado -mode $(mode) \
+	   -source $(TCL_DIR)/common/init.tcl -nolog -nojournal -verbose -notrace $(dcp)
+   endif
+endif
+##____________________________________________________________________________________________________
+
+
+.PHONY : build/clean
+build/clean : ## Delete ALL files from work/build
+
+	@$(RMDIR) $(WORK_DIR)/build/log/*
+	@$(RMDIR) $(WORK_DIR)/build/reports/*
+	@$(RMDIR) $(WORK_DIR)/build/outputs/*
+##____________________________________________________________________________________________________
+
