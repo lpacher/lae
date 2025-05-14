@@ -961,6 +961,7 @@ and for the frequency vs. $1/(N+1)$. Verify the expected linearity of the charac
 > root[] TGraph gr2(Npt)
 > root[] for(int k=0; k<Npt; k++){ gr2.SetPoint(k,1/xData[k],yData[k]) }
 > root[] gr2.Draw("ALP")
+> root[] gr2.Fit("pol1")
 > ```
 >
 
