@@ -34,7 +34,7 @@
 #############################################
 
 ## on-board 100 MHz clock
-set_property -dict {PACKAGE_PIN E3 IOSTANDARD LVCMOS33} [get_ports clk]
+set_property -dict { PACKAGE_PIN E3 IOSTANDARD LVCMOS33 } [get_ports clk]
 
 ## hard-wired TxD pin (FPGA pin already connected by Digilent to USB/UART bridge on the board)
 set_property -dict { PACKAGE_PIN D10  IOSTANDARD LVCMOS33 } [get_ports TxD]
