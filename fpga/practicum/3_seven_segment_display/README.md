@@ -114,7 +114,7 @@ Datasheets for the 7-segment display available in the lab have been placed in th
 <br />
 
 Open the required PDF according to the 7-segment display module you are working with. Understand the working principle
-of the 7-segment display module. With a **digital multimeter (DMM)** perform a basic **continuity tests** (the "beep" test)
+of the 7-segment display module. With a **digital multimeter (DMM)** perform a basic **continuity test** (the "beep" test)
 to cross-check with datasheet schematics which pins are shorted together (if any).
 
 <br />
