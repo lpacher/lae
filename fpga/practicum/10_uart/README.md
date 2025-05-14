@@ -160,6 +160,19 @@ Ask to the teacher if you need help.
 
 <br />
 
+<br />
+
+>
+> **QUESTION**
+>
+> Which is the endianness of the UART transmitted data ?
+>
+>   \___________________________________________________________________________________
+>
+
+<br />
+<!--------------------------------------------------------------------->
+
 **EXTRA**
 
 The `uart_xadc.v` design uses the embedded 12-bit XADC to monitor the on-chip temperature an and to send
