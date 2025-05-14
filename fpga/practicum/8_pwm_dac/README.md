@@ -282,6 +282,10 @@ As a first step display the **frequency-spectrum** of the PWM waveform at the os
 in order to generate a PWM waveform with approx. 50% duty cycle that mimics a square wave. Compare FFT results
 with the well-known theoretical Fourier expansion of a square wave. 
 
+<br />
+<img src="doc/pictures/pwm_FFT_oscilloscope.png" alt="drawing" width="650"/>
+<br />
+
 Once happy with FFT implement the following circuit on breadboard:
 
 <br />
