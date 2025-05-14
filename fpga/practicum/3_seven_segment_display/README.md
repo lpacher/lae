@@ -114,8 +114,15 @@ Datasheets for the 7-segment display available in the lab have been placed in th
 <br />
 
 Open the required PDF according to the 7-segment display module you are working with. Understand the working principle
-of the 7-segment display module. With a **digital multimeter (DMM)** perform a basic **continuity test** (the "beep" test)
+of the 7-segment display module.
+
+With a **digital multimeter (DMM)** perform a basic **continuity test** (the "beep" test)
 to cross-check with datasheet schematics which pins are shorted together (if any).
+Plug the module on the breadboard and place an approx. 100-300 $\Omega$ **limiting resistor**
+on some random pins to cross-check with datasheet schematics
+the pin numbering of the display. For this purpose you can simply power the 7-segment display
+module by connecting **GND** and **VCC** from the _Arty_ board to the module with two jumper wires.
+Verify that all LEDs of the display properly turn-on.
 
 <br />
 
@@ -209,7 +216,8 @@ at any time by **compiling the code** with `xvlog` at the command line:
 >
 > The block is a pure **combinational circuit**, therefore you can use a **truth-table** implemented using a Verilog `case` statement.
 > Alternatively, from the truth-table you can also write a **Karnaugh map** for each decoder output and derive **logic equations**
-> to drive the LEDs of the 7-segment display.
+> to drive the LEDs of the 7-segment display. Don't care values in the maps can be either considered 1 or 0 in order to maximize
+> the size of primary implicants.
 >
 > Ref. also to:
 >
