@@ -55,7 +55,7 @@ and read data from the FPGA. You already installed this additional software as p
 > In order to ensure that a PuTTY instance launched as a **standard user** is able to read/write
 > from/to `/dev/ttyUSBx` the user has to be part of this `dialout` Linux group.
 >
-> For this purpose add your user to the `dialout` group so you have appropriate permissions to
+> For this purpose add your user to the `dialout` group so you have appropriate permissions
 > to interact with the device: 
 >
 > ```
