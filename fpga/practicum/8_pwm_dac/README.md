@@ -267,8 +267,20 @@ The PWM output signal is a **periodic signal**, thus it can be expressed in form
 of a first **frequency-independent contribution**, corresponding to the **average value of the signal**, plus a sum
 of infinite frequency-dependent sine/cosine terms:
 
+<br />
+
 $$
-v(t) = V_{DC} + \sum_{n=0}^{\infty} \left[ a_n \cos(\omega_n t) + b_n \sin(\omega_n t) \right]
+v(t) = a_0 + \sum_{n=1}^{\infty} \left[ a_n \cos(\omega_n t) + b_n \sin(\omega_n t) \right]
+$$
+
+<br />
+
+The constant term $a_o$ is the average value of the signal and depends on the duty-cycle $D = T_{on}/T~$ of the PWM waveform:
+
+<br />
+
+$$
+a_o = \frac{1}{T}\ \int_0^T v(t)\ dt = \frac{1}{T}\ \int_0^{T_{on}} V_{on}\ dt = V_{on} \times \left(\frac{T_{on}}{T}\right) = V_{on} \times D
 $$
 
 <br />
