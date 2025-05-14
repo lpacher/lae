@@ -417,7 +417,8 @@ of the design.
 Explore all design checkpoint files that are part of the Vivado project tree:
 
 ```
-% ls -lh ./Gates.runs/*/* | grep .dcp
+% ls -lh ./Gates.runs/synth_1/* | grep .dcp
+% ls -lh ./Gates.runs/impl_1/*  | grep .dcp
 ```
 
 <br />

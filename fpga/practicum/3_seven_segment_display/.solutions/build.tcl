@@ -66,6 +66,9 @@ if { [file exists [pwd]/setup.tcl] } {
    exit 1
 }
 
+## CPU setup
+set_param general.maxThreads $numCpu
+
 
 ########################################################################
 ##   create new Vivado project attached to Artix-7 A35T FPGA device   ##
