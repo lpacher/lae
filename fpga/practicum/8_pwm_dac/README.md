@@ -47,6 +47,7 @@ This practicum should exercise the following concepts:
 * review the working principle of Pulse Width Modulation (PWM)
 * implement and test a free-running programmable 4-bit PWM generator on real FPGA hardware
 * measure the PWM period and compare its value with expectations
+* display the frequency-spectrum of a signal at the oscilloscope with the FFT
 * implement a 1-bit DAC to generate a programmable DC voltage
 * verify the PWM linear characteristics duty-cycle vs. threshold code
 * verify the DAC linear characteristics output voltage vs. threshold code
@@ -264,13 +265,24 @@ Observe the PWM output signal at the oscilloscope. Change the 4-bit threshold va
 
 The PWM output signal is a **periodic signal**, thus it can be expressed in form of **Fourier series** as the sum
 of a first **frequency-independent contribution**, corresponding to the **average value of the signal**, plus a sum
-of infinite frequency-dependent sine/cosine terms.
+of infinite frequency-dependent sine/cosine terms:
+
+$$
+v(t) = V_{DC} + \sum_{n=0}^{\infty} \left[ a_n \cos(\omega_n t) + b_n \sin(\omega_n t) \right]
+$$
+
+<br />
 
 With a large-enough **low-pass filter** (it can be as simple as a low-pass _RC_ filter) we can therefore obtain a constant
 DC voltage from a PWM signal by removing all remaining frequency-dependent terms of the series.
 This is the working principle of a so-called **1-bit D/A converter**.
 
-Implement the following circuit on breadboard:
+As a first step display the **frequency-spectrum** of the PWM waveform at the oscilloscope by means of the
+**Fast Fourier Transform (FFT)** function. Choose a threshold code at the middle of the range e.g. `4'b0111`
+in order to generate a PWM waveform with approx. 50% duty cycle that mimics a square wave. Compare FFT results
+with the well-known theoretical Fourier expansion of a square wave. 
+
+Once happy with FFT implement the following circuit on breadboard:
 
 <br />
 
