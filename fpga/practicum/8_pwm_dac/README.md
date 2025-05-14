@@ -286,6 +286,8 @@ with the well-known theoretical Fourier expansion of a square wave.
 <img src="doc/pictures/pwm_FFT_oscilloscope.png" alt="drawing" width="650"/>
 <br />
 
+<br />
+
 Once happy with FFT implement the following circuit on breadboard:
 
 <br />
