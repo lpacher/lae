@@ -270,7 +270,7 @@ of infinite frequency-dependent sine/cosine terms:
 <br />
 
 $$
-v(t) = a_0 + \sum_{n=1}^{\infty} \left[ a_n \cos(\omega_n t) + b_n \sin(\omega_n t) \right]
+v(t) = a_0 + \sum_{n=1}^{\infty} ~\left[ a_n ~\cos(\omega_n t) + b_n ~\sin(\omega_n t) \right]
 $$
 
 <br />
@@ -290,9 +290,15 @@ DC voltage from a PWM signal by removing all remaining frequency-dependent terms
 This is the working principle of a so-called **1-bit D/A converter**.
 
 As a first step display the **frequency-spectrum** of the PWM waveform at the oscilloscope by means of the
-**Fast Fourier Transform (FFT)** function. Choose a threshold code at the middle of the range e.g. `4'b0111`
-in order to generate a PWM waveform with approx. 50% duty cycle that mimics a square wave. Compare FFT results
-with the well-known theoretical Fourier expansion of a square wave. 
+**Fast Fourier Transform (FFT)** function available under the **Math** menu. Choose a threshold code
+at the middle of the range e.g. `4'b0111` in order to generate a PWM waveform with approx. 50% duty cycle that
+mimics a square wave. To reduce spurious harmonics in the spectrum it is recommended to acquire the waveform in
+average mode. Compare FFT results with the well-known theoretical [**Fourier expansion of a square wave**](https://mathworld.wolfram.com/FourierSeriesSquareWave.html):
+
+$$
+v(t) = \frac{V_{on}}{2} + \frac{2~V_{on}}{\pi}~\sum_{n=1}^{\infty} ~\frac{1}{n} ~\sin(\omega_n t) \ \ \ \ \ \ n = 1,3,5,7 ...
+$$
+
 
 <br />
 <img src="doc/pictures/pwm_FFT_oscilloscope.png" alt="drawing" width="650"/>
@@ -308,7 +314,8 @@ Once happy with FFT implement the following circuit on breadboard:
 
 <br />
 
-Choose yourself proper resistance and capacitance values for the filter. If you have time, you can **optionally** place
+Choose yourself proper resistance and capacitance values for the filter. Use FFT results to determine a suitable
+value for the time-constant of the filter. If you have time, you can **optionally** place
 an additional **buffer** implemented with an **operational amplifier** (e.g. **uA741**, **LM324**)
 working in **voltage-follower** configuration.
 
