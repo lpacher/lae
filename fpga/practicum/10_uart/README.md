@@ -136,7 +136,7 @@ Alternatively launch the _Device Manager_ from the Windows _Command Prompt_
 
 and expand the **Ports (COM & LPT)** section.
 
-Once done left-click on the **Open** buttom to establish the connection between the FPGA
+Once done left-click on the **Open** button to establish the connection between the FPGA
 and the host computer. Alternatively you can bypass the PuTTY graphical configuration and
 **start the communication from the command line** as follows:
 

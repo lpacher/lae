@@ -146,7 +146,7 @@ Before mapping the RTL code into real FPGA hardware it is recommended to run a b
 [**[Contents]**](#contents)
 
 Despite its simplicity the proposed design provides a first example of an RTL design with **multiple-levels of hierarchy**.
-In fact the top-level module instantiates other sub-modules such as a seven-segment decoder and an N-digit BCD-counter, with
+In fact the top-level module instantiates other sub-modules such as a 7-segment decoder and an N-digit BCD-counter, with
 the N-digit BCD-counter itself composed of a module-9 counter.
 
 In order to graphically visualize and better understand the overall design organization you can perform a simple
