@@ -7,13 +7,14 @@
 // Spring 2021
 //
 
-`define SIM
+//`define SIM
 
 `timescale 1ns / 100ps
 
 module uart_ascii (
 
    input  wire clk,                       // assume 100 MHz clock from external on-board oscillator
+   input  wire select,                    // select what to send through UART (e.g. constant character vs. all printable ASCII characters)
    output wire TxD,                       // serial output, hard-wired FPGA pin already connected by Digilent to USB/UART bridge on the board
    output wire txd_probe, busy_probe      // optionally, probe signals at the oscilloscope
 
@@ -77,14 +78,14 @@ module uart_ascii (
    //   ASCII table (ROM)   //
    ///////////////////////////
 
-   wire [7:0] tx_data ;
+   wire [7:0] rom_data ;
 
    ascii_rom   ascii_rom (
 
       .clk   (  pll_clk ),
       .ren   (  rom_ren ),
       .addr  ( rom_addr ),
-      .dout  (  tx_data )
+      .dout  ( rom_data )
 
       ) ;
 
@@ -98,6 +99,11 @@ module uart_ascii (
 
    BaudGen  BaudGen (.clk(pll_clk), .rst(~pll_locked), .tx_en(baud_tick)) ;
 
+   wire [7:0] tx_data ;
+
+   // switch between constant character or ROM ASCII values
+   assign tx_data = (select == 1'b0) ? 8'h41 : rom_data ;       // **DEBUG: send ASCII character "A"
+
    uart_tx_FSM  uart_tx (
 
       .clk       (     pll_clk ),
@@ -105,7 +111,6 @@ module uart_ascii (
       .tx_start  (     rom_ren ),
       .tx_en     (   baud_tick ),
       .tx_data   (     tx_data ),
-      //.tx_data   (     8'h41 ),   // **DEBUG: send ASCII character "A"
       .TxD       (         sdo ),
       .tx_busy   (        busy )
 
@@ -118,5 +123,4 @@ module uart_ascii (
    assign busy_probe = busy ;
 
 endmodule
-
 
