@@ -45,6 +45,9 @@ set_property -dict { PACKAGE_PIN G13  IOSTANDARD LVCMOS33 } [get_ports txd_probe
 ## use UART "busy" signal as trigger on CH2
 set_property -dict { PACKAGE_PIN B11  IOSTANDARD LVCMOS33 } [get_ports busy_probe] ;   ## JA2
 
+## **EXTRA: uart_ascii select pin (comment-out for urt_xadc design instead)
+set_property -dict { PACKAGE_PIN A8  IOSTANDARD LVCMOS33 } [get_ports select ] ;   ## SW0
+
 
 ################################
 ##   electrical constraints   ##

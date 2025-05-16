@@ -21,6 +21,7 @@ global numCpu
 
 set projectName {Gates}
 #set projectName {RingOscillator}
+#set projectName {FullAdder}
 
 
 ###############################################################################
@@ -37,6 +38,7 @@ set projectDir {.}
 
 set topModuleName {Gates}
 #set topModuleName {RingOscillator}
+#set topModuleName {FullAdder}
 
 
 ###########################################################
@@ -66,5 +68,5 @@ set targetFPGA {xc7a35ticsg324-1L}
 ## in order to fit your laptop performance.
 ##
 
-set numCpu {2}
+set numCpu {4}
 
