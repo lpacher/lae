@@ -54,7 +54,6 @@ RTL_TOP_MODULE := LFSR
 ## specify top-level testbench module (this is the target module for the xelab executable)
 SIM_TOP_MODULE := tb_LFSR
 
-
 ##
 ## **NOTE
 ##
@@ -73,12 +72,13 @@ SIM_VLOG_SOURCES := $(SIM_DIR)/glbl.v $(SIM_DIR)/ClockGen.v $(SIM_DIR)/tb_LFSR.v
 
 
 ## if no VHDL sources, you can either comment the below variables or just leave them empty
-RTL_VHDL_SOURCES :=
-SIM_VHDL_SOURCES :=
+#RTL_VHDL_SOURCES :=
+#SIM_VHDL_SOURCES :=
 
 
 ## specify optional '-define' statements (Verilog-only)
-VLOG_DEFINES := -define SDF_ANNOTATE
+#VLOG_DEFINES := -define SDF_ANNOTATE
+
 
 ##
 ## or automatically find all *.(s)v and *.vhd source files
@@ -132,8 +132,6 @@ VHDL_SOURCES := $(RTL_VHDL_SOURCES) $(SIM_VHDL_SOURCES)
 #VHDL_SOURCES := $(SIM_VHDL_SOURCES)
 
 
-
-
 ##########################
 ##   IP sources setup   ##
 ##########################
@@ -158,7 +156,15 @@ endif
 ##   targets implementation   ##
 ################################
 
-## common targets
+##
+## **NOTE
+##
+## In order to shorten the main Makefile you can also decide to move
+## the implementation of all targets into flow-specific sub-makefiles
+## and then include them in this Makefile.
+##
+
+## common variables and targets
 include scripts/common/Makefile.common
 
 ## simulation targets
@@ -169,11 +175,4 @@ include scripts/build/Makefile.build
 
 ## programming targets
 include scripts/install/Makefile.install
-
-.PHONY : clean
-clean : sim/clean build/clean ## Delete ALL temporary and garbage files
-
-	@$(RM) *.pb *.wdb *.log *.jou *.str *xpr *.xml *.bit *.bin
-	@$(RMDIR) xsim.dir
-	@$(RMDIR) .Xil
 
