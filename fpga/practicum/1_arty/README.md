@@ -399,7 +399,7 @@ read carefully the **FPGA Configuration** section of the official _Arty Referenc
 
 A few **jumpers** are available on the board and are used to **hard-program** some main functionalities of the board:
 
-* external vs. USB power mode on J13 (legacy _Arty_ board)
+* external vs. USB power mode on J13 (legacy _Arty_ board, not available for the _Arty A7_)
 * **MODE** on JP1
 * **CK_RESET** on JP2
 
