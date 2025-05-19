@@ -3,7 +3,8 @@
 # Practicum 10
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/practicum)]
 
-In this practicum you will experiment with the **Universal Asynchronous Receiver/Transmitter (UART)** protocol on real FPGA hardware.
+In this practicum you will experiment with the
+[**Universal Asynchronous Receiver/Transmitter (UART)**](https://www.rohde-schwarz.com/cz/products/test-and-measurement/essentials-test-equipment/digital-oscilloscopes/understanding-uart_254524.html) protocol on real FPGA hardware.
 
 For this purpose **two sample RTL designs** have been already prepared for you, both implementing a UART transmitter written
 in Verilog HDL to **send data from the FPGA to the host computer** through the **on-board USB/UART bridge** available on the
@@ -238,8 +239,20 @@ Ask to the teacher if you need help.
 <!--------------------------------------------------------------------->
 
 
-## Exercise
+## Exercises
 
-Try yourself to modify the UART transmitter in order to include also the **parity-bit** into UART frames
+<br />
+
+**EXERCISE 1**
+
+Try yourself to modify the UART transmitter in order to include also the **parity-bit** into UART frames.
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+**EXERCISE 2**
+
+Modify the `uart_ascii.v` design in order to replace the ROM written in Verilog with a Xilinx IP core.
 
 </div>
