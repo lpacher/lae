@@ -245,7 +245,8 @@ Ask to the teacher if you need help.
 
 **EXERCISE 1**
 
-Try yourself to modify the UART transmitter in order to include also the **parity-bit** into UART frames.
+Try yourself to modify the UART transmitter of the `uart_ascii.v` design in order to include also the **parity-bit**
+into UART frames. Update the PuTTY serial configuration accordingly.
 
 <br />
 <!--------------------------------------------------------------------->
