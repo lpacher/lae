@@ -111,8 +111,8 @@ The circuit that you are going to implement and test on real hardware is the fol
 
 <br />
 
-Open with a text editor application most relevant RTL sources already prepared for you and try to understand
-the working principle of the proposed digital design.
+The top-level RTL module is `CounterBCD_4digit_display.v`. Open with a text editor application most relevant RTL sources
+already prepared for you and try to understand the working principle of the proposed digital design.
 
 <br />
 <!--------------------------------------------------------------------->
@@ -151,7 +151,7 @@ the N-digit BCD-counter itself composed of a module-9 counter.
 
 In order to graphically visualize and better understand the overall design organization you can perform a simple
 **RTL elaboration** in Vivado that at the end generates a so called **RTL schematic**. For this purpose
-run the folllowing command in the terminal:
+run the following command in the terminal:
 
 ```
 % make build/import mode=gui
@@ -350,7 +350,7 @@ Verify the functionality of the new firmware after your changes.
 
 **EXERCISE 4**
 
-Change the **refresh frequency** for the 7-segment display module. Re-run the flows from scratch up to FPGA programming and
+Reduce the **refresh frequency** for the 7-segment display module below 0.1 Hz. Re-run the flows from scratch up to FPGA programming and
 verify the functionality of the new firmware after your changes.
 
 <br />
