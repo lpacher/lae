@@ -17,14 +17,14 @@ The proposed two designs implement the following functionalities:
 <br />
 
 All HDL and IP sources, scripts and constrains are available in the `.solutions/` directory as usual. Top-level RTL modules
-are `uart_ascii.v` and `uart_xadc.v`
+are `uart_ascii.v` and `uart_xadc.v` respectively.
 
 For this practicum, **try yourself** to:
 
 * copy the `Makefile` from the `.solutions/` directory
 * setup the work area
 * copy all required sources and scripts from the `.solutions/` directory
-* inspect RTL sources
+* inspect RTL sources and the design hierarchy
 * compile required IP cores from XCI files
 * implement the designs on target FPGA
 * install and debug both firmwares
