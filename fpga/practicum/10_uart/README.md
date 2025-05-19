@@ -176,7 +176,7 @@ Ask to the teacher if you need help.
 
 **EXTRA**
 
-The `uart_xadc.v` design uses the embedded 12-bit XADC to monitor the on-chip temperature an and to send
+The `uart_xadc.v` design uses the embedded 12-bit XADC to monitor the on-chip temperature and to send
 temperature values to the local computer through the FTDI UART/USB bridge.
 
 In order to make a **real-time histogram** of the incoming XADC data a simple **PyROOT data-acquisition system (DAQ)**
