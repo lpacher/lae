@@ -21,6 +21,7 @@ are `uart_ascii.v` and `uart_xadc.v`
 
 For this practicum, **try yourself** to:
 
+* copy the `Makefile` from the `.solutions/` directory
 * setup the work area
 * copy all required sources and scripts from the `.solutions/` directory
 * inspect RTL sources
@@ -30,7 +31,8 @@ For this practicum, **try yourself** to:
 
 <br />
 
-Once the firmware has been properly installed you can use the [**PuTTY terminal emulator**](https://www.putty.org/) to open a serial connection
+Start to implement the `uart_ascii.v` design. Once the firmware has been properly installed use
+the [**PuTTY terminal emulator**](https://www.putty.org/) to open a serial connection
 and read data from the FPGA. You already installed this additional software as part of the [**lab zero**](../../labs/lab0/README.md).
 
 <br />
@@ -176,8 +178,8 @@ Ask to the teacher if you need help.
 
 **EXTRA**
 
-The `uart_xadc.v` design uses the embedded 12-bit XADC to monitor the on-chip temperature and to send
-temperature values to the local computer through the FTDI UART/USB bridge.
+Move to the `uart_xadc.v` design once happy. The `uart_xadc.v` design uses the embedded 12-bit XADC to monitor
+the on-chip temperature and to send temperature values to the local computer through the FTDI UART/USB bridge.
 
 In order to make a **real-time histogram** of the incoming XADC data a simple **PyROOT data-acquisition system (DAQ)**
 that use the **Serial** Python library in place of PuTTY.
