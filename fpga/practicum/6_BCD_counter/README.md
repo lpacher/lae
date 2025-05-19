@@ -114,6 +114,10 @@ The circuit that you are going to implement and test on real hardware is the fol
 The top-level RTL module is `CounterBCD_4digit_display.v`. Open with a text editor application most relevant RTL sources
 already prepared for you and try to understand the working principle of the proposed digital design.
 
+The RTL code of the BCD counter (not shown in the above schematic) has been already discussed and simulated in:
+
+_<https://github.com/lpacher/lae/tree/master/fpga/labs/lab7>_
+
 <br />
 <!--------------------------------------------------------------------->
 
