@@ -272,12 +272,21 @@ endif
 
 
 #######################
-##   Other targets   ##
+##   other targets   ##
 #######################
 
 .PHONY : gui
 gui : ## Start Vivado in GUI mode and keep the shell alive
 
 	@echo "exec vivado -mode gui &" | tclsh -norc
+##____________________________________________________________________________________________________
+
+
+.PHONY : clean
+clean : sim/clean build/clean ## Delete ALL temporary and garbage files
+
+	@$(RM) *.pb *.wdb *.log *.jou *.str *xpr *.xml *.bit *.bin
+	@$(RMDIR) xsim.dir
+	@$(RMDIR) .Xil
 ##____________________________________________________________________________________________________
 
