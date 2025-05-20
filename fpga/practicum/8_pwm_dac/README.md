@@ -306,7 +306,8 @@ $$
 
 <br />
 
-Once happy with FFT implement the following circuit on breadboard:
+Repeat your FFT measurements by connecting the probe to the built-in 1 KHz square-wave generator provided
+by the oscilloscope for the probe compensation. Once happy with FFT implement the following circuit on breadboard:
 
 <br />
 
