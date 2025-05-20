@@ -7,7 +7,6 @@
 // Spring 2021
 //
 
-//`define SIM
 
 `timescale 1ns / 100ps
 
@@ -36,15 +35,15 @@ module uart_ascii (
 
    wire rom_ren ;   // single clock-pulse from tick counter
 
-`ifdef SIM
+`ifdef SYNTHESIS   // then -define SYNTHESIS is automatically set by Vivado when running synthesis flows (as in Synopsys Design Compiler/Fusion Compiler)
 
-   // use a higher frequency ticker for simulations, otherwise simulation time explodes (cover LOAD to IDLE states)
-   TickCounterRst #(.MAX(10414*14)) ticker (.clk(pll_clk), .rst(~pll_locked), .tick(rom_ren)) ;
+   // assert a single clock-pulse read-enable once every 0.5 seconds
+   TickCounterRst #(.MAX(50000000)) ticker (.clk(pll_clk), .rst(~pll_locked), .tick(rom_ren)) ;
 
 `else
  
-   // assert a single clock-pulse read-enable once every 0.5 seconds
-   TickCounterRst #(.MAX(50000000)) ticker (.clk(pll_clk), .rst(~pll_locked), .tick(rom_ren)) ;
+   // use a higher frequency ticker for simulations, otherwise simulation time explodes (cover LOAD to IDLE states)
+   TickCounterRst #(.MAX(10414*14)) ticker (.clk(pll_clk), .rst(~pll_locked), .tick(rom_ren)) ;
 
 `endif
 
