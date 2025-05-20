@@ -251,7 +251,7 @@ Observe the PWM output signal at the oscilloscope. Change the 4-bit threshold va
 >
 > **QUESTION**
 >
-> Which is the period of the PWM signal ? Is this value as expected from the RTL code ?
+> Which is the frequency of the PWM signal? Is this value as expected from the RTL code?
 >
 >   \____________________________________________________________________________________________________
 >
