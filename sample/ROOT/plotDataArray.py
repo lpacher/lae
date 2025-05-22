@@ -14,7 +14,6 @@
 ####################################################################
 
 """
-
 **IMPORTANT NOTE**
 
 The ROOT TGraph(Npt,xData,yData) constructor uses C/C++ arrays for
@@ -39,8 +38,7 @@ from the NumPy package as follows:
 
 Indeed, another possibility is to use the TGraph(Npt) constructor
 and then "fill" the graph with a for-loop. With this solution you
-can also use simple Python lists:
-
+can also use simple Python lists.
 """
 
 
@@ -83,39 +81,39 @@ gr1.SetMarkerStyle(21) ; gr2.SetMarkerStyle(22)
 gr1.SetMarkerSize(0.8) ; gr2.SetMarkerStyle(21)
 
 ## set line width and style
-#gr.SetLineWidth(1)
-#gr.SetLineStyle(1)
+#gr1.SetLineWidth(1)
+#gr1.SetLineStyle(1)
 
 ## plot title
 gr1.SetTitle("frequency vs (N+1)") ; gr2.SetTitle("frequency vs 1/(N+1)")
 
 ## x-axis setup
-#gr.GetXaxis().SetTitle("x-axis [unit]")
-#gr.GetXaxis().CenterTitle()
-#gr.GetXaxis().SetRangeUser(...)
-#gr.GetXaxis().SetNdivisions(...)
-#gr.GetXaxis().SetTickLength(...)
-#gr.GetXaxis().SetLabelOffset(...)
-#gr.GetXaxis().SetLabelSize(...)  
-#gr.GetXaxis().SetLabelFont(...)
-#gr.GetXaxis().SetTitleOffset(...)
-#gr.GetXaxis().SetTitleSize(...)
-#gr.GetXaxis().SetTitleFont(...)
+#gr1.GetXaxis().SetTitle("x-axis [unit]")
+#gr1.GetXaxis().CenterTitle()
+#gr1.GetXaxis().SetRangeUser(...)
+#gr1.GetXaxis().SetNdivisions(...)
+#gr1.GetXaxis().SetTickLength(...)
+#gr1.GetXaxis().SetLabelOffset(...)
+#gr1.GetXaxis().SetLabelSize(...)  
+#gr1.GetXaxis().SetLabelFont(...)
+#gr1.GetXaxis().SetTitleOffset(...)
+#gr1.GetXaxis().SetTitleSize(...)
+#gr1.GetXaxis().SetTitleFont(...)
 
 ## y-axis setup
-#gr.GetYaxis().SetTitle("y-axis [unit]")
-#gr.GetYaxis().CenterTitle()
-#gr.GetYaxis().SetRangeUser(...)
-#gr.GetYaxis().SetNdivisions(...)
-#gr.GetYaxis().SetTickLength(...)
-#gr.GetYaxis().SetLabelOffset(...)
-#gr.GetYaxis().SetLabelSize(...)
-#gr.GetYaxis().SetLabelFont(...)
-#gr.GetYaxis().SetTitleOffset(...)
-#gr.GetYaxis().SetTitleSize(...)
-#gr.GetYaxis().SetTitleFont(...)
+#gr1.GetYaxis().SetTitle("y-axis [unit]")
+#gr1.GetYaxis().CenterTitle()
+#gr1.GetYaxis().SetRangeUser(...)
+#gr1.GetYaxis().SetNdivisions(...)
+#gr1.GetYaxis().SetTickLength(...)
+#gr1.GetYaxis().SetLabelOffset(...)
+#gr1.GetYaxis().SetLabelSize(...)
+#gr1.GetYaxis().SetLabelFont(...)
+#gr1.GetYaxis().SetTitleOffset(...)
+#gr1.GetYaxis().SetTitleSize(...)
+#gr1.GetYaxis().SetTitleFont(...)
 
-#gr.Draw("ALP")
+#gr1.Draw("ALP")
 
 c1 = ROOT.TCanvas("c1","Ring-oscillator frequency study",800,400)
 
