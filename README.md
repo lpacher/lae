@@ -701,4 +701,8 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/161527c768
 * Lecture 18 - Mon 20/05/2025 16-18<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/1d9d71c1e5864f2ea408caeee182ca6e>_
 
+* Lecture 19 - Fri 22/05/2025 16-18<br />
+_<https://unito.webex.com/recordingservice/sites/unito/recording/play/c626b9e1671c4d2985e7c9f960ca3401>_
+
+
 </div>
