@@ -698,10 +698,10 @@ _<https://unito.webex.com/recordingservice/sites/unito/recording/play/a4e92a9b1d
 * Lecture 17 - Fri 16/05/2025 16-18<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/161527c768354ac68e3685a89634c8ad>_
 
-* Lecture 18 - Mon 20/05/2025 16-18<br />
+* Lecture 18 - Mon 19/05/2025 16-18<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/1d9d71c1e5864f2ea408caeee182ca6e>_
 
-* Lecture 19 - Fri 22/05/2025 16-18<br />
+* Lecture 19 - Fri 23/05/2025 16-18<br />
 _<https://unito.webex.com/recordingservice/sites/unito/recording/play/c626b9e1671c4d2985e7c9f960ca3401>_
 
 
