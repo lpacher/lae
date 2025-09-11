@@ -12,8 +12,12 @@ https://github.com/lpacher/lae/tree/master/fpga/practicum/1_arty)
 https://github.com/lpacher/lae/tree/master/fpga/practicum/2_gates)
 
 * **Practicum 3** <br />
+[LED pattern multiplexer.](
+https://github.com/lpacher/lae/tree/master/fpga/practicum/3_LED_pattern_mux)
+
+* **Practicum 4** <br />
 [Drive a 7-segment display.](
-https://github.com/lpacher/lae/tree/master/fpga/practicum/3_seven_segment_display)
+https://github.com/lpacher/lae/tree/master/fpga/practicum/4_seven_segment_display)
 
 * **Practicum 4** <br />
 [Blink a LED using a free-running counter.](
