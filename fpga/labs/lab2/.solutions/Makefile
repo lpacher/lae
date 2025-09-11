@@ -20,37 +20,41 @@ TOP := tb_Gates
 ## some useful aliases
 RM    := rm -f -v
 RMDIR := rm -rf -v
-
+ECHO  := echo -e
 
 ## compile Verilog sources (xvlog)
-compile : $(SOURCES)
-	@xvlog $(SOURCES) -log $@.log
+compile: $(SOURCES)
+	@$(RM) compile.log
+	@xvlog $(SOURCES) -log compile.log
 
 
 ## elaborate the design (xelab)
-elaborate :
-	@xelab -debug all $(TOP) -log $@.log
+elaborate: compile.log
+	@$(RM) elaborate.log
+	@xelab -debug all work.$(TOP) -log elaborate.log
 
 
 ## run the simulation (xsim)
-simulate : xsim.dir/work.$(TOP)
-	@echo "exec xsim -gui -tclbatch run.tcl work.$(TOP) -wdb $(TOP).wdb -log $@.log &" | tclsh -norc
+simulate: elaborate.log xsim.dir/work.$(TOP) run.tcl
+	@$(RM) simulate.log
+	@$(ECHO) "source -notrace run.tcl" > xsim.tcl
+	@$(ECHO) "exec xsim -gui -tclbatch xsim.tcl work.$(TOP) -wdb $(TOP).wdb -log simulate.log &" | tclsh -norc
 
 
 ## one-step compilation/elaboration/simulation
-sim : compile elaborate simulate
+sim: compile elaborate simulate
 
 
 ## load waveforms into XSim GUI
-waves :
-	@echo "exec xsim -gui $(TOP).wdb -nolog &" | tclsh -norc
+waves:
+	@$(ECHO) "exec xsim -gui $(TOP).wdb -nolog &" | tclsh -norc
 
 
 ## delete all log files and simulation outputs
-clean :
+clean:
 	@$(RM) *.log *.jou *.pb *.wdb *.wcfg
 	@$(RMDIR) xsim.dir .Xil
 
 
 ## none of the above implemented targets are on-disk files, declare them as PHONY
-.PHONY : compile elaborate simulate sim clean 
+.PHONY: compile elaborate simulate sim clean
