@@ -34,6 +34,27 @@ Try yourself to:
 * install and debug the firmware
 
 <br />
+
+Once you have verified the proper functionality of the firmware restore the routed design checkpoint in Vivado
+as follows:
+
+```
+% vivado -mode gui ./LED_pattern_mux.runs/impl_1/LED_pattern_mux_routed.dcp
+```
+
+<br />
+
+>
+> **QUESTION**
+>
+> Which FPGA device primitives have been used to map the design on real hardware? <br />
+> Is the final **gate-level schematic** the expected one?
+>
+>   \___________________________________________________________________________________
+>
+
+<br />
+
 <!--------------------------------------------------------------------->
 
 </div>
