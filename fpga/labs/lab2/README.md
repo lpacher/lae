@@ -188,8 +188,8 @@ after saving your changes.
 
 In order to **simulate** the block we also need a **testbench module** to create a suitable **test pattern** for all gates.
 
-In this case a simple **2-bits synchronous counter** can be used to easily generate **all possible input combinations**
-`2'b00`, `2'b01`, `2'b10` and `2'b11` for `A` and `B` input ports.
+In this case a simple **2-bits synchronous counter** can be used to easily generate **all possible
+input combinations** `00`, `01`, `10` and `11` for `A` and `B` input ports.
 Thus we will also learn how to generate a **clock waveform** and to implement a **counter** in Verilog.
 
 The simulation code has been already prepared for you. Open the testbench module `tb_Gates.v` that you initially copied
@@ -229,7 +229,7 @@ module tb_Gates ;
    // device under test (DUT)
    wire [5:0] Z ;
 
-   Gates DUT (.A(count[0]), .B(count[1]), .Z(Z)) ;
+   Gates DUT (.A(count[1]), .B(count[0]), .Z(Z)) ;
 
    // main stimulus
    initial
