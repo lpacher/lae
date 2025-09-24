@@ -18,6 +18,11 @@ set_property -dict { PACKAGE_PIN C11  IOSTANDARD LVCMOS33} [get_ports {BCD[1]} ]
 set_property -dict { PACKAGE_PIN C10  IOSTANDARD LVCMOS33} [get_ports {BCD[2]} ]
 set_property -dict { PACKAGE_PIN A10  IOSTANDARD LVCMOS33} [get_ports {BCD[3]} ]
 
+
+## **EXERCISE: drive with push-button BTN0 a 4-bit module-9 counter
+#set_property -dict { PACKAGE_PIN D9  IOSTANDARD LVCMOS33 } [get_ports btn]
+
+
 ## JA header mapping (200 ohm series resistor on each pin)
 set_property -dict { PACKAGE_PIN G13  IOSTANDARD LVCMOS33 } [get_ports segA] ;   ## JA[1]
 set_property -dict { PACKAGE_PIN B11  IOSTANDARD LVCMOS33 } [get_ports segB] ;   ## JA[2]

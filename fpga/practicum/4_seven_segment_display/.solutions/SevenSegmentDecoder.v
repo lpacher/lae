@@ -19,8 +19,10 @@ module SevenSegmentDecoder (
    // BCD input code
    input wire [3:0] BCD,
 
-   output wire DP,
+   // **EXERCISE: drive with a push-button a 4-bit module-9 counter
+   //input wire btn,
 
+   // 7-segment display module pins
    output wire segA,
    output wire segB,
    output wire segC,
@@ -28,6 +30,7 @@ module SevenSegmentDecoder (
    output wire segE,
    output wire segF,
    output wire segG,
+   output wire DP,
 
    output wire [3:0] LED   // optionally, display the BCD binary value on general-purpose standard LEDs
 
@@ -42,11 +45,33 @@ module SevenSegmentDecoder (
    assign DP = 1'b0 ;
    //assign DP = 1'b1 ;
 
-   //
-   // **DEBUG: 7-segments display using logic constants
+   ///////////////////////////////////////////////////////////
+   //   **DEBUG: 7-segments display using logic constants   //
+   ///////////////////////////////////////////////////////////
+
    //                                                     //a b c d e f g
    //assign {segA, segB, segC, segD, segE, segF, segG} = 7'b0_0_1_0_0_1_0 ;   // direct assignment of LED controls
 
+
+   //////////////////////////////////////
+   //   **EXERCISE: module-9 counter   //
+   //////////////////////////////////////
+
+/*
+
+   // the 4-bit BCD value is now a module-9 counter
+   reg [3:0] BCD = 4'b0000 ;
+
+   always @(posedge btn) begin
+      if( BCD == 4'b1001) begin
+         BCD <= 4'b0000 ;           // force the count-rollover when the BCD value reaches 9 (module-9 counter)
+      end
+      else begin
+         BCD <= BCD + 1'b1 ;
+      end
+   end
+
+*/
 
 
    /////////////////////////////////////////////////////////

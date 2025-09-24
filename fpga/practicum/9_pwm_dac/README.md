@@ -1,6 +1,6 @@
 <div align="justify">
 
-# Practicum 8
+# Practicum 9
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/practicum)]
 
 ## Contents

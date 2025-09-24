@@ -1,5 +1,5 @@
 
-# Practicum 5
+# Practicum 7
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/practicum)]
 
 

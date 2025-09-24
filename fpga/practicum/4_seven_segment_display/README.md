@@ -2,9 +2,9 @@
 
 <!-- TODO: add k-Maps solution ... -->
 
-<!-- TODO: make a first 4-bit counter driven by a push-button to increment BCD !!! -->
+<!-- TODO: make a first 4-bit BCD counter driven by a push-button to increment BCD !!! -->
 
-# Practicum 3
+# Practicum 4
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/practicum)]
 
 ## Contents
@@ -20,6 +20,7 @@
 * [**Implement the circuit on breadboard**](#implement-the-circuit-on-breadboard)
 * [**Debug your firmware on real hardware**](#debug-your-firmware-on-real-hardware)
 * [**Inspect Non-Project Mode Tcl commands**](#inspect-non-project-mode-tcl-commands)
+* [**Exercise**](#exercise)
 * [**Further readings**](#further-readings)
 
 <br />
@@ -698,6 +699,120 @@ for the remaining of the course to run the flows in batch mode from the command 
 <br />
 <!--------------------------------------------------------------------->
 
+
+## Exercise
+[**[Contents]**](#contents)
+
+Modify your initial RTL code in order to drive the 7-segment display module with a **4-bit BCD counter** in place of external slide-switches.
+For this purpose you have to create a **module-9 counter**, that is a 4-bit counter that counts from 0 to 9 and then restarts from 0.
+You can then use a simple **push-button** available on the DIgilent _Arty_ board to create a series of clock-pulses for the counter.
+
+Try yourself to complete the following code skeleton:
+
+```verilog
+module SevenSegmentDecoder (
+
+   // BCD input code
+   //input wire [3:0] BCD,     => comment-out these ports and replace them with a single push-button driving a module-9 counter
+
+   // push-button
+   input wire btn,
+
+   // **DEBUG: display the BCD binary value on general-purpose standard LEDs
+   output wire [3:0] LED,
+
+   // 7-segment display control pins
+   output wire DP,
+   output ... segA,
+   output ... segB,
+   output ... segC,
+   output ... segD,
+   output ... segE,
+   output ... segF,
+   output ... segG ) ;
+
+
+   /////////////////////
+   //   BCD counter   //
+   /////////////////////
+
+   // the 4-bit BCD value is now a module-9 counter
+   reg [3:0] BCD = 4'b0000 ;
+
+   always @(posedge btn) begin
+      if( BCD == 4'b1001) begin
+         BCD <= 4'b0000 ;           // force the count-rollover when the BCD value reaches 9 (module-9 counter)
+      end
+      else begin
+         BCD <= BCD + 1'b1 ;
+      end
+   end
+ 
+
+   ///////////////////////////////////
+   //   7-segment display decoder   //
+   ///////////////////////////////////
+
+   ...
+   ...
+
+endmodule
+```
+
+<br />
+
+Compile the source file to check for syntax errors with `xvlog` at the command line:
+
+```
+% xvlog SevenSegmentDecoder.v
+```
+
+<br />
+
+Once done with RTL changes **update also XDC constraints** in order to replace the original mapping to slide-switches
+with a single push-button (e.g. **BTN0**) as follows:
+
+```
+## slide switches
+#set_property -dict { PACKAGE_PIN A8   IOSTANDARD LVCMOS33} [get_ports {BCD[0]} ]
+#set_property -dict { PACKAGE_PIN C11  IOSTANDARD LVCMOS33} [get_ports {BCD[1]} ]
+#set_property -dict { PACKAGE_PIN C10  IOSTANDARD LVCMOS33} [get_ports {BCD[2]} ]
+#set_property -dict { PACKAGE_PIN A10  IOSTANDARD LVCMOS33} [get_ports {BCD[3]} ]
+
+## push-button BTN0
+set_property -dict { PACKAGE_PIN D9  IOSTANDARD LVCMOS33 } [get_ports btn]
+```
+
+<br />
+
+Re-run the flows in batch mode:
+
+```
+% make clean build
+```
+
+<br />
+
+Re-program the FPGA and debug the new updated firmware:
+
+```
+% make install
+```
+
+<br />
+
+>
+> **QUESTION**
+>
+> Does the number displayed on the 7-segment display module always match the number of times that you pressed the button ?
+>
+>   \___________________________________________________________________________________
+>
+
+<br />
+
+<br />
+<!--------------------------------------------------------------------->
 
 ## Further readings
 [**[Contents]**](#contents)
