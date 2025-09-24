@@ -1,6 +1,6 @@
 <div align="justify">
 
-# Practicum 10
+# Practicum 11
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/practicum)]
 
 In this practicum you will experiment with the

@@ -4,7 +4,7 @@
 
 <!-- TODO: make a first 4-bit counter driven by a push-button to increment BCD !!! -->
 
-# Practicum 3
+# Practicum 4
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/practicum)]
 
 ## Contents
