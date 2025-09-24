@@ -39,6 +39,11 @@ set_property -dict { PACKAGE_PIN H5  IOSTANDARD LVCMOS33 } [get_ports ZN] ;   ##
 #set_property IOSTANDARD LVCMOS33  [concat [all_inputs] [all_outputs]]
 
 
+## **EXERCISE: probe and display inverter pins at the oscilloscope
+#set_property -dict { PACKAGE_PIN F5   IOSTANDARD LVCMOS33 } [get_ports X_probe  ] ;   ## A0
+#set_property -dict { PACKAGE_PIN N17  IOSTANDARD LVCMOS33 } [get_ports ZN_probe ] ;   ## IO41
+
+
 ############################
 ##   timing constraints   ##
 ############################

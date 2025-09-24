@@ -157,9 +157,9 @@ set_property CONFIG_VOLTAGE 3.3 [current_design]
 ## NOTE: The ck_an_p pins can be used as single ended analog inputs with voltages from 0-3.3V (Chipkit Analog pins A0-A5).
 ##       These signals should only be connected to the XADC core. When using these pins as digital I/O, use pins ck_io[14-19].
 
-#set_property -dict { PACKAGE_PIN C5    IOSTANDARD LVCMOS33 } [get_ports { ck_an_n[0] }]; #IO_L1N_T0_AD4N_35 Sch=ck_an_n[0]
-#set_property -dict { PACKAGE_PIN C6    IOSTANDARD LVCMOS33 } [get_ports { ck_an_p[0] }]; #IO_L1P_T0_AD4P_35 Sch=ck_an_p[0]
-#set_property -dict { PACKAGE_PIN A5    IOSTANDARD LVCMOS33 } [get_ports { ck_an_n[1] }]; #IO_L3N_T0_DQS_AD5N_35 Sch=ck_an_n[1]
+#set_property -dict { PACKAGE_PIN C5    IOSTANDARD LVCMOS33 } [get_ports { ck_an_n[0] }]   ; #IO_L1N_T0_AD4N_35 Sch=ck_an_n[0]
+#set_property -dict { PACKAGE_PIN C6    IOSTANDARD LVCMOS33 } [get_ports { ck_an_p[0] }]   ; #IO_L1P_T0_AD4P_35 Sch=ck_an_p[0]
+#set_property -dict { PACKAGE_PIN A5    IOSTANDARD LVCMOS33 } [get_ports { ck_an_n[1] }]   ; #IO_L3N_T0_DQS_AD5N_35 Sch=ck_an_n[1]
 #set_property -dict { PACKAGE_PIN A6    IOSTANDARD LVCMOS33 } [get_ports { ck_an_p[1] }]   ; #IO_L3P_T0_DQS_AD5P_35 Sch=ck_an_p[1]
 #set_property -dict { PACKAGE_PIN B4    IOSTANDARD LVCMOS33 } [get_ports { ck_an_n[2] }]   ; #IO_L7N_T1_AD6N_35 Sch=ck_an_n[2]
 #set_property -dict { PACKAGE_PIN C4    IOSTANDARD LVCMOS33 } [get_ports { ck_an_p[2] }]   ; #IO_L7P_T1_AD6P_35 Sch=ck_an_p[2]

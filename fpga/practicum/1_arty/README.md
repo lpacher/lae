@@ -26,6 +26,7 @@
 * [**Program the FPGA**](#program-the-fpga)
 * [**Program the external Quad SPI Flash memory**](#program-the-external-quad-spi-flash-memory)
 * [**Create a Makefile to automate FPGA implementation and programming flows**](#create-a-makefile-to-automate-FPGA-implementation-and-programming-flows)
+* [**Exercise**](#exercise)
 * [**Extra: run the official Digilent Arty General I/O Demo**](#extra-run-the-official-digilent-arty-general-io-demo)
 * [**Further readings**](#further-readings)
 
@@ -1588,6 +1589,94 @@ For less typing, this is equivalent to run:
 ```
 % make clean build install
 ```
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+## Exercise
+[**[Contents]**](#contents)
+
+Extend the original RTL code in order to **probe and display at the oscilloscope** low-to-high and high-to-low
+**CMOS 3.3V logic transitions** on inverter pins. For this purpose create new Verilog output ports `X_probe` and `ZN_probe`
+for the `Inverter` module and use simple `assign` statements to make copies of `X` and `ZN` signals as follows:
+
+```verilog
+module Inverter (
+
+   input  wire X,
+   output wire ZN,
+   output wire X_probe,
+   output wire ZN_probe ) ;
+
+
+   ...
+   ...
+
+   assign X_probe = X ;
+   assign ZN_probe = ZN ;
+
+endmodule
+```
+
+<br />
+
+Save your modifications and **compile** the source file to **check for syntax errors** with the `xvlog` executable
+at the command line:
+
+```
+% xvlog Inverter.v
+```
+
+<br />
+
+Once done with RTL changes **update also XDC constraints** in order to map new ports `X_probe` and `ZN_probe` to **A0** and
+**IO41** pin headers available on the Digilent _Arty_ board as follows:
+
+```
+## **DEBUG: probe inverter pins at the oscilloscope
+set_property -dict { PACKAGE_PIN F5   IOSTANDARD LVCMOS33 } [get_ports X_probe  ] ;   #A0
+set_property -dict { PACKAGE_PIN N17  IOSTANDARD LVCMOS33 } [get_ports ZN_probe ] ;   #IO41
+```
+
+<br />
+
+Re-run the FPGA implementation flow in batch mode at the command-line using the previously created `Makefile`:
+
+```
+% make clean build
+```
+
+<br />
+
+Re-program the FPGA and debug the new updated firmware:
+
+```
+% make install
+```
+
+<br />
+
+>
+> **HINT**
+>
+> In order to "capture" logic transitions of `X_probe` and `ZN_probe` signals you have to
+> properly set **trigger options** of the oscilloscope you are working with in
+> order to use a _single-trigger_ or _single shot_ trigger mode.
+>
+> For this purpose open the **Trigger Menu** and switch the trigger-mode from **Auto** (default)
+> to **Normal**. Ensure that an edge transition is used as trigger condition.
+> Finally select the channel used to display the `X_probe` Verilog output port for the trigger. 
+>
+> In _Normal_ trigger mode in fact the trigger only occurs if the specified trigger
+> conditions are met, freezing the display after the trigger event.
+> In _Auto_ mode (default) a trigger is always forced instead, continuously updating
+> displayed waweforms.
+>
+> Do not forget to set the trigger mode back to _Auto_ once done.
+>
+
+<br />
 
 <br />
 <!--------------------------------------------------------------------->
