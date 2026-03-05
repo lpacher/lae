@@ -121,7 +121,7 @@ Each "lab" consists of step-by-step instructions to guide the student in running
 using Xilinx tools from the command-line. The only requirement for these labs is to have a personal computer
 with [all necessary development tools properly installed and configured](fpga/labs/lab0/README.md).
 
-The complete list of proposed labs can be found [**here**](https://github.com/lpacher/lae/tree/master/labs).
+The complete list of proposed labs can be found [**here**](https://github.com/lpacher/lae/tree/master/fpga/labs).
 
 Virtual laboratories are then supported by [**practical examples**](fpga/practicum/README.md) in the electronics lab
 in order to let students to physically experiment with a real FPGA and digital circuits using real hardware and instrumentation. 
