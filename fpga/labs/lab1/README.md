@@ -1291,8 +1291,9 @@ Verify if the functionality of the NOT gate has changed.
 
 **EXERCISE 3**
 
-Further modify the implementation of the inverter and replace the previous conditional assignment with a true instance of a **NOT-gate**
-using the `not` **gate primitive** provided by the Verilog language:
+Further modify the implementation of the inverter and replace the previous conditional
+assignment with a true instance of a **NOT-gate** using the `not` **gate primitive**
+provided by the Verilog language:
 
 
 ```verilog
@@ -1305,8 +1306,8 @@ not  u1 (ZN , X) ;
 
 <br />
 
-This is a first example of a **gate primitive instantiation**, and the resulting Verilog code basically represents a true **schematic**
-with a NOT-gate symbol.
+This is a first example of a **gate primitive instantiation**, and the resulting Verilog code
+basically represents a true **schematic** with a NOT-gate symbol.
 
 You can also add some **propagation-delay** to the `not` gate-primitive with the following syntax:
 
@@ -1322,7 +1323,43 @@ Verify if the functionality of the NOT gate has changed.
 
 <br />
 
+
 **EXERCISE 4**
+
+Hardware description languages allows to describe digital circuits
+at **different levels of abstraction**, moving from very high-level behavioral
+code down to basic logic equations and fundamental logic gates. 
+
+Additionality the Verilog language (not VHDL instead) also provides
+`nmos` and `pmos` primitives to describe **digital gates at transistor level**
+which is the lowest-possible level of abstraction foreseen by the language.
+Such a very low-level description is can be useful for **modeling purpuses**.
+
+Further modify the modify the implementation of the inverter and replace the primitive
+instantiation with the actual CMOS inverter schematic depicted below:
+
+<br />
+
+<img src="doc/pictures/CmosInverter.png" alt="drawing" width="400"/>
+
+<br />
+
+```verilog
+// switch-level implementation
+supply0 gnd ;
+supply1 vdd ;
+nmos M1 (ZN,gnd,X) ;
+pmos M2 (ZN,vdd,X) ;
+```
+
+<br />
+
+Save the file once done. Re-compile and re-simulate the code.
+Verify if the functionality of the NOT gate has changed.
+
+<br />
+
+**EXERCISE 5**
 
 Create a new source file `BufferTri.v` and try yourself to implement a **three-state buffer** using a C-like
 **conditional assignment** and an active-high output-enable `OE` control port:
