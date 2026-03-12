@@ -648,4 +648,24 @@ the circuit. Later in the course we will also implement and debug the above circ
 <br />
 <!--------------------------------------------------------------------->
 
+
+**EXERCISE 5**
+
+Replace the `nand` primitive with a **transistor-level implementation** using `nmos` and `pmos` as depicted in figure below.
+
+<br />
+
+<img src="doc/pictures/CmosNAND.png" alt="drawing" width="550"/>
+
+<br />
+
+```verilog
+nmos M1 (...) ;
+nmos M2 (...) ;
+pmos M3 (...) ;
+pmos M4 (...) ;
+````
+
+<!--------------------------------------------------------------------->
+
 </div>
