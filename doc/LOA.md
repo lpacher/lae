@@ -41,6 +41,8 @@
 
 **AMBA** - Advanced Microcontroller Bus Architecture
 
+**AMS** - Analog/Mixed-Signal
+
 **AoT** - Analog on Top
 
 **ASB** - Advanced System Bus
