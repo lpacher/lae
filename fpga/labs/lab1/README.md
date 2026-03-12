@@ -1327,23 +1327,35 @@ Verify if the functionality of the NOT gate has changed.
 **EXERCISE 4**
 
 Hardware description languages allows to describe digital circuits
-at different levels of abstraction, moving from very high-level behavioral
+at **different levels of abstraction**, moving from very high-level behavioral
 code down to basic logic equations and fundamental logic gates. 
 
 Additionality the Verilog language (not VHDL instead) also provides
-`nmos` and `pmos` primitives to describe digital gates **at transistor level**
+`nmos` and `pmos` primitives to describe **digital gates at transistor level**
 which is the lowest-possible level of abstraction foreseen by the language.
-Such a very low-level description can be useful for **modeling purpuses**.
+Such a very low-level description is can be useful for **modeling purpuses**.
 
-Just for teaching purposes further modify the modify the implementation
-of the inverter and replace the primitive instantiation with the actual
-CMOS inverter schematic depicted below:
+Further modify the modify the implementation of the inverter and replace the primitive
+instantiation with the actual CMOS inverter schematic depicted below:
 
 <br />
 
 <img src="doc/pictures/CmosInverter.png" alt="drawing" width="400"/>
 
 <br />
+
+```verilog
+// switch-level implementation
+supply0 gnd ;
+supply1 vdd ;
+nmos M1 (ZN,gnd,X) ;
+pmos M2 (ZN,vdd,X) ;
+```
+
+<br />
+
+Save the file once done. Re-compile and re-simulate the code.
+Verify if the functionality of the NOT gate has changed.
 
 <br />
 
