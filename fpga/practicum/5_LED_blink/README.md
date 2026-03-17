@@ -580,7 +580,7 @@ For this purpose simply **re-use** the same `SevenSegmentDecoder` module and pin
 already developed and tested in the previous practicum:
 
 ```
-% cp ../3_seven_segment_display/SevenSegmentDecoder.v ./rtl/
+% cp ../4_seven_segment_display/SevenSegmentDecoder.v ./rtl/
 ```
 
 <br />
