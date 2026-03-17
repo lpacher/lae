@@ -443,13 +443,13 @@ and then you **press the TAB key** you will immediately realize that the express
 A **port for Windows** of the TAB completion implemented for the Linux Bash shell exists and comes with a free
 program called **Clink** which can be downloaded from:
 
-_<https://mridgers.github.io/clink>_
+_<https://chrisant996.github.io/clink/>_
 
 For a **more efficient usage of the Windows command line** it is therefore **highly recommended**
 to download and install this executable:
 
 
-_<https://github.com/mridgers/clink/releases/download/0.4.9/clink_0.4.9_setup.exe>_
+_<https://github.com/chrisant996/clink/releases/download/v1.9.14/clink.1.9.14.d5f9a7_setup.exe>_
 
 At the end of the installation process a new `AutoRun` variable is created for your account by the installer
 in the **Windows Registry Editor** (just invoke `regedit` in the terminal to open the register) as
@@ -494,7 +494,7 @@ of `/dev/null` under Linux).
 As already mentioned you can also choose to perform a **non-administrator installation**, simply download
 and extract somewhere this portable `.zip` file
 
-_<https://github.com/mridgers/clink/releases/download/0.4.9/clink_0.4.9.zip>_
+_<https://github.com/chrisant996/clink/releases/download/v1.9.14/clink.1.9.14.d5f9a7.zip>_
 
 without performing any operation that requires elevated privileges. However, with this choice you will
 have to create the `AutoRun` variable in the  _Registry Editor_ by hand to "inject" clink each time a new
