@@ -1657,6 +1657,13 @@ Re-program the FPGA and debug the new updated firmware:
 
 <br />
 
+<img src="doc/pictures/InverterOscilloscope.png" alt="drawing" width="700"/>
+
+<br />
+
+<br />
+<br />
+
 >
 > **HINT**
 >
