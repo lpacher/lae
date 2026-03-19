@@ -9,6 +9,8 @@
 
 ## list of Verilog sources to be compiled
 SOURCES := Inverter.v tb_Inverter.v
+#SOURCES := Inverter.v BufferTri.v tb_Inverter.v
+#SOURCES := Inverter.v BufferTri.v Buffer.v tb_Inverter.v
 
 
 ## top-level module (testbench)

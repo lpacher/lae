@@ -1,5 +1,5 @@
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// Example Verilog testbench for Inverter and BufferTri modules.
+// Example Verilog testbench for Inverter, BufferTri and Buffer modules.
 //
 // Luca Pacher - pacher@to.infn.it
 // Spring 2020
@@ -40,7 +40,11 @@ module tb_Inverter ;
    end
 
 
-   /*   **EXTRA: instantiate and simulate a 3-state buffer
+   ///////////////////////////////////////////////////////////////
+   //   **EXERCISE: instantiate and simulate a 3-state buffer   //
+   ///////////////////////////////////////////////////////////////
+
+   /*
 
    reg enable = 1'b0 ;    // output-enable
    wire triOut ;
@@ -55,4 +59,18 @@ module tb_Inverter ;
 
    */
 
+
+   ///////////////////////////////////////////////////////
+   //   **EXERCISE: instantiate and simulate a buffer   //
+   ///////////////////////////////////////////////////////
+
+   /*
+
+   wire bufOut ;
+
+   Buffer DUT_3 ( .X(out), .ZB(bufOut)) ;
+
+   */
+
 endmodule
+

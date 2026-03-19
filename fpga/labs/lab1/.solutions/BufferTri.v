@@ -1,10 +1,10 @@
-//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Verilog description for a three-state buffer using either a conditional
 // assignment or a gate-primitive instantiation.
 //
 // Luca Pacher - pacher@to.infn.it
 // Spring 2023
-//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 `timescale 1ns / 100ps

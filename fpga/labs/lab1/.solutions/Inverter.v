@@ -28,7 +28,6 @@ but distributed across multiple lines
 //
 
 module Inverter (
-
    input  wire X,
    output wire ZN ) ;      // using 'wire' in the port declaration is redundant, by default I/O ports are already considered WIRES unless otherwise specified
 
