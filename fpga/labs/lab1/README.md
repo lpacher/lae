@@ -1151,28 +1151,32 @@ RMDIR := rm -rf -v
 
 
 ## compile Verilog sources (xvlog)
-compile :
-        @xvlog $(SOURCES) -log $@.log
+compile: $(SOURCES)
+    @$(RM) compile.log
+    @xvlog $(SOURCES) -log compile.log
 
 
 ## elaborate the design (xelab)
-elaborate :
-	@xelab -debug all $(TOP) -log $@.log
+elaborate: compile.log
+	@xelab -debug all work.$(TOP) -log elaborate.log
 
 
 ## run the simulation (xsim)
-simulate :
-	@xsim -gui -tclbatch run.tcl $(TOP) -log $@.log
+simulate: elaborate.log xsim.dir/work.$(TOP)
+	@xsim -gui -tclbatch run.tcl work.$(TOP) -log simulate.log
 
 
 ## one-step compilation/elaboration/simulation
-sim : compile elaborate simulate
+sim: compile elaborate simulate
 
 
 ## delete all log files and simulation outputs
-clean :
+clean:
         @$(RM) *.log *.jou *.pb *.wdb *.wcfg
         @$(RMDIR) xsim.dir .Xil
+
+## none of the above implemented targets are on-disk files, declare them as PHONY
+.PHONY: compile elaborate simulate sim clean
 ```
 
 <br />
@@ -1229,6 +1233,14 @@ from scratch:
 
 ```
 % make simulate
+```
+
+<br />
+
+A more complete `Makefile` example can be found in the `.solutions/` directory. Please inspect the content of the file:
+
+```
+% less .solutions/Makefile
 ```
 
 <br />
