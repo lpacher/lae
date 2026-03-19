@@ -1257,7 +1257,7 @@ included in the simulation.
 <br />
 
 >
->**IMPORTANT !**
+> **IMPORTANT !**
 >
 > The proposed Makefile-based automated flow **suffers from an important drawback**. That is, the compilation/elaboration/simulation flow
 > **cannot be re-invoked** from the XSim graphical interface after RTL or testbench changes, thus requiring to exit from the GUI and re-build
@@ -1268,6 +1268,8 @@ included in the simulation.
 >
 
 <br />
+<!--------------------------------------------------------------------->
+
 
 **EXERCISE 2**
 
@@ -1284,10 +1286,20 @@ assign ZN = (X == 1'b1) ? 1'b0 : 1'b1 ;
 
 <br />
 
-Save the file once done. Re-compile and re-simulate the code.
+Save the file once done. Re-compile and re-simulate the code at the command-line with:
+
+```
+% make clean
+% make sim
+```
+
+<br />
+
 Verify if the functionality of the NOT gate has changed.
 
 <br />
+<!--------------------------------------------------------------------->
+
 
 **EXERCISE 3**
 
@@ -1307,7 +1319,8 @@ not  u1 (ZN , X) ;
 <br />
 
 This is a first example of a **gate primitive instantiation**, and the resulting Verilog code
-basically represents a true **schematic** with a NOT-gate symbol.
+basically represents a true **schematic** with a NOT-gate symbol. This coding style is referred
+to as [**gate-level modeling**](https://vlsiverify.com/verilog/gate-level-modeling).
 
 You can also add some **propagation-delay** to the `not` gate-primitive with the following syntax:
 
@@ -1318,10 +1331,19 @@ not #(3) u1  (ZN , X) ;
 
 <br />
 
-Save the file once done. Re-compile and re-simulate the code.
+Save the file once done. Re-compile and re-simulate the code at the command-line with:
+
+```
+% make clean
+% make sim
+```
+
+<br />
+
 Verify if the functionality of the NOT gate has changed.
 
 <br />
+<!--------------------------------------------------------------------->
 
 
 **EXERCISE 4**
@@ -1333,14 +1355,31 @@ code down to basic logic equations and fundamental logic gates.
 Additionality the Verilog language (not VHDL instead) also provides
 `nmos` and `pmos` primitives to describe **digital gates at transistor level**
 which is the lowest-possible level of abstraction foreseen by the language.
-Such a very low-level description is can be useful for **modeling purpuses**.
+Such a very low-level description is referred to as
+[**switch-level modeling**](https://vlsiverify.com/verilog/switch-level-modeling)
+and can be useful for **modeling purpuses**.
 
-Further modify the modify the implementation of the inverter and replace the primitive
-instantiation with the actual CMOS inverter schematic depicted below:
+Further modify the modify the implementation of the inverter and replace the
+primitive instantiation with the actual CMOS inverter schematic depicted below:
 
 <br />
 
 <img src="doc/pictures/CmosInverter.png" alt="drawing" width="400"/>
+
+<br />
+
+Both `nmos` and `pmos` keywords used to model NMOS and PMOS devices respectively
+requires to specify drain/source/gate terminal as follows:
+
+```verilog
+nmos <name> (drain,source,gate) ;
+pmos <name> (drain,source,gate) ;
+```
+
+<br />
+
+Please be aware that drain/source terminals are interchangeable. As a result the CMOS implementation
+of an inverter in Verilog is the following:
 
 <br />
 
@@ -1354,10 +1393,20 @@ pmos M2 (ZN,vdd,X) ;
 
 <br />
 
-Save the file once done. Re-compile and re-simulate the code.
+Save the file once done. Re-compile and re-simulate the code at the command-line with:
+
+```
+% make clean
+% make sim
+```
+
+<br />
+
 Verify if the functionality of the NOT gate has changed.
 
 <br />
+<!--------------------------------------------------------------------->
+
 
 **EXERCISE 5**
 
@@ -1375,6 +1424,104 @@ assign ZT = (OE == 1'b1) ? X : 1'b1z ;
 <br />
 
 Re-use and extend the original inverter testbench code to simulate and verify the expected functionality.
+Update also the `SOURCES` variable in the `Makefile` in order to parse and compile `BufferTri.v` along
+with previous sources:
+
+```make
+#SOURCES := Inverter.v tb_Inverter.v
+SOURCES := Inverter.v BufferTri.v tb_Inverter.v
+```
+
+<br />
+
+Save all your changes and re-run the simulation at the command-line with:
+
+```
+% make clean
+% make sim
+```
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+**EXERCISE 5**
+
+Create a new source file `Buffer.v` and try yourself to implement a simple **buffer**.
+
+<br />
+
+<img src="doc/pictures/Buffer.png" alt="drawing" width="800"/>
+
+<br />
+
+Despite this can be immediately coded with a simple continuous assignment such as
+
+```verilog
+assign ZB = X ;
+```
+
+<br />
+
+or using the `buf` Verilog primitive
+
+```verilog
+buf u2 (ZB,X) ;
+```
+
+<br />
+
+the goal of this exercise is to implement the circuit using a cascade of two inverters to introduce
+a first example of  **design hierarchy** and **code reusability** in the process
+of hardware design.
+
+That is, we already implemented the functionality of an inverter in the `Inverter` module so we can re-use
+the code and simply **instantiate two inverters in cascade** to implement a buffer as depicted in figure.
+
+<br />
+
+<img src="doc/pictures/BufferWithInverters.png" alt="drawing" width="700"/>
+
+<br />
+
+The resulting Verilog code is the following:
+
+```verilog
+
+`timescale 1ns / 100ps
+
+module Buffer (
+
+   input  wire X,
+   output wire ZB ) ;   // **IMPORTANT: you can't use 'Z' because the identifier is already reserved for the 'high-impedance' logic constant!
+
+   wire inv1_to_inv2 ; 
+
+   Inverter inv_1 ( .X(X), .ZN(inv1_to_inv2) ) ;
+   Inverter inv_2 ( .X(inv1_to_inv2), .ZN(ZN) ) ;
+
+endmodule
+```
+
+<br />
+
+Once done extend the original `tb_Inverter.v` testbench code to also instantiate and test the new `Buffer` module.
+Update also the `SOURCES` variable in the `Makefile` in order to parse and compile `Buffer.v` along with previous
+sources:
+
+```make
+#SOURCES := Inverter.v BufferTri.v tb_Inverter.v
+SOURCES := Inverter.v BufferTri.v Buffer.v tb_Inverter.v
+```
+
+<br />
+
+Save all your changes and re-run the simulation at the command-line with:
+
+```
+% make clean
+% make sim
+```
 
 <br />
 <!--------------------------------------------------------------------->

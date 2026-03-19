@@ -1,10 +1,10 @@
-//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Verilog description for a NOT-gate (inverter) using either a continuous
 // assignment, a conditional assignment or a gate-primitive instantiation.
 //
 // Luca Pacher - pacher@to.infn.it
 // Spring 2020
-//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // this is a C-style single-line comment
 
@@ -28,7 +28,6 @@ but distributed across multiple lines
 //
 
 module Inverter (
-
    input  wire X,
    output wire ZN ) ;      // using 'wire' in the port declaration is redundant, by default I/O ports are already considered WIRES unless otherwise specified
 

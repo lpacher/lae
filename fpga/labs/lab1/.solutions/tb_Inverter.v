@@ -1,27 +1,35 @@
-//
-// Example Verilog testbench for the Inverter module.
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Example Verilog testbench for Inverter, BufferTri and Buffer modules.
 //
 // Luca Pacher - pacher@to.infn.it
 // Spring 2020
-//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 `timescale 1ns / 100ps   // specify time-unit and time-precision, this is only for simulation purposes
 
-
 // **TEST: if you set a smaller time-precision e.g. 10ps the simulation time increases
 //`timescale 1ns / 10ps
 
-module tb_Inverter ;   // empty port declaration for a testbench
+//module tb_Inverter () ;    // empty port declaration for a testbench
+module tb_Inverter ;
 
    reg in ;      // **IMPORTANT: note that this is declared as 'reg' net type
    wire out ;
 
-   // instantiate the device under test (DUT)
+   /////////////////////////////////////////////////
+   //   instantiate the device under test (DUT)   //
+   /////////////////////////////////////////////////
+
    //Inverter DUT (in, out) ;                       // by-position port mapping (aka "ordered" port connections)
    Inverter DUT ( .X(in), .ZN(out) ) ;              // by-name port mapping (aka "named" port connection)
 
-   // main stimulus
+
+   ///////////////////////
+   //   main stimulus   //
+   ///////////////////////
+
+   //initial begin : stimulus   // optionally begin/always blocks can be "labeled" for debug purposes
    initial begin
    
       #500 in = 1'b0 ;   // **QUESTION: what happens to 'in' before 500ns ?
@@ -32,7 +40,11 @@ module tb_Inverter ;   // empty port declaration for a testbench
    end
 
 
-   /*   **EXTRA: instantiate and simulate a 3-state buffer
+   ///////////////////////////////////////////////////////////////
+   //   **EXERCISE: instantiate and simulate a 3-state buffer   //
+   ///////////////////////////////////////////////////////////////
+
+   /*
 
    reg enable = 1'b0 ;    // output-enable
    wire triOut ;
@@ -47,4 +59,18 @@ module tb_Inverter ;   // empty port declaration for a testbench
 
    */
 
+
+   ///////////////////////////////////////////////////////
+   //   **EXERCISE: instantiate and simulate a buffer   //
+   ///////////////////////////////////////////////////////
+
+   /*
+
+   wire bufOut ;
+
+   Buffer DUT_3 ( .X(out), .ZB(bufOut)) ;
+
+   */
+
 endmodule
+
