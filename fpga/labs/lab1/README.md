@@ -1307,7 +1307,9 @@ not  u1 (ZN , X) ;
 <br />
 
 This is a first example of a **gate primitive instantiation**, and the resulting Verilog code
-basically represents a true **schematic** with a NOT-gate symbol.
+basically represents a true **schematic** with a NOT-gate symbol. This coding style is referred
+to as [**gate-level modeling**](https://vlsiverify.com/verilog/gate-level-modeling).
+.
 
 You can also add some **propagation-delay** to the `not` gate-primitive with the following syntax:
 
@@ -1333,14 +1335,29 @@ code down to basic logic equations and fundamental logic gates.
 Additionality the Verilog language (not VHDL instead) also provides
 `nmos` and `pmos` primitives to describe **digital gates at transistor level**
 which is the lowest-possible level of abstraction foreseen by the language.
-Such a very low-level description is can be useful for **modeling purpuses**.
+Such a very low-level description is referred to as
+[**switch-level modeling**](https://vlsiverify.com/verilog/switch-level-modeling)
+and can be useful for **modeling purpuses**.
 
-Further modify the modify the implementation of the inverter and replace the primitive
-instantiation with the actual CMOS inverter schematic depicted below:
+Further modify the modify the implementation of the inverter and replace the
+primitive instantiation with the actual CMOS inverter schematic depicted below:
 
 <br />
 
 <img src="doc/pictures/CmosInverter.png" alt="drawing" width="400"/>
+
+<br />
+
+Both `nmos` and `pmos` keywords used to model NMOS and PMOS devices respectively
+requires to specify drain/source/gate terminal as follows:
+
+```verilog
+nmos <name> (drain,source,gate) ;
+pmos <name> (drain,source,gate) ;
+```
+
+where drain/source are interchangeable. As a result the CMOS Verilog implementation
+of an inverter can be te following:
 
 <br />
 
