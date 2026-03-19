@@ -1263,8 +1263,16 @@ assign #3 ZN = !X ;
 
 <br />
 
-Save the file once done. Re-compile and re-simulate the code. Look at waveforms to verify if the delay has been properly
-included in the simulation.
+Save the file once done. Re-compile and re-simulate the code at the command-line with:
+
+```
+% make clean
+% make sim
+```
+
+<br />
+
+Look at waveforms to verify if the delay has been properly included in the simulation.
 
 <br />
 
