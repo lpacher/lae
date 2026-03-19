@@ -24,6 +24,7 @@ RMDIR := rm -rf -v
 
 ## compile Verilog sources (xvlog)
 compile : $(SOURCES)
+    @$(RM) compile.log
 	@xvlog $(SOURCES) -log compile.log
 
 
@@ -34,7 +35,7 @@ elaborate: compile.log
 
 ## run the simulation (xsim)
 #simulate: elaborate.log xsim.dir/work.$(TOP)
-#	@xsim -gui -tclbatch run.tcl work.$(TOP) -log $@.log
+#	@xsim -gui -tclbatch run.tcl work.$(TOP) -log simulate.log
 
 
 ## same as before, but keep alive the shell under Windows!
@@ -59,4 +60,5 @@ clean:
 
 
 ## none of the above implemented targets are on-disk files, declare them as PHONY
-.PHONY : compile elaborate simulate sim clean
+.PHONY: compile elaborate simulate waves sim clean
+
