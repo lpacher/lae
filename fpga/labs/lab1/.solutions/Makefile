@@ -23,7 +23,7 @@ RMDIR := rm -rf -v
 
 
 ## compile Verilog sources (xvlog)
-compile : $(SOURCES)
+compile: $(SOURCES)
     @$(RM) compile.log
 	@xvlog $(SOURCES) -log compile.log
 
@@ -35,7 +35,9 @@ elaborate: compile.log
 
 ## run the simulation (xsim)
 #simulate: elaborate.log xsim.dir/work.$(TOP)
+#
 #	@xsim -gui -tclbatch run.tcl work.$(TOP) -log simulate.log
+#	@python runSimulation.py
 
 
 ## same as before, but keep alive the shell under Windows!
@@ -55,10 +57,10 @@ waves:
 
 ## delete all log files and simulation outputs
 clean:
-	@$(RM) *.log *.jou *.pb *.wdb *.str
+	@$(RM) *.log *.jou *.pb *.wdb *.str *.txt
 	@$(RMDIR) xsim.dir .Xil
 
 
 ## none of the above implemented targets are on-disk files, declare them as PHONY
-.PHONY: compile elaborate simulate waves sim clean
+.PHONY: compile elaborate simulate waves sim waves clean
 

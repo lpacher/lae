@@ -1,12 +1,13 @@
-##
+##=======================================================================
 ## A first example Tcl simulation script for the Xilinx XSim simulator.
 ##
 ## Luca Pacher - pacher@to.infn.it
 ## Fall 2020
-##
+##=======================================================================
 
 
 ## profiling
+puts "\nINFO: Running [file normalize [info script]]\n"
 set tclStart [clock seconds]
 
 ## dump all waveforms into XSim Waveform Database (WDB)

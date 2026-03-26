@@ -1133,9 +1133,9 @@ For this purpose, create a new text file named `Makefile` (without extension):
 Then enter the following source code:
 
 ```make
-##
+##=======================================================================
 ## A first Makefile example to automate the Xilinx XSim simulation flow. 
-##
+##=======================================================================
 
 ## list of Verilog sources to be compiled
 SOURCES := Inverter.v tb_Inverter.v
@@ -1172,7 +1172,7 @@ sim: compile elaborate simulate
 
 ## delete all log files and simulation outputs
 clean:
-        @$(RM) *.log *.jou *.pb *.wdb *.wcfg
+        @$(RM) *.log *.jou *.pb *.wdb *.wcfg *.txt
         @$(RMDIR) xsim.dir .Xil
 
 ## none of the above implemented targets are on-disk files, declare them as PHONY
@@ -1223,7 +1223,17 @@ the execution of the command as follows:
 
 ```make
 simulate:
-	@echo "exec xsim -gui -tclbatch run.tcl $(TOP) -log $@.log &" | tclsh -norc
+	@echo "exec xsim -gui -tclbatch run.tcl $(TOP) -log simulate.log &" | tclsh -norc
+```
+
+<br />
+
+Alternativey one can use the `os.system()` routine into a simple **Python script** (e.g. `runSimulation.py`)
+that also allows to execute shell commands in background with the `&` character:
+
+```python
+import os
+os.system("xsim -gui -tclbatch run.tcl tb_Inverter -log simulate.log &")
 ```
 
 <br />
