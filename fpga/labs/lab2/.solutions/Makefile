@@ -1,9 +1,9 @@
-##
+##===========================================================================
 ## A first Makefile example to automate the Xilinx XSim simulation flow.
 ##
 ## Luca Pacher - pacher@to.infn.it
 ## Fall 2020
-##
+##===========================================================================
 
 ## list of Verilog sources to be compiled
 SOURCES := Gates.v tb_Gates.v
@@ -52,9 +52,9 @@ waves:
 
 ## delete all log files and simulation outputs
 clean:
-	@$(RM) *.log *.jou *.pb *.wdb *.wcfg
+	@$(RM) *.log *.jou *.pb *.wdb *.str *.txt
 	@$(RMDIR) xsim.dir .Xil
 
 
 ## none of the above implemented targets are on-disk files, declare them as PHONY
-.PHONY: compile elaborate simulate sim clean
+.PHONY: compile elaborate simulate sim waves clean
