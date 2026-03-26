@@ -1035,13 +1035,16 @@ With your **text editor** program create a new file named `run.tcl` :
 As a first example, write the following **Tcl code** in the new file:
 
 ```
-##
+##=======================================================================
 ## A first example Tcl simulation script for the Xilinx XSim simulator.
-##
-
+##=======================================================================
 
 ## profiling
+puts "\nINFO: Running [file normalize [info script]]\n"
 set tclStart [clock seconds]
+
+## dump all waveforms into XSim Waveform Database (WDB)
+log_wave -recursive /*
 
 ## add all top-level signals to the Wave window
 add_wave /*
@@ -1054,9 +1057,9 @@ puts "\nSimulation finished at [current_time]\n"
 
 ## report CPU time
 set tclStop [clock seconds]
-set seconds [expr ${tclStop} - ${tclStart} ]
+set seconds [expr $tclStop - $tclStart]
 
-puts "\nTotal elapsed-time for [info script]: [format "%.2f" [expr ${seconds}/60.]] minutes\n"
+puts "\nTotal elapsed-time for [file normalize [info script]]: [format "%.2f" [expr $seconds/60.]] minutes\n"
 ```
 
 <br />
