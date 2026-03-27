@@ -370,9 +370,9 @@ after saving your changes.
 [**[Contents]**](#contents)
 
 
-The **compilation** process generates a **binary representation** of the HDL sources that only Xilinx tools
-are now able to understand. This is basically the same thing that happens when you compile C/C++ sources at the
-command line using `gcc/g++` compilers.
+The **compilation** process generates a **binary representation** of the HDL sources that only
+Xilinx tools are now able to understand. This is basically the same thing that happens when
+you compile C/C++ sources at the command line using `gcc/g++` compilers.
 
 This binary representation goes into a so called **work library** placed in the `xsim.dir` directory
 created by `xvlog`:
@@ -385,15 +385,18 @@ created by `xvlog`:
 <br />
 
 In order to **simulate the testbench** we have at first to **merge together** the
-compiled code of our module under test (the `Inverter` module) with the compiled code of the testbench module (the `tb_Inverter` module)
-into a single **binary simulation executable**.
+compiled code of our module under test (the `Inverter` module) with the compiled code
+of the testbench module (the `tb_Inverter` module) into a single **binary simulation executable**.
 This process is called **design elaboration** and in the Xilinx XSim simulation flow this is performed
-by the `xelab` executable. More in general, HDL sources can also instantiate other pre-compiled digital blocks, FPGA device primitives etc.
-with a complex design hierarchy. Thus the elaboration process is also responsible to **resolve all external dependencies** found in the design.
-Back to our comparison with C/C++ programming, design elaboration is what is called **linking** when compiling C/C++ sources.
+by the `xelab` executable. More in general, HDL sources can also instantiate other pre-compiled digital
+blocks, FPGA device primitives etc. with a complex design hierarchy. Thus the elaboration process is
+also responsible to **resolve all external dependencies** found in the design.
+Back to our comparison with C/C++ programming, design elaboration is what is called **linking**
+when compiling C/C++ sources.
 
 The main argument for `xelab` is the **NAME of the top-level module** that you want to elaborate.
-Apart from a few special cases that we will discuss later in the course, this is usually the **NAME of the testbench module**:
+Apart from a few special cases that we will discuss later in the course, this is usually
+the **NAME of the testbench module**:
 
 ```
 % xelab -debug all tb_Inverter
@@ -401,26 +404,45 @@ Apart from a few special cases that we will discuss later in the course, this is
 
 <br />
 
-Be aware that the `-debug all` option is **REQUIRED** to make all signals in the design hierarchy **accessible** from the simulator
-graphical interface in form of **digital waveforms**. That is, if you want to be able to **probe and display ALL signals as waveforms in the GUI**
-you must elaborate the design with the `-debug all` flag. This is a feature common to all professional digital
-simulators in order to **save disk space** when you deal with very large digital HDL projects (e.g. an entire CPU) where you don't need
-to probe any single net in the design hierarchy.
-If you elaborate compiled sources without this option **you will NOT BE ABLE to probe signals** in the XSim graphical interface!
+Since the module has been compiled inside the work-library to avoid confusion it is
+recommended to explicitely elaborate the top-level module as follows:
+
+```
+% xelab -debug all work.tb_Inverter
+% ls -l xsim.dir/
+```
+
+<br />
+
+Be aware that the `-debug all` option is **REQUIRED** to make all signals in the design hierarchy 
+**accessible** from the simulator graphical interface in form of **digital waveforms**.
+That is, if you want to be able to **probe and display ALL signals as waveforms in the GUI**
+you must elaborate the design with the `-debug all` flag. This is a feature common to all professional
+digital simulators in order to **save disk space** when you deal with very large digital HDL projects
+(e.g. an entire CPU) where you don't need to probe any single net in the design hierarchy.
+If you elaborate compiled sources without this option **you will NOT BE ABLE to probe signals**
+in the XSim graphical interface!
 
 <br />
 
 >
 > **IMPORTANT !**
 >
-> The value to be passed as main argument to the `xelab` executable is the **NAME** of the top-level module that has to be elaborated,
-> **NOT the corresponding Verilog source file**! The following command-line syntax is therefore **WRONG** and generates errors:
+> The value to be passed as main argument to the `xelab` executable is the **NAME** of the top-level
+> module that has to be elaborated, **NOT the corresponding Verilog source file**!
+> The following command-line syntax is therefore **WRONG** and generates errors:
 >
 > ```
 > % xelab -debug all tb_Inverter.v
 > ```
 >
-> Do not call `xelab` targeting a `.v` file and **always pay attention to TAB completion on files**!
+> The recommended command-line syntax is:
+>
+> ```
+> % xelab -debug all work.tb_Inverter
+> ```
+>
+> Do not call `xelab` targeting a `.v` file and **always pay attention to TAB completion on files**.
 >
 
 <br />
@@ -666,6 +688,14 @@ Examples:
 </details>
 
 <br />
+
+As an example, use the `-log` switch to specify a custom file name for the log file:
+
+```
+% xelab -debug all work.tb_Inverter -log elaborate.log
+```
+
+<br />
 <!--------------------------------------------------------------------->
 
 
@@ -734,22 +764,40 @@ To start XSim type:
 
 <br />
 
+Alternatively you can explicitely specify also the name of the work-library as follows:
+
+```
+% xsim -gui work.tb_Inverter
+```
+
+<br />
+
 >
 > **IMPORTANT !**
 >
-> The value to be passed as main argument when invoking `xsim` is the **NAME of the simulation executable** (snapshot). In this course
-> we **always assume** that the name of the simulation executable is **the name of the testbench module** as specified
-> when executing `xelab` during elaboration. The target for the `xsim` command is **NOT a Verilog source file**! The following
+> The value to be passed as main argument when invoking `xsim` is the
+> **NAME of the simulation executable** (snapshot). In this course
+> we **always assume** that the name of the simulation executable is
+> **the name of the testbench module** as specified
+> when executing `xelab` during elaboration. The target for the `xsim`
+> command is **NOT a Verilog source file**! The following
 > command-line syntax is therefore **WRONG** and generates errors:
 >
 > ```
 > % xsim -gui tb_Inverter.v
 > ```
 >
+> The recommended command-line syntax is:
+>
+> ```
+> % xsim -gui work.tb_Inverter
+> ```
+>
 > Do not call `xsim` targeting a `.v` file and **always pay attention to TAB completion on files**!
 >
-> Just for reference, if you want to change the name of the simulation executable you can use the `-s` (same as `-snapshot`) switch
-> when you elaborate the design with `xelab`. As an example:
+> Just for reference, if you want to change the name of the simulation executable
+> you can use the `-s` (same as `-snapshot`) switch when you elaborate the design with `xelab`.
+As an example:
 >
 > ```
 > % xelab -debug all tb_Inverter -s tb_Inverter.exe 
@@ -758,7 +806,8 @@ To start XSim type:
 
 <br />
 
-The `-gui` option launches the XSim simulator **graphical user interface (GUI)** in order to be able to **probe and display waveforms**.
+The `-gui` option launches the XSim simulator **graphical user interface (GUI)**
+in order to be able to **probe and display waveforms**.
 
 <br />
 
@@ -767,14 +816,24 @@ The `-gui` option launches the XSim simulator **graphical user interface (GUI)**
 
 <br />
 
+As for `xvlog` and `xelab` executables you can use the `-log`
+switch to specify a custom file name for the log file:
+
+```
+% xsim -gui work.tb_Inverter -log simulate.log
+```
+
+<br />
+
 >
 > **IMPORTANT !**
 >
-> The command `xsim -gui` suffers from a very important drawback. That is, once `xsim` is invoked we **cannot type shell commands in the terminal anymore**.
+> The command `xsim -gui` suffers from a very important drawback. That is, once `xsim`
+> is invoked we **cannot type shell commands in the terminal anymore**.
 > Linux users can launch `xsim` in **background** by adding the `&` character,
 >
 > ```
-> % xsim -gui tb_Inverter &
+> % xsim -gui work.tb_Inverter -log simulate.log &
 > ```
 >
 > but there is no `&` equivalent on Windows. Later in this lab we will learn how to fix this by forwarding the execution of the command to `tclsh`.
@@ -1072,9 +1131,9 @@ the simulation flow (in the example, track and report the script execution time 
 Save the file once done and **relaunch the simulation** flow:
 
 ```
-% xvlog Inverter.v tb_Inverter.v
-% xelab -debug all tb_Inverter
-% xsim -gui tb_Inverter
+% xvlog Inverter.v tb_Inverter.v -log compile.log
+% xelab -debug all work.tb_Inverter -log elaborate.log
+% xsim -gui work.tb_Inverter -log simulate.log
 ```
 
 <br />
@@ -1106,7 +1165,18 @@ To further save time, the `run.tcl` script can be also automatically executed by
 using the `-tclbatch` option when invoking the `xsim` executable at the command line:
 
 ```
-% xsim -gui -tclbatch run.tcl tb_Inverter
+% xsim -gui -tclbatch run.tcl work.tb_Inverter
+```
+
+<br />
+
+If you prefer to suppress the command echoing into the XSim Tcl console you can create
+an additional `xsim.tcl` wrapper to `source` the actual `run.tcl` script with the
+`-notrace` switch:
+
+```
+% echo "source -notrace run.tcl" > xsim.tcl
+% xsim -gui -tclbatch xsim.tcl work.tb_Inverter -log simulate.log
 ```
 
 
@@ -1161,16 +1231,24 @@ compile: $(SOURCES)
 
 ## elaborate the design (xelab)
 elaborate: compile.log
+    @$(RM) elaborate.log
 	@xelab -debug all work.$(TOP) -log elaborate.log
 
 
-## run the simulation (xsim)
-simulate: elaborate.log xsim.dir/work.$(TOP)
-	@xsim -gui -tclbatch run.tcl work.$(TOP) -log simulate.log
+## run the simulation executable (xsim)
+simulate: elaborate.log xsim.dir/work.$(TOP) run.tcl
+	@$(RM) simulate.log
+	@echo "source -notrace run.tcl" > xsim.tcl
+	@xsim -gui -tclbatch xsim.tcl work.$(TOP) -wdb $(TOP).wdb -log simulate.log
 
 
 ## one-step compilation/elaboration/simulation
 sim: compile elaborate simulate
+
+
+## load waveforms into XSim GUI
+waves: $(TOP).wdb
+	@echo "exec xsim -gui $(TOP).wdb -nolog &" | tclsh -norc
 
 
 ## delete all log files and simulation outputs
@@ -1179,7 +1257,7 @@ clean:
         @$(RMDIR) xsim.dir .Xil
 
 ## none of the above implemented targets are on-disk files, declare them as PHONY
-.PHONY: compile elaborate simulate sim clean
+.PHONY: compile elaborate simulate sim waves clean
 ```
 
 <br />
@@ -1225,8 +1303,10 @@ the execution of the command as follows:
 
 
 ```make
-simulate:
-	@echo "exec xsim -gui -tclbatch run.tcl $(TOP) -log simulate.log &" | tclsh -norc
+simulate: elaborate.log xsim.dir/work.$(TOP) run.tcl
+	@$(RM) simulate.log
+	@echo "source -notrace run.tcl" > xsim.tcl
+	@echo "exec xsim -gui -tclbatch xsim.tcl work.$(TOP) -wdb $(TOP).wdb -log simulate.log &" | tclsh -norc
 ```
 
 <br />
@@ -1392,7 +1472,7 @@ Such a very low-level description is referred to as
 [**switch-level modeling**](https://vlsiverify.com/verilog/switch-level-modeling)
 and can be useful for **modeling purpuses**.
 
-Further modify the modify the implementation of the inverter and replace the
+Further modify the implementation of the inverter and replace the
 primitive instantiation with the actual CMOS inverter schematic depicted below:
 
 <br />
@@ -1440,42 +1520,6 @@ Verify if the functionality of the NOT gate has changed.
 <br />
 <!--------------------------------------------------------------------->
 
-
-**EXERCISE 5**
-
-Create a new source file `BufferTri.v` and try yourself to implement a **three-state buffer** using a C-like
-**conditional assignment** and an active-high output-enable `OE` control port:
-
-```verilog
-assign ZT = (OE == 1'b1) ? X : 1'b1z ;
-```
-
-<br />
-
-<img src="doc/pictures/BufferTri.png" alt="drawing" width="800"/>
-
-<br />
-
-Re-use and extend the original inverter testbench code to simulate and verify the expected functionality.
-Update also the `SOURCES` variable in the `Makefile` in order to parse and compile `BufferTri.v` along
-with previous sources:
-
-```make
-#SOURCES := Inverter.v tb_Inverter.v
-SOURCES := Inverter.v BufferTri.v tb_Inverter.v
-```
-
-<br />
-
-Save all your changes and re-run the simulation at the command-line with:
-
-```
-% make clean
-% make sim
-```
-
-<br />
-<!--------------------------------------------------------------------->
 
 
 **EXERCISE 5**
@@ -1538,13 +1582,14 @@ endmodule
 
 <br />
 
-Once done extend the original `tb_Inverter.v` testbench code to also instantiate and test the new `Buffer` module.
-Update also the `SOURCES` variable in the `Makefile` in order to parse and compile `Buffer.v` along with previous
-sources:
+Once done extend the original `tb_Inverter.v` testbench code to also instantiate and test 
+the functionality of the new `Buffer` module.
+Update also the `SOURCES` variable in the `Makefile` in order to parse and compile
+`Buffer.v` along with previous sources:
 
 ```make
-#SOURCES := Inverter.v BufferTri.v tb_Inverter.v
-SOURCES := Inverter.v BufferTri.v Buffer.v tb_Inverter.v
+#SOURCES := Inverter.v tb_Inverter.v
+SOURCES := Inverter.v Buffer.v tb_Inverter.v
 ```
 
 <br />
@@ -1555,6 +1600,56 @@ Save all your changes and re-run the simulation at the command-line with:
 % make clean
 % make sim
 ```
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+**EXERCISE 6**
+
+Create a new source file `BufferTri.v` and try yourself to implement a **tri-state buffer**
+using a C-like **conditional assignment** and an active-high output-enable `OE` control port:
+
+```verilog
+assign ZT = (OE == 1'b1) ? X : 1'b1z ;
+```
+
+<br />
+
+<img src="doc/pictures/BufferTri.png" alt="drawing" width="800"/>
+
+<br />
+
+Re-use and extend the original inverter testbench code to simulate and verify the expected functionality.
+Update also the `SOURCES` variable in the `Makefile` in order to parse and compile `BufferTri.v` along
+with previous sources:
+
+```make
+#SOURCES := Inverter.v Buffer.v tb_Inverter.v
+SOURCES := Inverter.v BufferTri.v tb_Inverter.v
+```
+
+<br />
+
+Save all your changes and re-run the simulation at the command-line with:
+
+```
+% make clean
+% make sim
+```
+
+<br />
+
+Once done try yourself to replace the conditional-assign implementation with the actual
+CMOS implementation. For this purpose re-use the `Inverter` module in cascade
+with a tri-state CMOS inverter as depicted in figure below.
+
+<br />
+
+<img src="doc/pictures/CmosBufferTri.png" alt="drawing" width="800"/>
+
+<br />
+
 
 <br />
 <!--------------------------------------------------------------------->
