@@ -1,9 +1,9 @@
-//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Implement basic logic gates in Verilog using continuous assignments.
 //
 // Luca Pacher - pacher@to.infn.it
 // Spring 2020
-//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 //
 // **NOTE

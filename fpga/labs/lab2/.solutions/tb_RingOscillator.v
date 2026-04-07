@@ -1,9 +1,9 @@
-//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Example testbench module for ring-oscillator circuit.
 //
 // Luca Pacher - pacher@to.infn.it
 // Spring 2024
-//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 `timescale 1ns / 100ps

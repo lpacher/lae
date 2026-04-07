@@ -1,8 +1,10 @@
 ##===========================================================================
-## A first Makefile example to automate the Xilinx XSim simulation flow.
+##
+## Improved Makefile example to automate the Xilinx XSim simulation flow.
 ##
 ## Luca Pacher - pacher@to.infn.it
 ## Fall 2020
+##
 ##===========================================================================
 
 ## list of Verilog sources to be compiled
@@ -22,6 +24,20 @@ RM    := rm -f -v
 RMDIR := rm -rf -v
 ECHO  := echo -e
 
+## command-line help
+help:
+	@$(ECHO) "\n------------------------------------"
+	@$(ECHO) "\nAvailable targets:\n"
+	@$(ECHO) "- help         Command-line help"
+	@$(ECHO) "- compile      Parse and compile RTL and simulation sources (xvlog)"
+	@$(ECHO) "- elaborate    Elaborate the design (xelab)"
+	@$(ECHO) "- simulate     Run the simulation executable (xsim)"
+	@$(ECHO) "- sim          Alias, same as make compile elaborate simulate"
+	@$(ECHO) "- waves        Load pre-existing waveform database into simulator"
+	@$(ECHO) "- clean        Clean-up the working directory\n"
+	@$(ECHO) "------------------------------------\n"
+
+
 ## compile Verilog sources (xvlog)
 compile: $(SOURCES)
 	@$(RM) compile.log
@@ -34,7 +50,7 @@ elaborate: compile.log
 	@xelab -debug all work.$(TOP) -log elaborate.log
 
 
-## run the simulation (xsim)
+## run the simulation executable (xsim)
 simulate: elaborate.log xsim.dir/work.$(TOP) run.tcl
 	@$(RM) simulate.log
 	@$(ECHO) "source -notrace run.tcl" > xsim.tcl
