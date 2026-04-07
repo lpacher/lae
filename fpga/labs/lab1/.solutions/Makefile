@@ -9,8 +9,8 @@
 
 ## list of Verilog sources to be compiled
 SOURCES := Inverter.v tb_Inverter.v
+#SOURCES := Inverter.v Buffer.v tb_Inverter.v
 #SOURCES := Inverter.v BufferTri.v tb_Inverter.v
-#SOURCES := Inverter.v BufferTri.v Buffer.v tb_Inverter.v
 
 
 ## top-level module (testbench)
@@ -37,7 +37,8 @@ elaborate: compile.log
 ## run the simulation executable (xsim)
 #simulate: elaborate.log xsim.dir/work.$(TOP)
 #	@$(RM) simulate.log
-#	@xsim -gui -tclbatch run.tcl work.$(TOP) -log simulate.log
+#	@echo "source -notrace run.tcl" > xsim.tcl
+#	@xsim -gui -tclbatch xsim.tcl work.$(TOP) -log simulate.log
 #	@python runSimulation.py
 
 
