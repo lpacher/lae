@@ -1,9 +1,10 @@
-//
-// Simple testbench to simulate basic logic gates with different implementations.
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Simple testbench to simulate basic logic gates with different
+// implementations.
 //
 // Luca Pacher - pacher@to.infn.it
 // Spring 2020
-//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 `timescale 1ns / 100ps

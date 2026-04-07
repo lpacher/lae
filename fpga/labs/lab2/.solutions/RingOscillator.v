@@ -1,12 +1,14 @@
-//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Example Verilog implementation of a ring-oscillator using STRUCTURAL CODE
 // and gate-primitives with propagation delays.
 //
 // Luca Pacher - pacher@to.infn.it
 // Spring 2024
-//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 `timescale 1ns / 100ps
+
+//`include "Inverter.v"
 
 module RingOscillator (
 
@@ -38,6 +40,12 @@ module RingOscillator (
    not  #(3) g2 (w[2], w[1]) ;
    not  #(3) g3 (w[3], w[2]) ;
    not  #(3) g4 (w[4], w[3]) ;
+
+   // example code-reuse
+   //Inverter g1 (.ZN(w[1]), .X(w[0])) ;
+   //Inverter g2 (.ZN(w[2]), .X(w[1])) ;
+   //Inverter g3 (.ZN(w[3]), .X(w[2])) ;
+   //Inverter g4 (.ZN(w[4]), .X(w[3])) ;
 
    assign clk = w[4] ;
 

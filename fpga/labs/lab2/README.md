@@ -633,7 +633,12 @@ endmodule
 <br />
 
 Create also a suitable testbench file `tb_RingOscillator.v` to drive the `start` signal of the ring-oscillator and simulate
-the circuit. Later in the course we will also implement and debug the above circuit on real FPGA hardware.
+the circuit. Once ready update both `SOURCES` and `TOP` variables in the `Makefile` and run the simulation at the command-line:
+
+```
+% make clean
+% make sim
+```
 
 <br />
 
@@ -646,10 +651,74 @@ the circuit. Later in the course we will also implement and debug the above circ
 >
 
 <br />
+
+Later in the course we will also implement and debug the above circuit on real FPGA hardware.
+
+<br />
 <!--------------------------------------------------------------------->
 
 
 **EXERCISE 5**
+
+As already introduced in `lab1` one key aspect of HDL programming (as in any other software programming language) is **code reuse**.
+In our case we already implemented the functionality of a single inverter gate in the `Inverter` module so we can re-use that module
+to build the ring-oscillator.
+
+As a first step make a copy of the `Inverter.v` code you developed in `lab1` as follows:
+
+```
+% cp ../lab1/Inverter.v .
+```
+
+<br />
+
+Then try yourself to modify the implementation of the ring-oscillator by instantiating `Inverter` modules in place of `not` primitives:
+
+```verilog
+
+`timescale 1ns / 100ps
+
+`include "Inverter.v"
+
+module RingOscillator (
+
+   input  wire start,
+   output wire clk
+
+   ) ;
+
+
+   // wires for internal connections
+   wire [4:0] w ;
+
+   nand #(...) g0 (...) ;
+
+   //not ...
+   //not ...
+
+   Inverter ...
+   Inverter ...
+
+   assign clk = w[4] ;
+
+endmodule
+```
+
+<br />
+
+In the proposed code-skeleton the C-like ``include` directive is used to compile the `Inverter.v` source code along with
+the main `RingOscillator.v` file without the need of updating the `SOURCES` variable in the `Makefile`. Once ready re-run
+the simulation at the command-line:
+
+```
+% make clean
+% make sim
+```
+
+<br />
+<!--------------------------------------------------------------------->
+
+**EXERCISE 6**
 
 Replace the `nand` primitive with a **transistor-level implementation** using `nmos` and `pmos` as depicted in figure below.
 
