@@ -1642,11 +1642,11 @@ Save all your changes and re-run the simulation at the command-line with:
 
 Once done try yourself to replace the conditional-assign implementation with the actual
 CMOS implementation. For this purpose re-use the `Inverter` module in cascade
-with a tri-state CMOS inverter as depicted in figure below.
+with a **tri-state CMOS inverter** as depicted in figure below.
 
 <br />
 
-<img src="doc/pictures/CmosBufferTri.png" alt="drawing" width="800"/>
+<img src="doc/pictures/CmosBufferTri.png" alt="drawing" width="850"/>
 
 <br />
 
