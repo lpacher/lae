@@ -706,7 +706,7 @@ endmodule
 
 <br />
 
-In the proposed code-skeleton the C-like ``include` directive is used to compile the `Inverter.v` source code along with
+In the proposed code-skeleton the C-like `` `include `` directive is used to compile the `Inverter.v` source code along with
 the main `RingOscillator.v` file without the need of updating the `SOURCES` variable in the `Makefile`. Once ready re-run
 the simulation at the command-line:
 
