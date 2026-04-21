@@ -1,12 +1,13 @@
-##
+##=======================================================================
 ## A first example Tcl simulation script for the Xilinx XSim simulator.
 ##
 ## Luca Pacher - pacher@to.infn.it
 ## Fall 2020
-##
+##=======================================================================
 
 
 ## profiling
+puts "\nINFO: Running [file normalize [info script]]\n"
 set tclStart [clock seconds]
 
 ## dump all waveforms into XSim Waveform Database (WDB)
@@ -23,6 +24,6 @@ puts "\nSimulation finished at [current_time]\n"
 
 ## report CPU time
 set tclStop [clock seconds]
-set seconds [expr ${tclStop} - ${tclStart} ]
+set seconds [expr $tclStop - $tclStart]
 
-puts "\nTotal elapsed-time for [file normalize [info script]]: [format "%.2f" [expr ${seconds}/60.]] minutes\n"
+puts "\nTotal elapsed-time for [file normalize [info script]]: [format "%.2f" [expr $seconds/60.]] minutes\n"
