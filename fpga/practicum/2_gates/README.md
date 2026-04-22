@@ -1061,12 +1061,12 @@ by the **name** of the macro. As an example:
 Implement and debug a simple **Full-Adder (FA)** combinational block as depicted in figure:
 
 <br />
-<img src="doc/pictures/FullAdder.png" alt="drawing" width="480"/>
+<img src="doc/pictures/FullAdder.png" alt="drawing" width="500"/>
 <br />
 
-The block is a pure **combinational circuit**, therefore you can use a **truth-table** implemented using a Verilog `case` statement.
-Alternatively, from the truth-table you can also write a **Karnaugh map** for each full-adder output and derive **logic equations**
-for `Sum` and `Cout`.
+As already discussed in `lab2` the block is a pure **combinational circuit**, therefore you can use a **truth-table** implemented
+using a Verilog `case` statement. Alternatively, from the truth-table you can also write a **Karnaugh map** for each full-adder
+output and derive **logic equations** for `Sum` and `Cout`.
 
 Indeed, you can simply use the standard sum operaror `+` as in other programming languages for this purpose:
 

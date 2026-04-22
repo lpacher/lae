@@ -422,7 +422,7 @@ A Verilog `case` statement within an `always` sequential block can be used for t
 
 <br />
 
-<img src="doc/pictures/table.png" alt="drawing" width="500"/>
+<img src="doc/pictures/table.png" alt="drawing" width="550"/>
 
 <br />
 
@@ -735,6 +735,69 @@ pmos M3 (...) ;
 pmos M4 (...) ;
 ````
 
+<br />
 <!--------------------------------------------------------------------->
 
+
+**EXERCISE 7**
+
+Implement and simulate a simple **Full-Adder (FA)** combinational block as depicted in figure:
+
+<br />
+<img src="doc/pictures/FullAdder.png" alt="drawing" width="560"/>
+<br />
+
+The block is a pure **combinational circuit**, therefore you can start from the **truth-table** of the circuit
+
+<br />
+<img src="doc/pictures/FullAdderTruthTable.png" alt="drawing" width="400"/>
+<br />
+
+<br />
+
+and use a Verilog `case` statement within an `always` combinational block:
+
+```verilog
+always @(*) begin
+
+  case ( {Cin,A,B} )
+     ...
+     ...
+   endcase
+end   //always
+```
+
+<br />
+
+Alternatively, from the truth-table you can also write a **Karnaugh map** for each full-adder output and derive **logic equations**
+for `Sum` and `Cout` as follows:
+
+```verilog
+// sum
+assign Sum = A ^ B ^ Cin ;
+
+// output carry
+assign Cout = (A & B) | (Cin & (A ^ B)) ;
+```
+
+<br />
+
+Indeed, you can simply use the standard sum operaror `+` as in other programming languages for this purpose:
+
+```verilog
+assign {Cout, Sum}  = A + B + Cin ;
+```
+
+<br />
+
+The **synthesis tool** will be then responsible to infer necessary logic gates to implement the binary
+addition in real hardware.
+
+Try yourself to:
+
+* create new `FullAdder.v` and `FullAdder.xdc` source files from scratch
+* implement a `FullAdder` module that performs a 2-bit binary addition with both input and output carry
+* re-use the original `tb_Gates.sv` testbench code to verify the functionality of the new block
+
 </div>
+
