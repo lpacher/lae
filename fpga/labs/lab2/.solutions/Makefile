@@ -93,7 +93,8 @@ sim: compile elaborate simulate
 ## load waveforms into XSim GUI
 .PHONY: waves
 waves:
-	@$(ECHO) "exec xsim -gui $(TOP).wdb -nolog &" | tclsh -norc
+	@$(ECHO) "add_waves /*" > probe.tcl
+	@$(ECHO) "exec xsim -tclbatch probe.tcl -gui $(TOP).wdb -nolog &" | tclsh -norc
 ##____________________________________________________________________________________________________
 
 
