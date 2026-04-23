@@ -302,7 +302,7 @@ Debug your simulation results.
 [**[Contents]**](#contents) 
 
 You can **customize waveform names**, **colors**, the **radix of buses** etc. in the Wave window at any time.
-As an example, **rename top-level signals** `count[0]`, `count[1]`, `Z[0]`, `Z[1]` etc. with more meaningful
+As an example, **rename top-level signals** `count[1]`, `count[0]`, `Z[0]`, `Z[1]` etc. with more meaningful
 names such as `A`, `B`, `AND`, `OR` etc. and **change the default radix** for the `count[1:0]` bus to **binary**.
 
 After signals renaming you can **save your display customizations** into a **Waveform Configuration (WCFG)** XML file (`.wcfg`).
@@ -469,8 +469,8 @@ in the `tb_Gates.v` file:
 ```verilog
 // device under test (DUT)
 
-//Gates DUT (.A(count[0]), .B(count[1]), .Z(Z)) ;       **COMMENT** the previous DUT !
-GatesTruthTable DUT (.A(count[0]), .B(count[1]), .Z(Z)) ;
+//Gates DUT (.A(count[1]), .B(count[0]), .Z(Z)) ;       **COMMENT** the previous DUT !
+GatesTruthTable DUT (.A(count[1]), .B(count[0]), .Z(Z)) ;
 
 ```
 
@@ -551,9 +551,9 @@ Update the testbench code in order to instantiate the new `GatesPrimitives` modu
 ```verilog
 // device under test (DUT)
 
-//Gates DUT (.A(count[0]), .B(count[1]), .Z(Z)) ;
-//GatesTruthTable DUT (.A(count[0]), .B(count[1]), .Z(Z)) ;
-GatesPrimitives DUT (.A(count[0]), .B(count[1]), .Z(Z)) ;
+//Gates DUT (.A(count[1]), .B(count[0]), .Z(Z)) ;
+//GatesTruthTable DUT (.A(count[1]), .B(count[0]), .Z(Z)) ;
+GatesPrimitives DUT (.A(count[1]), .B(count[0]), .Z(Z)) ;
 
 ```
 
@@ -769,8 +769,16 @@ end   //always
 
 <br />
 
-Alternatively, from the truth-table you can also write a **Karnaugh map** for each full-adder output and derive **logic equations**
-for `Sum` and `Cout` as follows:
+Alternatively, from the truth-table you can also write a **Karnaugh map** for each full-adder output
+
+
+<br />
+<img src="doc/pictures/FullAdderKmaps.png" alt="drawing" width="1700"/>
+<br />
+
+<br />
+
+and derive **logic equations** for `Sum` and `Cout` as follows:
 
 ```verilog
 // sum
@@ -782,7 +790,7 @@ assign Cout = (A & B) | (Cin & (A ^ B)) ;
 
 <br />
 
-Indeed, you can simply use the standard sum operaror `+` as in other programming languages for this purpose:
+Indeed, you can simply use the standard **sum operaror** `+` as in other programming languages for this purpose:
 
 ```verilog
 assign {Cout, Sum}  = A + B + Cin ;
@@ -795,9 +803,9 @@ addition in real hardware.
 
 Try yourself to:
 
-* create new `FullAdder.v` and `FullAdder.xdc` source files from scratch
+* create a new `FullAdder.v` source file from scratch
 * implement a `FullAdder` module that performs a 2-bit binary addition with both input and output carry
-* re-use the original `tb_Gates.sv` testbench code to verify the functionality of the new block
+* re-use and extend the original `tb_Gates.sv` testbench code to verify the functionality of the new block
 
 </div>
 

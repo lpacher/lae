@@ -74,10 +74,12 @@ simulate: elaborate.log xsim.dir/work.$(TOP) run.tcl
 	@$(ECHO) "source -notrace run.tcl" > xsim.tcl
 ifeq ($(mode),batch)
 	@xsim -tclbatch xsim.tcl work.$(TOP) -wdb $(TOP).wdb -log simulate.log -onfinish quit
-else ifeq ($(mode),tcl)
+else
+ifeq ($(mode),tcl)
 	@xsim -tclbatch xsim.tcl work.$(TOP) -wdb $(TOP).wdb -log simulate.log -onfinish stop
 else
 	@$(ECHO) "exec xsim -gui -tclbatch xsim.tcl work.$(TOP) -wdb $(TOP).wdb -log simulate.log &" | tclsh -norc
+endif
 endif
 ##____________________________________________________________________________________________________
 

@@ -11,7 +11,7 @@
 
 module GatesTruthTable (
 
-   input  wire A
+   input  wire A,
    input  wire B,
    output reg [5:0] Z     // **QUESTION: why Z is now declared as reg ?
 
