@@ -43,6 +43,12 @@ and to learn how to program its Xilinx Artix-7 FPGA with a simple Verilog RTL de
 
 <br />
 
+<img src="doc/pictures/Arty.png" alt="drawing" width="600"/>
+
+<br />
+
+<br />
+
 >
 > **IMPORTANT**
 >

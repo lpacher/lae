@@ -27,10 +27,13 @@ as AND, NAND, OR, NOR, XOR and XNOR as already discussed in `lab2` and `lab5`.
 For this purpose you will use simple **slide switches** and **general-purpose LEDs**
 available on the _Digilent Arty Board_.
 
-Additionally you will implement and verify a **parameterized ring-oscillator** circuit.
+You will then implement and verify a **parameterized ring-oscillator** circuit.
 Despite the circuit is pretty simple to be coded in Verilog you will need
 additional `dont_touch` **synthesis directives** and **special timing constraints**
 in order to properly map the RTL code on real FPGA hardware.
+
+Finally you are requested to implement and verify the functionality of a **full-adder**
+circuit.
 
 <br />
 <!--------------------------------------------------------------------->
@@ -50,6 +53,7 @@ This practicum should exercise the following concepts:
 * identify and fix timing-loop issues in combinational circuits
 * review and understand the difference between _Auto_ and _Normal_ trigger modes at the oscilloscope
 * debug termination issues
+* configure pull-up/pull-down resistors on selected programmable FPGA I/O pins
 
 <br />
 <!--------------------------------------------------------------------->
@@ -1084,11 +1088,82 @@ Try yourself to:
 * create new `FullAdder.v` and `FullAdder.xdc` source files from scratch
 * implement a `FullAdder` module that performs a 2-bit binary addition with both input and output carry
 * use XDC statements to map full-adder inputs to slide-switches **SW2**, **SW1** and **SW0** (use the left-most switch for the input-carry)
-and outputs to stadanrd LEDs **LD5** and **LD4** (use the left-most LED for the output carry)
+and outputs to standard LEDs **LD5** and **LD4** (use the left-most LED for the output carry)
 * update project settings with the `setup.tcl` script
 * run the implementation flow from `Makefile`
 * install and debug the firmware
 
+<br />
+<!--------------------------------------------------------------------->
+
+
+**EXERCISE 5**
+
+In the previous exercise we connected all full-adder inputs to slide-switches.
+Let now suppose that we want to update design constraints to map the input-carry
+`Cin` to a general-purpose **pin-header** in place of a slide-switch.
+However **without an external driving component** (can be as simple as a push-button
+implemented on the breadboard) the input `Cin` of the full-adder would remain **floating**.
+
+<br />
+
+>
+> **IMPORTANT !**
+>
+> Keeping unconnected FPGA pins configured as **input** pins is a **BAD practice** because
+> this can lead to unstable logic values, increase the power consumption ad cause
+> **potential damage to the device itself**. In fact unconnected input pins can act as **antennas**,
+> picking-up **electromagnetic interference (EMI)** and **noise**.
+>
+> &nbsp;&nbsp;&nbsp;&nbsp; <b>\*\* NEVER KEEP FPGA PINS PROGRAMMED AS INPUT PINS FLOATING ! \*\*</b>
+>
+
+<br />
+
+As discussed during lectures FPGA programmable I/O pins allows to optionally specify also
+a **pull-up** or **pull-down** condition, thus fixing all above issues.
+
+Modify design design constraints in order to:
+
+* map the full-adder `Cin` input port to pin **A0** of the _Arty_ board
+* additionally, configure the pin to be internally **pulled-up** using the `PULLUP` property
+
+<br />
+<img src="doc/pictures/FullAdderPullup.png" alt="drawing" width="550"/>
+<br />
+
+<br />
+
+```
+#set_property -dict { PACKAGE_PIN C10  IOSTANDARD LVCMOS33 } [get_ports Cin] ;   ##COMMENTED
+set_property -dict { PACKAGE_PIN F5 IOSTANDARD LVCMOS33 } [get_ports Cin] ;   ## A0
+set_property PULLUP TRUE [get_ports Cin]
+```
+
+<br />
+
+Save the file after modifications. Once ready re-run the flow at the command line with:
+
+```
+% make clean
+% make build
+```
+
+<br />
+
+After the implementation has successfully completed install the firmware to the FPGA board with:
+
+```
+% make install
+```
+
+<br />
+
+Verify the functionality of the updated firmware:
+
+* check logic values for `Cout` and `Sum` LEDs by changing **SW0** and **SW1** while keeping **A0** floating
+* **connect a jumper wire** between **A0** and ground to force `Cin` to be zero and re-check the expected functionality
+  of the summing circuit
 
 <br />
 <!--------------------------------------------------------------------->

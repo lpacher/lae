@@ -80,7 +80,7 @@ module FullAdder (
    assign Sum  = A ^ B ^ Cin ;   // XOR between A, B and Cin inputs
 
    // output carry
-   assign Cout = (A & B) | (Cin & (A ^ B)) ;
+   assign Cout = (A & B) | (Cin & A) | (Cin & B) ;   // this equation can be also re-factored as (A & B) | Cin & (A ^ B)
 
 */
 

@@ -12,7 +12,7 @@ https://github.com/lpacher/lae/tree/master/fpga/labs/lab0)
 https://github.com/lpacher/lae/tree/master/fpga/labs/lab1)
 
 * **Lab 2**<br />
-[Fundamental logic gates.](
+[Fundamental logic gates. Ring oscillator. Full-adder](
 https://github.com/lpacher/lae/tree/master/fpga/labs/lab2)
 
 * **Lab 3**<br />
