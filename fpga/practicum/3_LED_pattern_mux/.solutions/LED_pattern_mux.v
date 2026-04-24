@@ -1,12 +1,13 @@
-//=================================================================================
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
-// **EXTRA: Example VHDL implementation of a 2:1 MUX using when/else statements.
-//          Required for the STRUCTURAL code (schematic) implementation.
+// **EXTRA: Example Verilog implementation of a 2:1 MUX using a conditional
+//          assign statement. Required for the STRUCTURAL code (schematic)
+//          implementation.
 //
 // Luca Pacher - pacher@to.infn.it
 // Spring 2025
 //
-//=================================================================================
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 `timescale 1ns / 1ps
@@ -21,13 +22,13 @@ module MUX2 (
    ) ;
 
 
-   // conditioal assign
+   // conditional assign
    assign Z = (S == 1'b1) ? A : B ;
 
 endmodule
 
 
-//=================================================================================
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 //
 // Simple MUX-design to selectively turn-on LD7-LD5 and LD6-LD4 available
 // on the Digilent Arty board.
@@ -35,7 +36,7 @@ endmodule
 // Luca Pacher - pacher@to.infn.it
 // Spring 2025
 //
-//=================================================================================
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 module LED_pattern_mux (
