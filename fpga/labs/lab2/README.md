@@ -821,7 +821,7 @@ assign Cout = (A & B) | (Cin & A) | (Cin & B) ;   // this equation can be also r
 > A \cdot B + C_{in} \cdot A \cdot \overline{B} + C_{in} \cdot \overline{A} \cdot B
 > $$
 >
-> We can then factorize _B_ between the first and last terms:
+> We can then factorize _B_ between the first and the last term:
 >
 > $$ 
 > B \cdot (A + C_{in} \cdot \overline{A}) + C_{in} \cdot A \cdot \overline{B} \ \ \ \ \ \ (1)
@@ -833,13 +833,13 @@ assign Cout = (A & B) | (Cin & A) | (Cin & B) ;   // this equation can be also r
 > X + \overline{X} \cdot Y = X + Y
 > $$
 >
-> Thus
+> Thus:
 >
 > $$
 > A + C_{in} \cdot \overline{A} = A + C_{in} \ \ \ \rightarrow \ \ \ B \cdot (A + C_{in} \cdot \overline{A}) = B \cdot (A + C_{in}) = B \cdot A + B \cdot C_{in}
 > $$
 >
-> At thi point expression (1) becomes:
+> At this point expression (1) becomes:
 >
 > $$
 > B \cdot (A + C_{in} \cdot \overline{A}) + C_{in} \cdot A \cdot \overline{B} = B \cdot A + B \cdot C_{in} + C_{in} \cdot A \cdot \overline{B} \ \ \ \ \ \ (2)
