@@ -8,7 +8,7 @@
 https://github.com/lpacher/lae/tree/master/fpga/practicum/1_arty)
 
 * **Practicum 2** <br />
-[Fundamental logic gates. Ring oscillator.](
+[Fundamental logic gates. Ring oscillator. Full-adder](
 https://github.com/lpacher/lae/tree/master/fpga/practicum/2_gates)
 
 * **Practicum 3** <br />

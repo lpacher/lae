@@ -1,10 +1,11 @@
-//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Example different implementations using Verilog HDL
 // for a Full-Adder (FA) circuit.
 //
 // Luca Pacher - pacher@to.infn.it
 // Spring 2025
-//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 `timescale 1ns / 100ps
 
@@ -15,6 +16,8 @@ module FullAdder (
    input  wire Cin,    // input carry
    output wire Sum,
    output wire Cout    // output carry
+
+   //output reg  Sum,
    //output reg  Cout
 
    ) ;
@@ -37,7 +40,8 @@ module FullAdder (
    //
    // **NOTE
    //
-   // You can also assign the {Cout,Sum} concatenation using an always block!
+   // You can also assign the {Cout,Sum} concatenation using an always block
+   // (declaring Sum and Cout as 'reg' outputs)
    //
    //always @(*)
    //   {Cout,Sum} = A + B + Cin ;
@@ -68,7 +72,6 @@ module FullAdder (
    end   //always
 
 
-
    /////////////////////////
    //   logic equations   //
    /////////////////////////
@@ -77,7 +80,7 @@ module FullAdder (
    assign Sum  = A ^ B ^ Cin ;   // XOR between A, B and Cin inputs
 
    // output carry
-   assign Cout = (A & B) | (Cin & (A ^ B)) ;
+   assign Cout = (A & B) | (Cin & A) | (Cin & B) ;   // this equation can be also re-factored as (A & B) | Cin & (A ^ B)
 
 */
 

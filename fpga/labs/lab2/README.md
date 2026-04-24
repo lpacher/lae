@@ -760,37 +760,124 @@ and use a Verilog `case` statement within an `always` combinational block:
 ```verilog
 always @(*) begin
 
-  case ( {Cin,A,B} )
-     ...
-     ...
+   case ( {Cin,A,B} )
+
+      3'b000 : ... ;
+      3'b001 : ... ;
+      ...
+      ...
+      3'b111 : ... ;
+
    endcase
+
 end   //always
 ```
 
 <br />
 
 Alternatively, from the truth-table you can also write a **Karnaugh map** for each full-adder output
+and derive **logic equations** for `Sum` and `Cout` implemented with simple continuous `assign` statements as follows:
 
 
 <br />
-<img src="doc/pictures/FullAdderKmaps.png" alt="drawing" width="1700"/>
+<img src="doc/pictures/FullAdderKmapSum.png" alt="drawing" width="550"/>
+<br />
+
+<br />
+<img src="doc/pictures/FullAdderKmapCout.png" alt="drawing" width="550"/>
 <br />
 
 <br />
 
-and derive **logic equations** for `Sum` and `Cout` as follows:
 
 ```verilog
 // sum
 assign Sum = A ^ B ^ Cin ;
 
 // output carry
-assign Cout = (A & B) | (Cin & (A ^ B)) ;
+assign Cout = (A & B) | (Cin & A) | (Cin & B) ;   // this equation can be also re-factored as (A & B) | Cin & (A ^ B)
 ```
 
 <br />
 
-Indeed, you can simply use the standard **sum operaror** `+` as in other programming languages for this purpose:
+>
+> **NOTE**
+>
+> Proof of the logical equivalence:
+>
+> $$
+> A \cdot B + C_{in} \cdot A + C_{in} \cdot B = A \cdot B + C_{in} \cdot ( A \oplus B ) 
+> $$
+>
+> For this demonstration start from expanding the XOR function:
+>
+> $$
+> A \cdot B + C_{in} \cdot ( A \cdot \overline{B} + \overline{A} \cdot B )
+> $$
+>
+> Distribute the AND operation:
+>
+> $$
+> A \cdot B + C_{in} \cdot A \cdot \overline{B} + C_{in} \cdot \overline{A} \cdot B
+> $$
+>
+> We can then factorize _B_ between the first and last terms:
+>
+> $$ 
+> B \cdot (A + C_{in} \cdot \overline{A}) + C_{in} \cdot A \cdot \overline{B} \ \ \ \ \ \ (1)
+> $$
+>
+> At this point we recognize in the parenthesis the **second absorption theorem** of the boolean algebra:
+>
+> $$
+> X + \overline{X} \cdot Y = X + Y
+> $$
+>
+> Thus
+>
+> $$
+> A + C_{in} \cdot \overline{A} = A + C_{in} \ \ \ \rightarrow \ \ \ B \cdot (A + C_{in} \cdot \overline{A}) = B \cdot (A + C_{in}) = B \cdot A + B \cdot C_{in}
+> $$
+>
+> At thi point expression (1) becomes:
+>
+> $$
+> B \cdot (A + C_{in} \cdot \overline{A}) + C_{in} \cdot A \cdot \overline{B} = B \cdot A + B \cdot C_{in} + C_{in} \cdot A \cdot \overline{B} \ \ \ \ \ \ (2)
+> $$
+>
+> Finally we can factorize $C_{in}$ in (2) and apply the second absorption theorem again:
+>
+> $$
+> B \cdot A + B \cdot C_{in} + C_{in} \cdot A \cdot \overline{B} = B \cdot A + C_{in} \cdot ( B + A \cdot \overline{B} ) = B \cdot A + C_{in} \cdot (A + B) = A \cdot B + C_{in} \cdot A + C_{in} \cdot B
+> $$
+>
+
+<br />
+
+Once we have logic equations we can also implement the block at the **schematic level** using `xor`, `and` and `or` Verilog **gates primitives**:
+
+<br />
+<img src="doc/pictures/FullAdderSchematic.png" alt="drawing" width="800"/>
+<br />
+
+```verilog
+xor u1 (...) ;
+xor u2 (...) ;
+
+and u3 (...) ;
+and u4 (...) ;
+and u5 (...) ;
+
+or  u6 (...) ;
+```
+
+<br />
+
+This is another example of **structural** code, resulting into a **gate-level netlist**. <br />
+
+All previous examples are valid and equivalent implementations. However in order to take advantage
+of using an HDL to infer hardware you can simply use the standard **sum operaror** `+` as in other
+programming languages for this purpose:
 
 ```verilog
 assign {Cout, Sum}  = A + B + Cin ;
@@ -801,11 +888,88 @@ assign {Cout, Sum}  = A + B + Cin ;
 The **synthesis tool** will be then responsible to infer necessary logic gates to implement the binary
 addition in real hardware.
 
-Try yourself to:
+Create a new `FullAdder.v` source file from scratch and try yourself to implement a `FullAdder` module
+that performs a 2-bit binary addition with both input and output carry. Check for syntax errors with:
 
-* create a new `FullAdder.v` source file from scratch
-* implement a `FullAdder` module that performs a 2-bit binary addition with both input and output carry
-* re-use and extend the original `tb_Gates.sv` testbench code to verify the functionality of the new block
+```
+% make clean
+% make compile SOURCES=FullAdder.v
+```
+
+<br />
+
+To verify the functionality of the new block in simulation simply re-use and extend the original `tb_Gates.sv` testbench code.
+As an example extend the counter from 2-bits to 3-bits and drive full-adder inputs `Cin`,`A` and `B` with counter slices.
+Additionally increase the simulation time by increasing the number of clock-cycles before the `$finish` task.
+
+```verilog
+...
+
+//reg [1:0] count = 2'b00 ;
+reg [2:0] count = 3'b000 ;
+
+...
+
+FullAdder DUT (.Cin(count[2]), .A(count[1]), .B(count[0]), .Cout(...), .Sum(...)) ;
+
+...
+
+initial
+   #(8*10) $finish ;   //now you needs 8x clock-cycles to explore all possible 000 001 ... 111 input codes
+```
+
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+**EXERCISE 7**
+
+Despite the simplicity of a full-adder block you can immediately notice that **debugging**
+the proper functionality of the circuit by **looking at waveforms** and tracing logic values
+can become quite cumbersome.
+
+In order to have a more efficient way to verify the correctness of our full-adder implementation
+we can extend the testbench and introduce in the code some **self-checking capability**
+as follows:
+
+
+```verilog
+always @(posedge clk) begin
+   if ( {Cout,Sum} == count[2] + count[1] + count[0] ) begin
+      //check PASSED
+   end
+   else begin
+      // check FAILED (inform the user on the console and "pause" the simulation)
+      $display("\n**ERROR: Wrong FullAdder output detected! Force a stop now ...\n\n") ; $stop ;
+   end
+end   //always
+```
+
+<br />
+
+With this solution there is no need to look at waveforms to catch errors in our full-adder
+implementation because the testbench itself is able to recognize if something wrong happens
+in the sum between full-adder inputs.
+
+Try yourself to introduce a "bug" in the truth-table or in one of the logic-equations
+inside the `FullAdder` module, then re-simulate everything from scratch and let the testbench to
+find the error. As an example let suppose to wrongly implement the logic equation for the `Sum` output:
+
+```verilog
+//assign Sum  = A ^ B ^ Cin ;   //OK
+assign Sum  = A ^ B | Cin ;   //WRONG IMPLEMENTATION
+```
+
+<br />
+
+Re-compile all sources and re-run the simulation from scratch. Since you don't need to took at waveforms
+you can run XSim either in `tcl` or `batch` mode:
+
+```
+% make clean sim mode=tcl
+```
+
 
 </div>
 

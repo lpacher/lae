@@ -705,7 +705,7 @@ for the remaining of the course to run the flows in batch mode from the command 
 
 Modify your initial RTL code in order to drive the 7-segment display module with a **4-bit BCD counter** in place of external slide-switches.
 For this purpose you have to create a **module-9 counter**, that is a 4-bit counter that counts from 0 to 9 and then restarts from 0.
-You can then use a simple **push-button** available on the DIgilent _Arty_ board to create a series of clock-pulses for the counter.
+You can then use a simple **push-button** available on the Digilent _Arty_ board to create a series of clock-pulses for the counter.
 
 Try yourself to complete the following code skeleton:
 
