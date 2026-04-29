@@ -9,6 +9,8 @@
 
 `timescale 1ns / 100ps
 
+`include "FullAdder.v"
+
 module tb_Gates ;
 
 
@@ -57,6 +59,9 @@ module tb_Gates ;
    Gates           DUT (.A(count[1]), .B(count[0]), .Z(Z)) ;      // **UNCOMMENT** here the DUT that you want to simulate
    //GatesTruthTable  DUT (.A(count[1]), .B(count[0]), .Z(Z)) ;
    //GatesPrimitives  DUT (.A(count[1]), .B(count[0]), .Z(Z)) ;
+   
+   //wire Cout, Sum ;
+   //FullAdder  DUT (.Cin(1'b1), .A(count[1]), .B(count[0]), .Cout(Cout), .Sum(Sum));
 
 
    ///////////////////////
@@ -65,6 +70,29 @@ module tb_Gates ;
 
    initial
       #(4*10) $finish ;   // here we only need to choose the simulation time, e.g. 4x clock cycles
+
+
+
+/*
+
+   ///////////////////////////////////////////////////////////////////
+   //   **EXTRA: esample self-checking testbench for FulAdder DUT   //
+   ///////////////////////////////////////////////////////////////////
+
+   always @(posedge clk) begin
+      if ( {Cout,Sum} == count[1] + count[0] + 1'b0 ) begin
+         //check PASSED
+      end
+      else begin
+         // check FAILED (inform the user on the console and "pause" the simulation)
+         $display("\n**ERROR: Wrong FullAdder output detected! Force a stop now ...\n") ; $stop ;
+
+         //$error("Wrong FullAdder output detected! Force an exit now ...\n") ; $finish ;
+         //$fatal("Wrong FullAdder output detected! Force an exit now ...\n") ;
+      end
+   end   //always
+
+*/
 
 endmodule
 

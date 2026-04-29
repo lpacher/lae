@@ -34,7 +34,7 @@ module FullAdder (
    // gates to implement the circuit in real hardware. Alternatively since the circuit is a pure
    // combinational block you can use a truth-table or derive logic equations from K-maps.
    //
-   assign {Cout,Sum} = A + B + Cin ;
+   //assign {Cout,Sum} = A + B + Cin ;
 
 
    //
@@ -71,6 +71,7 @@ module FullAdder (
       endcase
    end   //always
 
+*/
 
    /////////////////////////
    //   logic equations   //
@@ -78,11 +79,11 @@ module FullAdder (
 
    // sum
    assign Sum  = A ^ B ^ Cin ;   // XOR between A, B and Cin inputs
+   //assign Sum  = A ^ B | Cin ;   // BUG: wrong logic equation => let the self-checking testbench to catch the error
+
 
    // output carry
    assign Cout = (A & B) | (Cin & A) | (Cin & B) ;   // this equation can be also re-factored as (A & B) | Cin & (A ^ B)
-
-*/
 
 endmodule
 

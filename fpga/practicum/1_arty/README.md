@@ -268,10 +268,16 @@ resources on the board:
 
 <br />
 
+Please remind that you can always use the **Seach/Find** utility of your preferred PDF viewer application
+to quickly search for schematic pin names and component names.
+
+<br />
+
 >
 > **QUESTIONS**
 >
-> Q.1 What is the value of the supply voltage used to power general-purpose standard LEDs ? Is the same for RGB LEDs ? Which component drives these LEDs ?
+> Q.1 What is the value of the supply voltage used to power general-purpose standard LEDs ? <br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Is the same for RGB LEDs ? Which component drives these LEDs ?
 >
 >   \___________________________________________________________________________________
 >
@@ -286,13 +292,21 @@ resources on the board:
 >   \___________________________________________________________________________________
 >
 >
-> Q.4 A component on the PCB generates a 100 MHz clock signal. Which is the name of this component ? Where is placed on the PCB ?
+> Q.4 A component on the PCB generates a 100 MHz clock signal. Which is the name of this component ? <br />
+>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Where is placed on the PCB ?
 >
 >   \___________________________________________________________________________________
 >
 > Q.5 Where is placed the external Quad SPI Flash memory used to optionally load a firmware to program the FPGA ?
 >
 >   \___________________________________________________________________________________
+>
+>
+> Q.6 What is the name of the FPGA pin connected to the general-purpose LED **LD4** ? <br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; What is the name of the FPGA connected to the pin-header **IO41** on the board ?
+>
+>   \___________________________________________________________________________________
+>
 >
 
 <br />

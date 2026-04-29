@@ -36,13 +36,19 @@
 #############################################
 
 ## slide switches
-set_property -dict { PACKAGE_PIN A8   IOSTANDARD LVCMOS33 } [get_ports A  ] ;   ## SW0
-set_property -dict { PACKAGE_PIN C11  IOSTANDARD LVCMOS33 } [get_ports B  ] ;   ## SW1
 set_property -dict { PACKAGE_PIN C10  IOSTANDARD LVCMOS33 } [get_ports Cin] ;   ## SW2
+set_property -dict { PACKAGE_PIN C11  IOSTANDARD LVCMOS33 } [get_ports A  ] ;   ## SW1
+set_property -dict { PACKAGE_PIN A8   IOSTANDARD LVCMOS33 } [get_ports B  ] ;   ## SW0
 
 ## standard LEDs
 set_property -dict { PACKAGE_PIN H5  IOSTANDARD LVCMOS33 } [get_ports Sum ] ;   ## LD4
 set_property -dict { PACKAGE_PIN J5  IOSTANDARD LVCMOS33 } [get_ports Cout] ;   ## LD5
+
+
+## **EXERCISE: re-map Cin to pin-header IO41 and configure PULLUP property (comment L39 before)
+#set_property -dict { PACKAGE_PIN N17  IOSTANDARD LVCMOS33 } [get_ports Cin] ;  ## IO41
+#set_property PULLUP   TRUE [get_ports Cin]
+#set_property PULLDOWN TRUE [get_ports Cin]
 
 
 ################################

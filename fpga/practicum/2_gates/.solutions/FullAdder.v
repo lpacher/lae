@@ -48,13 +48,11 @@ module FullAdder (
    //
 
 
-/*
-
-
    /////////////////////////////////////////////////
    //   truth-table implementation (behavioral)   //
    /////////////////////////////////////////////////
 
+/*
    always @(*) begin
 
       case ( {Cin,A,B} )
@@ -71,10 +69,14 @@ module FullAdder (
       endcase
    end   //always
 
+*/
+
 
    /////////////////////////
    //   logic equations   //
    /////////////////////////
+
+/*
 
    // sum
    assign Sum  = A ^ B ^ Cin ;   // XOR between A, B and Cin inputs

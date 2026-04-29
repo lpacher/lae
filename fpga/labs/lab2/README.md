@@ -780,7 +780,7 @@ and derive **logic equations** for `Sum` and `Cout` implemented with simple cont
 
 
 <br />
-<img src="doc/pictures/FullAdderKmapSum.png" alt="drawing" width="550"/>
+<img src="doc/pictures/FullAdderKmapSum.png" alt="drawing" width="560"/>
 <br />
 
 <br />
