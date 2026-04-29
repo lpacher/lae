@@ -1162,7 +1162,7 @@ After the implementation has successfully completed install the firmware to the 
 Verify the functionality of the updated firmware:
 
 * check logic values for `Cout` and `Sum` LEDs by changing **SW0** and **SW1** while keeping **IO41** floating
-* **connect a jumper wire** between **IO41** and ground *GND* to force `Cin` to be zero and re-check the expected functionality
+* **connect a jumper wire** between **IO41** and ground **GND** to force `Cin` to be zero and re-check the expected functionality
   of the summing circuit
 
 <br />
