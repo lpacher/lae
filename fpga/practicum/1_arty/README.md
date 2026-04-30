@@ -29,6 +29,7 @@
 * [**Exercises**](#exercises)
 * [**Extra: run the official Digilent Arty General I/O Demo**](#extra-run-the-official-digilent-arty-general-io-demo)
 * [**Further readings**](#further-readings)
+* [**Extra: comparison with Arduino code**](#extra-comparison-with-arduino-code)
 
 <br />
 <!--------------------------------------------------------------------->
@@ -52,10 +53,12 @@ and to learn how to program its Xilinx Artix-7 FPGA with a simple Verilog RTL de
 >
 > **IMPORTANT**
 >
-> All boards available in the lab mount a **Xilinx Artix-7 A35T** FPGA device. The original board by Digilent was referred to as _Arty_ while
-> the new revision of the same board is now referred to as _Arty A7_, still using an Artix-7 A35T device.
-> There are a few small differences in board schematics between the original version and the second version in terms of power management, but
-> apart from this all other schematic functionalities are the same.
+> All boards available in the lab mount a **Xilinx Artix-7 A35T** FPGA device. The original board
+> by Digilent was referred to as _Arty_ while the new revision of the same board is now referred
+> to as _Arty A7_, still using an Artix-7 A35T device.
+> There are a few **small differences in board schematics** between the original version and
+> the second version in terms of **power management**, but apart from this all other schematic
+> functionalities are the same.
 >
 
 <br />
@@ -255,14 +258,14 @@ provided by Digilent and available in the `.solutions/` directory:
 
 <br />
 
-Get familiar with most important programmable I/O in the sample XDC file and locate the corresponding physical
-resources on the board:
+Get familiar with most important **programmable I/O FPGA pins** in the sample XDC file `arty_all.xdc`
+and locate the corresponding **physical resources** on the board:
 
 * general-purpose standard LEDs
 * general-purpose RGB LEDs
 * slide switches
 * push-buttons
-* PMOD (Peripheral MODules) pin headers
+* [PMOD (Peripheral MODules)](https://digilent.com/reference/pmod/start) pin headers
 * Arduino/chipKIT pin headers
 
 
@@ -293,7 +296,7 @@ to quickly search for schematic pin names and component names.
 >
 >
 > Q.4 A component on the PCB generates a 100 MHz clock signal. Which is the name of this component ? <br />
->  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Where is placed on the PCB ?
+>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Where is placed on the PCB ? What is the name of the FPGA pin connected to this external clock ?
 >
 >   \___________________________________________________________________________________
 >
@@ -449,7 +452,7 @@ Despite the board can be powered from an external bench power supply or any 7-15
 using **5V from USB cable**. Connect the board to the USB port of your personal computer using a **USB A to micro USB cable**.
 Verify that the **POWER** status LED turns on.
 
-Use the DMM to perform basic power measurements on the following pins:
+Use the DMM to perform basic **voltage measurements** on the following pins:
 
 * **VCC**
 * **VIN**
@@ -468,7 +471,7 @@ Use the DMM to perform basic power measurements on the following pins:
 
 <br />
 
-Repeat all your power measurements using the **oscilloscope**.
+Repeat all your voltage measurements using the **oscilloscope**.
 
 <br />
 
@@ -1888,6 +1891,55 @@ features, please refer to Xilinx official documentation:
 * [_Vivado Design Suite User Guide: Programming and Debugging (UG908)_](
      https://www.xilinx.com/support/documentation/sw_manuals/xilinx2019_2/ug908-vivado-programming-debugging.pdf)
 * [_7 Series FPGAs Configuration User Guide_](https://www.xilinx.com/support/documentation/user_guides/ug470_7Series_Config.pdf)
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+## Extra: comparison with Arduino code
+[**[Contents]**](#contents)
+
+Turning on/off a simple LED driven by a button is usually the simplest hardware project
+that one can implement on any programmable development platform. In fact this is
+considered the equivalent of an ["Hello world!" program](https://en.wikipedia.org/wiki/Hello,_world)
+in any general-purpose software programming language.
+
+In the second module of the course you will also start with a "LED blink" project using an
+**Arduino development platform**. In the following you can find the C-like code needed to implement
+this very basic functionality:
+
+<br />
+
+```cpp
+// Arduino Example "buffer" Implementation
+// This program turns on/off the LED connected to pin 13 when a button connected to pin 7 is pressed
+
+#define BUTTON   7
+#define LED     13
+
+void setup() {
+
+   // Set pin 7 as an output
+   pinMode(BUTTON, INPUT);
+
+   // Set pin 13 as an output
+   pinMode(LED, OUTPUT);
+}
+
+
+void loop() {
+
+   // Check if button state is high (button is pressed)
+   if (digitalRead(BUTTON) == HIGH) {
+
+      digitalWrite(LED, HIGH);    //turn on LED
+
+   } else {
+
+      digitalWrite(LED, LOW);     //turn off LED
+   }
+}
+```
 
 <br />
 <!--------------------------------------------------------------------->
