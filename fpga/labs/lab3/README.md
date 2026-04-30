@@ -379,10 +379,15 @@ end   // always
 **LOGIC EQUATION**
 
 A forth possibility is to explicitly write the **logic equation** as it can be derived from the **truth table**.
-If a **sum-of-products (SoP)** approach is used the resulting circuit is the following:
+As discussed during lectures if a **sum-of-products (SoP)** approach is used the resulting logic equation can
+be easily obtained using the **Karnaugh map** associated with the truth-table as follows:
+
 <br />
 
-<img src="doc/pictures/mux_gates.png" alt="drawing" width="800"/>
+<img src="doc/pictures/mux_kmap_equation.png" alt="drawing" width="550"/>
+
+<br />
+
 
 
 ```verilog
@@ -404,6 +409,11 @@ assign Z = (A & ~S) | (B & S) ;
 
 Finally, we can also implement the block at the **schematic level** using Verilog **gates primitives** `and`, `or` and `not`:
 
+<br />
+
+<img src="doc/pictures/mux_gates.png" alt="drawing" width="800"/>
+
+<br />
 
 ```verilog
 //////////////////////////////////////////
@@ -653,7 +663,7 @@ this is a symptom of a timing issue.
 
 <br />
 
-<img src="doc/pictures/mux_kmap_timing.png" alt="drawing" width="500"/>
+<img src="doc/pictures/mux_kmap_timing.png" alt="drawing" width="550"/>
 
 <br />
 
