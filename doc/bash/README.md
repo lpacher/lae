@@ -1,3 +1,4 @@
+<div align="justify">
 
 # Basic Linux shell commands
 [[**Home**](../../README.md)] 
@@ -29,7 +30,7 @@ _<https://cheatography.com/davechild/cheat-sheets/linux-command-line>_
 
 **SHELL**
 
-Indicates a **text-based interface** that allows to interact with the operating system. For our purposes we will simply refer to the shell <br />
+Indicates a **text-based interface** that allows to interact with the operating system. For our purposes we will simply refer to the shell
 also as _terminal_, _console_, _command line_, _command interpreter_ etc. despite in computer technology they are not the same thing.
 
 For the course we assume to use the Linux **Bash shell** and the **Tcl shell** to run all flows.
@@ -46,7 +47,7 @@ See also:
 
 **PROMPT**
 
-The **string** of characters indicating _"I'm ready to accept a command and execute it"_. That is, we usually **type a command** after <br />
+The **string** of characters indicating _"I'm ready to accept a command and execute it"_. That is, we usually **type a command** after
 the "prompt string" and then we press the **RETURN key** in order to **execute** the command itself.
 
 Examples:
@@ -700,3 +701,4 @@ Example:
 % grep tcl ./sample/tclshrc.tcl
 ```
 
+</div>

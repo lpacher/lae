@@ -1,3 +1,4 @@
+<div align="justify">
 
 # Sample Xilinx Vivado simulation and implementation flows
 
@@ -385,4 +386,6 @@ In order to get the FPGA automatically programmed at power up you have to write 
 
 Please note that the firmware installation is a typical example of a very **automated and repetitive flow**, thus
 working in **batch mode** with a **command-line approach** becomes more efficient than opening a graphical interface.
+
+</div>
 

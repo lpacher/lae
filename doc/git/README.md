@@ -1,3 +1,5 @@
+<div align="justify">
+
 # Short git command-line usage summary
 
 A small collection of most frequentely used `git` commands for your day-to-day work and common tasks. 
@@ -348,3 +350,4 @@ To push this branch-renaming to the remote server, then use :
 % git push origin <tagName>
 ```
 
+</div>
