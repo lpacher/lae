@@ -653,7 +653,7 @@ this is a symptom of a timing issue.
 
 <br />
 
-<img src="doc/pictures/mux_kmap.png" alt="drawing" width="500"/>
+<img src="doc/pictures/mux_kmap_timing.png" alt="drawing" width="500"/>
 
 <br />
 
