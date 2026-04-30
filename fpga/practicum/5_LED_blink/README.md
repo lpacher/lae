@@ -16,6 +16,7 @@
 * [**Implement the design on target FPGA**](#implement-the-design-on-target-fpga)
 * [**Install and debug the firmware**](#install-and-debug-the-firmware)
 * [**Exercises**](#exercises)
+* [**Extra: comparison with Arduino code**](#extra-comparison-with-arduino-code)
 
 <br />
 <!--------------------------------------------------------------------->
@@ -673,6 +674,43 @@ Debug the functionality of the new firmware.
 **EXERCISE 4**
 
 Further extend your design and add a **reset signal** for the free-running counter.
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+## Extra: comparison with Arduino code
+[**[Contents]**](#contents)
+
+
+```cpp
+// Arduino Blink Example
+// This program makes an LED connected to pin 13 blink every second
+// Credits: https://docs.arduino.cc/built-in-examples/basics/Blink
+
+#define LED  13
+
+void setup() {
+
+   // Set pin 13 as an output
+   pinMode(LED, OUTPUT);
+}
+
+void loop() {
+
+   // Turn the LED ON
+   digitalWrite(LED, HIGH);
+
+   // Wait for 1 second
+   delay(1000);
+
+   // Turn the LED OFF
+   digitalWrite(LED, LOW);
+
+   // Wait for 1 second
+   delay(1000);
+}
+```
 
 <br />
 <!--------------------------------------------------------------------->
