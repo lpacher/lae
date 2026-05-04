@@ -1916,10 +1916,10 @@ this very basic functionality:
 
 ```cpp
 // Arduino Example "buffer" Implementation
-// This program turns on/off the LED connected to pin 13 when a button connected to pin 7 is pressed
+// This program turns on/off the LED connected to pin 3 when a button connected to pin 2 is pressed
 
-#define BUTTON   7
-#define LED     13
+#define BUTTON  2
+#define LED     3
 
 void setup() {
 
@@ -1950,6 +1950,9 @@ void loop() {
 <img src="doc/pictures/ArduinoPushbuttonToLed.png" alt="drawing" width="600"/>
 
 <br />
+
+Ref. also to: _<https://projecthub.arduino.cc/SBR/working-with-an-led-and-a-push-button-d34b17>_
+
 <!--------------------------------------------------------------------->
 
 </div>
