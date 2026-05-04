@@ -1174,7 +1174,7 @@ Verify the functionality of the updated firmware:
 >
 > Depending on board-specific implementation details some FPGA pins might already have **pre-placed**
 > pull-up or pull-down **external resistors** on the board itself! As an example, try to replace pin **IO41**
-> with pin **A0** while keeping the `PULLUP property` on the input-carry as follows:
+> with pin **A0** while keeping the `PULLUP` property on the input-carry as follows:
 > 
 > ```
 > #set_property -dict { PACKAGE_PIN N17 IOSTANDARD LVCMOS33 } [get_ports Cin] ;   ## IO41
