@@ -1162,8 +1162,8 @@ After the implementation has successfully completed install the firmware to the 
 Verify the functionality of the updated firmware:
 
 * check logic values for `Cout` and `Sum` LEDs by changing **SW0** and **SW1** while keeping **IO41** floating
-* **connect a jumper wire** between **IO41** and ground **GND** to force `Cin` to be zero and re-check the expected functionality
-  of the summing circuit
+* **connect a jumper wire** between **IO41** and ground **GND** though an approx. 220 $\Omega$ resistor
+  to force `Cin` to be zero and re-check the expected functionality of the summing circuit
 
 <br />
 
@@ -1194,7 +1194,7 @@ Verify the functionality of the updated firmware:
 >
 > You should now see that despite the `PULLUP` property set into the constraints file `Cin` remains low
 > if pin **A0** is left floating. This is expected, in fact as you can find in board schematics pin **A0**
-> already has approx. 3.3 $\Omega$ kpull-down resistors soldered on the board.
+> already has approx. 3.3 k$\Omega$ pull-down resistors soldered on the board.
 >
 > <br />
 >
