@@ -1905,11 +1905,11 @@ features, please refer to Xilinx official documentation:
 
 Turning on/off a simple LED driven by a button is usually the simplest hardware project
 that one can implement on any programmable development platform. In fact this is
-considered the equivalent of an ["Hello world!" program](https://en.wikipedia.org/wiki/Hello,_world)
+considered the equivalent of an ["Hello world" program](https://en.wikipedia.org/wiki/Hello,_world)
 in any general-purpose software programming language.
 
 In the second module of the course you will also start with a "LED blink" project using an
-**Arduino development platform**. In the following you can find the C-like code needed to implement
+**Arduino UNO development platform**. In the following you can find the C-like code needed to implement
 this very basic functionality:
 
 <br />
@@ -1944,6 +1944,10 @@ void loop() {
    }
 }
 ```
+
+<br />
+
+<img src="doc/pictures/ArduinoPushbuttonToLed.png" alt="drawing" width="600"/>
 
 <br />
 <!--------------------------------------------------------------------->
