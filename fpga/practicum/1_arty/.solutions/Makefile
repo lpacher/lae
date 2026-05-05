@@ -40,5 +40,5 @@ install: install.tcl
 .PHONY: clean
 clean:
  
-	@$(RM) *.log *.jou *.str *.xpr *.xml *.bit *.bin
+	@$(RM) *.log *.jou *.str *.xpr *.xml *.bit *.bin *.txt
 	@$(RMDIR) *.cache *.hbs *.hw *.ip_user_files *.runs *.sim *.srcs .Xil

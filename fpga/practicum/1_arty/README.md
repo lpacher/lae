@@ -879,7 +879,7 @@ with FPGA hardware. In order to be able to support both local and remote connect
 the Vivado hardware server uses the **TCP/IP network protocol**.
 
 The `hw_server` executable is automatically started for you in background
-when a new connection is started from the Vivado Harware Manager.
+when a new connection is started from the Vivado Hardware Manager.
 Start a new connection and verify that the daemon is actually running in background
 using a **command-line process monitor** utility.
 
@@ -899,8 +899,7 @@ For Windows users:
 
 <br />
 
-Compare the output of previous command with the `hw_server`
-executable command-line options:
+Explore all command-line switches and options available for the `hw_server` executable:
 
 ```
 % hw_server -help
@@ -1031,10 +1030,10 @@ run the Xilinx Vivado flows both in the graphical user interface and from Tcl sc
 > Xilinx Design Constraints are basically Tcl with Vivado-specific commands. However by default
 > your text editor might not recognize a `.xdc` source file as a Tcl file. As a result no
 > **syntax highlighting** is performed on the code. If you want
-> to have have some code-coloring also for XDC files you have to force your text editor
+> to have some code-coloring also for XDC files you have to force your text editor
 > application to load the file as Tcl.
 >
-> As an example Windows users working with **Notead++** can go through **Language > T > Tcl**
+> Windows users working with **Notead++** can go through **Language > T > Tcl**
 > with `Inverter.xdc` open in the editor. Linux users working with **Gedit** can go through
 > **View > Highlight Mode > Tcl** instead.
 >
@@ -1116,17 +1115,19 @@ set_property -dict { PACKAGE_PIN H5  IOSTANDARD LVCMOS33 } [get_ports ZN] ;  # L
 >
 > **IMPORTANT**
 >
-> As you can inspect from **board schematics** all slide-switches have **series resistors**
-> placed on the electrical path towards FPGA pins that works as **pull-up** or **pull-down resistors**
-> depending if the switches connect to **VCC** or **GND** respectively.
+> As you can inspect from board schematics all four **slide-switches** available on the _Arty_ board
+> have **series resistors** placed on the electrical path towards FPGA pins that works as **pull-up**
+> or **pull-down resistors** depending if the switches connect to **VCC** or **GND** respectively.
 > The circuit schematic depicted in figure is therefore a simplified reference circuit diagram.<br />
+>
+> <img src="doc/pictures/slide_switch_schematic.png" alt="drawing"/>
 >
 > Additionally be sure that a **current-limiting series resistor** is always placed on the current
 > path of a LED! Feel free to drive with the NOT gate an external LED mounted on the breadboard and
 > to map the `ZN` output port to any other programmable I/O available on the board.
 > However it will be **UP TO YOU** to place an approx. 100-300 $\Omega$ limiting resistor to protect the LED!
 >
-> **WITHOUT A LIMITING RESISTOR YOU WILL DESTROY ANY EXTERNAL LED CONNECTED TO PROGRAMMABLE I/O PINS !**
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>\*\* WITHOUT A LIMITING RESISTOR YOU WILL DESTROY ANY EXTERNAL LED CONNECTED TO PROGRAMMABLE I/O PINS ! \*\*</b>
 >
 
 <br />
@@ -1663,7 +1664,7 @@ install: install.tcl
 .PHONY: clean
 clean:
 
-	@$(RM) *.log *.jou *.str *.xpr *.xml *.bit *.bin
+	@$(RM) *.log *.jou *.str *.xpr *.xml *.bit *.bin *.txt
 	@$(RMDIR) *.cache *.hbs *.hw *.ip_user_files *.runs *.sim *.srcs .Xil
 ```
 
