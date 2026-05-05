@@ -852,16 +852,6 @@ puts [get_property REGISTER.IR.BIT5_DONE [current_hw_device]]
 ```
 
 <br />
-
-Try to understand the meaning of the following Tcl commands:
-
-```
-puts [current_hw_server]
-puts [current_hw_target]
-puts [current_hw_device]
-```
-
-<br />
 <!--------------------------------------------------------------------->
 
 
@@ -914,6 +904,16 @@ executable command-line options:
 
 ```
 % hw_server -help
+```
+
+<br />
+
+Try to understand the meaning of the following commands in the Vivado Hardware Manager Tcl console:
+
+```
+puts [current_hw_server]
+puts [current_hw_target]
+puts [current_hw_device]
 ```
 
 <br />
