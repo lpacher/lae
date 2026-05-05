@@ -1025,6 +1025,23 @@ run the Xilinx Vivado flows both in the graphical user interface and from Tcl sc
 
 <br />
 
+>
+> **HINT**
+>
+> Xilinx Design Constraints are basically Tcl with Vivado-specific commands. However by default
+> your text editor might not recognize a `.xdc` source file as a Tcl file. As a result no
+> **syntax highlighting** is performed on the code. If you want
+> to have have some code-coloring also for XDC files you have to force your text editor
+> application to load the file as Tcl.
+>
+> As an example Windows users working with **Notead++** can go through **Language > T > Tcl**
+> with `Inverter.xdc` open in the editor. Linux users working with **Gedit** can go through
+> **View > Highlight Mode > Tcl** instead.
+>
+
+<br />
+
+
 **PHYSICAL CONSTRAINTS (PORT MAPPING)**
 
 As a first step you have to write **pin constraints**. These constraints are required to:
@@ -1099,9 +1116,9 @@ set_property -dict { PACKAGE_PIN H5  IOSTANDARD LVCMOS33 } [get_ports ZN] ;  # L
 >
 > **IMPORTANT**
 >
-> As you can inspect from **board schematics** all slide-switches have a 10k $\Omega$ **series resistor**
-> placed on the electrical path towards FPGA pins that works as a **pull-up** or **pull-down resistors**
-> depending if the switch connects to **VCC** or **GND** respectively.
+> As you can inspect from **board schematics** all slide-switches have **series resistors**
+> placed on the electrical path towards FPGA pins that works as **pull-up** or **pull-down resistors**
+> depending if the switches connect to **VCC** or **GND** respectively.
 > The circuit schematic depicted in figure is therefore a simplified reference circuit diagram.<br />
 >
 > Additionally be sure that a **current-limiting series resistor** is always placed on the current
