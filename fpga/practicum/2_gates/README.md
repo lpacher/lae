@@ -96,11 +96,11 @@ The circuit that you are going to implement and debug is shown in figure.
 >
 > **NOTE**
 >
-> As you can inspect from **board schematics** general-purpose **RGB LEDs** are connected to the main 5V supply
+> As you can inspect from board schematics general-purpose **RGB LEDs** are connected to the main 5V supply
 > voltage through inverters implemented with BJT transistors, while general-purpose **standard LEDs** simply
 > connect to ground with 330 $\Omega$ series limiting resistors.
 > Additionally as already discussed into the first practicum all **slide-switches** on the _Arty_ board
-> have series resistor placed on the electrical path towards FPGA pins that works as **pull-up**
+> have series resistors placed on the electrical path towards FPGA pins that work as **pull-up**
 > or **pull-down resistors** depending if switches connect to **VCC** or **GND** respectively.
 >
 > The circuit schematic depicted in figure is therefore a simplified reference circuit diagram. 
