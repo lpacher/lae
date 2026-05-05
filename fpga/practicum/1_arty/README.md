@@ -19,6 +19,7 @@
 * [**Check cable drivers installation**](#check-cable-drivers-installation)
 * [**Launch the Vivado Hardware Manager**](#launch-the-vivado-hardware-manager)
 * [**Interact with the board from the Hardware Manager**](#interact-with-the-board-from-the-hardware-manager)
+* [**Identify the hardware-server daemon**](#identify-the-hardware-server-daemon)
 * [**Read the device DNA**](#read-the-device-dna)
 * [**Monitor the on-chip temperature through XADC**](#monitor-the-on-chip-temperature-through-xadc)
 * [**Implement a simple RTL design targeting the Arty board**](#implement-a-simple-rtl-design-targeting-the-arty-board)
@@ -660,8 +661,8 @@ Alternatively you can type `open_hw_manager` in the Tcl console.
 ## Interact with the board from the Hardware Manager
 [**[Contents]**](#contents)
 
-Try to establish a connection between the _Hardware Manager_ and the Artix-7 FPGA device. To do this, simply left-click
-on **Open target > Auto Connect**.
+Try to establish a connection between the _Hardware Manager_ and the Artix-7 FPGA device.
+To do this, simply left-click on **Open target > Auto Connect**.
 
 <br />
 
@@ -670,7 +671,8 @@ on **Open target > Auto Connect**.
 
 <br />
 
-If cable drivers are properly installed the _Hardware Manager_ automatically recognizes the Artix-7 A35T on the board as `xc7a35t_0`.
+If cable drivers are properly installed the _Hardware Manager_ automatically recognizes the Artix-7 A35T
+on the board as `xc7a35t_0`.
 Observe the sequence of Tcl commands traced for you in the **Tcl Console** tab:
 
 
@@ -684,9 +686,9 @@ refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7a35t_0] 0]
 
 <br />
 
-You can start saving these commands into a Tcl script that can be later used to **automate the FPGA programming flow** in batch mode
-without the need of invoking the graphical interface. For this purpose create with your preferred **text-editor** application
-a new `install.tcl` script and copy-and-paste all above statements into the file:
+You can start saving these commands into a Tcl script that can be later used to **automate the FPGA programming flow**
+in batch mode without the need of invoking the graphical interface. For this purpose create with your preferred
+**text-editor** application a new `install.tcl` script and copy-and-paste all above statements into the file:
 
 
 ```
@@ -697,8 +699,8 @@ a new `install.tcl` script and copy-and-paste all above statements into the file
 
 <br />
 
-Save and exit once done. We will later complete the script with additional Tcl programming statements needed to load the
-firmware into the FPGA in batch mode.
+Save and exit once done. We will later complete the script with additional Tcl programming statements needed
+to load the firmware into the FPGA in batch mode.
 
 Once a connection is established between the _Hardware Manager_ and the FPGA the **JTAG chain** has been
 initialized and some digital activity can be now observed on JTAG signals.
@@ -847,6 +849,60 @@ Try to understand the meaning of the following Tcl commands:
 puts [current_hw_server]
 puts [current_hw_target]
 puts [current_hw_device]
+```
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+## Identify the hardware-server daemon
+[**[Contents]**](#contents)
+
+The Vivado **hardware server** is the application that actually interacts
+between a computer and an FPGA hardware attached to it. The `hw_server`
+command-line executable is responsible of running this background process:
+
+```
+% which hw_server
+```
+
+<br />
+
+The "computer" running the `hw_server` executable can be a **local computer** 
+(e.g. your personal laptop in the lab) or a **remote computer**
+(e.g. a micro-computer running on a satellite or in a counting-room at CERN).
+Indeed interacting with some remote computer is a very common experimental case
+with FPGA hardware.
+
+In order to be able to support both local and remote connections the Vivado
+hardware server uses the **TCP/IP network protocol**.
+
+The `hw_server` executable is automatically started for you when a new connection
+is started from the Vivado Harware Manager. Start a new connection and verify
+that the daemon is actually running in background using a i**command-line process
+monitor** utility.
+
+For Linux users:
+
+```
+% ps aux | grep hw_server
+```
+
+<br />
+
+For Windows users:
+
+```
+% tasklist | grep hw_server
+```
+
+<br />
+
+Compare the output of previous command with the `hw_server`
+executable command-line options:
+
+```
+% hw_server -help
 ```
 
 <br />
