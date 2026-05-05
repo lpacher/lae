@@ -1099,9 +1099,14 @@ set_property -dict { PACKAGE_PIN H5  IOSTANDARD LVCMOS33 } [get_ports ZN] ;  # L
 >
 > **IMPORTANT**
 >
-> Be sure that a **current-limiting series resistor** is always placed on the current path of a LED!
-> Feel free to drive with the NOT gate an external LED mounted on the breadboard and to map the
-> `ZN` output port to any other programmable I/O available on the board.<br />
+> As you can inspect from **board schematics** all slide-switches have a 10k $\Omega$ **series resistor**
+> placed on the electrical path towards FPGA pins that works as a **pull-up** or **pull-down resistors**
+> depending if the switch connects to **VCC** or **GND** respectively.
+> The circuit schematic depicted in figure is therefore a simplified reference circuit diagram.<br />
+>
+> Additionally be sure that a **current-limiting series resistor** is always placed on the current
+> path of a LED! Feel free to drive with the NOT gate an external LED mounted on the breadboard and
+> to map the `ZN` output port to any other programmable I/O available on the board.
 > However it will be **UP TO YOU** to place an approx. 100-300 $\Omega$ limiting resistor to protect the LED!
 >
 > **WITHOUT A LIMITING RESISTOR YOU WILL DESTROY ANY EXTERNAL LED CONNECTED TO PROGRAMMABLE I/O PINS !**
@@ -1762,8 +1767,8 @@ Re-program the FPGA and debug the new updated firmware:
 > **HINT**
 >
 > In order to "capture" logic transitions of `X_probe` and `ZN_probe` signals you have to
-> properly set **trigger options** of the oscilloscope you are working with in
-> order to use a _single-trigger_ or _single shot_ trigger mode.
+> properly set **trigger options**
+> of the oscilloscope you are working with to use a _single-trigger_ or _single shot_ trigger mode.
 >
 > For this purpose open the **Trigger Menu** and switch the trigger-mode from **Auto** (default)
 > to **Normal**. Ensure that an edge transition is used as trigger condition.
