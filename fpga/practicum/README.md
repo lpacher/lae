@@ -44,10 +44,18 @@ https://github.com/lpacher/lae/tree/master/fpga/practicum/9_pwm_dac)
 https://github.com/lpacher/lae/tree/master/fpga/practicum/10_delay_line)
 
 * **Practicum 11** <br />
-[Universal Asynchronous Receiver/Transmitter (UART).](
-https://github.com/lpacher/lae/tree/master/fpga/practicum/11_uart)
+[A simple sequence detector with a Finite State Machine (FSM).](
+https://github.com/lpacher/lae/tree/master/fpga/practicum/11_sequence_detector)
 
 * **Practicum 12** <br />
+[Universal Asynchronous Receiver/Transmitter (UART).](
+https://github.com/lpacher/lae/tree/master/fpga/practicum/12_uart)
+
+* **Practicum 13** <br />
 [Integrated Logic Analyzer (ILA).](
-https://github.com/lpacher/lae/tree/master/fpga/practicum/12_ila)
+https://github.com/lpacher/lae/tree/master/fpga/practicum/13_ila)
+
+* **Practicum 14** <br />
+[Virtual Input/Output (VIO).](
+https://github.com/lpacher/lae/tree/master/fpga/practicum/14_vio)
 
