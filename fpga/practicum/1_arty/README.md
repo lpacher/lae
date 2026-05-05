@@ -366,17 +366,25 @@ A JTAG connector uses the following signals:
 * **TRST** (Test Reset, optional)
 
 
-In the past a dedicated (and expensive) **programming cable**, namely _Xilinx USB Platform Cable_,
-was required to program FPGA boards from a host computer. This dedicated cable (still in use for particular applications)
-**connects to a host computer USB port** (in the past to the "old style" serial port instead)
-and converts USB data into JTAG data.<br />
+As shown in figure below in the past a dedicated (and expensive) **programming cable**,
+namely _Xilinx USB Platform Cable_, was required to program FPGA boards from a host computer.
+This dedicated cable (still in use for particular applications) **connects to a host computer USB port**
+(in the past to the "old style" serial port instead) and converts USB data into JTAG data.<br />
+
+<br />
+
+<img src="doc/pictures/xilinx_platform_cable.png" alt="drawing" width="500"/>
+
+<br /><br />
 
 For easier programming, the majority of new modern FPGA boards equipped with a Xilinx device provides
 an **on-board dedicated circuitry** that **converts USB to JTAG without the need
-of a dedicated cable**. That is, you can easily program your board by using a simple **USB Type A/Type B** or **USB Type A/micro USB**
-cable connected between the host computer and the board without the need of a dedicated programming cable.
+of a dedicated cable**. That is, you can easily program your board by using a simple **USB Type A/Type B**
+or **USB Type A/micro USB** cable connected between the host computer and the board without the need of
+a dedicated programming cable.
 
-On Digilent Arty/ Arty A7 boards this conversion is performed by an integrated circuit by **FTDI (Future Technology Devices International)**.
+On Digilent Arty/ Arty A7 boards this conversion is performed by an integrated circuit by
+**FTDI (Future Technology Devices International)**.
 You can easily recognize the FTDI chip on the board close to the micro-USB connector.
 
 <br />
@@ -394,6 +402,8 @@ You can easily recognize the FTDI chip on the board close to the micro-USB conne
 Additionally the **J8 connector** on the board provides **test-points** to probe JTAG signals
 using a 6-pins **through-hole (TH)** header.
 Later in this practicum we will use these test-points to **observe JTAG signals at the oscilloscope**.
+With the DMM perform a **continuity test** to identify **VCC** and **GND** on the J8 connector
+as reference test-points to then identify remaining JTAG signals.
 
 <br />
 
@@ -860,7 +870,10 @@ puts [current_hw_device]
 
 The Vivado **hardware server** is the application that actually interacts
 between a computer and an FPGA hardware attached to it. The `hw_server`
-command-line executable is responsible of running this background process:
+command-line executable that comes with the Vivado installation
+is responsible of running this background process:
+
+<br />
 
 ```
 % which hw_server
@@ -872,15 +885,13 @@ The "computer" running the `hw_server` executable can be a **local computer**
 (e.g. your personal laptop in the lab) or a **remote computer**
 (e.g. a micro-computer running on a satellite or in a counting-room at CERN).
 Indeed interacting with some remote computer is a very common experimental case
-with FPGA hardware.
+with FPGA hardware. In order to be able to support both local and remote connections
+the Vivado hardware server uses the **TCP/IP network protocol**.
 
-In order to be able to support both local and remote connections the Vivado
-hardware server uses the **TCP/IP network protocol**.
-
-The `hw_server` executable is automatically started for you when a new connection
-is started from the Vivado Harware Manager. Start a new connection and verify
-that the daemon is actually running in background using a i**command-line process
-monitor** utility.
+The `hw_server` executable is automatically started for you in background
+when a new connection is started from the Vivado Harware Manager.
+Start a new connection and verify that the daemon is actually running in background
+using a **command-line process monitor** utility.
 
 For Linux users:
 
@@ -893,7 +904,7 @@ For Linux users:
 For Windows users:
 
 ```
-% tasklist | grep hw_server
+% tasklist | grep hw_server   (alternatively type taskmgr to start the Task Manager from the console)
 ```
 
 <br />
