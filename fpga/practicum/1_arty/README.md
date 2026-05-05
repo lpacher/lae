@@ -1846,21 +1846,23 @@ _<https://digilent.com/reference/programmable-logic/arty-a7/demos/gpio>_
 >
 > **WARNING**
 >
-> Pay attention to the **FPGA version** of the demo design! All boards available in the lab mount an Artix-7 **A35T** device!
-> However _Digilent_ also sells an _Arty A7_ board equipped with a more powerful **A100T** device!
+> Pay attention to the **FPGA version** of the demo design! All boards available in the lab mount
+> an Artix-7 **A35T** device! However _Digilent_ also sells an _Arty A7_ board equipped with a more
+> powerful **A100T** device!
 >
 > If you download the demo design compiled for the A100T device you will be not able to program the board!
 >
 
 <br />
 
-You can easily download and extract all demo sources at the command-line with `wget` and `unzip` utilities
-as follows:
+You can easily download and extract all demo sources at the command-line with `wget` (Linux) or
+`certutil` (Windows) and then use `unzip` utilities as follows:
 
 ```
 % mkdir gpio_demo
 % cd gpio_demo
-% wget https://github.com/Digilent/Arty-A7-35-GPIO/releases/download/v2018.2-1/Arty-A7-35-GPIO-2018.2-1.zip
+% wget https://github.com/Digilent/Arty-A7-35-GPIO/releases/download/v2018.2-1/Arty-A7-35-GPIO-2018.2-1.zip   #Linux
+% certutil -urlcache -split -f https://github.com/Digilent/Arty-A7-35-GPIO/releases/download/v2018.2-1/Arty-A7-35-GPIO-2018.2-1.zip Arty-A7-35-GPIO-2018.2-1.zip   #Windows
 % unzip Arty-A7-35-GPIO-2018.2-1.zip
 % ls -l
 ```
