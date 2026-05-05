@@ -1116,7 +1116,7 @@ set_property -dict { PACKAGE_PIN H5  IOSTANDARD LVCMOS33 } [get_ports ZN] ;  # L
 > **IMPORTANT**
 >
 > As you can inspect from board schematics all four **slide-switches** available on the _Arty_ board
-> have **series resistors** placed on the electrical path towards FPGA pins that works as **pull-up**
+> have **series resistors** placed on the electrical path towards FPGA pins that work as **pull-up**
 > or **pull-down resistors** depending if the switches connect to **VCC** or **GND** respectively.
 > The circuit schematic depicted in figure is therefore a simplified reference circuit diagram.<br />
 >
