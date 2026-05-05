@@ -9,8 +9,10 @@
 ## Gedit/Nedit temporary files
 *~
 
-## log files
+## log files, journal files
 *.log
+*.jou
+*.txt
 log*
 
 ## ROOT files
