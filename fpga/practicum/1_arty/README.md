@@ -459,9 +459,9 @@ Verify that all jumpers are properly inserted.
 ## Connect the board to your personal computer
 [**[Contents]**](#contents)
 
-Despite the board can be powered from an external bench power supply or any 7-15V AC adapter, for this course we will simply power the board
-using **5V from USB cable**. Connect the board to the USB port of your personal computer using a **USB A to micro USB cable**.
-Verify that the **POWER** status LED turns on.
+Despite the board can be powered from an external bench power supply or any 7-15V AC adapter, for this course
+we will simply power the board using **5V from USB cable**. Connect the board to the USB port of your personal
+computer using a **USB A to micro USB cable**. Verify that the **POWER** status LED turns on.
 
 Use the DMM to perform basic **voltage measurements** on the following pins:
 
@@ -489,9 +489,10 @@ Repeat all your voltage measurements using the **oscilloscope**.
 >
 > **IMPORTANT**
 >
-> Before using an "unknown" oscilloscope **always** verify that **BNC probes** are properly **compensated** by connecting the probes to the
-> built-in oscilloscope square-wave generator. In case probes are over-compensated or under-compensated use a small screwdriver and operate
-> on the probe trimmer.
+> Before using an "unknown" oscilloscope **always** verify that **BNC probes** are properly **compensated**
+> by connecting the probes to the built-in oscilloscope square-wave generator.
+> In case probes are over-compensated or under-compensated use a small screwdriver and operate on the
+> probe trimmer.
 >
 > If you feel completely lost at this point ask to the teacher or ref. to:
 >
@@ -917,9 +918,19 @@ puts [current_hw_device]
 
 <br />
 
+Use the `netstat` utility (available on both Linux and Windows operating systems)
+to query **network statistics** on your computer from the command-line:
+
+```
+% netstat -a -o
+```
+
+<br />
+
 >
 > **QUESTION**
 >
+> Which is the process-ID (PID) of the `hw_server` daemon ? <br />
 > On which TCP/IP port is running the `hw_server` daemon ? <br />
 > What is the IP address of the computer running the `hw_server` daemon ? 
 >
