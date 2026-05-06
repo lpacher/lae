@@ -812,8 +812,8 @@ default value and debug also **TMS**, **TDI** and **TDO** signals while keeping 
 
 <br />
 
-Try to **close the communication** between the FPGA and the computer by executing the following command in the _Hardware Manager_
-Tcl console:
+Try to **close the communication** between the FPGA and the computer by executing the following command
+in the _Hardware Manager_ Tcl console:
 
 ```
 disconnect_hw_server
@@ -879,7 +879,7 @@ with FPGA hardware. In order to be able to support both local and remote connect
 the Vivado hardware server uses the **TCP/IP network protocol**.
 
 The `hw_server` executable is automatically started for you in background
-when a new connection is started from the Vivado Hardware Manager.
+when a new connection is started from the Vivado _Hardware Manager_.
 Start a new connection and verify that the daemon is actually running in background
 using a **command-line process monitor** utility.
 
@@ -907,13 +907,24 @@ Explore all command-line switches and options available for the `hw_server` exec
 
 <br />
 
-Try to understand the meaning of the following commands in the Vivado Hardware Manager Tcl console:
+Try to understand the meaning of the following commands in the Vivado _Hardware Manager_ Tcl console:
 
 ```
 puts [current_hw_server]
 puts [current_hw_target]
 puts [current_hw_device]
 ```
+
+<br />
+
+>
+> **QUESTION**
+>
+> On which TCP/IP port is running the `hw_server` daemon ? <br />
+> What is the IP address of the computer running the `hw_server` daemon ? 
+>
+>   \___________________________________________________________________________________
+>
 
 <br />
 <!--------------------------------------------------------------------->
@@ -941,7 +952,8 @@ get_property REGISTER.EFUSE.FUSE_DNA [current_hw_device]
 >
 > **QUESTION**
 >
-> Which is the value of the device DNA of the FPGA connected to your computer ? How many bits are used for the device DNA ? <br /><br /> 
+> Which is the value of the device DNA of the FPGA connected to your computer ? <br />
+> How many bits are used for the device DNA ? <br /><br /> 
 >
 >   \___________________________________________________________________________________
 >
