@@ -1,3 +1,4 @@
+##===========================================================================
 ##
 ## Improved GNU Makefile example to automate the Xilinx XSim simulation flow.
 ##
@@ -15,6 +16,7 @@
 ## Luca Pacher - pacher@to.infn.it
 ## Fall 2020
 ##
+##===========================================================================
 
 
 #######################################
@@ -101,7 +103,7 @@ SIM_VLOG_SOURCES := $(SIM_DIR)/tb_MUX2.v $(SIM_DIR)/ClockGen.v
 #VLOG_DEFINES := -define IF_ELSE
 #VLOG_DEFINES := -define TRUTH_TABLE
 #VLOG_DEFINES := -define CONDITIONAL_ASSIGN
-#VLOG_DEFINES := -define LOGIC_EQUATION
+VLOG_DEFINES := -define LOGIC_EQUATION
 #VLOG_DEFINES := -define STRUCTURAL
 
 ## if no VHDL sources, you can either comment the below variables or just leave them empty

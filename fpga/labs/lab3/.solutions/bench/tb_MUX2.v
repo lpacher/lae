@@ -53,8 +53,8 @@ module tb_MUX2 ;
    reg  select ;
    wire Z;
 
-   MUX2  DUT (.A(count[0]), .B(count[1]), .S(select), .Z(Z)) ;
-   //MUX2  DUT (.A(1'b1), .B(1'b1), .S(select), .Z(Z)) ;
+   MUX2  DUT (.S(select), .A(count[1]), .B(count[0]), .Z(Z)) ;
+   //MUX2  DUT (.S(select), .A(1'b1), .B(1'b1), .Z(Z)) ;
 
 
    ///////////////////////
@@ -78,9 +78,17 @@ module tb_MUX2 ;
    //   text-based simulation output   //
    //////////////////////////////////////
 
+   wire Svalue, Avalue, Bvalue, Zvalue ;
+
+   assign Svalue = DUT.S ;   //example HIERARCHICAL signal probing in Verilog => monitor effective MUX input values, not testbench signals!
+   assign Avalue = DUT.A ;
+   assign Bvalue = DUT.B ;
+   assign Zvalue = DUT.Z ;
+
+
    initial begin
       $display("\t\t\t\t   time   S   A   B   Z") ;
-      $monitor("%d ns   %b   %b   %b   %b",$time, select, count[0], count[1], Z) ;
+      $monitor("%d ns   %b   %b   %b   %b",$time, Svalue, Avalue, Bvalue, Zvalue) ;
    end
 
 
@@ -105,7 +113,7 @@ module tb_MUX2 ;
    //
 
    always @(posedge clk) begin
-      if ( Z == ((count[0] & (~select)) | (count[1] & select))) begin
+      if ( Zvalue == ( Avalue & (~Svalue)) | (Bvalue & Svalue)) begin
          //check PASSED
       end
       else begin

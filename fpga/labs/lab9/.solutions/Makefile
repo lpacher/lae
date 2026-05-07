@@ -67,7 +67,8 @@ SIM_TOP_MODULE := tb_LFSR
 ## specify RTL sources by hand (more in general can be Verilog + VHDL code)
 ##
 
-RTL_VLOG_SOURCES := $(RTL_DIR)/LFSR.v $(RTL_DIR)/TickCounterRst.v
+RTL_VLOG_SOURCES := $(RTL_DIR)/LFSR.v
+#RTL_VLOG_SOURCES := $(RTL_DIR)/LFSR.v $(RTL_DIR)/TickCounterRst.v
 SIM_VLOG_SOURCES := $(SIM_DIR)/glbl.v $(SIM_DIR)/ClockGen.v $(SIM_DIR)/tb_LFSR.v
 
 

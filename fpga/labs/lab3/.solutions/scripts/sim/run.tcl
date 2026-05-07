@@ -25,7 +25,7 @@ set scriptsDir [pwd]/../../scripts
 ## load into XSim Tcl environment the custom 'relaunch' procedure...
 if { [info procs relaunch] eq "" } {
 
-   source -notrace -quiet ${scriptsDir}/sim/relaunch.tcl ;  ## but do this only once !
+   source -notrace -quiet $scriptsDir/sim/relaunch.tcl ;  ## but do this only once !
 }
 
 
@@ -34,9 +34,9 @@ if { [info procs relaunch] eq "" } {
 #########################
 
 ## choose signals displayed in the Wave window or dumped into a VCD file
-if { [file exists ${scriptsDir}/sim/probe.tcl] } {
+if { [file exists $scriptsDir/sim/probe.tcl] } {
 
-   source -notrace -quiet ${scriptsDir}/sim/probe.tcl ;   ## use a dedicated script for this task
+   source -notrace -quiet $scriptsDir/sim/probe.tcl ;   ## use a dedicated script for this task
 }
 
 
@@ -72,9 +72,9 @@ puts "Simulation finished at [current_time]"
 
 ## report CPU time
 set tclStop [clock seconds]
-set tclSeconds [expr ${tclStop} - ${tclStart} ]
+set tclSeconds [expr $tclStop - $tclStart]
 
-puts "\nTotal elapsed-time for [file normalize [info script]]: [format "%.2f" [expr ${tclSeconds}/60.]] minutes\n"
+puts "\nTotal elapsed-time for [file normalize [info script]]: [format "%.2f" [expr $tclSeconds/60.]] minutes\n"
 
 
 ########################################################

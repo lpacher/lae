@@ -1,10 +1,10 @@
-//
-// Example code to genrate normally-distributed pseudo-random numbers
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Example code to generate normally-distributed pseudo-random numbers
 // using the Central Limit Theorem and LFSRs.
 //
 // Luca Pacher - pacher@to.infn.it
 // Spring 2021
-//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 `include "ClockGen.v"

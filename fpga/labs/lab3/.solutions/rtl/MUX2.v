@@ -17,9 +17,9 @@
 // either choose here the implementation that you want to simulate or compile sources with 'xvlog -define MACRO_NAME'
 
 //`define IF_ELSE
-`define TRUTH_TABLE
+//`define TRUTH_TABLE
 //`define CONDITIONAL_ASSIGN
-//`define LOGIC_EQUATION
+`define LOGIC_EQUATION
 //`define STRUCTURAL
 
 // alternatively you can also collect all defines into a separate source file and include it into RTL code
@@ -111,7 +111,8 @@ module MUX2 (
 
 `elsif LOGIC_EQUATION
 
-   assign Z = (A & ~S) | (B & S) ;
+   //assign Z = (A & ~S) | (B & S) ;
+   assign Z = (A & ~S) ^ (B & S) ;
 
 
    /////////////////////////////////////////////////////////////////////////

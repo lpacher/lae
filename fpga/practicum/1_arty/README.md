@@ -307,11 +307,16 @@ to quickly search for schematic pin names and component names.
 >
 >
 > Q.6 What is the name of the FPGA pin connected to the general-purpose LED **LD4** ? <br />
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; What is the name of the FPGA connected to the pin-header **IO41** on the board ?
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; What is the name of the FPGA pin connected to the pin-header **IO41** on the board ?
 >
 >   \___________________________________________________________________________________
 >
 >
+
+<br />
+
+Compare your answers for Q.4 and Q.6 with statements part of the
+`arty_all.xdc` sample constraints file.
 
 <br />
 <!--------------------------------------------------------------------->
