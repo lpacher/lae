@@ -125,26 +125,28 @@ proc simulate { {mode "gui"} } {
    ## keep using the 'mode' Makefile variable as used to launch Vivado.
    ##
 
+   exec echo "source -notrace [pwd]/../../scripts/sim/run.tcl" > xsim.tcl
+
    if { ${mode} == "gui" } {
 
       puts "**INFO: \[TCL\] Running simulation in GUI mode\n\n"
 
       exec xsim ${xelabTop} -gui -wdb [pwd]/wdb/${xelabTop}.wdb \
-         -onerror stop -stats -tclbatch [pwd]/../../scripts/sim/run.tcl -log ${logFile} &
+         -onerror stop -stats -tclbatch xsim.tcl -log ${logFile} &
 
    } elseif { ${mode} == "tcl" } {
 
       puts "**INFO: \[TCL\] Running simulation in TCL mode\n\n"
 
       exec xsim ${xelabTop} -wdb [pwd]/wdb/${xelabTop}.wdb \
-         -onerror stop -stats -tclbatch [pwd]/../../scripts/sim/run.tcl -log ${logFile} >@stdout 2>@stdout
+         -onerror stop -stats -tclbatch xsim.tcl -log ${logFile} >@stdout 2>@stdout
 
    } elseif { ${mode} == "batch" } {
 
       puts "**INFO: \[TCL\] Running simulation in BATCH mode\n\n"
 
       exec xsim ${xelabTop} -wdb [pwd]/wdb/${xelabTop}.wdb -onfinish quit \
-         -onerror stop -stats -tclbatch [pwd]/../../scripts/sim/run.tcl -log ${logFile} >@stdout 2>@stdout
+         -onerror stop -stats -tclbatch xsim.tcl -log ${logFile} >@stdout 2>@stdout
 
    } else {
 
