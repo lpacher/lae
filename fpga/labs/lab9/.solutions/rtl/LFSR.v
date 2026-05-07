@@ -19,26 +19,6 @@ module LFSR #(parameter [7:0] SEED = 8'hFF) (   // seed of the pseudo-random bit
    ) ;
 
 
-
-   ///////////////////////////////////////
-   //   PLL IP core (Clocking Wizard)   //
-   ///////////////////////////////////////
-
-   wire pll_clk, pll_locked ;
-
-   PLL  PLL_inst ( .CLK_IN(clk), .CLK_OUT(pll_clk), .LOCKED(pll_locked) ) ;   // generates 100 MHz output clock with maximum input-jitter filtering
-
-
-   /////////////////////////////////
-   //   tick counter (optional)   //
-   /////////////////////////////////
-
-   wire enable ;
-
-   TickCounterRst #(.MAX(10)) TickCounter_inst (.clk(clk), .rst(~pll_locked), .tick(enable)) ;      // 10 MHz "tick"
-   //TickCounterRst #(.MAX(1)) TickCounter_inst ( .clk(clk), .rst(~pll_locked), .tick(enable) ) ;   // with MAX = 1 the "tick" is always high, same as running at 100 MHz
-
-
    ////////////////////////////////////////
    //   linear feedback shift register   //
    ////////////////////////////////////////
@@ -52,25 +32,17 @@ module LFSR #(parameter [7:0] SEED = 8'hFF) (   // seed of the pseudo-random bit
    //wire feedback = q[7] ^ (q[6:0] == 7'b0000000) ;  // this modified feedback allows reaching 256 states instead of 255
 
 
-   always @(posedge pll_clk) begin
+   always @(posedge clk) begin
 
-      if(~pll_locked) begin
+     q[0] <= feedback ;
+     q[1] <= q[0] ;
+     q[2] <= q[1] ^ feedback ; 
+     q[3] <= q[2] ^ feedback ;
+     q[4] <= q[3] ^ feedback ;
+     q[5] <= q[4] ;
+     q[6] <= q[5] ;
+     q[7] <= q[6] ;
 
-         q <= SEED ;
-
-      end
-      else if (enable) begin
-
-         q[0] <= feedback ;
-         q[1] <= q[0] ;
-         q[2] <= q[1] ^ feedback ; 
-         q[3] <= q[2] ^ feedback ;
-         q[4] <= q[3] ^ feedback ;
-         q[5] <= q[4] ;
-         q[6] <= q[5] ;
-         q[7] <= q[6] ;
-
-      end   // if
    end // always
 
    assign PRBS = q[7] ;
