@@ -3,6 +3,19 @@
 # Practicum 1
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/practicum)]
 
+<br />
+
+>
+> **IMPORTANT NOTE**
+>
+> README files of this course are **better displayed** and **more readable** in the Web Browser
+> if a **light theme** is adopted. Very likely by default you are using a "dark" appearance instead,
+> however it is highly recommended to switch to "light" the theme of your browser for reading.
+>
+> As an example, in _Google Chrome_ you can change this with _Customize Chrome > Appearance > Light Mode_.
+>
+
+<br />
 
 ## Contents
 
@@ -311,6 +324,10 @@ to quickly search for schematic pin names and component names.
 >
 >   \___________________________________________________________________________________
 >
+> Q.7 What is the purpose of the **RESET** push-button ? How does it work ? <br/>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; How many pin-headers are connected to this signal ?
+>
+>   \___________________________________________________________________________________
 >
 
 <br />
