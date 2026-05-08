@@ -25,6 +25,7 @@
 * [**Navigate to the practicum directory**](#navigate-to-the-practicum-directory)
 * [**Explore board schematics and master XDCs**](#explore-board-schematics-and-master-xdcs)
 * [**Power supplies**](#power-supplies)
+* [**User interface and PCB components**](#user-interface-and-pcb-components)
 * [**JTAG interface**](#jtag-interface)
 * [**Check jumper settings**](#check-jumper-settings)
 * [**Connect the board to your personal computer**](#connect-the-board-to-your-personal-computer)
@@ -271,6 +272,46 @@ provided by Digilent and available in the `.solutions/` directory:
 ```
 
 <br />
+<!--------------------------------------------------------------------->
+
+
+## Power supplies
+[**[Contents]**](#contents)
+
+The first thing to do when you are in front of a completely "new" and "unknown" board is to identify
+how to actually power your electronics.
+Try to understand all possible **powering schemes** foreseen for the board.
+For this purpose read carefully the **Power Supplies** section of the official
+_Arty Reference Manual_ by Digilent. Cross-check all information with the **Power Regulation** section
+from board schematics and identify most important **voltage regulators** available on the board.
+
+Locate the following power-related pins:
+
+* **VCC**
+* **VIN**
+* **5V0**
+* **3V3**
+
+With a **digital multimeter (DMM)** perform  some basic **continuity tests** (the "beep" test) to verify
+that different same-potential test-points on the board are effectively shorted together, e.g. **GND** or **VCC**.
+
+<br />
+
+>
+> **QUESTION**
+>
+> Which is the difference between **VIN** and **5V0** supply-voltages available on the Arduino/chipKIT
+> pin header ? Which is the difference between **VU** and **VIN** ?
+>
+>   \___________________________________________________________________________________
+>
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+## User interface and PCB components
+[**[Contents]**](#contents)
 
 Get familiar with most important **programmable I/O FPGA pins** in the sample XDC file `arty_all.xdc`
 and locate the corresponding **physical resources** on the board:
@@ -286,7 +327,7 @@ and locate the corresponding **physical resources** on the board:
 <br />
 
 Please remind that you can always use the **Seach/Find** utility of your preferred PDF viewer application
-to quickly search for schematic pin names and component names.
+to quickly search for schematic pin names and component names. Try to answer to the following questions.
 
 <br />
 
@@ -304,7 +345,8 @@ to quickly search for schematic pin names and component names.
 >   \___________________________________________________________________________________
 >
 >
-> Q.3 The push-buttons available on the board are normally-open (NO) or normally-closed (NC) buttons ?
+> Q.3 The push-buttons available on the board are normally-open (NO) or normally-closed (NC) buttons ? <br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (hint: use continuity tests to find out this)
 >
 >   \___________________________________________________________________________________
 >
@@ -338,38 +380,6 @@ Compare your answers for Q.4 and Q.6 with statements part of the
 <br />
 <!--------------------------------------------------------------------->
 
-
-## Power supplies
-[**[Contents]**](#contents)
-
-Try to understand all possible **powering schemes** foreseen for the board.
-For this purpose read carefully the **Power Supplies** section of the official
-_Arty Reference Manual_ by Digilent. Cross-check all information with the **Power Regulation** section
-from board schematics and identify most important **voltage regulators** available on the board.
-
-Locate the following power-related pins:
-
-* **VCC**
-* **VIN**
-* **5V0**
-* **3V3**
-
-With a **digital multimeter (DMM)** perform  some basic **continuity tests** (the "beep" test) to verify
-that different same-potential test-points on the board are effectively shorted together, e.g. **GND** or **VCC**.
-
-<br />
-
->
-> **QUESTION**
->
-> Which is the difference between **VIN** and **5V0** supply-voltages available on the Arduino/chipKIT
-> pin header ? Which is the difference between **VU** and **VIN** ?
->
->   \___________________________________________________________________________________
->
-
-<br />
-<!--------------------------------------------------------------------->
 
 
 ## JTAG interface
