@@ -998,7 +998,7 @@ Ask to the teacher if you are not confident in using the ROOT software.
 <!--------------------------------------------------------------------->
 
 
-**EXERCISE 3**
+**EXERCISE 2**
 
 
 By default the ring-oscillator output toggle has been assigned to the **A5** pin of the **chipKIT** header
