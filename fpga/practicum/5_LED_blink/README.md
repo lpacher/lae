@@ -305,6 +305,10 @@ set_output_delay -clock clk100 5.000 [all_outputs]
 ```
 
 <br />
+
+<img src="doc/pictures/GCLK100_schematic.png" alt="drawing"/>
+
+<br />
 <!--------------------------------------------------------------------->
 
 
@@ -531,8 +535,8 @@ a dedicated reset signal.
 
 **EXERCISE 2**
 
-Modify the `LED_blink` module in order to add an `enable` Verilog input port to be used as external
-**count-enable** control for your free-running counter:
+Modify the `LED_blink` module in order to add an `enable` input control signal to be used as external
+**active-high count-enable** for your free-running counter:
 
 <br />
 
@@ -550,7 +554,15 @@ end
 <br />
 
 Update also the XDC file in order to assign the new `enable` input port to the slide-switch **SW0**
-on the _Arty_ board. Save all files once done and re-run the flows from scratch from the command line
+on the _Arty_ board:
+
+```
+set_property -dict { PACKAGE_PIN A8  IOSTANDARD LVCMOS33 } [get_ports enable] ;  #SW0
+```
+
+<br />
+
+Save all files once done and re-run the flows from scratch from the command line
 up to FPGA programming with:
 
 ```
@@ -674,7 +686,7 @@ Debug the functionality of the new firmware.
 
 **EXERCISE 4**
 
-Further extend your design and add a **reset signal** for the free-running counter:
+Further extend your design and add a **reset** input control signal for the free-running counter:
 
 ```verilog
 if ( reset == ??? ) begin
@@ -685,7 +697,7 @@ end
 
 <br />
 
-For this purpose map the new `reset` port to the dedicated **RESET** red push-button available
+For this purpose map the new `reset` input port to the dedicated **RESET** red push-button available
 on the _Arty_ board with the following XDC statement:
 
 ```
@@ -703,7 +715,7 @@ Cross-check PDF board schematics (search for `CK_RST`) to identify the proper
 
 <br />
 
-Choose yourself to implement a synchronous or an asynchronous reset.
+Choose yourself to implement a **synchronous** or an **asynchronous** reset.
 Save all files once done and re-run the implementation flow from scratch from the command line:
 
 ```
@@ -713,8 +725,13 @@ Save all files once done and re-run the implementation flow from scratch from th
 
 <br />
 
-Probe at the oscilloscope the **RST** signal available on the **J7 connector**.
 Debug the functionality of the new firmware.
+For this purpose probe at the oscilloscope the **RST** signal available on the **J7 connector**.
+As usual in order to "capture" logic transitions on this reset signal open the **Trigger Menu**
+and switch the trigger-mode from **Auto** (default) to **Normal**. Ensure that an edge transition
+is used as trigger condition. Finally select the channel used to display the `reset` Verilog
+input port for the trigger. 
+
 
 <img src="doc/pictures/POWER_header.png" alt="drawing" width="400"/>
 
