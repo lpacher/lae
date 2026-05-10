@@ -670,10 +670,65 @@ Connect with jumper wires the 7-segment display to the board and install the bit
 Debug the functionality of the new firmware.
 
 <br />
+<!--------------------------------------------------------------------->
 
 **EXERCISE 4**
 
-Further extend your design and add a **reset signal** for the free-running counter.
+Further extend your design and add a **reset signal** for the free-running counter:
+
+```verilog
+if ( reset == ??? ) begin
+   ...
+   ...
+end
+```
+
+<br />
+
+For this purpose map the new `reset` port to the dedicated **RESET** red push-button available
+on the _Arty_ board with the following XDC statement:
+
+```
+set_property -dict { PACKAGE_PIN C2  IOSTANDARD LVCMOS33 } [get_ports reset]
+```
+
+<br />
+
+Cross-check PDF board schematics (search for `CK_RST`) to identify the proper
+ **reset polarity** to be used in the RTL code:
+
+<br />
+
+<img src="doc/pictures/CK_RST_schematic.png" alt="drawing" width="250"/>
+
+<br />
+
+Choose yourself to implement a synchronous or an asynchronous reset.
+Save all files once done and re-run the implementation flow from scratch from the command line:
+
+```
+% make clean
+% make build install
+```
+
+<br />
+
+Probe at the oscilloscope the **RST** signal available on the **J7 connector**.
+Debug the functionality of the new firmware.
+
+<img src="doc/pictures/POWER_header.png" alt="drawing" width="400"/>
+
+>
+> **QUESTION**
+>
+> The **RESET** red push-button generates an active-high or an active-low reset signal ?
+>
+>   \___________________________________________________________________________________
+>
+
+<br />
+
+In case of unexpected results or misbehaviour for your reset scheme try to change the reset polarity.
 
 <br />
 <!--------------------------------------------------------------------->

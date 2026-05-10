@@ -225,13 +225,12 @@ As a first step, open a **terminal** window and change to the practicum director
 
 <br />
 
-List the content of the directory:
+List the content of the following directories:
 
 ```
-% ls -l
+% ls -l doc/arty
 % ls -l .solutions
 ```
-
 
 <br />
 <!--------------------------------------------------------------------->
@@ -240,9 +239,11 @@ List the content of the directory:
 ## Explore board schematics and master XDCs
 [**[Contents]**](#contents)
 
-Before connecting the board to your personal computer explore and study **board schematics**. Try to recognize on the PCB
-all schematic components. Open the proper PDF file according to the board you are working with:
+Before connecting the board to your personal computer read carefully the _Arty Reference Manual_
+and then explore and study **board schematics**. Open the proper PDF file according to the board you are working with:
 
+
+* `doc/arty/arty_reference_manual.pdf` common to both _Arty_ and _Arty A7_ versions
 * `doc/arty/arty_board_schematics.pdf` for the original _Arty_ board
 * `doc/arty/arty_a7_board_schematics.pdf` for the new revision of the board referred to as _Arty A7_ 
 
@@ -278,30 +279,76 @@ provided by Digilent and available in the `.solutions/` directory:
 ## Power supplies
 [**[Contents]**](#contents)
 
-The first thing to do when you are in front of a completely "new" and "unknown" board is to identify
-how to actually power your electronics.
-Try to understand all possible **powering schemes** foreseen for the board.
-For this purpose read carefully the **Power Supplies** section of the official
+The first thing to do whenever you are in front of a completely "new" and "unknown" board is to identify
+how to actually feed power to your electronics. Try to understand all possible **powering schemes** foreseen
+for the board. For this purpose read carefully the **Power Supplies** section of the official
 _Arty Reference Manual_ by Digilent. Cross-check all information with the **Power Regulation** section
-from board schematics and identify most important **voltage regulators** available on the board.
+from PDF board schematics and identify most important **voltage regulators** available on the board.
 
-Locate the following power-related pins:
+The **J7 connector** on the board provides **test-points** to probe voltage values for power measurements.
+Identify this connector both on the physical board and into PDF board schematics.
 
+<img src="doc/pictures/POWER_header.png" alt="drawing" width="400"/>
+
+
+Locate the following power-related pins on the physical board:
+
+* **GND**
 * **VCC**
 * **VIN**
 * **5V0**
 * **3V3**
 
+Additionally locate the following power-related nets into PDF board schematics:
+
+* **VU**
+* **VUSB**
+* **REG5V0**
+* **VCC5V0**
+* **VCC3V3**
+
+<br />
+
+Please remind that you can always use the **Search/Find** utility (Ctrl+F) in your PDF viewer application
+to quickly search for schematic pin names and component names into PDF board schematics.
+
+<br />
+
 With a **digital multimeter (DMM)** perform  some basic **continuity tests** (the "beep" test) to verify
 that different same-potential test-points on the board are effectively shorted together, e.g. **GND** or **VCC**.
+Try to answer to the following questions according to your continuity test results.
 
 <br />
 
 >
-> **QUESTION**
+> **QUESTIONS**
 >
-> Which is the difference between **VIN** and **5V0** supply-voltages available on the Arduino/chipKIT
-> pin header ? Which is the difference between **VU** and **VIN** ?
+> Q.1 How many powering schemes are supported for the Digilent _Arty_ board ?
+>
+>   \___________________________________________________________________________________
+>
+> Q.2  What is the purpose of the **J13** jumper ? (legacy _Arty_ board only)
+>
+>   \___________________________________________________________________________________
+>
+> Q.3 Are **J13** pin-headers and the **5V0** terminal somehow related together ?  (legacy _Arty_ board only)
+>
+>   \___________________________________________________________________________________
+>
+> Q.4 Which is the difference between **VIN** and **5V0** supply-voltages ?
+>
+>   \___________________________________________________________________________________
+>
+> Q.5  Which is the difference between **VU** and **VIN** supply-voltages ?
+>
+>   \___________________________________________________________________________________
+>
+> Q.6 What is the name of the voltage regulator used to generate the supply-voltage for the FPGA ?  <br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Where is placed on the board ? What is this voltage value ?
+>
+>   \___________________________________________________________________________________
+>
+> Q.7 Which is the difference between **VCC** and **3V3** supply-voltages ?
 >
 >   \___________________________________________________________________________________
 >
@@ -313,6 +360,7 @@ that different same-potential test-points on the board are effectively shorted t
 ## User interface and PCB components
 [**[Contents]**](#contents)
 
+Try to recognize most important integrated circuits and components on the board.
 Get familiar with most important **programmable I/O FPGA pins** in the sample XDC file `arty_all.xdc`
 and locate the corresponding **physical resources** on the board:
 
@@ -322,12 +370,14 @@ and locate the corresponding **physical resources** on the board:
 * push-buttons
 * [PMOD (Peripheral MODules)](https://digilent.com/reference/pmod/start) pin headers
 * Arduino/chipKIT pin headers
+* external memories
 
 
 <br />
 
-Please remind that you can always use the **Seach/Find** utility of your preferred PDF viewer application
-to quickly search for schematic pin names and component names. Try to answer to the following questions.
+Please remind that you can always use the **Search/Find** utility (Ctrl+F) of your preferred PDF viewer application
+to quickly search for schematic pin names and component names. Try to answer to the following questions, also with
+the help of simple continuity tests performed with the DMM.
 
 <br />
 
@@ -366,16 +416,20 @@ to quickly search for schematic pin names and component names. Try to answer to 
 >
 >   \___________________________________________________________________________________
 >
-> Q.7 What is the purpose of the **RESET** push-button ? How does it work ? <br/>
-> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; How many pin-headers are connected to this signal ?
+> Q.7 What is the purpose of the **PROG** push-button ?
+>
+>   \___________________________________________________________________________________
+>
+> Q.8 What is the purpose of the **RESET** push-button ? How does it work ? <br/>
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; How many pin-headers are connected to this signal ? <br />
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; (hint: cross-check board schematics and use continuity tests to find out this)
 >
 >   \___________________________________________________________________________________
 >
 
 <br />
 
-Compare your answers for Q.4 and Q.6 with statements part of the
-`arty_all.xdc` sample constraints file.
+Compare your answers for Q.4 and Q.6 with statements part of the `arty_all.xdc` sample constraints file.
 
 <br />
 <!--------------------------------------------------------------------->
@@ -386,8 +440,8 @@ Compare your answers for Q.4 and Q.6 with statements part of the
 [**[Contents]**](#contents)
 
 Xilinx FPGAs are programmed using the [**JTAG protocol**](https://en.wikipedia.org/wiki/JTAG).
-JTAG (Join Test Action Group) is an industry-standard **serial-interface** protocol for integrated
-circuits configuration and debug as well as more complex PCB testing after manufacture.
+JTAG (Join Test Action Group) is an industry-standard **synchronous serial-interface** protocol
+for integrated circuits configuration and debug as well as more complex PCB testing after manufacture.
 
 A JTAG connector uses the following signals:
 
@@ -415,7 +469,7 @@ of a dedicated cable**. That is, you can easily program your board by using a si
 or **USB Type A/micro USB** cable connected between the host computer and the board without the need of
 a dedicated programming cable.
 
-On Digilent Arty/ Arty A7 boards this conversion is performed by an integrated circuit by
+On Digilent _Arty_/_Arty A7_ boards this conversion is performed by an integrated circuit by
 **FTDI (Future Technology Devices International)**.
 You can easily recognize the FTDI chip on the board close to the micro-USB connector.
 
@@ -439,7 +493,7 @@ as reference test-points to then identify remaining JTAG signals.
 
 <br />
 
-<img src="doc/pictures/JTAG_header.png" alt="drawing" width="600"/>
+<img src="doc/pictures/JTAG_header.png" alt="drawing" width="625"/>
 
 <br />
 
@@ -453,7 +507,7 @@ as reference test-points to then identify remaining JTAG signals.
 
 <br />
 
-Try to understand all possible programming options supported for the board. For this purpose
+Try to understand all possible **programming options** supported for the board. For this purpose
 read carefully the **FPGA Configuration** section of the official _Arty Reference Manual_ by Digilent.
 
 
