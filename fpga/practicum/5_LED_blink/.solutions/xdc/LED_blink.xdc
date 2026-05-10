@@ -61,6 +61,9 @@ set_property -dict { PACKAGE_PIN F5  IOSTANDARD LVCMOS33 } [get_ports LED_probe]
 #set_property -dict { PACKAGE_PIN A18  IOSTANDARD LVCMOS33 } [get_ports segG] ;   ## JA[7]
 #set_property -dict { PACKAGE_PIN K16  IOSTANDARD LVCMOS33 } [get_ports DP  ] ;   ## JA[8]
 
+## **EXERCISE: clock-divider
+#set_property -dict { PACKAGE_PIN N17  IOSTANDARD LVCMOS33 } [get_ports clk_div] ;  # IO41
+
 
 ############################
 ##   timing constraints   ##

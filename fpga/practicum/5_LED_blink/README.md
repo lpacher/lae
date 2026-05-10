@@ -305,6 +305,10 @@ set_output_delay -clock clk100 5.000 [all_outputs]
 ```
 
 <br />
+
+<img src="doc/pictures/GCLK100_schematic.png" alt="drawing"/>
+
+<br />
 <!--------------------------------------------------------------------->
 
 
@@ -531,8 +535,8 @@ a dedicated reset signal.
 
 **EXERCISE 2**
 
-Modify the `LED_blink` module in order to add an `enable` Verilog input port to be used as external
-**count-enable** control for your free-running counter:
+Modify the `LED_blink` module in order to add an `enable` input control signal to be used as external
+**active-high count-enable** for your free-running counter:
 
 <br />
 
@@ -550,7 +554,15 @@ end
 <br />
 
 Update also the XDC file in order to assign the new `enable` input port to the slide-switch **SW0**
-on the _Arty_ board. Save all files once done and re-run the flows from scratch from the command line
+on the _Arty_ board:
+
+```
+set_property -dict { PACKAGE_PIN A8  IOSTANDARD LVCMOS33 } [get_ports enable] ;  #SW0
+```
+
+<br />
+
+Save all files once done and re-run the flows from scratch from the command line
 up to FPGA programming with:
 
 ```
@@ -672,9 +684,10 @@ Debug the functionality of the new firmware.
 <br />
 <!--------------------------------------------------------------------->
 
+
 **EXERCISE 4**
 
-Further extend your design and add a **reset signal** for the free-running counter:
+Further extend your design and add a **reset** input control signal for the free-running counter:
 
 ```verilog
 if ( reset == ??? ) begin
@@ -685,7 +698,7 @@ end
 
 <br />
 
-For this purpose map the new `reset` port to the dedicated **RESET** red push-button available
+For this purpose map the new `reset` input port to the dedicated **RESET** red push-button available
 on the _Arty_ board with the following XDC statement:
 
 ```
@@ -703,7 +716,7 @@ Cross-check PDF board schematics (search for `CK_RST`) to identify the proper
 
 <br />
 
-Choose yourself to implement a synchronous or an asynchronous reset.
+Choose yourself to implement a **synchronous** or an **asynchronous** reset.
 Save all files once done and re-run the implementation flow from scratch from the command line:
 
 ```
@@ -713,8 +726,13 @@ Save all files once done and re-run the implementation flow from scratch from th
 
 <br />
 
-Probe at the oscilloscope the **RST** signal available on the **J7 connector**.
 Debug the functionality of the new firmware.
+For this purpose probe at the oscilloscope the **RST** signal available on the **J7 connector**.
+As usual in order to "capture" logic transitions on this reset signal open the **Trigger Menu**
+and switch the trigger-mode from **Auto** (default) to **Normal**. Ensure that an edge transition
+is used as trigger condition. Finally select the channel used to display the `reset` Verilog
+input port for the trigger. 
+
 
 <img src="doc/pictures/POWER_header.png" alt="drawing" width="400"/>
 
@@ -729,6 +747,43 @@ Debug the functionality of the new firmware.
 <br />
 
 In case of unexpected results or misbehaviour for your reset scheme try to change the reset polarity.
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+**EXERCISE 5**
+
+The typical **bandwidth** for an **entry-level oscilloscope** is usually between **50 MHz** and **100 MHz**.
+This range is more than enough for general electronics, learning and teaching purposes, FPGA/microcontroller
+projects and to deal with common audio signals. This is the case of most oscilloscopes available in the lab.
+
+As a result due to **bandwidth limitation** it might be not possible to directly probe and display a clean 100 MHz clock-waveform.
+In such a situation we can use a **clock-divider** to take measurements on a lower-frequency clock-waveform starting 
+from a higher-frequency clock.
+
+Further extend your LED-blink design and add a new `clk_div` output port. Then implement a simple
+**divide-by-2** clock-divider as depicted in figure to drive the new `clk_div` output port. Feel free
+to also implement a reset for the clock-divider by re-using the reset signal intoduced in the
+previous exercise.
+
+
+<img src="doc/pictures/ClockDivider.png" alt="drawing" width="600"/>
+
+Once done with RTL changes update also XDC constraints and choose yourself one general-purpose I/O available
+on the _Arty_ board to map the new port (PMOD, Arduino/chipKit).
+
+Save all files once done and re-run the implementation flow from scratch from the command line:
+
+```
+% make clean
+% make build install
+```
+
+<br />
+
+Probe at the oscilloscope the `clk_div` port and make a frequency measurement. Compare this value
+with the nominal 100 MHz clock-frequency of the external XTAL oscillator mounted on the board.
 
 <br />
 <!--------------------------------------------------------------------->

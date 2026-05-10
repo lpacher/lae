@@ -316,7 +316,8 @@ to quickly search for schematic pin names and component names into PDF board sch
 
 With a **digital multimeter (DMM)** perform  some basic **continuity tests** (the "beep" test) to verify
 that different same-potential test-points on the board are effectively shorted together, e.g. **GND** or **VCC**.
-Try to answer to the following questions according to your continuity test results.
+Cross-check PDF board schematics and try to answer to the following questions.
+Whenever possible confirm your answers with the help of simple continuity tests performed with the DMM.
 
 <br />
 
@@ -375,9 +376,13 @@ and locate the corresponding **physical resources** on the board:
 
 <br />
 
-Please remind that you can always use the **Search/Find** utility (Ctrl+F) of your preferred PDF viewer application
-to quickly search for schematic pin names and component names. Try to answer to the following questions, also with
-the help of simple continuity tests performed with the DMM.
+Please remind that you can always use the **Search/Find** utility (Ctrl+F) in your PDF viewer application
+to quickly search for schematic pin names and component names into PDF board schematics.
+
+<br />
+
+Cross-check PDF board schematics and try to answer to the following questions.
+Whenever possible confirm your answers with the help of simple continuity tests performed with the DMM.
 
 <br />
 
@@ -1658,7 +1663,7 @@ For the legacy _Arty_ board the device name to be selected is **mt25ql128-spi-x1
 
 <br />
 
-For the new _Arty A7_ board the device name to be selected is **s25fl128sxxxxxx0-spi-x1-_x2_x4** as follows:
+For the new _Arty A7_ board the device name to be selected is **s25fl128sxxxxxx0-spi-x1_x2_x4** as follows:
 
 * _Manufacturer_: **Spansion**
 * _Density (Mb)_: **128**
@@ -1669,7 +1674,6 @@ For the new _Arty A7_ board the device name to be selected is **s25fl128sxxxxxx0
 
 Left click on **OK** once selected. Finally, specify the **memory configuration file** to be flashed in the memory.
 In this case the file to be specified is the **raw binary** `Inverter.bin` created by Vivado in the `Inverter.runs/impl_1/` directory.
-Left-click on **OK** to start the memory programming.
 
 <br />
 
@@ -1677,9 +1681,29 @@ Left-click on **OK** to start the memory programming.
 
 <br />
 
+Left-click on **OK** to start the memory programming.
 Once the firmware has been written to the external memory the **DONE** status LED turns on again.
 
-Review all Tcl programming commands traced in the Tcl console.
+Review the sequence of Tcl programming commands traced for you in the _Hardware Manager_ Tcl console:
+
+```
+create_hw_cfgmem -hw_device [lindex [get_hw_devices] 0] -mem_dev [lindex [get_cfgmem_parts {mt25ql128-spi-x1_x2_x4} ] 0] ;    #legacy Arty board, s25fl128sxxxxxx0-spi-x1_x2_x4 for new Arty A7
+set_property PROGRAM.BLANK_CHECK  0 [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
+set_property PROGRAM.ERASE  1 [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
+set_property PROGRAM.CFG_PROGRAM  1 [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
+set_property PROGRAM.VERIFY  1 [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
+set_property PROGRAM.CHECKSUM  0 [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
+refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
+set_property PROGRAM.ADDRESS_RANGE  {use_file} [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
+set_property PROGRAM.FILES {Inverter.runs/impl_1/Inverter.bit} [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
+set_property PROGRAM.UNUSED_PIN_TERMINATION  {pull-none} [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
+create_hw_bitstream -hw_device [lindex [get_hw_devices xc7a35t_0] 0] [get_property PROGRAM.HW_CFGMEM_BITFILE [lindex [get_hw_devices xc7a35t_0] 0]]
+program_hw_devices [lindex [get_hw_devices xc7a35t_0] 0]
+refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
+program_hw_cfgmem -hw_cfgmem [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
+```
+
+<br />
 
 Close the USB/JTAG chain from the _Hardware Manager_ using:
 
@@ -1689,17 +1713,84 @@ disconnect_hw_server
 
 <br />
 
-Finally, disconnect and then riconnect the USB cable from the computer to verify the **firmware persistence across power cycles**.
+Finally, disconnect and then reconnect the USB cable from the computer to verify the **firmware persistence across power cycles**.
 
 <br />
 
 >
 > **QUESTION**
 >
-> Disconnect the USB cable from the computer and then remove the **MODE** jumper on **JP1**. What happens when you reconnect the USB cable ?
+> Disconnect the USB cable from the computer and then remove the **MODE** jumper on **JP1**. <br />
+> What happens when you reconnect the USB cable ?
 >
 >   \___________________________________________________________________________________
 >
+
+<br />
+
+As already done with JTAG installation we can use Tcl commands into a script and fully automate also
+the Quad-SPI Flash memory programming flow in batch mode without the need of running any Vivado
+graphical user interface.
+
+For this purpose create a new `install_flash.tcl` script with you preferred text editor and enter
+the following Tcl code:
+
+```
+## open the Hardware Manager
+open_hw_manager
+
+## "auto-connect"
+connect_hw_server -allow_non_jtag
+open_hw_target
+current_hw_device [get_hw_devices xc7a35t_0]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7a35t_0] 0]
+
+## identify Quad SPI Flash external memory (same as "Add Configuration Memory Device..." in the GUI)
+create_hw_cfgmem -hw_device [lindex [get_hw_devices] 0] -mem_dev [lindex [get_cfgmem_parts {mt25ql128-spi-x1_x2_x4} ] 0] ;    #legacy Arty board, use s25fl128sxxxxxx0-spi-x1_x2_x4 for new Arty A7
+
+## specify programming options
+set_property PROGRAM.BLANK_CHECK  0 [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
+set_property PROGRAM.ERASE        1 [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
+set_property PROGRAM.CFG_PROGRAM  1 [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
+set_property PROGRAM.VERIFY       1 [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
+set_property PROGRAM.CHECKSUM     0 [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
+
+refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
+
+## specify the memory file
+set_property PROGRAM.ADDRESS_RANGE           {use_file}                          [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
+set_property PROGRAM.FILES                   {Inverter.runs/impl_1/Inverter.bit} [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
+set_property PROGRAM.UNUSED_PIN_TERMINATION  {pull-none}                         [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
+
+## program the external Quad-SPI Flash memory
+create_hw_bitstream -hw_device [lindex [get_hw_devices xc7a35t_0] 0] [get_property PROGRAM.HW_CFGMEM_BITFILE [lindex [get_hw_devices xc7a35t_0] 0]]
+program_hw_devices [lindex [get_hw_devices xc7a35t_0] 0]
+refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
+program_hw_cfgmem -hw_cfgmem [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
+
+## close current hardware target
+close_hw_target [current_hw_target]
+
+## disconnect from hardware server
+disconnect_hw_server [current_hw_server]
+```
+
+<br />
+
+At this point you can program the external memory in batch mode with:
+
+```
+% vivado -mode batch -source install_flash.tcl -notrace -log install_flash.log -nojournal
+```
+
+<br />
+
+In case of troubles or syntax errors review the complete script already prepared for
+you and available in the `.solutions/` directory:
+
+```
+% cat .solutions/install_flash.tcl
+```
 
 <br />
 <!--------------------------------------------------------------------->
@@ -1768,6 +1859,11 @@ install: install.tcl
 
 	@vivado -mode batch -source install.tcl -notrace -log install.log -nojournal
 
+## install bitstream to external Quad-SPI Flash memory (Hardware Manager)
+.PHONY: install/flash
+install/flash: install_flash.tcl
+
+	@vivado -mode batch -source install_flash.tcl -notrace -log install_flash.log -nojournal
 
 ## delete all log files and project files generated by Vivado flows
 .PHONY: clean
@@ -1894,8 +1990,8 @@ Re-program the FPGA and debug the new updated firmware:
 > **HINT**
 >
 > In order to "capture" logic transitions of `X_probe` and `ZN_probe` signals you have to
-> properly set **trigger options**
-> of the oscilloscope you are working with to use a _single-trigger_ or _single shot_ trigger mode.
+> properly set **trigger options** of the oscilloscope you are working with to use
+> a _single-trigger_ or _single shot_ trigger mode.
 >
 > For this purpose open the **Trigger Menu** and switch the trigger-mode from **Auto** (default)
 > to **Normal**. Ensure that an edge transition is used as trigger condition.
