@@ -684,6 +684,7 @@ Debug the functionality of the new firmware.
 <br />
 <!--------------------------------------------------------------------->
 
+
 **EXERCISE 4**
 
 Further extend your design and add a **reset** input control signal for the free-running counter:
@@ -746,6 +747,43 @@ input port for the trigger.
 <br />
 
 In case of unexpected results or misbehaviour for your reset scheme try to change the reset polarity.
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+**EXERCISE 5**
+
+The typical **bandwidth** for an **entry-level oscilloscope** is usually between **50 MHz** and **100 MHz**.
+This range is more than enough for general electronics, learning and teaching purposes, FPGA/microcontroller
+projects and to deal with common audio signals. This is the case of most oscilloscopes available in the lab.
+
+As a result due to **bandwidth limitation** it might be not possible to directly probe and display a clean 100 MHz clock-waveform.
+In such a situation we can use a **clock-divider** to take measurements on a lower-frequency clock-waveform starting 
+from a higher-frequency clock.
+
+Further extend your LED-blink design and add a new `clk_div` output port. Then implement a simple
+**divide-by-2** clock-divider as depicted in figure to drive the new `clk_div` output port. Feel free
+to also implement a reset for the clock-divider by re-using the reset signal intoduced in the
+previous exercise.
+
+
+<img src="doc/pictures/ClockDivider.png" alt="drawing" width="600"/>
+
+Once done with RTL changes update also XDC constraints and choose yourself one general-purpose I/O available
+on the _Arty_ board to map the new port (PMOD, Arduino/chipKit).
+
+Save all files once done and re-run the implementation flow from scratch from the command line:
+
+```
+% make clean
+% make build install
+```
+
+<br />
+
+Probe at the oscilloscope the `clk_div` port and make a frequency measurement. Compare this value
+with the nominal 100 MHz clock-frequency of the external XTAL oscillator mounted on the board.
 
 <br />
 <!--------------------------------------------------------------------->

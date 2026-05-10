@@ -1,10 +1,10 @@
-//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Turn on/off an on-board LED using a free-running counter as clock divider.
 // Optionally, drive a 7-segment display module as discussed in practicum #3.
 //
 // Luca Pacher - pacher@to.infn.it
 // Spring 2021
-//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 //`include "rtl/SevenSegmentDecoder.v"
 
@@ -16,6 +16,9 @@ module LED_blink (
 
    // **EXERCISE: add an external count-enable control (e.g. slide-switch)
    //input wire enable,
+
+   // **EXERCISE: add an external reset control (e.g. push-button)
+   //input wire reset,
 
    output wire LED,
    output wire LED_probe    // probe at the oscilloscope the LED control signal
@@ -29,6 +32,9 @@ module LED_blink (
    //output wire segF,
    //output wire segG,
    //output wire DP
+
+   // **EXERCISE: clock-divider to measure the frequency of the input clock
+   //output reg clk_div
 
    ) ;
 
@@ -44,6 +50,10 @@ module LED_blink (
 
 
    always @(posedge clk) begin
+      //if(reset) begin
+      //   cpunt <= 'b0 ;
+      //end
+      //else
       //if(enable) begin
          count <= count + 'b1 ;            // **QUESTION: where is the reset for this counter ? 
       //end
@@ -66,7 +76,7 @@ module LED_blink (
 
 
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-   //   optionally, drive a 7-segment display (simply re-use the module already implemented into practicum #3)   //
+   //   **EXERCISE: drive a 7-segment display (simply re-use the module already implemented into practicum #3)   //
    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /*
@@ -88,6 +98,15 @@ module LED_blink (
    ) ;
 
 */
+
+   ///////////////////////////////////
+   //   **EXERCISE: clock-divider   //
+   ///////////////////////////////////
+
+   //initial clk_div = 1'b0 ;
+
+   //always @(posedge clk)
+   //   clk_div <= ~ clk_div ;
 
 endmodule
 
