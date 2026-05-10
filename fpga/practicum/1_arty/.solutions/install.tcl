@@ -1,18 +1,15 @@
-###########################################################################
-#
-# Example Tcl script to run the FPGA firmware installation flow using
-# the Vivado Hardware Manager in batch (non-interactive) mode.
-#
-# Command line usage:
-#
-#   % cp .solutions/install.tcl .
-#   % vivado -mode batch -source install.tcl -notrace -log install.log -nojournal
-#
-# Luca Pacher - pacher@to.infn.it
-# Spring 2024
-#
-###########################################################################
-
+##============================================================================
+## Example Tcl script to run the FPGA firmware installation flow using
+## the Vivado Hardware Manager in batch (non-interactive) mode.
+##
+## Command line usage:
+##
+##   % cp .solutions/install.tcl .
+##   % vivado -mode batch -source install.tcl -notrace -log install.log -nojournal
+##
+## Luca Pacher - pacher@to.infn.it
+## Spring 2024
+##============================================================================
 
 ## open the Hardware Manager
 open_hw_manager
