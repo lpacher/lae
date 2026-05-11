@@ -294,11 +294,32 @@ Inspect the content of the **Xilinx Design Constraints (XDC)** file already prep
 
 <br />
 
-Pay attention to the following **timing constraints** used for the Static Timing Analysis (STA):
+The `LED_blink` design provides a first example of **synchronous** digital design, with all
+FlipFlops of the free-running counter driven by the same clock.
+As already discussed the Digilent _Arty_ board is equipped with an
+**external 100 MHz XTAL oscillator** connected to pin **E3** of the FPGA:
+
+```
+## on-board 100 MHz clock
+set_property -dict [list PACKAGE_PIN E3 IOSTANDARD LVCMOS33] [get_ports clk]
+```
+
+<br />
+
+<img src="doc/pictures/GCLK100_schematic.png" alt="drawing"/>
+
+<br /><br />
+
+Since the design is synchrous **timing closure** becomes essential to avoid
+**setup/hold timing violations**.  Pay attention to the following **timing constraints**
+used for the **Static Timing Analysis (STA)** check:
 
 ```
 ## create a 100 MHz clock signal with 50% duty cycle for reg2reg Static Timing Analysis (STA)
 create_clock -period 10.000 -name clk100 -waveform {0.000 5.000} -add [get_ports clk]
+
+## constrain in2reg timing paths (assume approx. 1/2 clock period)
+set_output_delay -clock clk100 5.000 [all_inputs]
 
 ## constrain reg2out timing paths (assume approx. 1/2 clock period)
 set_output_delay -clock clk100 5.000 [all_outputs]
@@ -306,7 +327,12 @@ set_output_delay -clock clk100 5.000 [all_outputs]
 
 <br />
 
-<img src="doc/pictures/GCLK100_schematic.png" alt="drawing"/>
+In this case we drive a simple LED so we can optionally disable reg2out timing checks for this output:
+
+```
+set_false_path -to [get_ports LED]
+```
+
 
 <br />
 <!--------------------------------------------------------------------->
