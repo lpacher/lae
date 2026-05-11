@@ -24,12 +24,12 @@ https://github.com/lpacher/lae/tree/master/fpga/practicum/4_seven_segment_displa
 https://github.com/lpacher/lae/tree/master/fpga/practicum/5_LED_blink)
 
 * **Practicum 6** <br />
-[Clock multiplication and division using a Phase-Locked Loop (PLL) IP core.](
-https://github.com/lpacher/lae/tree/master/fpga/practicum/6_PLL)
+[A 4-bit Binary Coded Decimal (BCD) counter driving a 7-segment display.](
+https://github.com/lpacher/lae/tree/master/fpga/practicum/6_BCD_counter)
 
 * **Practicum 7** <br />
-[A 4-bit Binary Coded Decimal (BCD) counter driving a 7-segment display.](
-https://github.com/lpacher/lae/tree/master/fpga/practicum/7_BCD_counter)
+[Clock multiplication and division using a Phase-Locked Loop (PLL) IP core.](
+https://github.com/lpacher/lae/tree/master/fpga/practicum/7_PLL)
 
 * **Practicum 8** <br />
 [Display an eye-diagram from a Pseudo-Random Bit Sequence (PRBS) generator.](
