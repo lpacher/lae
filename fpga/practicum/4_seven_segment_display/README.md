@@ -2,7 +2,6 @@
 
 <!-- TODO: add k-Maps solution ... -->
 
-<!-- TODO: make a first 4-bit BCD counter driven by a push-button to increment BCD !!! -->
 
 # Practicum 4
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/practicum)]
@@ -320,7 +319,8 @@ a **200 ohm resistor** placed in series, while **JB** and **JC** doesn't.
 > current path of a LED! If you don't use PMODs that already have resistors in series it's **UP TO YOU** to place
 > approx. 100-200 ohm resistors on 7-segment display input pins!
 >
-> **WITHOUT LIMITING RESISTORS YOU WILL DESTROY THE 7-SEGMENT DISPLAY MODULE !**
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <b>\*\* WITHOUT LIMITING RESISTORS YOU WILL DESTROY THE 7-SEGMENT DISPLAY MODULE ! \*\*</b>
+>
 
 <br />
 
@@ -793,7 +793,16 @@ Re-run the flows in batch mode:
 
 <br />
 
-Re-program the FPGA and debug the new updated firmware:
+In case of **timing issues** reported by Vivado simply disable timing-checks
+on the button signal used as clock with a **false-path** statement as follows:
+
+```
+set_false_path -from [get_ports btn]
+```
+
+<br />
+
+Once the bitstream is ready re-program the FPGA and debug the new updated firmware:
 
 ```
 % make install
@@ -810,6 +819,21 @@ Re-program the FPGA and debug the new updated firmware:
 >
 
 <br />
+
+<br />
+
+In case of **unexpected results** in the number of times you pressed the button vs.
+the decimal number displayed on the 7-segment display module try to catch at the oscilloscope
+**switch bounces** due to **mechanical chattering** when the switch is pressed.
+As usual for this purpose it is recommended to open the **Trigger Menu** of the
+oscilloscope you are working with and to switch the trigger-mode from **Auto** (default)
+to **Normal**. Ensure that a positive-edge transition is used as
+trigger condition. Finally select the channel used to display the push-button
+for the trigger. Cross-check push-buttons connections into PDF board schematics
+(e.g. **BTN0**) to find out the right test-point for the oscilloscope probe.
+
+<img src="doc/pictures/push_buttons_schematic.png" alt="drawing" width="550"/>
+
 
 <br />
 <!--------------------------------------------------------------------->
