@@ -4,14 +4,13 @@
 # Practicum 3
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/practicum)]
 
-For this practicum **try yourself** to write a suitable multiplexing logic
+For this practicum **try yourself** to write a suitable **multiplexing logic**
 to alternatively drive the four standard LEDs available on the Digilent _Arty_ board
 with either `1010` or `0101` patterns according to the position of a slide-switch.
 
 <br />
 
 <img src="doc/pictures/LED_pattern_mux.png" alt="drawing" width="700"/>
-<img src="doc/pictures/table.png" alt="drawing" width="500"/>
 
 <br />
 
@@ -24,6 +23,18 @@ All scripts and `Makefile` can be copied from the `.solutions/` directory as fol
 % cp .solutions/install.tcl .
 ```
 
+<br />
+
+As depicted in figure the block that you are requested to implement has one input and
+four outputs. The circuit is a pure **combinational circuit** and according to
+the desired functionality the **truth-table** for the block is the following:
+
+<br />
+
+<img src="doc/pictures/table.png" alt="drawing" width="500"/>
+
+<br />
+
 Try yourself to:
 
 * create new `LED_pattern_mux.v` and `LED_pattern_mux.xdc` source files from scratch
@@ -35,7 +46,7 @@ Try yourself to:
 
 <br />
 
-Once you have verified the proper functionality of the firmware **restore the final routed design checkpoint**
+Once you have verified the proper functionality of the firmware **restore the final routed design checkpoint (DCP)**
 in the Vivado graphical interface.
 
 For Linux users:
@@ -58,6 +69,12 @@ Inspect in the GUI the final **gate-level schematic**.
 
 <br />
 
+<img src="doc/pictures/LED_pattern_mux_vivado.png" alt="drawing"/>
+
+<br />
+
+<br />
+
 >
 > **QUESTION**
 >
@@ -71,7 +88,7 @@ Inspect in the GUI the final **gate-level schematic**.
 
 Let now suppose that you don't have a synthesis tool to infer the hardware starting from some HDL code.
 Try to derive yourself **logic equations** from the proposed truth-table of the circuit.
-Draw on paper the resulting gate-level schematic and copare your results with Vivado synthesis
+Draw **on paper** the resulting gate-level schematic and compare your results with Vivado synthesis
 results.
 
 <br />
