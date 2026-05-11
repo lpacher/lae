@@ -1500,11 +1500,24 @@ Most important reports are:
 
 <br />
 
-As an example, review in the console the content of the **post-placement utilization report**:
+Review in the console the content of the **post-placement utilization report**. Either use
+
+```
+% less Inverter/Inverter.runs/impl_1/Inverter_utilization_placed.rpt
+```
+
+<br />
+
+or
 
 ```
 % less Inverter.runs/impl_1/Inverter_utilization_placed.rpt
 ```
+
+<br />
+
+depending if you enabled or not the _Create project subdirectory_ option in the Vivado _New Project_ wizard.
+
 
 <br />
 
@@ -1573,7 +1586,7 @@ current_hw_device [get_hw_devices xc7a35t_0]
 refresh_hw_device -update_hw_probes false [lindex [get_hw_devices xc7a35t_0] 0]
 
 ## specify the bitstream file
-set_property PROGRAM.FILE {Inverter.runs/impl_1/Inverter.bit} [get_hw_devices xc7a35t_0]
+set_property PROGRAM.FILE {Inverter.runs/impl_1/Inverter.bit} [get_hw_devices xc7a35t_0] ;   #change this to {Inverter/Inverter.runs/impl_1/Inverter.bit} if needed
 
 ## empty entries
 set_property PROBES.FILE {} [get_hw_devices xc7a35t_0]
@@ -1759,7 +1772,7 @@ refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
 
 ## specify the memory file
 set_property PROGRAM.ADDRESS_RANGE           {use_file}                          [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
-set_property PROGRAM.FILES                   {Inverter.runs/impl_1/Inverter.bit} [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
+set_property PROGRAM.FILES                   {Inverter.runs/impl_1/Inverter.bit} [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]] ;   #change this to {Inverter/Inverter.runs/impl_1/Inverter.bin} if needed
 set_property PROGRAM.UNUSED_PIN_TERMINATION  {pull-none}                         [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
 
 ## program the external Quad-SPI Flash memory
