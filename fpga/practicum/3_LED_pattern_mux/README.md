@@ -35,12 +35,26 @@ Try yourself to:
 
 <br />
 
-Once you have verified the proper functionality of the firmware restore the routed design checkpoint in Vivado
-as follows:
+Once you have verified the proper functionality of the firmware **restore the final routed design checkpoint**
+in the Vivado graphical interface.
+
+For Linux users:
 
 ```
-% vivado -mode gui ./LED_pattern_mux.runs/impl_1/LED_pattern_mux_routed.dcp
+% vivado -mode gui ./LED_pattern_mux.runs/impl_1/LED_pattern_mux_routed.dcp &
 ```
+
+<br />
+
+For Windows users:
+
+```
+% echo "exec vivado -mode gui ./LED_pattern_mux.runs/impl_1/LED_pattern_mux_routed.dcp &" | tclsh -norc
+```
+
+<br />
+
+Inspect in the GUI the final **gate-level schematic**.
 
 <br />
 
@@ -55,6 +69,12 @@ as follows:
 
 <br />
 
+Let now suppose that you don't have a synthesis tool to infer the hardware starting from some HDL code.
+Try to derive yourself **logic equations** from the proposed truth-table of the circuit.
+Draw on paper the resulting gate-level schematic and copare your results with Vivado synthesis
+results.
+
+<br />
 <!--------------------------------------------------------------------->
 
 </div>
