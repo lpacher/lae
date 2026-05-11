@@ -1708,7 +1708,7 @@ set_property PROGRAM.VERIFY  1 [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_d
 set_property PROGRAM.CHECKSUM  0 [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
 refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
 set_property PROGRAM.ADDRESS_RANGE  {use_file} [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
-set_property PROGRAM.FILES {Inverter.runs/impl_1/Inverter.bit} [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
+set_property PROGRAM.FILES {Inverter.runs/impl_1/Inverter.bin} [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
 set_property PROGRAM.UNUSED_PIN_TERMINATION  {pull-none} [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
 create_hw_bitstream -hw_device [lindex [get_hw_devices xc7a35t_0] 0] [get_property PROGRAM.HW_CFGMEM_BITFILE [lindex [get_hw_devices xc7a35t_0] 0]]
 program_hw_devices [lindex [get_hw_devices xc7a35t_0] 0]
@@ -1772,7 +1772,7 @@ refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
 
 ## specify the memory file
 set_property PROGRAM.ADDRESS_RANGE           {use_file}                          [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
-set_property PROGRAM.FILES                   {Inverter.runs/impl_1/Inverter.bit} [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]] ;   #change this to {Inverter/Inverter.runs/impl_1/Inverter.bin} if needed
+set_property PROGRAM.FILES                   {Inverter.runs/impl_1/Inverter.bin} [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]] ;   #change this to {Inverter/Inverter.runs/impl_1/Inverter.bin} if needed
 set_property PROGRAM.UNUSED_PIN_TERMINATION  {pull-none}                         [get_property PROGRAM.HW_CFGMEM [lindex [get_hw_devices xc7a35t_0] 0]]
 
 ## program the external Quad-SPI Flash memory
