@@ -45,7 +45,7 @@ https://github.com/lpacher/lae/tree/master/fpga/practicum/10_delay_line)
 
 * **Practicum 11** <br />
 [A simple sequence detector with a Finite State Machine (FSM).](
-https://github.com/lpacher/lae/tree/master/fpga/practicum/11_sequence_detector)
+https://github.com/lpacher/lae/tree/master/fpga/practicum/11_sequence_detector_FSM)
 
 * **Practicum 12** <br />
 [Universal Asynchronous Receiver/Transmitter (UART).](
