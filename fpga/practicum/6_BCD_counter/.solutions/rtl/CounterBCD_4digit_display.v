@@ -1,9 +1,9 @@
-//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
 // 4-digit BCD counter driving a 4-digit 7-segment display module.
 //
 // Luca Pacher - pacher@to.infn.it
 // Spring 2021
-//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~`
 
 
 `timescale 1ns / 100ps
@@ -21,7 +21,7 @@ module CounterBCD_4digit_display (
    output wire segE,
    output wire segF,
    output wire segG,
-   output reg [3:0] anode 
+   output wire [3:0] anode 
 
    ) ;
 
@@ -45,9 +45,9 @@ module CounterBCD_4digit_display (
    end
 
 
-   //////////////////////////////////////////////////////////////
-   // control slice for multiplexing anodes and BCD-boundles   //
-   //////////////////////////////////////////////////////////////
+   ////////////////////////////////////////////////////////////////
+   //   control slice for multiplexing anodes and BCD-boundles   //
+   ////////////////////////////////////////////////////////////////
 
    wire [1:0] refresh_slice ;
 
@@ -72,7 +72,6 @@ module CounterBCD_4digit_display (
    ) ;
 
 
-
    ///////////////////////////////////
    //   multiplexer on BCD slices   //
    ///////////////////////////////////
@@ -95,44 +94,13 @@ module CounterBCD_4digit_display (
    //////////////////////////////////////////////////////// 
    //   binary/one-hot decoder for anodes multiplexing   //
    ////////////////////////////////////////////////////////
-   
-   //  slice[1:0]   |   anode[3:0]
-   //      00       |      0001
-   //      01       |      0010
-   //      10       |      0100
-   //      11       |      1000
-   //
-   //                 _                 _
-   // _______________/ \_______________/ \______  anode[3]
-   //               _                  _
-   // _____________/ \________________/ \_______  anode[2]
-   //             _                  _
-   // ___________/ \________________/ \_________  anode[1]
-   //           _                  _
-   // _________/ \________________/ \___________  anode[0]
-   //
 
+   OneHotAnodeDecoder  anode_decoder (
 
-   integer i ;
+      .slice  ( refresh_slice ),
+      .anode  (         anode )
 
-   always @(*) begin
-
-      for (i=0 ; i<4; i=i+1) begin      // compact procedural code using a Verilog for-loop
-
-         anode[i] = ( refresh_slice == i ) ;
-
-      end  // for
-   end  // always
-
-
-/*
-
-   assign anode[0] = ( refresh_slice == 0 ) ? 1'b1 : 1'b0 ;      // alternatively, use concurrent conditional assignments on wires
-   assign anode[1] = ( refresh_slice == 1 ) ? 1'b1 : 1'b0 ;
-   assign anode[2] = ( refresh_slice == 2 ) ? 1'b1 : 1'b0 ;
-   assign anode[3] = ( refresh_slice == 3 ) ? 1'b1 : 1'b0 ;
-
-*/
+   ) ;
 
 
    ///////////////////////////

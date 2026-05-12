@@ -57,7 +57,8 @@ This practicum should exercise the following concepts:
 * avoid to infer unwanted latches when writing combinational code
 * re-spin a design after small Engineering Change Order (ECO) changes
 * get familiar with most important _Non-Project Mode_ Tcl commands
-
+* introduce the problem of mechanical chattering and button-bounces that affects physical push-buttons
+ 
 <br />
 <!--------------------------------------------------------------------->
 

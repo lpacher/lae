@@ -52,7 +52,7 @@ LOG_DIR  := log
 RTL_TOP_MODULE := CounterBCD_4digit_display
 
 ## specify top-level testbench module (this is the target module for the xelab executable)
-SIM_TOP_MODULE := tb_CounterBCD_4digit_display\
+SIM_TOP_MODULE := tb_CounterBCD_4digit_display
 
 ##
 ## **NOTE
@@ -67,7 +67,7 @@ SIM_TOP_MODULE := tb_CounterBCD_4digit_display\
 ## specify RTL sources by hand (more in general can be Verilog + VHDL code)
 ##
 
-RTL_VLOG_SOURCES := $(RTL_DIR)/TickCounter.v $(RTL_DIR)/Debouncer.v $(RTL_DIR)/CounterBCD.v $(RTL_DIR)/CounterBCD_Ndigit.v $(RTL_DIR)/SevenSegmentDecoder.v $(RTL_DIR)/CounterBCD_4digit_display.v
+RTL_VLOG_SOURCES := $(RTL_DIR)/TickCounter.v $(RTL_DIR)/Debouncer.v $(RTL_DIR)/CounterBCD.v $(RTL_DIR)/CounterBCD_Ndigit.v $(RTL_DIR)/SevenSegmentDecoder.v $(RTL_DIR)/OneHoteAnodeDecoder.v $(RTL_DIR)/CounterBCD_4digit_display.v
 SIM_VLOG_SOURCES := $(SIM_DIR)/glbl.v $(SIM_DIR)/ClockGen.v $(SIM_DIR)/tb_CounterBCD_4digit_display.v
 
 
