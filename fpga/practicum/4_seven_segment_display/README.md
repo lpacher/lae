@@ -834,6 +834,24 @@ for the trigger. Cross-check push-buttons connections into PDF board schematics
 
 <img src="doc/pictures/push_buttons_schematic.png" alt="drawing" width="550"/>
 
+<br />
+
+In the following a few **example** oscilloscope waveforms of what you might see.
+Later in the course we will learn how to add a suitable **debouncing circuit**
+to properly feed "clean" button signals to FPGA internals.
+
+<br />
+
+<img src="doc/pictures/button_bounce_oscilloscope_example1.png" alt="drawing" width="700"/>
+
+<br /><br />
+
+<img src="doc/pictures/button_bounce_oscilloscope_example2.png" alt="drawing" width="700"/>
+
+<br /><br />
+
+<img src="doc/pictures/button_bounce_oscilloscope_example3.png" alt="drawing" width="700"/>
+
 
 <br />
 <!--------------------------------------------------------------------->
