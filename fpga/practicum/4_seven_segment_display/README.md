@@ -68,7 +68,7 @@ This practicum should exercise the following concepts:
 As a first step, open a **terminal** window and change to the practicum directory:
 
 ```
-% cd Desktop/lae/fpga/practicum/3_seven_segment_display
+% cd Desktop/lae/fpga/practicum/4_seven_segment_display
 ```
 
 <br />
