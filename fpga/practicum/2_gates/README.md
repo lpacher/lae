@@ -311,11 +311,6 @@ or left-click the schematic icon in the _Netlist_  tab.
 
 <br />
 
-<img src="doc/pictures/Gates_vivado.png" alt="drawing"/>
-
-<br />
-<br />
-
 >
 > **QUESTION**
 >
@@ -334,6 +329,11 @@ for the `INIT` parameter in the **Properties** section.
 Check the `INIT` value of each LUT in the schematic and determine if this is in agreement
 with the expected functionality of each implemented logic gate.
 
+<br />
+
+<img src="doc/pictures/Gates_vivado.png" alt="drawing"/>
+
+<br />
 
 <br />
 <!--------------------------------------------------------------------->

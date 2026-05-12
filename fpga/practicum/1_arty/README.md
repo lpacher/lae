@@ -1363,6 +1363,42 @@ and try to run the FPGA implementation flow in _Project Mode_ up to bitstream ge
 
 <br />
 
+At each step of the flow debug implementation results in the Vivado graphical user interface.
+In particular at the end of the implementation flow open the final post-routing 
+**gate-level schematic**. For this purpose you can either go through
+
+**Flow Navigator > IMPLEMENTATION > Open Implemented Design > Schematic**  
+
+
+or left-click the schematic icon in the _Netlist_  tab.
+
+<br />
+
+>
+> **QUESTION**
+>
+> Which FPGA device primitives have been used to map the design on real hardware ?
+>
+>   \___________________________________________________________________________________
+>
+
+<br />
+
+For each **Look-Up Table (LUT)** in the schematic identify and debug its **initialization value**.
+For this purpose left-click in the schematic view on the LUT instance that you want to inspect,
+then right-click on it, select **Cell Properties...** in the drop-down menu and finally search
+for the `INIT` parameter in the **Properties** section.
+
+Check the `INIT` value of each LUT in the schematic and determine if this is in agreement
+with the expected functionality for an inverter gate.
+
+<br />
+
+<img src="doc/pictures/Inverter_vivado.png" alt="drawing"/>
+
+<br />
+<br />
+
 After the implementation flow has successfully completed **locate the bitstream file**
 to be used for firmware installation.
 
@@ -1517,17 +1553,6 @@ or
 <br />
 
 depending if you enabled or not the _Create project subdirectory_ option in the Vivado _New Project_ wizard.
-
-
-<br />
-
->
-> **QUESTION**
->
-> Which FPGA device primitives have been used to map the design on real hardware ?
->
->   \___________________________________________________________________________________
->
 
 <br />
 <!--------------------------------------------------------------------->
