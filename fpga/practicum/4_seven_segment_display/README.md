@@ -852,9 +852,9 @@ to properly feed "clean" button signals to FPGA internals.
 
 <img src="doc/pictures/button_bounce_oscilloscope_example3.png" alt="drawing" width="700"/>
 
-
-<br />
+<br /><br />
 <!--------------------------------------------------------------------->
+
 
 ## Further readings
 [**[Contents]**](#contents)
