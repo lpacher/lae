@@ -52,7 +52,7 @@ LOG_DIR  := log
 RTL_TOP_MODULE := CounterBCD_4digit_display
 
 ## specify top-level testbench module (this is the target module for the xelab executable)
-SIM_TOP_MODULE := tb_CounterBCD_4digit_display\
+SIM_TOP_MODULE := tb_CounterBCD_4digit_display
 
 ##
 ## **NOTE
