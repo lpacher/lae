@@ -26,7 +26,7 @@
 
 
    // number of (x,y) experimental values
-   int Npt = 5 ;
+   const int Npt = 5 ;
 
    TGraph *gr1 = new TGraph(Npt) ;
    TGraph *gr2 = new TGraph(Npt) ;
@@ -90,6 +90,9 @@
 
    c1->cd(2) ;
    gr2->Draw("ALP") ;
+
+   // update the canvas
+   c1->Update()
 
 }   // end script
 

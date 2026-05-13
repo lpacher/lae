@@ -125,3 +125,6 @@ gr1.Draw("ALP")
 c1.cd(2)
 gr2.Draw("ALP")
 
+## update the canvas
+c1.Update()
+
