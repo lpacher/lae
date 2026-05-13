@@ -51,7 +51,7 @@ module tb_CounterBCD_4digit_display ;
    wire [3:0] DIGIT_0 = DUT.BCD[ 3: 0] ;
    wire [3:0] DIGIT_1 = DUT.BCD[ 7: 4] ;
    wire [3:0] DIGIT_2 = DUT.BCD[11: 8] ;
-   wire [3:0 ]DIGIT_3 = DUT.BCD[15:12] ;
+   wire [3:0] DIGIT_3 = DUT.BCD[15:12] ;
 
 
    ///////////////////////

@@ -414,6 +414,14 @@ Once all scripts are in place try to re-run all flows from scratch using the `ma
 
 <br />
 
+In case of implementation errors debug the Vivado **log file** at the command line with:
+
+```
+% grep ERROR build.log
+```
+
+<br />
+
 Explore the content of the updated scripts with your preferred text editor or using basic
 command-line utilities `cat`, `more` or `less`.
 

@@ -46,6 +46,14 @@ Try yourself to:
 
 <br />
 
+In case of implementation errors debug the Vivado **log file** at the command line with:
+
+```
+% grep ERROR build.log
+```
+
+<br />
+
 Once you have verified the proper functionality of the firmware **restore the final routed design checkpoint (DCP)**
 in the Vivado graphical interface.
 
