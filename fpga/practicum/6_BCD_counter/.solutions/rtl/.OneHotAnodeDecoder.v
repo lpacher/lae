@@ -33,6 +33,10 @@ module OneHotAnodeDecoder (
    ) ;
 
 
+   //////////////////////////////////
+   //    for-loop implementation   //
+   //////////////////////////////////
+
    integer i ;
 
    always @(*) begin
@@ -45,12 +49,36 @@ module OneHotAnodeDecoder (
    end  // always
 
 
+   ///////////////////////////////////////////
+   //   truth-table (case) implementation   //
+   ///////////////////////////////////////////
+
    /*
 
-   assign anode[0] = ( slice == 0 ) ? 1'b1 : 1'b0 ;      // alternatively, use concurrent conditional assignments on wires
-   assign anode[1] = ( slice == 1 ) ? 1'b1 : 1'b0 ;
-   assign anode[2] = ( slice == 2 ) ? 1'b1 : 1'b0 ;
-   assign anode[3] = ( slice == 3 ) ? 1'b1 : 1'b0 ;
+   always @(*) begin
+      case (slice)
+
+         2'b00 : anode = 4'b0001 ;
+         2'b01 : anode = 4'b0010 ;
+         2'b10 : anode = 4'b0100 ;
+         2'b11 : anode = 4'b1000 ;
+
+      endcase
+   end   //always
+
+   */
+
+
+   ////////////////////////////////////////////
+   //    conditional-assign implementation   //
+   ////////////////////////////////////////////
+
+   /*
+
+   assign anode[0] = ( slice == 2'b00 ) ? 1'b1 : 1'b0 ;      // alternatively, use concurrent conditional assignments on wires
+   assign anode[1] = ( slice == 2'b01 ) ? 1'b1 : 1'b0 ;
+   assign anode[2] = ( slice == 2'b10 ) ? 1'b1 : 1'b0 ;
+   assign anode[3] = ( slice == 2'b11 ) ? 1'b1 : 1'b0 ;
 
    */
 

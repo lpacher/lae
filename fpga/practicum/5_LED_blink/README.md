@@ -762,6 +762,12 @@ input port for the trigger.
 
 <img src="doc/pictures/POWER_header.png" alt="drawing" width="400"/>
 
+<br />
+
+<img src="doc/pictures/RESET_BTN_oscilloscope.png" alt="drawing" width="700"/>
+
+<br /><br />
+
 >
 > **QUESTION**
 >
@@ -784,7 +790,7 @@ The typical **bandwidth** for an **entry-level oscilloscope** is usually between
 This range is more than enough for general electronics, learning and teaching purposes, FPGA/microcontroller
 projects and to deal with common audio signals. This is the case of most oscilloscopes available in the lab.
 
-As a result due to **bandwidth limitation** it might be not possible to directly probe and display a clean 100 MHz clock-waveform.
+As a result due to **bandwidth limitations** it might be not possible to directly probe and display a clean 100 MHz clock-waveform.
 In such a situation we can use a **clock-divider** to take measurements on a lower-frequency clock-waveform starting 
 from a higher-frequency clock.
 

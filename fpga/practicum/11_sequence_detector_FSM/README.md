@@ -14,6 +14,7 @@
 * [**Design constraints**](#design-constraints)
 * [**Implement the design on target FPGA**](#implement-the-design-on-target-fpga)
 * [**Install and debug the firmware**](#install-and-debug-the-firmware)
+* [**Exercise**](#exercise)
 
 
 <br />
@@ -33,6 +34,20 @@ available on the Digilent _Arty_ board from right to left as depicted in figure.
 
 <img src="doc/pictures/RequestedSwitchSequence.png" alt="drawing" width="200"/>
 
+<br /><br />
+
+In practice the circuit has to be able to detect a **thermometer-code** sequence
+
+```verilog
+4'b0001
+4'b0011
+4'b0111
+4'b1111
+```
+
+<br>
+
+generated using slide-switches as inputs for the state-machine.
 
 <br />
 <!--------------------------------------------------------------------->
@@ -236,6 +251,19 @@ system **upload the firmware** from the command line using:
 Once the firmware has been successfully installed press the **RESET** button, then play with
 slide-switches and check if your state-machine properly detects the requested sequence.
 Debug the value of the current-state by looking at standard LEDs.
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+## Exercise
+[**[Contents]**](#contents)
+
+Modify the FSM in order to detect the opposite sequence, from left to right as depicted in figure.
+
+<br />
+
+<img src="doc/pictures/RequestedSwitchSequenceExercise.png" alt="drawing" width="200"/>
 
 <br />
 <!--------------------------------------------------------------------->

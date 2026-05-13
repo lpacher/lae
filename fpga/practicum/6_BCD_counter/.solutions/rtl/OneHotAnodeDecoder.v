@@ -29,7 +29,7 @@
 module OneHotAnodeDecoder (
 
    input  wire [1:0] slice,
-   output reg  [3:0] anode        // 4-bit bus driven inside 'always' block
+   output reg  [3:0] anode        // 4-bit bus driven inside an 'always' block
    //output wire  [3:0] anode     // 4-bit bus driven by continuous 'assign' statements 
 
    ) ;
