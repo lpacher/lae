@@ -132,7 +132,6 @@ as follows:
 
 <br />
 
-
 The `sequence_detector_FSM` Verilog module that you are going to implement runs with the
 nominal 100 MHz external clock, has 4-inputs corresponding to slide-switches available on the
 _Arty_ board, one reset and a LED on which display that the right sequence has been detected.
@@ -145,7 +144,9 @@ A partial **state diagram** is depicted below:
 
 <img src="doc/pictures/HintFSM.png" alt="drawing" width="700"/>
 
-<br />
+<br /><br />
+
+Try yourself to complete the following code skeleton:
 
 ```verilog
 module sequence_detector_FSM (
