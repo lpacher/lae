@@ -63,7 +63,7 @@ This practicum should exercise the following concepts:
 As a first step, open a **terminal** window and change to the practicum directory:
 
 ```
-% cd Desktop/lae/fpga/practicum/4_LED_blink
+% cd Desktop/lae/fpga/practicum/5_LED_blink
 ```
 
 <br />
