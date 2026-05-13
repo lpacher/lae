@@ -285,7 +285,7 @@ gui : ## Start Vivado in GUI mode and keep the shell alive
 .PHONY : clean
 clean : sim/clean build/clean ## Delete ALL temporary and garbage files
 
-	@$(RM) *.pb *.wdb *.log *.jou *.str *xpr *.xml *.bit *.bin
+	@$(RM) *.pb *.wdb *.log *.jou *.str *xpr *.xml *.bit *.bin *webtalk.html
 	@$(RMDIR) xsim.dir
 	@$(RMDIR) .Xil
 ##____________________________________________________________________________________________________

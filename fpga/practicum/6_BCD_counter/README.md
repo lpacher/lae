@@ -13,7 +13,7 @@
 * [**Inspect RTL sources**](#inspect-rtl-sources)
 * [**Explore the RTL design hierarchy**](#explore-the-rtl-design-hierarchy)
 * [**RTL coding**](#rtl-coding)
-* [**Simulate the design (optional)**](#simulate-the-design-optional)
+* [**Simulate the design**](#simulate-the-design)
 * [**Implement the design on target FPGA**](#implement-the-design-on-target-fpga)
 * [**Build the circuit on breadboard**](#build-the-circuit-on-breadboard)
 * [**Install and debug the firmware**](#install-and-debug-the-firmware)
@@ -237,12 +237,23 @@ your source code with:
 <!--------------------------------------------------------------------->
 
 
-## Simulate the design (optional)
+## Simulate the design
 [**[Contents]**](#contents)
 
-A simplified testbench can be used to verify that all connections are OK and that the BCD counter
-counts properly. Before mapping the RTL code into real FPGA hardware it is recommended to run
-a behavioral simulation of the proposed RTL code:
+A simplified testbench has been already prepared for you to verify that all connections are OK
+and that the BCD counter counts properly. Open with your preferred text-editor application
+the testbench and inspect the simulation code:
+
+```
+% gedit bench/tb_CounterBCD_4digit_display.v &   (for Linux users)
+
+% n++ bench\tb_CounterBCD_4digit_display.v       (for Windows users)
+```
+
+<br />
+
+Before mapping the RTL code into real FPGA hardware **run a behavioral simulation**
+of the complete RTL code:
 
 ```
 % make sim mode=gui
