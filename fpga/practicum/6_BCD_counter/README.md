@@ -387,16 +387,6 @@ CounterBCD_Ndigit  #(.NDIGITS(4)) counter (
 
 <br />
 
-Once done, save the file and try to re-run the flows from scratch up to FPGA programming with:
-
-```
-% make clean
-% make build install
-```
-
-<br />
-
-Verify if with the insertion of the `Debouncer` module the BCD counter now counts as expected.
 Open in your text-editor the `rtl/Debouncer.v` source code:
 
 ```
@@ -409,6 +399,19 @@ Open in your text-editor the `rtl/Debouncer.v` source code:
 
 Inspect the code and try yourself to **draw on paper the circuit schematic** implemented
 in the `Debouncer` module.
+
+<br />
+
+Once done, save the file and try to re-run the flows from scratch up to FPGA programming with:
+
+```
+% make clean
+% make build install
+```
+
+<br />
+
+Verify if with the insertion of the `Debouncer` module the BCD counter now counts as expected.
 
 <br />
 <!--------------------------------------------------------------------->
