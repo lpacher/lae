@@ -396,9 +396,19 @@ Once done, save the file and try to re-run the flows from scratch up to FPGA pro
 
 <br />
 
-Verify if with a debouncer the BCD counter now counts as expected.
+Verify if with the insertion of the `Debouncer` module the BCD counter now counts as expected.
+Open in your text-editor the `rtl/Debouncer.v` source code:
 
-TODO: draw on paper the schematic of the `Debouncer` module !
+```
+% gedit rtl/Debouncer.v &   (for Linux users)
+
+% n++ rtl\Debouncer.v       (for Windows users)
+```
+
+<br />
+
+Inspect the code and try yourself to **draw on paper the circuit schematic** implemented
+in the `Debouncer` module.
 
 <br />
 <!--------------------------------------------------------------------->
