@@ -21,6 +21,7 @@ set_property -dict { PACKAGE_PIN A10  IOSTANDARD LVCMOS33} [get_ports {BCD[3]} ]
 
 ## **EXERCISE: drive with push-button BTN0 a 4-bit module-9 counter
 #set_property -dict { PACKAGE_PIN D9  IOSTANDARD LVCMOS33 } [get_ports btn]
+#set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets btn]
 
 
 ## JA header mapping (200 ohm series resistor on each pin)

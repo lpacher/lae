@@ -803,6 +803,48 @@ set_false_path -from [get_ports btn]
 
 <br />
 
+Depending on the version of Vivado you might also encounter the following **placement error**
+reported by Vivado in the console:
+
+```
+ERROR: [Place 30-574] Poor placement for routing between an IO pin and BUFG. If this sub optimal condition is acceptable
+for this design, you may use the CLOCK_DEDICATED_ROUTE constraint in the .xdc file to demote this message to a WARNING.
+However, the use of this override is highly discouraged. These examples can be used directly in the .xdc file to override
+this clock rule.
+	< set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets btn_IBUF] >
+
+	Clock Rule: rule_gclkio_bufg
+	Status: FAILED
+	Rule Description: An IOB driving a BUFG must use a CCIO in the same half side (top/bottom) of chip as the BUFG
+
+	btn_IBUF_inst (IBUF.O) is locked to IOB_X0Y137
+	btn_IBUF_BUFG_inst (BUFG.I) is provisionally placed by clockplacer on BUFGCTRL_X0Y31
+Resolution: Poor placement of an IO pin and a BUFG has resulted in the router using a non-dedicated path between the two.
+There are several things that could trigger this DRC, each of which can cause unpredictable clock insertion delays that
+result in poor timing.  This DRC could be caused by any of the following: (a) a clock port was placed on a pin that is no
+a CCIO-pin (b)the BUFG has not been placed in the same half of the device or SLR as the CCIO-pin (c) a single ended clock
+has been placed on the N-Side of a differential pair CCIO-pin.
+```
+
+<br />
+
+To solve this simply add the suggested statement into the XDC constraints file:
+
+```
+set_property CLOCK_DEDICATED_ROUTE FALSE [get_nets btn]
+```
+
+<br />
+
+Please remind that you can always use the `grep` utility at the command line to quickly search for errors
+in the Vivado **log file** and debug issues and problems:
+
+```
+% grep ERROR build.log
+```
+
+<br />
+
 Once the bitstream is ready re-program the FPGA and debug the new updated firmware:
 
 ```
