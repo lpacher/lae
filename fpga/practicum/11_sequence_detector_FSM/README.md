@@ -38,7 +38,7 @@ available on the Digilent _Arty_ board from right to left as depicted in figure.
 
 In practice the circuit has to be able to detect a **thermometer-code** sequence
 
-```verilog
+```
 4'b0001
 4'b0011
 4'b0111
@@ -137,6 +137,16 @@ The `sequence_detector_FSM` Verilog module that you are going to implement runs 
 nominal 100 MHz external clock, has 4-inputs corresponding to slide-switches available on the
 _Arty_ board, one reset and a LED on which display that the right sequence has been detected.
 
+<br />
+
+A partial **state diagram** is depicted below:
+
+<br />
+
+<img src="doc/pictures/HintFSM.png" alt="drawing" width="700"/>
+
+<br />
+
 ```verilog
 module sequence_detector_FSM (
 
@@ -147,15 +157,33 @@ module sequence_detector_FSM (
 
    ) ;
 
+
+   parameter [...] IDLE  = .... ;
+   parameter [...] START = .... ;
+
    ...
    ...
 
-   reg [...] STATE ;
+   reg [...] STATE, STATE_NEXT ;
 
-   ...
-   ...
+
+   //////////////////////////
+   //   next-state logic   //
+   //////////////////////////
 
    always @(posedge clk) begin
+
+      ...
+      ...
+
+   end   //always 
+
+
+   /////////////////////////////
+   //   combinational logic   //
+   /////////////////////////////
+
+   always @(*) begin
 
       ...
       ...
@@ -167,13 +195,6 @@ endmodule
 
 <br />
 
-A partial **state diagram** is depicted below:
-
-<br />
-
-<img src="doc/pictures/HintFSM.png" alt="drawing" width="700"/>
-
-<br />
 
 Please remind that you can check for syntax errors at any time by compiling
 your source code with:
