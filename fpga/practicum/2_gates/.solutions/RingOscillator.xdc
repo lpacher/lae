@@ -57,7 +57,7 @@ set_false_path -from [all_inputs] -to [all_outputs]
 ####################
 
 #set_property DONT_TOUCH TRUE [get_nets w* ]
-#set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets w* ]
+set_property ALLOW_COMBINATORIAL_LOOPS TRUE [get_nets w* ]
 
 
 ################################

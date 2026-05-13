@@ -745,6 +745,14 @@ After the implementation has successfully completed install the firmware to the 
 
 <br />
 
+In case of implementation errors debug the Vivado **log file** at the command line with:
+
+```
+% grep ERROR build.log
+```
+
+<br />
+
 Verify the functionality of the ring-oscillator you have mapped on real hardware.
 Use the **SW0** slide-switch assigned to the `start` Verilog input port
 to enable/disable the oscillator and probe the `clk` signal at the oscilloscope.
