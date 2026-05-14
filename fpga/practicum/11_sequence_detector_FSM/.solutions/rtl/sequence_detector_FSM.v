@@ -7,7 +7,7 @@ module sequence_detector_FSM (
    input  wire reset,
    input  wire [3:0] SW,
    output wire detected,
-   output wire [3:0] state_led   //DEBUG: show to standard LEDs current-state binary values
+   output wire [2:0] state_led   //DEBUG: show to standard LEDs current-state binary values
 
    ) ;
 
@@ -21,14 +21,15 @@ module sequence_detector_FSM (
 
    reg [2:0] STATE, STATE_NEXT ;
 
-   assign state_led = { 1'b0 , STATE } ;
+   // **DEBUG: map STATE-bits to standard LEDs
+   assign state_led = STATE ;
 
 
    /////////////////////////////////////////////////
    //   next-state logic (FSM sequential part)   //
    /////////////////////////////////////////////////
 
-   always @(posedge clk or negedge reset) begin
+   always @(posedge clk) begin
       if (~reset) begin        //RESET button => active-low
       //if (reset) begin       //BTN0 button => active-high
          STATE <= IDLE ;
@@ -44,11 +45,7 @@ module sequence_detector_FSM (
    //   combinational part   //
    ////////////////////////////
 
-   //reg detected_comb ;
-
    always @(*) begin
-
-      //detected_comb = 1'b0 ;
 
       case (STATE)
 
@@ -61,7 +58,9 @@ module sequence_detector_FSM (
          //__________________________________________________________________
          //
          START : begin
-            if ( SW == 4'b0001 )
+            if ( SW == 4'b0000 )
+               STATE_NEXT <= START ;
+            else if ( SW == 4'b0001 )
                STATE_NEXT <= ONE ;
             else
                STATE_NEXT <= IDLE ;

@@ -1,3 +1,4 @@
+<div align="justify">
 
 # Practicum 7
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/practicum)]
@@ -37,7 +38,7 @@ The proposed circuit under test is the following:
 In particular the PLL is customized in order to generate **four different lower-frequency clocks**
 starting from the default 100 MHz external clock available on the Arty board. A **special 4:1 multiplexer**
 driven by two slide-switches is then used to select the clock waveform to be displayed at the oscilloscope,
-along with the PLL "locked" status flag. §Additionally you can reset the PLL at any time with a dedicated
+along with the PLL "locked" status flag. Additionally you can reset the PLL at any time with a dedicated
 active-high reset pin.
 
 Since MUX inputs are clock signals in this case the MUX functionality cannot be implemented
@@ -412,3 +413,4 @@ Debug the functionality of the new firmware.
 <br />
 <!--------------------------------------------------------------------->
 
+</div>

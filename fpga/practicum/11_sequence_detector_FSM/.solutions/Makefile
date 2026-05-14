@@ -52,7 +52,7 @@ LOG_DIR  := log
 RTL_TOP_MODULE := sequence_detector_FSM
 
 ## specify top-level testbench module (this is the target module for the xelab executable)
-#SIM_TOP_MODULE := n/a
+SIM_TOP_MODULE := tb_sequence_detector_FSM
 
 ##
 ## **NOTE
@@ -68,7 +68,7 @@ RTL_TOP_MODULE := sequence_detector_FSM
 ##
 
 RTL_VLOG_SOURCES := $(RTL_DIR)/sequence_detector_FSM.v
-#SIM_VLOG_SOURCES := n/a
+SIM_VLOG_SOURCES := $(SIM_DIR)/glbl.v $(SIM_DIR)/ClockGen.v $(SIM_DIR)/tb_sequence_detector_FSM.v
 
 
 ## if no VHDL sources, you can either comment the below variables or just leave them empty
