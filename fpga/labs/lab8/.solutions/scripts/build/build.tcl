@@ -25,6 +25,9 @@ if { [catch {
    set buildStart [clock seconds]
    ###################################
 
+   ## CPU setup
+   set_param general.maxThreads 8
+
    puts "Start at: [clock format ${buildStart} -format {%x %X}]"
 
    ## parse RTL and IP sources

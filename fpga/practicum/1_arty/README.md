@@ -2258,7 +2258,7 @@ this very basic functionality:
 
 void setup() {
 
-   // Set pin 7 as an output
+   // Set pin 7 as an input
    pinMode(BUTTON, INPUT);
 
    // Set pin 13 as an output

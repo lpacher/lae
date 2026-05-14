@@ -260,16 +260,6 @@ of the complete RTL code:
 ```
 
 <br />
-
->
-> **QUESTION**
->
-> Which is the reset scheme adopted in the design ?
->
->   \____________________________________________________________________________________________________
->
-
-<br />
 <!--------------------------------------------------------------------->
 
 
@@ -332,6 +322,16 @@ Debug the functionality of the firmware on real hardware:
 * display at the oscilloscope the one-hot code generated for `anode[3:0]` outputs
 * increment the BCD counter by pressing the appropriate push-button on the board and observe the result onto the display
 * play with the reset button
+
+<br />
+
+>
+> **QUESTION**
+>
+> Which is the reset scheme adopted in the 4-digit BCD-counter ?
+>
+>   \____________________________________________________________________________________________________
+>
 
 <br />
 <!--------------------------------------------------------------------->

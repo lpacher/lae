@@ -17,6 +17,7 @@
 * [**Implement a 1-bit DAC on breadboard**](#implement-a-1-bit-dac-on-breadboard)
 * [**Linearity data analysis**](#linearity-data-analysis)
 * [**Exercises**](#exercises)
+* [**Extra: comparison with Arduino code**](#extra-comparison-with-arduino-code)
 
 
 <br />
@@ -475,7 +476,7 @@ module SawtoothGen (
 
 
    // PWM generator
-   PWM #(.THRESHOLD_BITS(16)) PWM_INST ( .clk(clk), .threshold(count), .pwn_out(pwm_out)) ;
+   PWM #(.THRESHOLD_BITS(16)) PWM_INST ( .clk(clk), .threshold(count), .pwm_out(pwm_out)) ;
 
 endmodule
 ```
@@ -488,6 +489,34 @@ endmodule
 
 Modify the logic on the counter in order to implement a **triangular wave generator**.
 
+<br />
+<!--------------------------------------------------------------------->
+
+## Extra: comparison with Arduino code
+[**[Contents]**](#contents)
+
+
+```cpp
+// Arduino Example PWM Implementation
+
+#define PWM_OUT 11
+
+void setup() {
+
+   // Set pin 11 as an output
+   pinMode(PWM_OUT, OUTPUT);
+}
+
+
+void loop() {
+
+   // Duty cycle chosen with integer beween 0 and 255
+   analogWrite(PWM_OUT,70);
+}
+```
+
+<br />
+<!--------------------------------------------------------------------->
 
 </div>
 
