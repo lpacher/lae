@@ -18,6 +18,13 @@ log*
 ## ROOT files
 *.root
 
+## executables
+*.exe
+
+## compressed files
+*.zip
+*.tar.gz
+
 ## temporary directory (optional)
 tmp/*
 temp/*
