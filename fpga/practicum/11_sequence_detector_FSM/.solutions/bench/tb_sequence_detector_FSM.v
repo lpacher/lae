@@ -1,7 +1,19 @@
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Example simulation code for the sequence_detector_FSM module.
+// Beside standard verification features the testbench uses a ROM
+// (Read-Only Memory) to store an arbitrary sequence of switch
+// positions as inputs for the sequence detector.
+//
+// Luca Pacher - pacher@to.infn.it
+// Spring 2026
+//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 `timescale 1ns / 100ps
 
 module tb_sequence_detector_FSM ;
+
 
    /////////////////////////
    //   clock generator   //
@@ -9,7 +21,7 @@ module tb_sequence_detector_FSM ;
 
    wire clk ;
 
-   ClockGen  #(.PERIOD(10.0)) ClockGen_inst (.clk(clk) ) ;   // override default period as module parameter (default is 50.0 ns)
+   ClockGen  #(.PERIOD(10.0)) ClockGen_inst (.clk(clk) ) ;
 
 
    ///////////////////////////
@@ -33,10 +45,9 @@ module tb_sequence_detector_FSM ;
    ) ;
 
 
-
-   //////////////////////
-   //   ROM sequence   //
-   //////////////////////
+   /////////////////////////////////////////
+   //   ROM-based switch input sequence   //
+   /////////////////////////////////////////
 
    reg [4:0] mem [0:15] ;
 
@@ -46,9 +57,9 @@ module tb_sequence_detector_FSM ;
       mem[ 0] = 4'b0000 ;
       mem[ 1] = 4'b0010 ;
       mem[ 2] = 4'b1010 ;
-      mem[ 3] = 4'b0000 ;
-      mem[ 4] = 4'b0001 ;
-      mem[ 5] = 4'b0011 ;
+      mem[ 3] = 4'b0000 ;  //OK
+      mem[ 4] = 4'b0001 ;  //OK
+      mem[ 5] = 4'b0011 ;  //OK
       mem[ 6] = 4'b1011 ;
       mem[ 7] = 4'b0000 ;  //OK
       mem[ 8] = 4'b0001 ;  //OK
@@ -79,5 +90,19 @@ module tb_sequence_detector_FSM ;
 
       #100 $finish ;
    end   //initial
+
+
+   //////////////////////////////////////
+   //   text-based simulation output   //
+   //////////////////////////////////////
+
+   initial begin
+      $display("time   SW   detected") ;
+      $monitor("%d ns   %b   %b", $time, sequence, detected) ;
+   end
+
+   always @(*)
+      if ( STATE == 3'b101 )
+         $display("Sequence detected!") ;
 
 endmodule
