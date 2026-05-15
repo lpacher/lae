@@ -1,15 +1,32 @@
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Example sequence-detector Finite State Machine (FSM) implementation.
+// The machine is designed to detect the switching-sequence of the four
+// slide-switches available on the Digilent Arty board from right to left.
+//
+// Luca Pacher - pacher@to.infn.it
+// Spring 2026
+//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 `timescale 1ns / 100ps
 
 module sequence_detector_FSM (
 
-   input  wire clk,
-   input  wire reset,
-   input  wire [3:0] SW,
-   output wire detected,
-   output wire [3:0] state_led   //DEBUG: show to standard LEDs current-state binary values
+   input  wire clk,         // external 100 MHz clock from XTAL oscillator
+   input  wire reset,       // external reset (map this to the RESET red push-button)
+   input  wire [3:0] SW,    // slide-switches
+   output wire detected,    // turn on a LED with this output when the sequence has been detected
+
+   // **DEBUG: show to standard LEDs current-state binary values
+   output wire [2:0] state_led
 
    ) ;
+
+
+   /////////////////////////////////
+   //   states-definition table   //
+   /////////////////////////////////
 
    parameter [2:0] IDLE   = 3'b111 ;
    parameter [2:0] START  = 3'b001 ;   // 4'b0000 detected
@@ -21,16 +38,16 @@ module sequence_detector_FSM (
 
    reg [2:0] STATE, STATE_NEXT ;
 
-   assign state_led = { 1'b0 , STATE } ;
+   // **DEBUG: map STATE-bits to standard LEDs
+   assign state_led = STATE ;
 
 
    /////////////////////////////////////////////////
    //   next-state logic (FSM sequential part)   //
    /////////////////////////////////////////////////
 
-   always @(posedge clk or negedge reset) begin
+   always @(posedge clk) begin
       if (~reset) begin        //RESET button => active-low
-      //if (reset) begin       //BTN0 button => active-high
          STATE <= IDLE ;
       end
       else begin
@@ -39,16 +56,11 @@ module sequence_detector_FSM (
    end   //always
 
 
-
    ////////////////////////////
    //   combinational part   //
    ////////////////////////////
 
-   //reg detected_comb ;
-
    always @(*) begin
-
-      //detected_comb = 1'b0 ;
 
       case (STATE)
 
@@ -61,7 +73,9 @@ module sequence_detector_FSM (
          //__________________________________________________________________
          //
          START : begin
-            if ( SW == 4'b0001 )
+            if ( SW == 4'b0000 )
+               STATE_NEXT <= START ;
+            else if ( SW == 4'b0001 )
                STATE_NEXT <= ONE ;
             else
                STATE_NEXT <= IDLE ;
@@ -110,6 +124,6 @@ module sequence_detector_FSM (
       endcase
    end   //always
 
-   assign detected = (STATE_NEXT == DONE) ? 1'b1 : 1'b0 ;
+   assign detected = (STATE == DONE) ? 1'b1 : 1'b0 ;
 
 endmodule
