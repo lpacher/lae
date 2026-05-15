@@ -1008,7 +1008,7 @@ and for the frequency vs. $1/(N+1)$. Verify the expected linearity of the charac
 > into the `TGraph` constructor:
 >
 > ```
-> root[] int Npt = ...
+> root[] const int Npt = ...
 > root[] double xData[Npt] = {283 , 567 , 849 , 1133 , 1415 ... }
 > root[] double yData[Npt] = { ... }
 > root[] TGraph gr1(Npt,xData,yData)

@@ -413,7 +413,7 @@ Verify the expected **linearity of the DAC characteristic** with a fit. Feel fre
 > into the `TGraph` constructor:
 >
 > ```
-> root[] int Npt = 16
+> root[] const int Npt = 16
 > root[] double xData[Npt] = {0,1,2,3 ... 15}
 > root[] double yData[Npt] = { ... }
 > root[] TGraph gr(Npt,xData,yData)
