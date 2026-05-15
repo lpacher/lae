@@ -248,16 +248,6 @@ Once the board has been recognized by the operating system **upload the firmware
 Observe the pseudo-random bit sequence at the oscilloscope.
 
 <br />
-
->
-> **QUESTION**
->
-> Which is the rate of the pseudo-random bit sequence ? Compare your answer with the behavioral simulation.
->
->   \____________________________________________________________________________________________________
->
-
-<br />
 <!--------------------------------------------------------------------->
 
 
@@ -274,6 +264,19 @@ by the _**opening**_ of the "eye", while **RMS and peak-to-peak jitter** can be 
 <br />
 
 <img src="doc/pictures/eye_diagram1.png" alt="drawing" width="550"/>
+
+<br /><br />
+
+>
+> **QUESTIONS*
+>
+> Q1. What is the rate of the pseudo-random bit sequence ? Compare your answer with the behavioral simulation.
+>
+>   \____________________________________________________________________________________________________
+>
+> Q2. What is the peak-to-peak **jitter** on transmitted data ? 
+>
+>   \____________________________________________________________________________________________________
 
 <br />
 <!--------------------------------------------------------------------->
