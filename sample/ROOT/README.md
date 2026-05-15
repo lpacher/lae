@@ -101,15 +101,12 @@ Python 2.7 should be already installed on your Linux system by default. Double-c
 Simply download and extract both ROOT and Python pre-compiled `.zip` files already prepared for you.
 If GNU Win is properly installed you can use `certutil` and `unzip` utilities at the command-line as follows:
 
-<!-- wget https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/ROOT.zip     **NOT WORKING** -->
-<!-- wget https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/Python.zip   **NOT WORKING** -->
-
 ```
 % cd C:\Users\<username>
 % mkdir -p local
 % cd local
-% certutil -urlcache -split -f https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/ROOT.zip ROOT.zip
-% certutil -urlcache -split -f https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/Python.zip Python.zip
+% wget --no-check-certificate  https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/ROOT.zip
+% wget --no-check-certificate  https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/Python.zip
 % unzip ROOT.zip
 % unzip Python.zip
 % rm -f ROOT.zip Python.zip
