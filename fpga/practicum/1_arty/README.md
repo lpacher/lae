@@ -185,7 +185,7 @@ _<https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/Evince.zip>_
 > % cd C:\Users\<username>
 > % mkdir -p local
 > % cd local
-> % wget https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/Evince.zip
+> % wget --no-check-certificate https://www.to.infn.it/~pacher/teaching/FPGA/software/windows/Evince.zip
 > % unzip Evince.zip
 > % rm Evince.zip
 > ```
@@ -2122,8 +2122,7 @@ You can easily download and extract all demo sources at the command-line with `w
 ```
 % mkdir gpio_demo
 % cd gpio_demo
-% wget https://github.com/Digilent/Arty-A7-35-GPIO/releases/download/v2018.2-1/Arty-A7-35-GPIO-2018.2-1.zip   #Linux
-% certutil -urlcache -split -f https://github.com/Digilent/Arty-A7-35-GPIO/releases/download/v2018.2-1/Arty-A7-35-GPIO-2018.2-1.zip Arty-A7-35-GPIO-2018.2-1.zip   #Windows
+% wget --no-check-certificate https://github.com/Digilent/Arty-A7-35-GPIO/releases/download/v2018.2-1/Arty-A7-35-GPIO-2018.2-1.zip 
 % unzip Arty-A7-35-GPIO-2018.2-1.zip
 % ls -l
 ```
