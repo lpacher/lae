@@ -10,8 +10,8 @@
 * [**Navigate to the practicum directory**](#navigate-to-the-practicum-directory)
 * [**Setting up the work area**](#setting-up-the-work-area)
 * [**Compile the PLL IP core**](#compile-the-pll-ip-core)
-* [**Review RTL sources (optional)**](#review-rtl-sources-optional)
-* [**Simulate the design (optional)**](#simulate-the-design-optional)
+* [**Review RTL sources**](#review-rtl-sources)
+* [**Simulate the design**](#simulate-the-design)
 * [**Implement the design on target FPGA**](#implement-the-design-on-target-fpga)
 * [**Install and debug the firmware**](#install-and-debug-the-firmware)
 * [**Implement a 1-bit DAC on breadboard**](#implement-a-1-bit-dac-on-breadboard)
@@ -154,23 +154,29 @@ At the end of the flow verify that all IP sources are in place:
 <!--------------------------------------------------------------------->
 
 
-## Review RTL sources (optional)
+## Review RTL sources
 [**[Contents]**](#contents)
 
-The proposed block is a 4-bit free-running counter followed by a binary-comparator that compares the count value with
-an external 4-bit programmable threshold. A parameterized tick-counter can be used to slow-down the data processing, while the
-PLL core is used to filter the 100 MHz input clock.
+The proposed block is a 4-bit free-running counter followed by a binary-comparator that compares
+the count value with an external 4-bit programmable threshold. A parameterized tick-counter
+can be used to slow-down the data processing, while the PLL core is used to filter the 100 MHz input clock.
 
-If needed, review in your text-editor application the main RTL module `rtl/PWM.v` before continuing.
+Review yourself in your text-editor application the main RTL module `rtl/PWM.v` before continuing.
+
+```
+% gedit rtl/PWM.v &   (for Linux users)
+
+% n++ rtl\PWM.v       (for Windows users)
+```
 
 <br />
 <!--------------------------------------------------------------------->
 
 
-## Simulate the design (optional)
+## Simulate the design
 [**[Contents]**](#contents)
 
-Before mapping the RTL code into real FPGA hardware it is recommended to run a behavioral simulation of the proposed RTL code
+Before mapping the RTL code into real FPGA hardware **run a behavioral simulation** of the proposed RTL code
 in order to verify that all RTL and IP sources are in place and to review the functionality of the digital block:
 
 ```
