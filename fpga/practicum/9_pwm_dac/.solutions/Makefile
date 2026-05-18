@@ -52,7 +52,7 @@ LOG_DIR  := log
 RTL_TOP_MODULE := PWM
 
 ## specify top-level testbench module (this is the target module for the xelab executable)
-SIM_TOP_MODULE := tb_PWM
+SIM_TOP_MODULE := tb_PWM4
 
 ##
 ## **NOTE
