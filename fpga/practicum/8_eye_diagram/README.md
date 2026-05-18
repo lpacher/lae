@@ -11,8 +11,8 @@
 * [**Navigate to the practicum directory**](#navigate-to-the-practicum-directory)
 * [**Setting up the work area**](#setting-up-the-work-area)
 * [**Compile the PLL IP core**](#compile-the-pll-ip-core)
-* [**Review RTL sources (optional)**](#review-rtl-sources-optional)
-* [**Simulate the design (optional)**](#simulate-the-design-optional)
+* [**Review RTL sources**](#review-rtl-sources)
+* [**Simulate the design**](#simulate-the-design)
 * [**Implement the design on target FPGA**](#implement-the-design-on-target-fpga)
 * [**Install and debug the firmware**](#install-and-debug-the-firmware)
 * [**Display the eye-diagram at the oscilloscope**](#display-the-eye-diagram-at-the-oscilloscope)
@@ -154,23 +154,30 @@ At the end of the flow verify that all IP sources are in place:
 <!--------------------------------------------------------------------->
 
 
-## Review RTL sources (optional)
+## Review RTL sources
 [**[Contents]**](#contents)
 
-The proposed block is a shift-register with a special "feedback" that causes register outputs to assume binary values that "seems" random.
-A parameterized tick-counter can be used to slow-down the data processing, while the PLL is used to filter the
-input clock.
+The proposed block is a shift-register with a special "feedback" that causes register outputs
+to assume binary values that "seems" random.
+A parameterized **tick-counter** can be used to slow-down the data processing, while the PLL
+is used to filter the input clock.
 
-If needed, review in your text-editor application the main RTL module `rtl/LFSR.v` before continuing.
+Review yourself in your text-editor application the main RTL module `rtl/LFSR.v` before continuing:
+
+```
+% gedit rtl/LFSR.v &   (for Linux users)
+
+% n++ rtl\LFSR.v       (for Windows users)
+```
 
 <br />
 <!--------------------------------------------------------------------->
 
 
-## Simulate the design (optional)
+## Simulate the design
 [**[Contents]**](#contents)
 
-Before mapping the RTL code into real FPGA hardware it is recommended to run a behavioral simulation of the proposed RTL code
+Before mapping the RTL code into real FPGA hardware **run a behavioral simulation** of the proposed RTL code
 in order to verify that all RTL and IP sources are in place and to review the functionality of the digital block:
 
 ```
@@ -184,8 +191,8 @@ in order to verify that all RTL and IP sources are in place and to review the fu
 ## Implement the design on target FPGA
 [**[Contents]**](#contents)
 
-Inspect the content of the main **Xilinx Design Constraints (XDC)** file used to implement the design on real FPGA hardware already
-prepared for you:
+Inspect the content of the main **Xilinx Design Constraints (XDC)** file used to implement the design
+on real FPGA hardware already prepared for you:
 
 ```
 % cat xdc/LFSR.xdc
@@ -236,7 +243,8 @@ Once done, verify that the **bitstream file** has been properly generated:
 ## Install and debug the firmware
 [**[Contents]**](#contents)
 
-Connect the board to the USB port of your personal computer using a **USB A to micro USB cable**. Verify that the **POWER** status LED turns on.
+Connect the board to the USB port of your personal computer using a **USB A to micro USB cable**.
+Verify that the **POWER** status LED turns on.
 Once the board has been recognized by the operating system **upload the firmware** from the command line using:
 
 ```
@@ -246,16 +254,6 @@ Once the board has been recognized by the operating system **upload the firmware
 <br />
 
 Observe the pseudo-random bit sequence at the oscilloscope.
-
-<br />
-
->
-> **QUESTION**
->
-> Which is the rate of the pseudo-random bit sequence ? Compare your answer with the behavioral simulation.
->
->   \____________________________________________________________________________________________________
->
 
 <br />
 <!--------------------------------------------------------------------->
@@ -275,8 +273,22 @@ by the _**opening**_ of the "eye", while **RMS and peak-to-peak jitter** can be 
 
 <img src="doc/pictures/eye_diagram1.png" alt="drawing" width="550"/>
 
+<br /><br />
+
+>
+> **QUESTIONS**
+>
+> Q1. What is the rate of the pseudo-random bit sequence ? Compare your answer with the behavioral simulation.
+>
+>   \____________________________________________________________________________________________________
+>
+> Q2. What is the peak-to-peak **jitter** on transmitted data ? 
+>
+>   \____________________________________________________________________________________________________
+
 <br />
 <!--------------------------------------------------------------------->
+
 
 ## Exercises
 [**[Contents]**](#contents)
@@ -309,7 +321,7 @@ Display the new eye diagram after your changes.
 <img src="doc/pictures/eye_diagram2.png" alt="drawing" width="550"/>
 <img src="doc/pictures/eye_diagram3.png" alt="drawing" width="550"/>
 
-<br />
+<br /><br />
 
 >
 > **QUESTION**
@@ -320,6 +332,8 @@ Display the new eye diagram after your changes.
 >
 
 <br />
+<!--------------------------------------------------------------------->
+
 
 **EXERCISE 2**
 
@@ -350,6 +364,10 @@ series resistance.
 <img src="doc/pictures/eye_diagram4.png" alt="drawing" width="550"/>
 
 <br />
+
+<br />
+<!--------------------------------------------------------------------->
+
 
 **EXERCISE 3**
 
