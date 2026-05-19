@@ -252,9 +252,26 @@ Once the board has been recognized by the operating system **upload the firmware
 
 <br />
 
-Observe the PWM output signal at the oscilloscope. Change the 4-bit threshold value using the slide-switches available on the board.
+Observe the PWM output signal at the oscilloscope. Change the 4-bit threshold value using the slide-switches available on the board
+and check what happens to the duty-cycle of the PWM waveform. A few **example** oscilloscope waveforms are presented below.
 
 <br />
+
+<img src="doc/pictures/pwm_oscilloscope_0001.png" alt="drawing" width="700"/>
+
+<br /><br />
+
+<img src="doc/pictures/pwm_oscilloscope_0011.png" alt="drawing" width="700"/>
+
+<br /><br />
+
+<img src="doc/pictures/pwm_oscilloscope_0111.png" alt="drawing" width="700"/>
+
+<br /><br />
+
+<img src="doc/pictures/pwm_oscilloscope_1110.png" alt="drawing" width="700"/>
+
+<br /><br />
 
 >
 > **QUESTION**
