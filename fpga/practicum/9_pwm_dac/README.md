@@ -512,12 +512,12 @@ endmodule
 > **HINT**
 >
 > In order to properly filter-out AC components of the PWM signal the *RC* time-constant
-> of the filter has to be larger of the period of the PWM period:
+> of the filter has to be larger than the PWM period:
 >
 > $RC > T_{PWM}$
 >
 > However the frequency of the PWM counter has to be higher than the frequency at which
-> the thresold changes.
+> the thresold-code for the PWM binary comparator changes.
 >
 
 <br />
