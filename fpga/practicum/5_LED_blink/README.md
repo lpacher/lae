@@ -545,12 +545,13 @@ a dedicated reset signal.
 >
 > **IMPORTANT**
 >
-> This is a very **FPGA-specific feature** which represents a **major difference** with respect to the **ASIC digital design flow**!
-> If you write some HDL code targeting an ASIC it will be always up to you to properly reset all FlipFlops in the design to the desired
-> startup value!
+> This is a very **FPGA-specific feature** which represents a **major difference** with respect to
+> the **ASIC digital design flow**!
+> If you write some HDL code targeting an ASIC it will be always up to you to properly reset
+> all FlipFlops in the design to the desired startup value!
 >
-> A professional synthesis tool (e.g. _Genus_ by Cadence or _Design Compiler_ by Synopsys) used to make real integrated circuits
-> would simply ignore the `initial` statement in your code.
+> A professional synthesis tool (e.g. _Genus_ by Cadence or _Design Compiler_ by Synopsys) used to make
+> real integrated circuits would simply ignore the `initial` statement in your code.
 >
 
 <br />
