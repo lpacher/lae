@@ -965,7 +965,7 @@ endmodule
 <br />
 
 Once done with RTL changes **update also design constraints** in order to map
-thw new `updown` control signal to a slide-switch on the board.
+this new `updown` control signal to a slide-switch on the board.
 
 <br />
 <!--------------------------------------------------------------------->
