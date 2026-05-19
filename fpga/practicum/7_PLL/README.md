@@ -12,7 +12,7 @@
 * [**Setting up the work area**](#setting-up-the-work-area)
 * [**Compile the PLL IP core**](#compile-the-pll-ip-core)
 * [**Inspect RTL sources**](#inspect-rtl-sources)
-* [**Simulate the design (optional)**](#simulate-the-design-optional)
+* [**Simulate the design**](#simulate-the-design)
 * [**Implement the design on target FPGA**](#implement-the-design-on-target-fpga)
 * [**Install and debug the firmware**](#install-and-debug-the-firmware)
 * [**Debug termination issues**](#debug-termination-issues)
@@ -206,11 +206,11 @@ Try yourself to understand the working principle of the proposed digital design.
 <!--------------------------------------------------------------------->
 
 
-## Simulate the design (optional)
+## Simulate the design
 [**[Contents]**](#contents)
 
-Before mapping the RTL code into real FPGA hardware verify the expected functionality of the PLL
-with a behavioral simulation:
+Before mapping the RTL code into real FPGA hardware **run a behavioral simulation** and verify
+the expected functionality of the PLL core:
 
 ```
 % make sim mode=gui
