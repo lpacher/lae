@@ -902,12 +902,13 @@ to properly feed "clean" button signals to FPGA internals.
 <img src="doc/pictures/button_bounce_oscilloscope_example3.png" alt="drawing" width="700"/>
 
 <br /><br />
-<!--------------------------------------------------------------------->
+<!--:w
+------------------------------------------------------------------->
 
 
 **EXERCISE 2**
 
-Further extend your design in order to add an additional `updown` control signal
+Further extend your design in order to add an additional `updown` input control signal
 to decide if the counter runs as an **up-counter** or a **down-counter**.
 
 ```verilog
@@ -935,21 +936,36 @@ module SevenSegmentDecoder (
    ...
    ...
 
+   /////////////////////////////
+   //   up/down BCD counter   //
+   /////////////////////////////
+
+   // the 4-bit BCD value is now a module-9 counter
+   reg [3:0] BCD = 4'b0000 ;
+
    always @(posedge btn) begin
       if( updown ) begin
-         //implement a BCD-counter that counts from 0 to 9 if enabled
+         //implement a BCD-counter that counts from 0 to 9
       else begin
-         //implement a BCD-counter that counts from 9 to 0 if enabled
+         //implement a BCD-counter that counts from 9 to 0
       end
    end   //always
+
+
+   ///////////////////////////////////
+   //   7-segment display decoder   //
+   ///////////////////////////////////
+
+   ...
+   ...
 
 endmodule
 ```
 
 <br />
 
-Once done with RTL changes update also design constraints map this new control signal
-to a slide-switch on the board.
+Once done with RTL changes **update also design constraints** in order to map
+thw new `updown` control signal to a slide-switch on the board.
 
 <br />
 <!--------------------------------------------------------------------->
