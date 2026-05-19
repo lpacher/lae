@@ -1441,7 +1441,8 @@ You might also have noticed that each step of the flow executed in the GUI has a
 "super-command" in Tcl. Review the sequence of commands traced for you by Vivado into the **Tcl Console** tab:
 
 ```
-create_project -verbose -force -part xc7a35ticsg324-1L Inverter
+create_project Inverter /path/to/Inverter -part xc7a35ticsg324-1L   #if you ENABLED  the "Create project subdirectory" option in the Vivado "New Project" wizard
+create_project Inverter -part xc7a35ticsg324-1L                     #if you DISABLED the "Create project subdirectory" option in the Vivado "New Project" wizard
 add_files -norecurse -fileset sources_1 Inverter.v
 update_compile_order -fileset sources_1
 add_files -norecurse -fileset constrs_1 Inverter.xdc
@@ -1451,6 +1452,21 @@ set_property STEPS.WRITE_BITSTREAM.ARGS.BIN_FILE true [get_runs impl_1]
 launch_runs impl_1 -to_step write_bitstream
 wait_on_run impl_1
 ```
+
+<br />
+
+>
+> **IMPORTANT**
+>
+> Pay attention to the actual `create_project` Tcl command used to create the project!
+> An additional directory can be created into the current working directory depending
+> if you enabled or not the **Create project subdirectory** option in the Vivado
+> _New Project_ wizard as summarized below:
+>
+> ```
+> create_project <project name> /path/to/<project sub directory> -part xc7a35ticsg324-1L   #if you ENABLED  the "Create project subdirectory" option in the Vivado "New Project" wizard
+> create_project <project name> -part xc7a35ticsg324-1L                                    #if you DISABLED the "Create project subdirectory" option in the Vivado "New Project" wizard
+> ```
 
 <br />
 
@@ -1589,6 +1605,21 @@ set_property PROGRAM.FILE {Inverter.runs/impl_1/Inverter.bit} [get_hw_devices xc
 program_hw_devices [get_hw_devices xc7a35t_0]
 refresh_hw_device [lindex [get_hw_devices xc7a35t_0] 0]
 ```
+
+<br />
+
+>
+> **IMPORTANT**
+>
+> Pay attention to the actual path pointing to the `.bit` file!
+> An additional directory might be required into the `PROGRAM.FILE` path
+> depending if you enabled or not the **Create project subdirectory** option in the Vivado
+> _New Project_ wizard as summarized below:
+>
+> ```
+> set_property PROGRAM.FILE {Inverter/Inverter.runs/impl_1/Inverter.bit} [get_hw_devices xc7a35t_0]   #if you ENABLED  the "Create project subdirectory" option in the Vivado "New Project" wizard
+> set_property PROGRAM.FILE {Inverter.runs/impl_1/Inverter.bit} [get_hw_devices xc7a35t_0]            #if you DISABLED the "Create project subdirectory" option in the Vivado "New Project" wizard
+> ```
 
 <br />
 
