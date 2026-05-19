@@ -5,7 +5,6 @@
 //
 // Luca Pacher - pacher@to.infn.it
 // Spring 2026
-//
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
@@ -22,6 +21,14 @@ module sequence_detector_FSM (
    output wire [2:0] state_led
 
    ) ;
+
+
+   //////////////////////////////////
+   //   **EXERCISE: add PLL core   //
+   //////////////////////////////////
+
+   //wire pll_clk, pll_locked ;
+   //PLL PLL_INST (.CLK_IN(clk), .CLK_OUT(pll_clk), .LOCKED(pll_locked)) ;
 
 
    /////////////////////////////////
@@ -45,6 +52,9 @@ module sequence_detector_FSM (
    /////////////////////////////////////////////////
    //   next-state logic (FSM sequential part)   //
    /////////////////////////////////////////////////
+
+   //always @(posedge pll_clk) begin
+   //   if (~reset || ~pll_locked) begin
 
    always @(posedge clk) begin
       if (~reset) begin        //RESET button => active-low
@@ -114,6 +124,8 @@ module sequence_detector_FSM (
          DONE : begin
             if ( SW == 4'b1111 )
                STATE_NEXT <= DONE ;
+            else if ( SW == 4'b0000 )
+               STATE_NEXT <= START ;
             else
                STATE_NEXT <= IDLE ;
          end

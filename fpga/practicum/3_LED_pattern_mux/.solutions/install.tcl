@@ -37,6 +37,8 @@ if { ![file exists $bitFile] } {
 set tclStart [clock seconds]
 ###################################
 
+## disable ChipScope server (cs_server)
+set_param labtools.enable_cs_server false
 
 ## open the Hardware Manager
 open_hw_manager
