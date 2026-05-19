@@ -499,7 +499,7 @@ module SawtoothGen (
 
 
    // PWM generator
-   PWM #(.THRESHOLD_BITS(16)) PWM_INST ( .clk(clk), .threshold(count), .pwm_out(pwm_out)) ;
+   PWM #(.THRESHOLD_NBITS(16)) PWM_INST ( .clk(clk), .threshold(count), .pwm_out(pwm_out)) ;
 
 endmodule
 ```
