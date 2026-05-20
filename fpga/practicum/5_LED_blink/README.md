@@ -616,8 +616,8 @@ Extend your initial design and **drive a 7-segment display** module with a suita
 
 <br />
 
-For this purpose simply **re-use** the same `SevenSegmentDecoder` module and pin constraints for the **BCD/7-segment decoder**
-already developed and tested in the previous practicum:
+For this purpose simply **re-use** the same `SevenSegmentDecoder` module and pin constraints
+for the **BCD/7-segment decoder** already developed and tested in the previous practicum:
 
 ```
 % cp ../4_seven_segment_display/SevenSegmentDecoder.v ./rtl/
@@ -625,7 +625,23 @@ already developed and tested in the previous practicum:
 
 <br />
 
-Complete yourself the following code skeleton:
+Open the copy in your text-editor application and then modify the source code in order to remove
+additional features (e.g. BCD counter) added during exercises while keeping only the core functionality
+(combinational part) of the decoder.
+
+<br />
+
+Compile the file to check for syntax errors:
+
+```
+% make compile hdl=rtl/SevenSegmentDecoder.v
+```
+
+<br />
+
+Once done complete yourself the following code skeleton:
+
+<br />
 
 ```verilog
 module LED_blink (
@@ -633,7 +649,7 @@ module LED_blink (
    input  wire clk,         // assume 100 MHz external clock from on-board oscillator
    input  wire enable,      // external count-enable control (e.g. slide-switch)
 
-   // **REMOVE this ports (and update XDC properly...)
+   // **REMOVE these ports (and update XDC properly...)
    //output wire LED,
    //output wire LED_probe    // probe at the oscilloscope the LED control signal
 
@@ -647,14 +663,14 @@ module LED_blink (
    output wire segG,
    output wire DP
 
-   ) ;
+   );
 
 
    ...
    ...
 
    wire [3:0] BCD ;
-   assign BCD = { count[...] , count[...] , count[...] , count[...] } ;
+   assign BCD = { count[...] , count[...] , count[...] , count[...] } ;   //same as count[k+3:k]
 
    SevenSegmentDecoder  SevenSegmentDecoderInst (
 
