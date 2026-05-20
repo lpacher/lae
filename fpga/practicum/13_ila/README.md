@@ -13,9 +13,8 @@
 * [**Implement the design on target FPGA**](#implement-the-design-on-target-fpga)
 * [**Install and debug the firmware**](#install-and-debug-the-firmware)
 * [**Insert an Integrated Logic Analyzer (ILA) debug core**](#insert-an-integrated-logic-analyzer-(-ila-)-debug-core)
-* [**Further readings**](#further-readings)
 * [**Export the ILA debug probes file**](#export-the-ila-debug-probes-file)
-* [**Install the new firmware and debug with ILA**](#install-the-new-firmware-and-debug-with-ila)
+* [**Install the new firmware with ILA probes**](#install-the-new-firmware-with-ila-probes)
 * [**Setup triggers and debug signals into the ILA dashboard**](#setup-triggers-and-debug-signals-into-the-ila-dashboard)
 * [**Further readings**](#further-readings)
 
@@ -287,9 +286,9 @@ design.
 
 <img src="doc/pictures/counter_ila_vivado.png" alt="drawing"/>
 
-<br />
+<br /><br />
 
-In order to export the probed file run the following command in the Vivado Tcl console:
+In order to **export the probes file** run the following command in the Vivado Tcl console:
 
 ```
 write_debug_probes ./work/build/outputs/counter_ila.ltx
@@ -297,19 +296,33 @@ write_debug_probes ./work/build/outputs/counter_ila.ltx
 
 <br />
 
-Close Vivado once done.
+Close Vivado once done and verify that the new file is in place:
+
+```
+% ls -l ./work/build/outputs/ | grep ltx
+```
+
+<br />
+
+You can open this `.ltx` file with any text-editor, in fact the ILA probes file is a plain-text
+**JSON (JavaScript Object Notation) file** used by the Vivado _Harware Manager_ to give proper signal
+names to "waveforms" that will be traced in the graphical interface during your debug.
+
+Explore the contents of the file using `less`, `more` or `cat` utilities at the command line:
+
+```
+% cat ./work/build/outputs/counter_ila.ltx
+```
 
 <br />
 <!--------------------------------------------------------------------->
 
 
-## Install the new firmware and debug with ILA
+## Install the new firmware with ILA probes
 [**[Contents]**](#contents)
 
-Start a new session of the Vivado _Hardware manager_ from the command line. You can use the following `Makefile` target
-in place of running `vivado -mode gui` standalone:
-
-
+Start a new session of the Vivado _Hardware manager_ from the command line. For less typing you can use
+the following `Makefile` target in place of running `vivado -mode gui` standalone as usual:
 
 ```
 % make hw_manager mode=gui
@@ -317,14 +330,23 @@ in place of running `vivado -mode gui` standalone:
 
 <br />
 
-Observe in the Tcl console the equivalent command:
+Establish a new connection between the _Hardware Manager_ and the _Arty_ board.
+To do this, simply left-click on **Open target > Auto Connect**.
+
+Once the FPGA has been properly recognized right-click on the `xc7a35t` device, select **Program Device...**
+and specify **both** the **bitstream file** (`.bit`) and the **ILA probes file** (`.ltx`) as in figure:
+
+<br />
+
+<img src="doc/pictures/ProgramDevice.png" alt="drawing" width="500"/>
+
+<br /><br />
+
+Finally left-click on **Program** to upload the firmware. As you can find traced into the Vivado Tcl console
+the following command is used to specify the probes file:
 
 ```
-set_property PROBES.FILE { work/build/outputs/counter_ila.ltx } [current_hw_device]
-```
-
-```
-% make install mode=gui
+set_property PROBES.FILE { /path/to/work/build/outputs/counter_ila.ltx } [get_hw_devices xc7a35t_0]
 ```
 
 <br />
@@ -334,9 +356,12 @@ set_property PROBES.FILE { work/build/outputs/counter_ila.ltx } [current_hw_devi
 ## Setup triggers and debug signals into the ILA dashboard
 [**[Contents]**](#contents)
 
-1) add both reset and enable signals as "triggers"
 
-2) IMPORTANTE: configure "OR" as global trigger !!!
+<br />
+
+<img src="doc/pictures/ILA_dashboard.png" alt="drawing"/>
+
+<br />
 
 
 <br />
