@@ -77,13 +77,20 @@ Create a new fresh working area:
 
 <br />
 
-Additionally, recursively copy from the `.solutions/` directory the following design sources and scripts
-already prepared for you:
+Additionally, recursively copy from the `.solutions/` directory the following design sources and scripts:
 
 ```
 % cp -r .solutions/rtl/      .
 % cp -r .solutions/scripts/  .
 % cp -r .solutions/xdc/      .
+```
+
+<br />
+
+Create a new fresh working area:
+
+```
+% make area
 ```
 
 <br />
