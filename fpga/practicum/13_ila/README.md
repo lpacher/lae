@@ -24,8 +24,9 @@
 ## Introduction
 [**[Contents]**](#contents)
 
-The goal of this practicum is to to introduce and demonstrate the usage
-of the **Integrated Logic Analyzer (ILA)** debug feature available in Vivado.
+The goal of this practicum is to to introduce and demonstrate the usage of the **Integrated Logic Analyzer (ILA)**
+debug feature available in Vivado. This unique feature will allow you to "spy" and debug electrical-values
+for selected internal signals of a design mapped and running on real FPGA hardware.
 
 <br />
 <!--------------------------------------------------------------------->
