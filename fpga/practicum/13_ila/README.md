@@ -406,6 +406,12 @@ Once you have completed with the trigger setup **arm the trigger** and start deb
 driven by the external reset button and the count-enable slide-switch.
 
 <br />
+
+<img src="doc/pictures/ILA_running.png" alt="drawing">
+
+<br />
+
+<br />
 <!--------------------------------------------------------------------->
 
 ## Further readings
