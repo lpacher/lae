@@ -527,9 +527,44 @@ endmodule
 **EXERCISE 2**
 
 Modify the logic on the counter in order to implement a **triangular wave generator**.
+For this purpose you have to play with `if/else` conditions to make a counter that
+counts from zero to some maximum and then comes back from the maximum to zero:
+
+<br />
+
+>
+> **HINT**
+>
+> Use an additional FilpFlop output to trace if the counter has to count-up or to count-down,
+> then update the output of this FlipFlop depending if the counter reaches its maximum value
+> or zero.
+>
+> ```verilog
+> ...
+> ...
+>
+> reg up0_down1 = 1'b0 ;
+>
+> ...
+> ...
+>
+> if ( up0_down1 == 1'b0 ) begin
+>
+>   ...
+>   ...   //count from zero to max, then override up0_down1 flag properly
+>
+> end
+> else begin
+>
+>   ...
+>   ...   //count from max down to zero, then override up0_down1 flag properly
+>
+> end
+> ```
 
 <br />
 <!--------------------------------------------------------------------->
+
 
 ## Extra: comparison with Arduino code
 [**[Contents]**](#contents)
