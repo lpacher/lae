@@ -12,7 +12,7 @@
 * [**Review RTL sources**](#review-rtl-sources)
 * [**Implement the design on target FPGA**](#implement-the-design-on-target-fpga)
 * [**Install and debug the firmware**](#install-and-debug-the-firmware)
-* [**Insert an Integrated Logic Analyzer (ILA) debug core**](#insert-an-integrated-logic-analyzer-(-ila-)-debug-core)
+* [**Insert an Integrated Logic Analyzer (ILA) debug core**](#insert-an-integrated-logic-analyzer-ila-debug-core)
 * [**Export the ILA debug probes file**](#export-the-ila-debug-probes-file)
 * [**Install the new firmware with ILA probes**](#install-the-new-firmware-with-ila-probes)
 * [**Setup triggers and debug signals into the ILA dashboard**](#setup-triggers-and-debug-signals-into-the-ila-dashboard)
@@ -92,8 +92,8 @@ Additionally, recursively copy from the `.solutions/` directory the following de
 ## Review RTL sources
 [**[Contents]**](#contents)
 
-The proposed block is a simple 28-bit binary counter running at 100 MHz clock with additional reset and count-enable control signals.
-Additionally the four most-significant bits (MSB) of this counter simply drives four LEDs on the _Arty_ board.
+The proposed block is a simple 28-bit binary counter running at 100 MHz clock with external reset and count-enable control signals.
+Additionally the four most-significant bits (MSB) of this counter simply drives four general-purpose LEDs on the _Arty_ board.
 
 Review yourself in your text-editor application the main RTL module `rtl/counter_ila.v` before continuing:
 
@@ -168,11 +168,14 @@ Play with reset and count-enable input controls to check that the firmware works
 [**[Contents]**](#contents)
 
 Let now suppose that for unknown reasons the firmware installed on the board does not work as expected.
-The **Integrated Logic Analyzer (ILA)** core allows allows to "spy" internal signals in your design and
-to display then in a simulation-like environment within the Vivado _Hardware manager_.
+The **Integrated Logic Analyzer (ILA)** core allows you to "spy" real FPGA **internal signals** running in hardware
+and to display them in a **simulation-like debug environment** integrated within the Vivado _Hardware Manager_.
 
 As an example let suppose that we want to monitor what happens to LED values when controlling the counter
-with either the reset or the count-enable.
+with either the reset or the count-enable. So we want to add an ILA **IP core** to "spy" all these signals
+into real FPGA hardware.
+
+For this purpose simply start the Vivado IP flow from `Makefile` as follows:
 
 ```
 % make ip mode=gui
@@ -180,8 +183,10 @@ with either the reset or the count-enable.
 
 <br />
 
-In the Vivado IP Catalog go through **Vivado Repository > Debug & Verification > Debug > ILA (Integrated Logic Analyzer)** or simply
+Once the IP repository has benn successfully initialized in the Vivado **IP Catalog**
+go through **Vivado Repository > Debug & Verification > Debug > ILA (Integrated Logic Analyzer)** or simply
 search for "ila" in the Search bar. Right-click on the IP and select *Customize IP*.
+
 <br />
 
 In the **General Options** TAB configure the IP with the following specifications:
@@ -364,43 +369,44 @@ This graphical interface resembles the XSim simulation environment used to trace
 
 <img src="doc/pictures/ILA_dashboard.png" alt="drawing"/>
 
-<br />
+<br /><br />
 
 Since we want to "spy" what happens to LED values when pressing either the reset or the count-enable of our counter
 we have to **specify trigger signals** and **trigger conditions** to activate the ILA core.
 For this purpose you have to use the **Trigger Setup** window.
 
-As a first step specify as **Global Trigger Condition** the OR-operator:
+As a first step specify as **global trigger condition** the OR-operator:
 
 <br />
 
-<img src="doc/pictures/TriggerSetupSetTriggerConditionOR.png" alt="drawing"/ width="500">
+<img src="doc/pictures/TriggerSetupSetTriggerConditionOR.png" alt="drawing" width="600"/>
 
-<br />
+<br /><br />
 
 Then add both the reset and the count-enable probes as trigger signals:
 
 <br />
 
-<img src="doc/pictures/TriggerSetupAddSignals.png" alt="drawing" width="500"/>
+<img src="doc/pictures/TriggerSetupAddProbes.png" alt="drawing" width="600"/>
 
-<br />
+<br /><br />
 
 As an example activate the trigger for these signals whenever a low-to-high or a high-to-low transition occurs:
 
 <br />
 
-<img src="doc/pictures/TriggerSetupValue.png" alt="drawing" width="500"/>
+<img src="doc/pictures/TriggerSetupValue.png" alt="drawing" width="600"/>
 
-<br />
+<br /><br />
 
+With this setup the ILA will be triggered whenever either the reset OR the enable change.
 You can also rename signal names for easier debug in the wave window:
 
 <br />
 
-<img src="doc/pictures/TriggerSetupValue.png" alt="drawing" width="500"/>
+<img src="doc/pictures/TriggerSetupRenameSignal.png" alt="drawing" width="600"/>
 
-<br />
+<br /><br />
 
 Once you have completed with the trigger setup **arm the trigger** and start debugging internal FPGA signals
 driven by the external reset button and the count-enable slide-switch.
