@@ -356,6 +356,9 @@ set_property PROBES.FILE { /path/to/work/build/outputs/counter_ila.ltx } [get_hw
 ## Setup triggers and debug signals into the ILA dashboard
 [**[Contents]**](#contents)
 
+Once the FPGA has been successfully programmed the _Hardware Manager_ displays the **ILA Default Dashboard**.
+This graphical interface resembles the XSim simulation environment used to trace waveforms, but also includes
+**triggers** and **play buttons** as depicted in figure.
 
 <br />
 
@@ -363,6 +366,44 @@ set_property PROBES.FILE { /path/to/work/build/outputs/counter_ila.ltx } [get_hw
 
 <br />
 
+Since we want to "spy" what happens to LED values when pressing either the reset or the count-enable of our counter
+we have to **specify trigger signals** and **trigger conditions** to activate the ILA core.
+For this purpose you have to use the **Trigger Setup** window.
+
+As a first step specify as **Global Trigger Condition** the OR-operator:
+
+<br />
+
+<img src="doc/pictures/TriggerSetupSetTriggerConditionOR.png" alt="drawing"/ width="500">
+
+<br />
+
+Then add both the reset and the count-enable probes as trigger signals:
+
+<br />
+
+<img src="doc/pictures/TriggerSetupAddSignals.png" alt="drawing" width="500"/>
+
+<br />
+
+As an example activate the trigger for these signals whenever a low-to-high or a high-to-low transition occurs:
+
+<br />
+
+<img src="doc/pictures/TriggerSetupValue.png" alt="drawing" width="500"/>
+
+<br />
+
+You can also rename signal names for easier debug in the wave window:
+
+<br />
+
+<img src="doc/pictures/TriggerSetupValue.png" alt="drawing" width="500"/>
+
+<br />
+
+Once you have completed with the trigger setup **arm the trigger** and start debugging internal FPGA signals
+driven by the external reset button and the count-enable slide-switch.
 
 <br />
 <!--------------------------------------------------------------------->
