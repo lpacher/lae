@@ -205,7 +205,7 @@ Move to the `uart_xadc.v` design once happy. The `uart_xadc.v` design uses the e
 the on-chip temperature and to send temperature values to the local computer through the FTDI UART/USB bridge.
 
 In order to make a **real-time histogram** of the incoming XADC data a simple **PyROOT data-acquisition system (DAQ)**
-that use the **Serial** Python library in place of PuTTY.
+that uses the **Serial** Python library in place of PuTTY.
 
 
 For Linux users:
@@ -257,5 +257,32 @@ into UART frames. Update the PuTTY serial configuration accordingly.
 **EXERCISE 2**
 
 Modify the `uart_ascii.v` design in order to replace the ROM written in Verilog with a Xilinx IP core.
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+## Extra: comparison with Arduino code
+
+```cpp
+// Arduino UART Example Usage
+
+void setup() {
+
+   //Configure UART at 9.6 kHz baud-rate
+   Serial.begin(9600);
+}
+
+
+void loop() {
+
+   //Send a message from Arduino to serial monitor
+   Serial.println("Enjoy the second part of the course using Arduino!");
+}
+```
+
+<br />
+<!--------------------------------------------------------------------->
+
 
 </div>
