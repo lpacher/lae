@@ -98,16 +98,7 @@ Copy from the `.solutions/` directory the main `Makefile` already prepared for y
 
 <br />
 
-Create a new fresh working area:
-
-```
-% make area
-```
-
-<br />
-
-Additionally, recursively copy from the `.solutions/` directory the following design sources
-and scripts already prepared for you:
+Additionally, recursively copy from the `.solutions/` directory the following design sources and scripts:
 
 ```
 % cp -r .solutions/rtl/      .
@@ -115,6 +106,7 @@ and scripts already prepared for you:
 % cp -r .solutions/scripts/  .
 % cp -r .solutions/xdc/      .
 ```
+
 <br />
 
 >
@@ -123,6 +115,14 @@ and scripts already prepared for you:
 > In this case we want to perform a **recursive copy**, do not forget to add the `-r` option.
 > The above `cp` command works fine under Windows also if you use back-slashes in the path.
 >
+
+<br />
+
+Create a new fresh working area:
+
+```
+% make area
+```
 
 <br />
 <!--------------------------------------------------------------------->

@@ -101,20 +101,19 @@ Copy from the `.solutions/` directory the main `Makefile` already prepared for y
 
 <br />
 
-Create a new fresh working area:
-
-```
-% make area
-```
-
-<br />
-
-Additionally, recursively copy from the `.solutions/` directory simulation sources
-and scripts already prepared for you:
+Additionally, recursively copy from the `.solutions/` directory simulation sources ad scripts:
 
 ```
 % cp -r .solutions/bench/    .
 % cp -r .solutions/scripts/  .
+```
+
+<br />
+
+Create a new fresh working area:
+
+```
+% make area
 ```
 
 <br />

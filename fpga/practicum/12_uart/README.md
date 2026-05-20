@@ -23,8 +23,8 @@ All HDL and IP sources, scripts and constrains are available in the `.solutions/
 For this practicum, **try yourself** to:
 
 * copy the `Makefile` from the `.solutions/` directory
-* setup the work area
 * copy all required sources and scripts from the `.solutions/` directory
+* setup the work area
 * inspect RTL sources and the design hierarchy
 * compile required IP cores from XCI files
 * implement the designs on target FPGA

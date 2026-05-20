@@ -118,6 +118,16 @@ Copy from the `.solutions/` directory the main `Makefile` already prepared for y
 
 <br />
 
+Additionally, recursively copy from the `.solutions/` directory the following design sources and scripts:
+
+```
+% cp -r .solutions/bench/    .
+% cp -r .solutions/scripts/  .
+% cp -r .solutions/xdc/      .
+```
+
+<br />
+
 List all available `Makefile` targets:
 
 ```
@@ -134,14 +144,6 @@ Create a new fresh working area:
 
 <br />
 
-Additionally, recursively copy from the `.solutions/` directory the following design sources and scripts already prepared for you:
-
-```
-% cp -r .solutions/bench/    .
-% cp -r .solutions/scripts/  .
-% cp -r .solutions/xdc/      .
-```
-<br />
 
 >
 > **REMINDER**
