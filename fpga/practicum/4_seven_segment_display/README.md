@@ -19,7 +19,7 @@
 * [**Implement the circuit on breadboard**](#implement-the-circuit-on-breadboard)
 * [**Debug your firmware on real hardware**](#debug-your-firmware-on-real-hardware)
 * [**Inspect Non-Project Mode Tcl commands**](#inspect-non-project-mode-tcl-commands)
-* [**Exercise**](#exercise)
+* [**Exercises**](#exercises)
 * [**Further readings**](#further-readings)
 
 <br />
@@ -701,12 +701,18 @@ for the remaining of the course to run the flows in batch mode from the command 
 <!--------------------------------------------------------------------->
 
 
-## Exercise
+## Exercises
 [**[Contents]**](#contents)
 
-Modify your initial RTL code in order to drive the 7-segment display module with a **4-bit BCD counter** in place of external slide-switches.
-For this purpose you have to create a **module-9 counter**, that is a 4-bit counter that counts from 0 to 9 and then restarts from 0.
-You can then use a simple **push-button** available on the Digilent _Arty_ board to create a series of clock-pulses for the counter.
+<br />
+
+**EXERCISE 1**
+
+Modify your initial RTL code in order to drive the 7-segment display module with a **4-bit BCD counter**
+in place of external slide-switches. For this purpose you have to create a **module-9 counter**, that is
+a 4-bit counter that counts from 0 to 9 and then restarts from 0.
+You can then use a simple **push-button** available on the Digilent _Arty_ board to create a series of
+clock-pulses for the counter.
 
 Try yourself to complete the following code skeleton:
 
@@ -896,6 +902,72 @@ to properly feed "clean" button signals to FPGA internals.
 <img src="doc/pictures/button_bounce_oscilloscope_example3.png" alt="drawing" width="700"/>
 
 <br /><br />
+<!--:w
+------------------------------------------------------------------->
+
+
+**EXERCISE 2**
+
+Further extend your design in order to add an additional `updown` input control signal
+to decide if the counter runs as an **up-counter** or a **down-counter**.
+
+```verilog
+module SevenSegmentDecoder (
+
+   // push-button
+   input wire btn,
+
+   // additional switch to choose to either count-up or count-down
+   input wire updown,
+
+   // **DEBUG: display the BCD binary value on general-purpose standard LEDs
+   output wire [3:0] LED,
+
+   // 7-segment display control pins
+   output wire DP,
+   output ... segA,
+   output ... segB,
+   output ... segC,
+   output ... segD,
+   output ... segE,
+   output ... segF,
+   output ... segG ) ;
+
+   ...
+   ...
+
+   /////////////////////////////
+   //   up/down BCD counter   //
+   /////////////////////////////
+
+   // the 4-bit BCD value is now a module-9 counter
+   reg [3:0] BCD = 4'b0000 ;
+
+   always @(posedge btn) begin
+      if( updown ) begin
+         //implement a BCD-counter that counts from 0 to 9
+      else begin
+         //implement a BCD-counter that counts from 9 to 0
+      end
+   end   //always
+
+
+   ///////////////////////////////////
+   //   7-segment display decoder   //
+   ///////////////////////////////////
+
+   ...
+   ...
+
+endmodule
+```
+
+<br />
+
+Once done with RTL changes **update also design constraints** in order to map
+this new `updown` control signal to a slide-switch on the board.
+
+<br />
 <!--------------------------------------------------------------------->
 
 

@@ -389,10 +389,11 @@ Verify the expected **linearity of the DAC characteristic** with a fit. Feel fre
 >
 > **HINT**
 >
-> Simple plots of experimental data in form of y-values vs. x-values in ROOT are implemented using the `TGraph` class,
-> which allows to also **read measurements data from a text file**.
+> Simple plots of experimental data in form of y-values vs. x-values in ROOT are implemented using
+> the `TGraph` class, which allows to also **read measurements data from a text file**.
 >
-> With your text-editor application create a new text file e.g. `data/pwm_dac.txt` and register your measurements as follows:
+> With your text-editor application create a new text file e.g. `data/pwm_dac.txt` and register
+> your measurements as follows:
 >
 > ```
 > # code  Vout  Ton  Ton/T
@@ -475,8 +476,9 @@ Try yourself to:
 
 * create new `SawtoothGen.v` and `SawtoothGen.xdc` source files from scratch
 * implement a new `SawtoothGen` module with one input clock and one PWM output
-* re-use the previously implemented PWM code by instantiating the PWM generator into the new code
-* implement a 16-bit free-running counter to generate a variable threshold of the PWM generator
+* re-use the previously implemented PWM code by instantiating the PWM generator into the new code<br />
+  (remove the PLL core if not needed)
+* implement an 8-bit free-running counter to generate a variable threshold of the PWM generator
 * use a tick-pulse to properly slow-down the frequency of the counter
 * write proper XDC constraints
 * install and debug the new firmware on FPGA
@@ -490,7 +492,7 @@ module SawtoothGen (
    output wire pwm_out
 ) ;
 
-   reg [15:0] count = 'b0 ;
+   reg [7:0] count = 'b0 ;
 
    // free-running counter with proper ticker
    ...
@@ -499,10 +501,24 @@ module SawtoothGen (
 
 
    // PWM generator
-   PWM #(.THRESHOLD_BITS(16)) PWM_INST ( .clk(clk), .threshold(count), .pwm_out(pwm_out)) ;
+   PWM #(.THRESHOLD_NBITS(8)) PWM_INST ( .clk(clk), .threshold(count), .pwm_out(pwm_out)) ;
 
 endmodule
 ```
+
+<br />
+
+>
+> **HINT**
+>
+> In order to properly filter-out AC components of the PWM signal the *RC* time-constant
+> of the filter has to be larger than the PWM period:
+>
+> $RC > T_{PWM}$
+>
+> However the frequency of the PWM counter has to be higher than the frequency at which
+> the thresold-code for the PWM binary comparator changes.
+>
 
 <br />
 <!--------------------------------------------------------------------->
