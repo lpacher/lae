@@ -1,3 +1,12 @@
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Example 28-bit binary counter Verilog design with external reset
+// and count-enable control signals to demonstrate the usage of the
+// Integrated Logic Analyzer (ILA) debug core in Vivado.
+//
+// Luca Pacher - pacher@to.infn.it
+// Spring 2026
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 `timescale 1ns / 100ps
 
@@ -17,7 +26,7 @@ module counter_ila (
    reg [27:0] count = 'b0 ;
 
    always @(posedge clk) begin
-      if (~reset) begin
+      if (~reset) begin          //synchronous-reset, active-low
          count <= 'b0 ;
       end
       else if (enable) begin
@@ -28,9 +37,9 @@ module counter_ila (
    assign LED = count[27:24] ;
 
 
-   //////////////////////////////////////////////////////////////////////////////////////////////
-   //   **EXERCISE: add here an Integrated Logic Analyzer (ILA) IP core to monitor the reset   //
-   //////////////////////////////////////////////////////////////////////////////////////////////
+   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+   //   **EXERCISE: compile and add here an Integrated Logic Analyzer (ILA) IP core to monitor all I/O signals   //
+   ////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
    // ...
 

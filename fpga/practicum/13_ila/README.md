@@ -77,7 +77,8 @@ Create a new fresh working area:
 
 <br />
 
-Additionally, recursively copy from the `.solutions/` directory the following design sources and scripts already prepared for you:
+Additionally, recursively copy from the `.solutions/` directory the following design sources and scripts
+already prepared for you:
 
 ```
 % cp -r .solutions/rtl/      .
@@ -92,10 +93,12 @@ Additionally, recursively copy from the `.solutions/` directory the following de
 ## Review RTL sources
 [**[Contents]**](#contents)
 
-The proposed block is a simple 28-bit binary counter running at 100 MHz clock with external reset and count-enable control signals.
-Additionally the four most-significant bits (MSB) of this counter simply drives four general-purpose LEDs on the _Arty_ board.
+The proposed block is a simple 28-bit binary counter running at 100 MHz clock with external reset and count-enable
+control signals. The four most-significant bits (MSB) of this counter are then used to drive four general-purpose
+LEDs available on the _Arty_ board.
 
-Review yourself in your text-editor application the main RTL module `rtl/counter_ila.v` before continuing:
+Review yourself in your preferred **text-editor** application the main RTL module `rtl/counter_ila.v` before
+continuing:
 
 ```
 % gedit rtl/counter_ila.v &   (for Linux users)
@@ -110,8 +113,8 @@ Review yourself in your text-editor application the main RTL module `rtl/counter
 ## Implement the design on target FPGA
 [**[Contents]**](#contents)
 
-Inspect the content of the main **Xilinx Design Constraints (XDC)** file used to implement the design on real FPGA hardware already
-prepared for you:
+Inspect the content of the main **Xilinx Design Constraints (XDC)** file used to implement the design
+on real FPGA hardware already prepared for you:
 
 ```
 % cat xdc/counter_ila.xdc
@@ -149,8 +152,9 @@ Once done, verify that the **bitstream file** has been properly generated:
 ## Install and debug the firmware
 [**[Contents]**](#contents)
 
-Connect the board to the USB port of your personal computer using a **USB A to micro USB cable**. Verify that the **POWER** status LED turns on.
-Once the board has been recognized by the operating system **upload the firmware** from the command line using:
+Connect the board to the USB port of your personal computer using a **USB A to micro USB cable**.
+Verify that the **POWER** status LED turns on. Once the board has been recognized by the operating
+system **upload the firmware** from the command line using:
 
 ```
 % make install
@@ -158,7 +162,7 @@ Once the board has been recognized by the operating system **upload the firmware
 
 <br />
 
-Play with reset and count-enable input controls to check that the firmware works as expected.
+Play with reset and count-enable controls to check that the firmware works as expected.
 
 <br />
 <!--------------------------------------------------------------------->
