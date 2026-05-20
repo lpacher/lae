@@ -1,4 +1,3 @@
-
 <div align="justify">
 
 # Practicum 13
@@ -10,7 +9,15 @@
 * [**Practicum aims**](#practicum-aims)
 * [**Navigate to the practicum directory**](#navigate-to-the-practicum-directory)
 * [**Setting up the work area**](#setting-up-the-work-area)
-
+* [**Review RTL sources**](#review-rtl-sources)
+* [**Implement the design on target FPGA**](#implement-the-design-on-target-fpga)
+* [**Install and debug the firmware**](#install-and-debug-the-firmware)
+* [**Insert an Integrated Logic Analyzer (ILA) debug core**](#insert-an-integrated-logic-analyzer-(-ila-)-debug-core)
+* [**Further readings**](#further-readings)
+* [**Export the ILA debug probes file**](#export-the-ila-debug-probes-file)
+* [**Install the new firmware and debug with ILA**](#install-the-new-firmware-and-debug-with-ila)
+* [**Setup triggers and debug signals into the ILA dashboard**](#setup-triggers-and-debug-signals-into-the-ila-dashboard)
+* [**Further readings**](#further-readings)
 
 <br />
 <!--------------------------------------------------------------------->
@@ -47,4 +54,293 @@ As a first step, open a **terminal** window and change to the practicum director
 % cd Desktop/lae/fpga/practicum/13_ila
 ```
 
+<br />
+<!--------------------------------------------------------------------->
+
+
+## Setting up the work area
+[**[Contents]**](#contents)
+
+
+Copy from the `.solutions/` directory the main `Makefile` already prepared for you:
+
+```
+% cp .solutions/Makefile .
+```
+
+<br />
+
+Create a new fresh working area:
+
+```
+% make area
+```
+
+<br />
+
+Additionally, recursively copy from the `.solutions/` directory the following design sources and scripts already prepared for you:
+
+```
+% cp -r .solutions/rtl/      .
+% cp -r .solutions/scripts/  .
+% cp -r .solutions/xdc/      .
+```
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+## Review RTL sources
+[**[Contents]**](#contents)
+
+The proposed block is a simple 28-bit binary counter running at 100 MHz clock with additional reset and count-enable control signals.
+Additionally the four most-significant bits (MSB) of this counter simply drives four LEDs on the _Arty_ board.
+
+Review yourself in your text-editor application the main RTL module `rtl/counter_ila.v` before continuing:
+
+```
+% gedit rtl/counter_ila.v &   (for Linux users)
+
+% n++ rtl\counter_ila.v       (for Windows users)
+```
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+## Implement the design on target FPGA
+[**[Contents]**](#contents)
+
+Inspect the content of the main **Xilinx Design Constraints (XDC)** file used to implement the design on real FPGA hardware already
+prepared for you:
+
+```
+% cat xdc/counter_ila.xdc
+```
+
+<br />
+
+If not already in place, copy the file from the `.solutions/` directory as follows:
+
+```
+% cp .solutions/xdc/counter_ila.xdc  xdc/
+```
+
+<br />
+
+Identify all pins that have been used to map top-level RTL ports.
+Run the FPGA implementation flow in _**Non Project mode**_ from the command line:
+
+```
+% make build
+```
+
+<br />
+
+Once done, verify that the **bitstream file** has been properly generated:
+
+```
+% ls -l work/build/outputs/  | grep .bit
+```
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+## Install and debug the firmware
+[**[Contents]**](#contents)
+
+Connect the board to the USB port of your personal computer using a **USB A to micro USB cable**. Verify that the **POWER** status LED turns on.
+Once the board has been recognized by the operating system **upload the firmware** from the command line using:
+
+```
+% make install
+```
+
+<br />
+
+Play with reset and count-enable input controls to check that the firmware works as expected.
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+## Insert an Integrated Logic Analyzer (ILA) debug core
+[**[Contents]**](#contents)
+
+Let now suppose that for unknown reasons the firmware installed on the board does not work as expected.
+The **Integrated Logic Analyzer (ILA)** core allows allows to "spy" internal signals in your design and
+to display then in a simulation-like environment within the Vivado _Hardware manager_.
+
+As an example let suppose that we want to monitor what happens to LED values when controlling the counter
+with either the reset or the count-enable.
+
+```
+% make ip mode=gui
+```
+
+<br />
+
+In the Vivado IP Catalog go through **Vivado Repository > Debug & Verification > Debug > ILA (Integrated Logic Analyzer)** or simply
+search for "ila" in the Search bar. Right-click on the IP and select *Customize IP*.
+<br />
+
+In the **General Options** TAB configure the IP with the following specifications:
+
+* Component Name: `ila_monitor`
+* Number of Probes: 3
+* Sample Data Depth: 1024
+
+
+Additionally in the **Probe_Ports** TAB specify for the `probe2` port a width of 4-bits to later connect the four LEDs.
+Left-clock OK once done. In the **Generate Output Products** window be sure that the **Out of Context** option is checked.
+Finally left-click on **Generate** to compile the IP core.
+
+<br />
+
+Once the IP compilation process successfully completed exit from Vivado and verify that all IP deliverables are in place:
+
+```
+% ls -l ./cores/ila_monitor/*
+```
+
+<br />
+
+Review the **Verilog instantiation template** (`.veo` )part of deliverables:
+
+```
+% cat ./cores/ila_monitor/ila_monitor.veo
+```
+
+<br />
+
+At this point edit the original RTL code and try yourself to **instantiate** the ILA core to probe both reset and enable
+input control signals for the counter and the four output LEDs.
+
+<br />
+
+Additionally place `mark_debug` and `keep` **synthesis pragmas** for all signals that you want to debug as follows:
+
+```verilog
+module counter_ila (
+
+   input  wire clk,
+   (* mark_debug = "true", keep = "true" *)
+   input  wire reset,
+   (* mark_debug = "true", keep = "true" *)
+   input  wire enable,
+   (* mark_debug = "true", keep = "true" *)
+   output wire [3:0] LED
+
+   ) ;
+
+
+   ...
+   ...
+
+endmodule
+```
+
+<br />
+
+Once done with RTL changes re-build the firmware from scratch:
+
+```
+% make clean build
+```
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+## Export the ILA debug probes file
+[**[Contents]**](#contents)
+
+In order to be able to probe and display FPGA internal signals into the Vivado _Harware Manager_
+the ILA debug probe file (.ltx) file has to be provided along with the bitfile. This file is
+automatically generated for you when running **Project mode** scripts, while it's up to the
+user to export this file when working with **Non Project mode** scripts with the `write_debug_probes`
+Tcl command.
+
+As a first step **restore the final routed design checkpoint (DCP)** in the Vivado graphical interface:
+
+```
+% vivado -mode gui ./work/build/outputs/routed.dcp
+```
+
+<br />
+
+Inspect in the GUI the final **gate-level schematic** and verify that the ILA IP core is found in your
+design.
+
+<br />
+
+<img src="doc/pictures/LED_pattern_mux_vivado.png" alt="drawing"/>
+
+<br />
+
+In order to export the probed file run the following command in the Vivado Tcl console:
+
+```
+write_debug_probes ./work/build/outputs/counter_ila.ltx
+```
+
+<br />
+
+Close Vivado once done.
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+## Install the new firmware and debug with ILA
+[**[Contents]**](#contents)
+
+Start a new session of the Vivado _Hardware manager_ from the command line. You can use the following `Makefile` target
+in place of running `vivado -mode gui` standalone:
+
+
+
+```
+% make hw_manager mode=gui
+```
+
+<br />
+
+Observe in the Tcl console the equivalent command:
+
+```
+set_property PROBES.FILE { work/build/outputs/counter_ila.ltx } [current_hw_device]
+```
+
+```
+% make install mode=gui
+```
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+## Setup triggers and debug signals into the ILA dashboard
+[**[Contents]**](#contents)
+
+1) add both reset and enable signals as "triggers"
+
+2) IMPORTANTE: configure "OR" as global trigger !!!
+
+
+<br />
+<!--------------------------------------------------------------------->
+
+## Further readings
+[**[Contents]**](#contents)
+
+
+* _<https://www.realdigital.org/doc/0d71e045cc8d7193b585e8f39eaa9bf3>_
+* _<https://opentitan.org/book/doc/contributing/fpga/debugging_with_ila.html>_
+
+<br />
+<!--------------------------------------------------------------------->
+
 </div>
+
