@@ -185,7 +185,7 @@ For this purpose simply start the Vivado IP flow from `Makefile` as follows:
 
 Once the IP repository has benn successfully initialized in the Vivado **IP Catalog**
 go through **Vivado Repository > Debug & Verification > Debug > ILA (Integrated Logic Analyzer)** or simply
-search for "ila" in the Search bar. Right-click on the IP and select *Customize IP*.
+search for "ila" in the Search bar. Right-click on the IP and select **Customize IP**.
 
 <br />
 
@@ -197,7 +197,7 @@ In the **General Options** TAB configure the IP with the following specification
 
 
 Additionally in the **Probe_Ports** TAB specify for the `probe2` port a width of 4-bits to later connect the four LEDs.
-Left-clock OK once done. In the **Generate Output Products** window be sure that the **Out of Context** option is checked.
+Left-click OK once done. In the **Generate Output Products** window be sure that the **Out of Context** option is checked.
 Finally left-click on **Generate** to compile the IP core.
 
 <br />
@@ -210,7 +210,7 @@ Once the IP compilation process successfully completed exit from Vivado and veri
 
 <br />
 
-Review the **Verilog instantiation template** (`.veo` )part of deliverables:
+Review the **Verilog instantiation template** (`.veo`) part of these deliverables:
 
 ```
 % cat ./cores/ila_monitor/ila_monitor.veo
@@ -218,7 +218,7 @@ Review the **Verilog instantiation template** (`.veo` )part of deliverables:
 
 <br />
 
-At this point edit the original RTL code and try yourself to **instantiate** the ILA core to probe both reset and enable
+At this point **modify the original RTL code** and try yourself to **instantiate** the ILA core to probe both reset and enable
 input control signals for the counter and the four output LEDs.
 
 <br />
@@ -284,7 +284,7 @@ For Windows users:
 
 <br />
 
-Inspect in the GUI the final **gate-level schematic** and verify that the ILA IP core is found in your
+Inspect in the GUI the final **gate-level schematic** and verify that the ILA core is found in your
 design.
 
 <br />

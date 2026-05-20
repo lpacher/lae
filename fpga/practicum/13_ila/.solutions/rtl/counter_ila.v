@@ -4,14 +4,17 @@
 module counter_ila (
 
    input  wire clk,
+   (* mark_debug = "true", keep = "true" *)
    input  wire reset,
+   (* mark_debug = "true", keep = "true" *)
    input  wire enable,
+   (* mark_debug = "true", keep = "true" *)
    output wire [3:0] LED
 
    ) ;
 
 
-   reg [26:0] count = 'b0 ;
+   reg [27:0] count = 'b0 ;
 
    always @(posedge clk) begin
       if (~reset) begin
@@ -22,15 +25,13 @@ module counter_ila (
       end
    end   //always
 
-   assign LED = count[26:23] ;
+   assign LED = count[27:24] ;
 
 
-   //////////////////////////////////////////////////////////////////////////////////////////
-   //   **TODO: add here an Integrated Logic Analyzer (ILA) IP core to monitor the reset   //
-   //////////////////////////////////////////////////////////////////////////////////////////
+   //////////////////////////////////////////////////////////////////////////////////////////////
+   //   **EXERCISE: add here an Integrated Logic Analyzer (ILA) IP core to monitor the reset   //
+   //////////////////////////////////////////////////////////////////////////////////////////////
 
-   // ...
-   // ...
    // ...
 
 endmodule
