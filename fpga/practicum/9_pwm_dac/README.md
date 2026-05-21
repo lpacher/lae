@@ -19,7 +19,6 @@
 * [**Exercises**](#exercises)
 * [**Extra: comparison with Arduino code**](#extra-comparison-with-arduino-code)
 
-
 <br />
 <!--------------------------------------------------------------------->
 
@@ -651,6 +650,12 @@ void loop() {
    analogWrite(PWM_OUT,70);
 }
 ```
+
+<br />
+
+<img src="doc/pictures/ArduinoPinsPWM.png" alt="drawing" width="700"/>
+
+<br />
 
 <br />
 <!--------------------------------------------------------------------->
