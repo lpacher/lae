@@ -1,5 +1,5 @@
 ##=============================================================================
-## Implementation constraints for the counter_ila design example.
+## Implementation constraints for the counter_vio design example.
 ## All pin positions and electrical properties refer to the Digilent
 ## Arty-A7 development board.
 ##

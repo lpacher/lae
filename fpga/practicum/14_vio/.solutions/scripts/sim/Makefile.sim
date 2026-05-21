@@ -1,0 +1,67 @@
+
+###########################################
+##   SIMULATION targets implementation   ##
+###########################################
+
+## empty variable to optionally specify a single Verilog/SystemVerilog or VHDL file to be compiled
+hdl :=
+
+ifneq ($(hdl),)
+   export HDL_FILE=$(hdl)
+endif
+
+
+.PHONY : sim/compile
+sim/compile : $(TCL_DIR)/sim/compile.tcl ## Parse and compile RTL and simulation sources
+
+ifeq ($(wildcard $(WORK_DIR)/sim/.*),)
+	@$(error ERROR: Missing simulation working area $(WORK_DIR)/sim ! Run 'make area' before running the flows.)
+else
+	@tclsh $(TCL_DIR)/sim/compile.tcl compile
+endif
+##____________________________________________________________________________________________________
+
+
+.PHONY : sim/elaborate
+sim/elaborate : $(TCL_DIR)/sim/elaborate.tcl ## Elaborate the design
+
+	@tclsh $(TCL_DIR)/sim/elaborate.tcl elaborate
+##____________________________________________________________________________________________________
+
+
+.PHONY : sim/simulate
+sim/simulate : $(TCL_DIR)/sim/simulate.tcl $(WORK_DIR)/sim/xsim.dir ## Run simulation executable
+
+	@tclsh $(TCL_DIR)/sim/simulate.tcl simulate $(mode)
+##____________________________________________________________________________________________________
+
+
+.PHONY : compile
+compile : sim/compile ## Alias, same as 'make sim/compile'
+
+.PHONY : elaborate
+elaborate : sim/elaborate ## Alias, same as 'make sim/elaborate'
+
+.PHONY : simulate
+simulate : sim/simulate ## Alias, same as 'make sim/simulate'
+
+.PHONY : sim
+sim : sim/compile sim/elaborate sim/simulate ## Alias, same as 'make compile elaborate simulate'
+
+#.PHONY : timesim
+#timesim :
+##____________________________________________________________________________________________________
+
+
+.PHONY : sim/clean
+sim/clean : ## Delete ALL files from work/sim
+
+	@$(RM)    $(WORK_DIR)/sim/*.log
+	@$(RM)    $(WORK_DIR)/sim/*.jou
+	@$(RM)    $(WORK_DIR)/sim/*.pb
+	@$(RM)    $(WORK_DIR)/sim/*.wdb
+	@$(RMDIR) $(WORK_DIR)/sim/log/*
+	@$(RMDIR) $(WORK_DIR)/sim/xsim.dir
+	@$(RMDIR) $(WORK_DIR)/sim/.Xil
+##____________________________________________________________________________________________________
+
