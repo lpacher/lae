@@ -26,7 +26,7 @@
 ## Introduction
 [**[Contents]**](#contents)
 
-The goal of this practicum is to to introduce and demonstrate the usage
+The goal of this practicum is to introduce and demonstrate the usage
 of the **Virtual Input/Output (VIO)** debug feature available in Vivado.
 This IP core will allow you to **force/release selected internal FPGA signals remotely**
 from a Vivado _Hadware Manager_ session in order to "emulate"
