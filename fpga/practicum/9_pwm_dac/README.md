@@ -653,9 +653,7 @@ void loop() {
 
 <br />
 
-<img src="doc/pictures/ArduinoPinsPWM.png" alt="drawing" width="700"/>
-
-<br />
+<img src="doc/pictures/ArduinoPinsPWM.png" alt="drawing" width="400"/>
 
 <br />
 <!--------------------------------------------------------------------->
