@@ -13,11 +13,8 @@
 module counter_vio (
 
    input  wire clk,
-   (* mark_debug = "true", keep = "true" *)
    input  wire reset,
-   (* mark_debug = "true", keep = "true" *)
    input  wire enable,
-   (* mark_debug = "true", keep = "true" *)
    output wire [3:0] LED
 
    ) ;

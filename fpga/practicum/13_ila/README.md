@@ -195,7 +195,7 @@ For this purpose simply start the Vivado IP flow from `Makefile` as follows:
 
 <br />
 
-Once the IP repository has benn successfully initialized in the Vivado **IP Catalog**
+Once the IP repository has been successfully initialized in the Vivado **IP Catalog**
 go through **Vivado Repository > Debug & Verification > Debug > ILA (Integrated Logic Analyzer)** or simply
 search for "ila" in the Search bar. Right-click on the IP and select **Customize IP**.
 
@@ -203,7 +203,7 @@ search for "ila" in the Search bar. Right-click on the IP and select **Customize
 
 In the **General Options** TAB configure the IP with the following specifications:
 
-* Component Name: `ila_monitor`
+* Component Name: `ila_core`
 * Number of Probes: 3
 * Sample Data Depth: 1024
 
@@ -217,7 +217,7 @@ Finally left-click on **Generate** to compile the IP core.
 Once the IP compilation process successfully completed exit from Vivado and verify that all IP deliverables are in place:
 
 ```
-% ls -l ./cores/ila_monitor/*
+% ls -l ./cores/ila_core/*
 ```
 
 <br />
@@ -225,7 +225,7 @@ Once the IP compilation process successfully completed exit from Vivado and veri
 Review the **Verilog instantiation template** (`.veo`) part of these deliverables:
 
 ```
-% cat ./cores/ila_monitor/ila_monitor.veo
+% cat ./cores/ila_core/ila_core.veo
 ```
 
 <br />
