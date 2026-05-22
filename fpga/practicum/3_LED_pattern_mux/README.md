@@ -4,6 +4,8 @@
 # Practicum 3
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/practicum)]
 
+## Estimated time: **20 minutes**
+
 For this practicum **try yourself** to write a suitable **multiplexing logic**
 to alternatively drive the four standard LEDs available on the Digilent _Arty_ board
 with either `1010` or `0101` patterns according to the position of a slide-switch.

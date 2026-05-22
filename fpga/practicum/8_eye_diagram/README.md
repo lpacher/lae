@@ -3,6 +3,7 @@
 # Practicum 8
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/practicum)]
 
+## Estimated time: **20 minutes**
 
 ## Contents
 

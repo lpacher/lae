@@ -3,7 +3,7 @@
 # Practicum 14
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae/tree/master/fpga/practicum)]
 
-## Estimated time: **30 minutes**
+## Estimated time: **20 minutes**
 
 ## Contents
 
@@ -350,6 +350,24 @@ wire reset_int ;
 
 (* mark_debug = "true", keep = "true" *)
 wire enable_int ;
+```
+
+<br />
+
+Once done with RTL changes re-build the firmware from scratch from the command line:
+
+```
+% make clean build
+```
+
+<br />
+
+Finally export the new debug probes file and re-install the new firmware. For the installation
+it is recommended to simply open a Vivado _Hardware Manager_ session in graphic mode since the
+beginning:
+
+```
+% make hw_manager mode=gui
 ```
 
 
