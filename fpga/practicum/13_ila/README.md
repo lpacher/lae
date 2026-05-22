@@ -304,11 +304,11 @@ design.
 
 <br />
 
-<!-- img src="doc/pictures/counter_ila_vivado.png" alt="drawing"  >
+<img src="doc/pictures/counter_ila_vivado.png" alt="drawing"  >
 
 <br /><br />
 
-In order to **export the probes file** run the following command in the Vivado Tcl console:
+In order to **export the debug probes file** run the following command in the Vivado Tcl console:
 
 ```
 write_debug_probes ./work/build/outputs/counter_ila.ltx
