@@ -174,6 +174,10 @@ At this point try yourself to **complete the template RTL code** in order to **i
 to drive both reset and enable control signals for the counter **from the VIO core** in combination with
 real external reset and enable input signals coming from physical push-button/switch on the _Arty_ board.
 
+Pay attention in implementing logic functions required to merge `reset` with `reset_from_vio`
+and `enable` with `enable_from_vio` wires. In practice by default the presence of the VIO core in the
+code has to be "seamless".
+
 <br />
 <!--------------------------------------------------------------------->
 
@@ -254,6 +258,10 @@ design.
 
 <br />
 
+<img src="doc/pictures/counter_vio_vivado.png" alt="drawing"/>
+
+<br /><br />
+
 Then **export the probes file** by running the following command in the Vivado Tcl console:
 
 ```
@@ -311,21 +319,42 @@ standalone as usual:
 
 <br />
 
-Establish a new connection between the _Hardware Manager_ and the _Arty_ board and re-program the FPGA.
-To do this, simply left-click on **Open target > Auto Connect**, then right-click
-on the `xc7a35t` device, select **Program Device...** and specify **both** the **bitstream file** (`.bit`)
-and the **debug probes file** (`.ltx`).
+Establish a new connection between the _Hardware Manager_ and the _Arty_ board.
+To do this, simply left-click on **Open target > Auto Connect** as usual.
 
-Once the FPGA has been successfully programmed the _Hardware Manager_ displays the **VIO Default Dashboard**.
-This window allows you to create **virtual push-buttons and slide-switches** to force/release
+Once the FPGA has been successfully recognized the _Hardware Manager_ displays the **VIO Default Dashboard**
+as in picture.
+
+<br />
+
+<img src="doc/pictures/DashboardSpecifyProbesFile.png" alt="drawing"/>
+
+<br /><br />
+
+In order to be able to interact with the VIO core you have to specify the **debug probes file** (`.ltx`)
+and to **refresh** the device as suggested.
+
+<br />
+
+<img src="doc/pictures/RefreshDevice.png" alt="drawing" width="500"/>
+
+<br /><br />
+
+At this point the VIO dashboard allows you to create **virtual push-buttons and slide-switches** to force/release
 remotely FPGA internal signals in place of real physical switches.
 
-Try yourself to create for the counter
+Try yourself to add both `reset_int` and `enable_int` probes into the dashboard and to create for the counter
 
 * a virtual active-low push-button for the reset and
 * a virtual slide-switch for the enable
 
 then play with these virtual stimuli and debug the functionality of the firmware.
+
+<br />
+
+<img src="doc/pictures/DashboardAddProbes.png" alt="drawing"/>
+
+<br />
 
 <br />
 <!--------------------------------------------------------------------->
