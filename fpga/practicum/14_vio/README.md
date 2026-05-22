@@ -383,6 +383,17 @@ wire enable_int ;
 
 <br />
 
+Since you already compiled the ILA core in the previous practicum to save time free to
+simply re-compile the IP starting from a copy of its main XCI configuration file as follows:
+
+```
+% mkdir -p cores/ila_core
+% cp ../13_ila/cores/ila_core/ila_core.xci ./cores/ila_core
+% make ip mode=batch xci=cores/ila_core/ila_core.xci
+```
+
+<br />
+
 Once done with RTL changes re-build the firmware from scratch from the command line:
 
 ```
