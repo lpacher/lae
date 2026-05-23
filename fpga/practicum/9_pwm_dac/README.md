@@ -583,6 +583,18 @@ endmodule
 >
 
 <br />
+
+<!-- TODO: aggiungere waveform all'oscilloscopio + FFT -->
+
+Re-build the firmware and display the new waveform at the oscilloscope.
+Perform the FFT of the signal at the oscilloscope and compare the frequency spectrum with the well-known theoretical
+[**Fourier expansion of a sawtooth wave**](https://mathworld.wolfram.com/FourierSeriesSawtoothWave.html):
+
+$$
+v(t) = \frac{A}{2} + \frac{2~A}{\pi}~\sum_{n=1}^{\infty} ~\frac{ (-1)^{n+1}}{n} ~\sin(\omega_n t) \ \ \ \ \ \ n = 1,2,3,4,5,6,7 ...
+$$
+
+<br />
 <!--------------------------------------------------------------------->
 
 
