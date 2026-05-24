@@ -3,6 +3,10 @@
 
 [[**Home**](https://github.com/lpacher/lae)] [[**Back**](https://github.com/lpacher/lae)]
 
+<br />
+
+## Introductory projects
+
 * **Practicum 1** <br />
 [Getting started with the Digilent Arty A7 development board.](
 https://github.com/lpacher/lae/tree/master/fpga/practicum/1_arty)
@@ -26,6 +30,12 @@ https://github.com/lpacher/lae/tree/master/fpga/practicum/5_LED_blink)
 * **Practicum 6** <br />
 [A 4-bit Binary Coded Decimal (BCD) counter driving a 7-segment display.](
 https://github.com/lpacher/lae/tree/master/fpga/practicum/6_BCD_counter)
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+## Intermediate projects
 
 * **Practicum 7** <br />
 [Clock multiplication and division using a Phase-Locked Loop (PLL) IP core.](
@@ -58,4 +68,18 @@ https://github.com/lpacher/lae/tree/master/fpga/practicum/13_ila)
 * **Practicum 14** <br />
 [Virtual Input/Output (VIO).](
 https://github.com/lpacher/lae/tree/master/fpga/practicum/14_vio)
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+## Advanced projects
+
+* **Practicum 15** <br />
+[JTAG exploration from Tcl.](
+https://github.com/lpacher/lae/tree/master/fpga/practicum/15_jtag)
+
+* **Practicum 16** <br />
+[Basic Ethernet.](
+https://github.com/lpacher/lae/tree/master/fpga/practicum/16_ethernet)
 
