@@ -5,6 +5,14 @@
 
 <br />
 
+>
+> **IMPORTANT**
+>
+> Each student is **requested** to complete <b><i>at least</i></b> all introductory projects.
+>
+
+<br />
+
 ## Introductory projects
 
 * **Practicum 1** <br />
