@@ -205,22 +205,19 @@ Move to the `uart_xadc.v` design once happy. The `uart_xadc.v` design uses the e
 the on-chip temperature and to send temperature values to the local computer through the FTDI UART/USB bridge.
 
 In order to make a **real-time histogram** of the incoming XADC data a simple **PyROOT data-acquisition system (DAQ)**
-that uses the **Serial** Python library in place of PuTTY.
+that uses the **Serial** Python library in place of PuTTY has been already prepared for you.
 
 
-For Linux users:
+In case not aready installed Linux users can easily install `pyserial` through `pip` as follows:
 
 ```
-% sudo apt-get install python-pip
-
-% sudo yum install python-pip
 % python -m pip install pyserial
 ```
 
 <br />
 
-A fully-working pre-compiled Python 2.7 installation including this extra Python library has been already prepared
-for Windows users and it is available at the following link:
+A fully-working pre-compiled Python 2.7.18 installation including this extra Python library has been
+already prepared for Windows users and it is available at the following link:
 
 _<http://personalpages.to.infn.it/~pacher/teaching/FPGA/software/windows/Python.zip>_
 
