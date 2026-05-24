@@ -85,7 +85,7 @@ https://github.com/lpacher/lae/tree/master/fpga/practicum/14_vio)
 
 * **Practicum 15** <br />
 [JTAG exploration from Tcl.](
-https://github.com/lpacher/lae/tree/master/fpga/practicum/15_jtag)
+https://github.com/lpacher/lae/tree/master/fpga/practicum/15_jtag_tcl)
 
 * **Practicum 16** <br />
 [Basic Ethernet.](
