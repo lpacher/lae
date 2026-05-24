@@ -1,4 +1,4 @@
-//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Simple ROOT macro to histogram normally-distributed pseudo-random values generated
 // according to the Central Limit Theorem (CLT).
 //
@@ -17,7 +17,8 @@
 //
 // Luca Pacher - pacher@to.infn.it
 // Spring 2020
-//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 void hNormal (char *fileName="work/sim/gaus.txt") {
 

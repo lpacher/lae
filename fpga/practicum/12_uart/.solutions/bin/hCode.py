@@ -5,8 +5,6 @@
 ## Spring 2020
 ##
 
-import ROOT
-
 import os
 import sys
 import serial

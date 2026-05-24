@@ -507,7 +507,18 @@ directory clean:
 
 <br />
 
-Compile the new design from the command line by invoking the `xvlog` executable as follows:
+Compile, elaborate and simulate the new design from the command line. For less typing you can run the following
+Tcl script already prepared for you:
+
+```
+% cp .solutions/bin/runSimNormalDistribution.tcl ./bin
+% tclsh bin/runSimNormalDistribution.tcl
+```
+
+<br />
+
+Alternatively you can run each step of the simulation flow as extensively discussed at the beginning of the course.
+Start by invoking the `xvlog` executable as follows:
 
 ```
 % xvlog ../../bench/tb_NormalDistribution.v -include ../../bench
