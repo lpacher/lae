@@ -1,7 +1,12 @@
 
+## open Hardware Manager
+#open_hw_manager
+
 ## open hardware target in JTAG mode
 connect_hw_server -url localhost:3121 -verbose
 open_hw_target -jtag_mode on
+
+puts "Current hw_target is [current_hw_target]"
 
 set jtag_chain [get_property hw_jtag [current_hw_target]]
 
@@ -23,4 +28,13 @@ run_state_hw_jtag IDLE
 
 ## display the DNA code
 puts "Device FUSE_DNA: $hex_dna"
+
+## **DEBUG: get DNA from high-level property and compare
+#set fuse_dna [get_property REGISTER.EFUSE.FUSE_DNA [current_hw_device]]
+
+## close hardware target
+#close_hw_target
+
+## close hardware server
+#disconnet_hw_server
 
