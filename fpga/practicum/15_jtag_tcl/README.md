@@ -721,9 +721,14 @@ get_property REGISTER.EFUSE.FUSE_DNA [current_hw_device]
 
 <br />
 
+An example Tcl script from an external GitHub project can be found at the following link:
+
+_<https://github.com/qermit/AfcJtag/blob/master/scansta_afc.tcl>_
+
+<br />
+
 Some useful references:
 
 * _<https://www.xjtag.com/about-jtag/jtag-a-technical-overview/>_
 * _<https://docs.amd.com/v/u/en-US/ug470_7Series_Config>_
-
 
