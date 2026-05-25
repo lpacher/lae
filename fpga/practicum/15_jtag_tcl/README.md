@@ -20,7 +20,8 @@ In this practicum experiment yourself with the **JTAG protocol Finite State-Mach
 <br /><br />
 
 Since you are going to mainly issue **Tcl commands interactively**  in the _Hardware Manager_, 
-for your trials you can simply run Vivado in Tcl mode as follows:
+for your trials you can simply run Vivado in Tcl mode with the
+following script already prepared for you:
 
 ```
 % cp .solutions/hw_manager.tcl .
@@ -29,7 +30,15 @@ for your trials you can simply run Vivado in Tcl mode as follows:
 
 <br />
 
-Then start the _Hardware Manager_ from the Vivado Tcl console:
+Alternatively launch Vivado in Tcl mode with
+
+```
+% vivado -mode tcl
+```
+
+<br />
+
+and then start the _Hardware Manager_ from the Vivado Tcl console:
 
 ```
 open_hw_manager
@@ -73,7 +82,7 @@ set_property PARAM.FREQUENCY 5000000 [current_hw_target] ;   #reduce TCK frequen
 
 <br />
 
-Once the target is running in JTAG mode main the **Instruction Register (IR)** and all **Data Registers (DR)**
+Once the target is running in JTAG mode the main **Instruction Register (IR)** and all **Data Registers (DR)**
 are accessible through the `scan_ir_hw_jtag` and `scan_dr_hw_jtag` Tcl commands respectively.
 Additionally the devices on the target can also be put into various states using the `run_state_hw_jtag` command.
 
