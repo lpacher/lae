@@ -23,7 +23,8 @@ Since you are going to mainly issue **Tcl commands interactively**  in the _Hard
 for your trials you can simply run Vivado in Tcl mode as follows:
 
 ```
-% vivado -mode tcl
+% cp .solutions/hw_manager.tcl .
+% vivado -mode tcl -source hw_manager.tcl
 ```
 
 <br />
@@ -86,6 +87,10 @@ run_state_hw_jtag IDLE
 ```
 
 <br />
+
+<img src="doc/pictures/JTAG_RESET_to_IDLE.png" alt="drawing" width="650"/>
+
+<br /><br />
 
 Explore all **command-line switches and options** available for Vivado JTAG Tcl commands.
 
@@ -721,6 +726,8 @@ Example:
 For this practicum you have to carefully read and understand the <b><i>Advanced JTAG Usage</i></b> chapter
 of the official [**7-Series FPGAs Configuration User Guide**](https://docs.amd.com/v/u/en-US/ug470_7Series_Config).
 
+<br />
+
 An example Tcl script from an external GitHub project can be found at the following link:
 
 _<https://github.com/qermit/AfcJtag/blob/master/scansta_afc.tcl>_
@@ -764,6 +771,13 @@ As a second example, try yourself to put the JTAG state machine in `BYPASS` mode
 on **TDI** and verify at the oscilloscope that **TDO** is properly echoed.
 
 <br />
+
+<img src="doc/pictures/JTAG_TDI_TDO_BYPASS.png" alt="drawing" width="650"/>
+
+<br /><br />
+
+
+## Further readings
 
 Some useful references:
 
