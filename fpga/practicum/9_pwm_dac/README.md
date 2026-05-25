@@ -584,9 +584,14 @@ endmodule
 
 <br />
 
-<!-- TODO: aggiungere waveform all'oscilloscopio + FFT -->
-
 Re-build the firmware and display the new waveform at the oscilloscope.
+
+<br />
+
+<img src="doc/pictures/pwm_sawtooth_oscilloscope.png" alt="drawing" width="700"/>
+
+<br /><br />
+
 Perform the FFT of the signal at the oscilloscope and compare the frequency spectrum with the well-known theoretical
 [**Fourier expansion of a sawtooth wave**](https://mathworld.wolfram.com/FourierSeriesSawtoothWave.html):
 

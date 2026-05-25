@@ -44,9 +44,9 @@ if { [catch {
 
    puts "\n-- Parsing design constraints..."
 
-   if { [llength [glob -nocomplain [pwd]/xdc/*.xdc]] != 0 } {
+   if { [llength [glob -nocomplain [pwd]/xdc/$env(RTL_TOP_MODULE).xdc]] != 0 } {
 
-      foreach src [glob -nocomplain [pwd]/xdc/*.xdc] {
+      foreach src [glob -nocomplain [pwd]/xdc/$env(RTL_TOP_MODULE).xdc] {
 
          puts "\n\nLoading Xilinx Design Constraint (XDC) source file ${src} ...\n" ; read_xdc -unmanaged ${src}
       }
