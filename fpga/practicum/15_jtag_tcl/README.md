@@ -5,7 +5,7 @@
 
 <br />
 
-Experiment yourself with the **JTAG protocol Finite State-Machine (FSM)** using
+In this practicum experiment yourself with the **JTAG protocol Finite State-Machine (FSM)** using
 **low-level** JTAG Tcl commands available in the Vivado _Hardware Manager_:
 
 * `run_state_hw_jtag`
@@ -19,8 +19,8 @@ Experiment yourself with the **JTAG protocol Finite State-Machine (FSM)** using
 
 <br /><br />
 
-Since you are going to only issue Tcl commands in the _Hardware Manager_ for your trials you can simply 
-run Vivado in Tcl mode as follows:
+Since you are going to mainly issue **Tcl commands interactively**  in the _Hardware Manager_, 
+for your trials you can simply run Vivado in Tcl mode as follows:
 
 ```
 % vivado -mode tcl
@@ -47,11 +47,38 @@ open_hw_target -jtag_mode on
 
 <br />
 
-Once the target is running in JTAG mode both the **Instruction Register (IR)** and **Data Registers (DR)**
+Connect also **oscilloscope probes** on the dedicated **JTAG header** available on the Digilent _Arty_ board
+to debug JTAG **TCK**, **TMS**, **TDI** and **TDO** signals.
+
+<br />
+
+<img src="doc/pictures/JTAG_header.png" alt="drawing" width="625"/>
+
+<br /><br />
+
+For easier debug on JTAG signals it is recommended to probe **TCK** on CH1 and always use this signal for the trigger, then properly
+set **trigger options** and setup a _single-trigger_ or _single shot_ trigger mode to "capture" JTAG sequences.
+Therefore open the **Trigger Menu** and switch the trigger-mode from **Auto** (default) to **Normal**. Ensure that a positive-edge
+transition is used as trigger condition.
+
+<br />
+
+If needed you can also **reduce the JTAG clock frequency** from the _Hardware Manager_ Tcl console to avoid signals distortion
+due to oscilloscope **bandwidth limitations**. As an example:
+
+```
+set_property PARAM.FREQUENCY 5000000 [current_hw_target] ;   #reduce TCK frequency to 5 MHz
+```
+
+<br />
+
+Once the target is running in JTAG mode main the **Instruction Register (IR)** and all **Data Registers (DR)**
 are accessible through the `scan_ir_hw_jtag` and `scan_dr_hw_jtag` Tcl commands respectively.
 Additionally the devices on the target can also be put into various states using the `run_state_hw_jtag` command.
 
-As an example:
+<br />
+
+As an example, run the following commands and check what happens to JTAG waveforms at the oscilloscope:
 
 ```
 run_state_hw_jtag RESET
@@ -60,7 +87,8 @@ run_state_hw_jtag IDLE
 
 <br />
 
-Explore all **command-line switches and options** available for these Tcl commands.
+Explore all **command-line switches and options** available for Vivado JTAG Tcl commands.
+
 
 <br />
 <!--------------------------------------------------------------------->
@@ -693,9 +721,19 @@ Example:
 For this practicum you have to carefully read and understand the <b><i>Advanced JTAG Usage</i></b> chapter
 of the official [**7-Series FPGAs Configuration User Guide**](https://docs.amd.com/v/u/en-US/ug470_7Series_Config).
 
+An example Tcl script from an external GitHub project can be found at the following link:
+
+_<https://github.com/qermit/AfcJtag/blob/master/scansta_afc.tcl>_
+
 <br />
 
-As an example, try yourself to write a Tcl script from scratch `get_dna_jtag.tcl` to read-back the reserved
+In the following two different example low-level JTAG programming sequences are proposed.
+
+<br />
+
+**READ THE DEVICE DNA THROUGH JTAG**
+
+As a first example, try yourself to write a Tcl script from scratch `get_dna_jtag.tcl` to read-back the reserved
 **64-bits Device DNA** using the `FUSE_DNA` JTAG command corresponding to the op-code `6'b110010` as depicted below.
 
 <br />
@@ -704,15 +742,12 @@ As an example, try yourself to write a Tcl script from scratch `get_dna_jtag.tcl
 
 <br /><br />
 
-Connect also **oscilloscope probes** on the dedicated **JTAG header** to debug JTAG signals.
+Display the **TDO** signal at the oscilloscope and verify that the DNA code obtained from Tcl matches
+serial data transmitted through JTAG.
 
 <br />
 
-<img src="doc/pictures/JTAG_header.png" alt="drawing" width="625"/>
-
-<br />
-
-Compare your result with the high-level `FUSE_DNA` property directly available in the _Harware Manager_
+Compare your result with the high-level `REGISTER.EFUSE.FUSE_DNA` property directly available in the _Harware Manager_
 as discussed in the first practicum:
 
 ```
@@ -720,10 +755,13 @@ get_property REGISTER.EFUSE.FUSE_DNA [current_hw_device]
 ```
 
 <br />
+<!--------------------------------------------------------------------->
 
-An example Tcl script from an external GitHub project can be found at the following link:
 
-_<https://github.com/qermit/AfcJtag/blob/master/scansta_afc.tcl>_
+**ENTER TO BYPASS MODE**
+
+As a second example, try yourself to put the JTAG state machine in `BYPASS` mode, then feed using Tcl some random serial stream
+on **TDI** and verify at the oscilloscope that **TDO** is properly echoed.
 
 <br />
 

@@ -2,13 +2,20 @@
 ## open Hardware Manager
 #open_hw_manager
 
-## open hardware target in JTAG mode
+## start hardware server
 connect_hw_server -url localhost:3121 -verbose
+refresh_hw_server
+
+## open hardware target in JTAG mode
 open_hw_target -jtag_mode on
+refresh_hw_target
 
 puts "Current hw_target is [current_hw_target]"
 
 set jtag_chain [get_property hw_jtag [current_hw_target]]
+
+## if needed, reduce JTAG clock grequency to avoid oscilloscope bandwidth limitations
+#set_property PARAM.FREQUENCY 5000000 [current_hw_target] ;   #reduce TCK frequency to 5 MHz
 
 ## be sure to start from IDLE
 run_state_hw_jtag RESET
