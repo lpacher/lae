@@ -200,6 +200,36 @@ Ask to the teacher if you need help.
 <br />
 <!--------------------------------------------------------------------->
 
+## Exercises
+
+<br />
+
+**EXERCISE 1**
+
+Try yourself to modify the UART transmitter of the `uart_ascii.v` design in order to **double the baud-rate**
+from **9600** (highly reliable default rate for general debugging) to **19200** (common mid-range speed).
+Re-build the firmware. Update the PuTTY serial configuration accordingly.
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+**EXERCISE 2**
+
+Try yourself to modify the UART transmitter of the `uart_ascii.v` design in order to include also the **parity-bit**
+into UART frames. Update the PuTTY serial configuration accordingly.
+
+<br />
+<!--------------------------------------------------------------------->
+
+
+**EXERCISE 3**
+
+Modify the `uart_ascii.v` design in order to replace the ROM written in Verilog with a Xilinx IP core.
+
+<br />
+<!--------------------------------------------------------------------->
+
 
 ## UART XADC
 
@@ -246,8 +276,25 @@ Ask to the teacher if you need help.
 
 **EXERCISE 1**
 
-Try yourself to modify the UART transmitter of the `uart_ascii.v` design in order to include also the **parity-bit**
-into UART frames. Update the PuTTY serial configuration accordingly.
+Update the configuration of the XADC core in order to receive in input an **external single-ended analog voltage**
+fed to pin **A0** of the _Arty_ board.
+
+For this purpose simply open the existing IP repository with
+
+```
+% make ip mode=gui
+```
+
+<br />
+
+then select the pre-existing compiled XADC core and **re-customize** the IP in order to enable the **VAUX4P/N** channel as inputs
+for the ADC.
+
+Once the new IP is ready update also the `XADC.v` wrapper and the top-level design `uart_xadc.v` in order to feed
+A0 differential pins to the new ADC.
+
+Ask to teacher more details about how single-ended voltages are fed to the XADC from the board using **analog inputs**
+available on the ChipKit/Arduino shield.
 
 <br />
 <!--------------------------------------------------------------------->
@@ -255,7 +302,9 @@ into UART frames. Update the PuTTY serial configuration accordingly.
 
 **EXERCISE 2**
 
-Modify the `uart_ascii.v` design in order to replace the ROM written in Verilog with a Xilinx IP core.
+Extend the `uart_xadc` design in order to include the **sawtooth PWM waveform generator** that you already implemented in
+practicum 9 and feed this voltage signal to the ADC to generate a **code-density plot** to characterize the ADC
+linearity.
 
 <br />
 <!--------------------------------------------------------------------->
