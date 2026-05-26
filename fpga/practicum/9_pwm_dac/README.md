@@ -419,6 +419,8 @@ Verify the expected **linearity of the DAC characteristic** with a fit. Feel fre
 >
 > ```
 > root[] TGraph gr("data/pwm_dac.txt")
+> root[] gr.SetMarkerStyle(20)
+> root[] gr.SetMarkerSize(1.2)
 > root[] gr.Draw("ALP")
 > ```
 >
@@ -440,6 +442,8 @@ Verify the expected **linearity of the DAC characteristic** with a fit. Feel fre
 > root[] double xData[Npt] = {0,1,2,3 ... 15}
 > root[] double yData[Npt] = { ... }
 > root[] TGraph gr(Npt,xData,yData)
+> root[] gr.SetMarkerStyle(20)
+> root[] gr.SetMarkerSize(1.2)
 > root[] gr.Draw("ALP")
 > root[] gr.Fit("pol1")
 > ```

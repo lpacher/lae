@@ -336,6 +336,8 @@ Verify the expected linearity of the characteristic with a fit. Feel free to use
 >
 > ```
 > root[] TGraph gr("data/DelayLine.dat")
+> root[] gr.SetMarkerStyle(20)
+> root[] gr.SetMarkerSize(1.2)
 > root[] gr.Draw("ALP")
 > ```
 >
@@ -357,6 +359,8 @@ Verify the expected linearity of the characteristic with a fit. Feel free to use
 > root[] double xData[Npt] = {0,1,2,3 ... 15}
 > root[] double yData[Npt] = { ... }
 > root[] TGraph gr(Npt,xData,yData)
+> root[] gr.SetMarkerStyle(20)
+> root[] gr.SetMarkerSize(1.2)
 > root[] gr.Draw("ALP")
 > root[] gr.Fit("pol1")
 > ```

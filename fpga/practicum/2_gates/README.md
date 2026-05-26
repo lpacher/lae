@@ -995,8 +995,12 @@ and for the frequency vs. $1/(N+1)$. Verify the expected linearity of the charac
 >
 > ```
 > root[] TGraph gr1("data/RingOscillator.dat","%lg %*lg %lg")
+> root[] gr1.SetMarkerStyle(20)
+> root[] gr1.SetMarkerSize(1.2)
 > root[] gr1.Draw("ALP")
 > root[] TGraph gr2("data/RingOscillator.dat","%*lg %lg %lg")
+> root[] gr2.SetMarkerStyle(21)
+> root[] gr2.SetMarkerSize(1.2)
 > root[] gr2.Draw("ALP")
 > root[] gr2.Fit("pol1")
 > ```
@@ -1012,9 +1016,13 @@ and for the frequency vs. $1/(N+1)$. Verify the expected linearity of the charac
 > root[] double xData[Npt] = {283 , 567 , 849 , 1133 , 1415 ... }
 > root[] double yData[Npt] = { ... }
 > root[] TGraph gr1(Npt,xData,yData)
+> root[] gr1.SetMarkerStyle(20)
+> root[] gr1.SetMarkerSize(1.2)
 > root[] gr1.Draw("ALP")
 > root[] TGraph gr2(Npt)
 > root[] for(int k=0; k<Npt; k++){ gr2.SetPoint(k,1/xData[k],yData[k]) }
+> root[] gr2.SetMarkerStyle(21)
+> root[] gr2.SetMarkerSize(1.2)
 > root[] gr2.Draw("ALP")
 > root[] gr2.Fit("pol1")
 > ```
