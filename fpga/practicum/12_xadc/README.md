@@ -1,4 +1,13 @@
 
+Additional idea:
+
+mappare lo start-of-conversion direttamente su un push-button
+e portare fuori all'oscilloscopio i segnali di SoC e EoC
+per verificarne il TIMING vs. guida !!!
+
+https://henryomd.blogspot.com/2015/06/bare-metal-code-to-read-adc-on-zynq.html
+
+
 <br />
 
 <img src="doc/pictures/XADC_block_diagram.png" alt="drawing"/>

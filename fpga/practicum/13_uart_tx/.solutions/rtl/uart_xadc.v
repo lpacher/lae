@@ -73,19 +73,20 @@ module uart_xadc (
 
 
    // compose BYTES to be transmitted over serial lane
-   wire [7:0] byte1 = (select == 1'b0) ? 8'hFF : adc_data[7:0] ;                  //lower byte
-   wire [7:0] byte2 = (select == 1'b0) ? 8'hFF : {4'b0000 , adc_data[11:8] } ;    //upper byte
+   wire [7:0] tx_byte1 = (select == 1'b0) ? 8'hFF : adc_data[7:0] ;                  //lower tx_byte
+   wire [7:0] tx_byte2 = (select == 1'b0) ? 8'hFF : {4'b0000 , adc_data[11:8] } ;    //upper tx_byte
 
 
    /////////////////////////////////
-   //   byte-splitter using FSM   //
+   //   tx_byte-splitter using FSM   //
    /////////////////////////////////
 
    wire busy ;   //FROM UART FSM
 
    parameter [1:0] IDLE       = 2'b00 ;
-   parameter [1:0] SEND_BYTE1 = 2'b01 ;
-   parameter [1:0] SEND_BYTE2 = 2'b10 ;
+   parameter [1:0] BYTE1 = 2'b01 ;
+   parameter [1:0] BYTE2 = 2'b10 ;
+   parameter [1:0] DONE       = 2'b11 ;   //dummy-state, just one clock delay
 
    reg [1:0] STATE = 2'b00 ;
 
@@ -96,34 +97,31 @@ module uart_xadc (
       else
          case (STATE)
 
-         default : STATE <= IDLE ;
-         //_________________________________
-         //
-         IDLE :
-         begin
-            if (adc_eoc)
-               STATE <= SEND_BYTE1 ;
-            else
-               STATE <= IDLE ;
-         end
-         //_________________________________
-         //
-         SEND_BYTE1 :
-         begin
-            if (busy)
-               STATE <= SEND_BYTE2 ;
-            else
-               STATE <=  ;
-         end
-         //_________________________________
-         //
-         SEND_BYTE2 :
-         begin
-            if (busy)
-               STATE <= SEND_BYTE2 ;
-            else
-               STATE <= IDLE ;
-         end
+            default : STATE <= IDLE ;
+            //_________________________________
+            //
+            IDLE :
+            begin
+               if (adc_eoc)
+                  STATE <= BYTE1 ;
+            end
+            //_________________________________
+            //
+            BYTE1 :
+            begin
+               if (~busy)
+                  STATE <= BYTE2 ;
+            end
+            //_________________________________
+            //
+            BYTE2 :
+            begin
+               if (~busy)
+                  STATE <= DONE ;
+            end
+            //_________________________________
+            //
+            DONE : STATE <= IDLE ;
          endcase
    end   //always
 
@@ -141,8 +139,8 @@ module uart_xadc (
    //   UART transmitter FSM   //
    //////////////////////////////
 
-   wire tx_start = (STATE == SEND_BYTE1) || (STATE == SEND_BYTE2) ;
-   wire [7:0] tx_data = (STATE == SEND_BYTE1) ? byte1 : byte2 ;
+   wire tx_start = (STATE == BYTE1) || (STATE == BYTE2) ;
+   wire [7:0] tx_data = (STATE == BYTE1) ? tx_byte1 : tx_byte2 ;
 
    uart_tx_FSM  uart_tx (
 

@@ -1,6 +1,8 @@
-//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Implementation of UART transmission unit using a Finite State Machine (FSM).
 // The block only transmits one BYTE and it is foreseen to be interfaced with a FIFO.
+//
+// Ref. also to: https://github.com/FPGA-course-2025/day3/blob/main/UART/uart_transmitter.vhd
 //
 // Luca Pacher - pacher@to.infn.it
 // Fall 2020
@@ -12,6 +14,7 @@
 //         IDLE        START  BIT0  BIT1  BIT2  BIT3  BIT4  BIT5  BIT6  BIT7  STOP  IDLE
 //
 //
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 `timescale 1ns / 100ps
