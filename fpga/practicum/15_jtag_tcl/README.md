@@ -84,7 +84,17 @@ set_property PARAM.FREQUENCY 5000000 [current_hw_target] ;   #reduce TCK frequen
 
 Once the target is running in JTAG mode the main **Instruction Register (IR)** and all **Data Registers (DR)**
 are accessible through the `scan_ir_hw_jtag` and `scan_dr_hw_jtag` Tcl commands respectively.
-Additionally the devices on the target can also be put into various states using the `run_state_hw_jtag` command.
+Additionally the TAP state machine can be put into four stable states (`RESET`, `IDLE`, `IRPAUSE` and `DRPAUSE`)
+using the `run_state_hw_jtag` command.
+
+<br />
+
+<img src="doc/pictures/JTAG_architecture.png" alt="drawing"/>
+
+<br /><br />
+
+The complete list of available JTAG **op-codes** and **registers** is described in the <b><i>Advanced JTAG Usage</i></b> chapter
+of the official [**7-Series FPGAs Configuration User Guide**](https://docs.amd.com/v/u/en-US/ug470_7Series_Config).
 
 <br />
 
@@ -730,13 +740,6 @@ Example:
 <!--------------------------------------------------------------------->
 
 
-<br />
-
-For this practicum you have to carefully read and understand the <b><i>Advanced JTAG Usage</i></b> chapter
-of the official [**7-Series FPGAs Configuration User Guide**](https://docs.amd.com/v/u/en-US/ug470_7Series_Config).
-
-<br />
-
 An example Tcl script from an external GitHub project can be found at the following link:
 
 _<https://github.com/qermit/AfcJtag/blob/master/scansta_afc.tcl>_
@@ -777,7 +780,7 @@ get_property REGISTER.EFUSE.FUSE_DNA [current_hw_device]
 **ENTER TO BYPASS MODE**
 
 As a second example, try yourself to put the JTAG state machine in `BYPASS` mode, then feed using Tcl some random serial stream
-on **TDI** and verify at the oscilloscope that **TDO** is properly echoed.
+on **TDI** and verify at the oscilloscope that **TDO** is properly echoed with one clock-period delay as expected.
 
 <br />
 
