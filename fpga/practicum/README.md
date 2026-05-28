@@ -13,11 +13,21 @@
 
 <br />
 
+## Preparatory work
+
+* **Practicum 0** <br />
+[Digilent Arty A7 reference documentation.](
+https://github.com/lpacher/lae/tree/master/fpga/practicum/0_arty_doc)
+
+<br />
+<!--------------------------------------------------------------------->
+
+
 ## Introductory projects
 
 * **Practicum 1** <br />
 [Getting started with the Digilent Arty A7 development board.](
-https://github.com/lpacher/lae/tree/master/fpga/practicum/1_arty)
+https://github.com/lpacher/lae/tree/master/fpga/practicum/1_arty_board)
 
 * **Practicum 2** <br />
 [Fundamental logic gates. Ring oscillator. Full-adder](
@@ -41,19 +51,20 @@ https://github.com/lpacher/lae/tree/master/fpga/practicum/6_BCD_counter)
 
 * **Practicum 7** <br />
 [Display an eye-diagram from a Pseudo-Random Bit Sequence (PRBS) generator.](
-https://github.com/lpacher/lae/tree/master/fpga/practicum/8_eye_diagram)
+https://github.com/lpacher/lae/tree/master/fpga/practicum/7_eye_diagram)
+
+* **Practicum 9** <br />
+[A digitally-controlled delay line.](
+https://github.com/lpacher/lae/tree/master/fpga/practicum/8_delay_line)
 
 * **Practicum 8** <br />
 [Pulse Width Modulation (PWM) and 1-bit DAC.](
 https://github.com/lpacher/lae/tree/master/fpga/practicum/9_pwm_dac)
 
-* **Practicum 9** <br />
-[A digitally-controlled delay line.](
-https://github.com/lpacher/lae/tree/master/fpga/practicum/10_delay_line)
 
 * **Practicum 10** <br />
 [A simple sequence detector with a Finite State Machine (FSM).](
-https://github.com/lpacher/lae/tree/master/fpga/practicum/11_sequence_detector_FSM)
+https://github.com/lpacher/lae/tree/master/fpga/practicum/10_sequence_detector_FSM)
 
 <br />
 <!--------------------------------------------------------------------->
@@ -63,23 +74,23 @@ https://github.com/lpacher/lae/tree/master/fpga/practicum/11_sequence_detector_F
 
 * **Practicum 11** <br />
 [Clock multiplication and division using a Phase-Locked Loop (PLL) IP core.](
-https://github.com/lpacher/lae/tree/master/fpga/practicum/7_PLL)
+https://github.com/lpacher/lae/tree/master/fpga/practicum/11_PLL)
 
 * **Practicum 12** <br />
-[XADC.](
+[Embedded XADC. Binary to BCD using the double-dabbler algorithm.](
 https://github.com/lpacher/lae/tree/master/fpga/practicum/12_xadc)
 
 * **Practicum 13** <br />
 [Universal Asynchronous Receiver/Transmitter (UART).](
-https://github.com/lpacher/lae/tree/master/fpga/practicum/12_uart)
+https://github.com/lpacher/lae/tree/master/fpga/practicum/13_uart)
 
 * **Practicum 14** <br />
 [Integrated Logic Analyzer (ILA).](
-https://github.com/lpacher/lae/tree/master/fpga/practicum/13_ila)
+https://github.com/lpacher/lae/tree/master/fpga/practicum/14_ila)
 
 * **Practicum 15** <br />
 [Virtual Input/Output (VIO).](
-https://github.com/lpacher/lae/tree/master/fpga/practicum/14_vio)
+https://github.com/lpacher/lae/tree/master/fpga/practicum/15_vio)
 
 <br />
 <!--------------------------------------------------------------------->
@@ -87,11 +98,15 @@ https://github.com/lpacher/lae/tree/master/fpga/practicum/14_vio)
 
 ## Advanced projects
 
-* **Practicum 15** <br />
-[JTAG exploration from Tcl.](
-https://github.com/lpacher/lae/tree/master/fpga/practicum/15_jtag_tcl)
-
 * **Practicum 16** <br />
+[JTAG exploration from Tcl.](
+https://github.com/lpacher/lae/tree/master/fpga/practicum/16_jtag_tcl)
+
+* **Practicum 17** <br />
 [Basic Ethernet.](
-https://github.com/lpacher/lae/tree/master/fpga/practicum/16_ethernet)
+https://github.com/lpacher/lae/tree/master/fpga/practicum/17_ethernet)
+
+* **Practicum 18** <br />
+[Microblaze.](
+https://github.com/lpacher/lae/tree/master/fpga/practicum/18_microblaze)
 
