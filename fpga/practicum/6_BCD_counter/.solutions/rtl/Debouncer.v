@@ -1,9 +1,13 @@
-//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Simple push-button debouncer with 0.5 kHz or 1 kHz low sampling frequency.
+// For a counter-based debouncer ref. to:
+//
+// - https://forum.digikey.com/t/debounce-logic-circuit-vhdl/12573
+// - https://www.fpga4fun.com/Debouncer2.html
 //
 // Luca Pacher - pacher@to.infn.it
 // Spring 2021
-//
+//~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 
 `timescale 1ns / 100ps
