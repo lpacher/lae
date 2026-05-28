@@ -53,11 +53,11 @@ https://github.com/lpacher/lae/tree/master/fpga/practicum/6_BCD_counter)
 [Display an eye-diagram from a Pseudo-Random Bit Sequence (PRBS) generator.](
 https://github.com/lpacher/lae/tree/master/fpga/practicum/7_eye_diagram)
 
-* **Practicum 9** <br />
+* **Practicum 8** <br />
 [A digitally-controlled delay line.](
 https://github.com/lpacher/lae/tree/master/fpga/practicum/8_delay_line)
 
-* **Practicum 8** <br />
+* **Practicum 9** <br />
 [Pulse Width Modulation (PWM) and 1-bit DAC.](
 https://github.com/lpacher/lae/tree/master/fpga/practicum/9_pwm_dac)
 
