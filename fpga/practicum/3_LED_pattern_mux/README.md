@@ -104,8 +104,9 @@ results.
 <br />
 <!--------------------------------------------------------------------->
 
+* [**Exercises**](#exercises)
 
-**EXERCISE 4**
+**EXERCISE 1**
 
 Implement and debug a simple **Full-Adder (FA)** combinational block as depicted in figure:
 
@@ -141,7 +142,8 @@ and outputs to standard LEDs **LD5** and **LD4** (use the left-most LED for the 
 <br />
 <!--------------------------------------------------------------------->
 
-**EXERCISE 5**
+
+**EXERCISE 2**
 
 In the previous exercise we connected all full-adder inputs to slide-switches.
 Let now suppose that we want to update design constraints to map the input-carry
