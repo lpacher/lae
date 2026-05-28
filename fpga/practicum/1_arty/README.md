@@ -2113,6 +2113,7 @@ Capture new digital waveforms at the oscilloscope.
 ## Extra: run the official Digilent Arty General I/O Demo
 [**[Contents]**](#contents)
 
+
 When you buy a new "development board" (also referred to as "evaluation board") either
 from a **main FPGA vendor** such as _AMD Xilinx_, _Intel Altera_, _Lattice_ etc.
 or from a **third-party vendor** such as _Digilent_ the board is always accompanied by
@@ -2194,7 +2195,9 @@ Open a new _Hardware Manager_ session and program the FPGA with the `GPIO_demo.b
 You can then play with the demo as described in the
 [**official demo documentation**](https://digilent.com/reference/learn/programmable-logic/tutorials/arty-general-io-demo/start):
 
-_<https://digilent.com/reference/learn/programmable-logic/tutorials/arty-general-io-demo/start>_
+* _<https://digilent.com/reference/learn/programmable-logic/tutorials/arty-general-io-demo/start>_
+* _<https://www.avnet.com/fsp/opasdata/d120001/medias/docus/178/UG-AES-A7MB-7A35T-G_Arty_OOB_GPIO_demo_V1.pdf>_
+
 
 <br />
 
