@@ -39,41 +39,45 @@ https://github.com/lpacher/lae/tree/master/fpga/practicum/5_LED_blink)
 [A 4-bit Binary Coded Decimal (BCD) counter driving a 7-segment display.](
 https://github.com/lpacher/lae/tree/master/fpga/practicum/6_BCD_counter)
 
+* **Practicum 7** <br />
+[Display an eye-diagram from a Pseudo-Random Bit Sequence (PRBS) generator.](
+https://github.com/lpacher/lae/tree/master/fpga/practicum/8_eye_diagram)
+
+* **Practicum 8** <br />
+[Pulse Width Modulation (PWM) and 1-bit DAC.](
+https://github.com/lpacher/lae/tree/master/fpga/practicum/9_pwm_dac)
+
+* **Practicum 9** <br />
+[A digitally-controlled delay line.](
+https://github.com/lpacher/lae/tree/master/fpga/practicum/10_delay_line)
+
+* **Practicum 10** <br />
+[A simple sequence detector with a Finite State Machine (FSM).](
+https://github.com/lpacher/lae/tree/master/fpga/practicum/11_sequence_detector_FSM)
+
 <br />
 <!--------------------------------------------------------------------->
 
 
 ## Intermediate projects
 
-* **Practicum 7** <br />
+* **Practicum 11** <br />
 [Clock multiplication and division using a Phase-Locked Loop (PLL) IP core.](
 https://github.com/lpacher/lae/tree/master/fpga/practicum/7_PLL)
 
-* **Practicum 8** <br />
-[Display an eye-diagram from a Pseudo-Random Bit Sequence (PRBS) generator.](
-https://github.com/lpacher/lae/tree/master/fpga/practicum/8_eye_diagram)
-
-* **Practicum 9** <br />
-[Pulse Width Modulation (PWM) and 1-bit DAC.](
-https://github.com/lpacher/lae/tree/master/fpga/practicum/9_pwm_dac)
-
-* **Practicum 10** <br />
-[A digitally-controlled delay line.](
-https://github.com/lpacher/lae/tree/master/fpga/practicum/10_delay_line)
-
-* **Practicum 11** <br />
-[A simple sequence detector with a Finite State Machine (FSM).](
-https://github.com/lpacher/lae/tree/master/fpga/practicum/11_sequence_detector_FSM)
-
 * **Practicum 12** <br />
+[XADC.](
+https://github.com/lpacher/lae/tree/master/fpga/practicum/12_xadc)
+
+* **Practicum 13** <br />
 [Universal Asynchronous Receiver/Transmitter (UART).](
 https://github.com/lpacher/lae/tree/master/fpga/practicum/12_uart)
 
-* **Practicum 13** <br />
+* **Practicum 14** <br />
 [Integrated Logic Analyzer (ILA).](
 https://github.com/lpacher/lae/tree/master/fpga/practicum/13_ila)
 
-* **Practicum 14** <br />
+* **Practicum 15** <br />
 [Virtual Input/Output (VIO).](
 https://github.com/lpacher/lae/tree/master/fpga/practicum/14_vio)
 
