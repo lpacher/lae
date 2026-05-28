@@ -147,6 +147,8 @@ proc elaborate {} {
 
    puts "\n-- Checking for elaboration errors ...\n"
 
+   exec sed -i {/user_environment/d} ${logFile} ;   #remove FAKE errors
+
    if { [catch {exec grep --color ERROR ${logFile} >@stdout 2>@stdout }] } {
 
       puts "\t================================="

@@ -19,7 +19,8 @@ module BaudGen (
 
    ) ;
 
-   TickCounterRst #(.MAX(10414))  BaudTicker ( .clk(clk), .rst(rst), .tick(tx_en) ) ;
+   TickCounterRst #(.MAX(1000))  BaudTicker ( .clk(clk), .rst(rst), .tick(tx_en) ) ;
+   //TickCounterRst #(.MAX(10414))  BaudTicker ( .clk(clk), .rst(rst), .tick(tx_en) ) ;
 
 endmodule
 

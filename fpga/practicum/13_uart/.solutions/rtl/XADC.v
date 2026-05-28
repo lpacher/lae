@@ -28,6 +28,9 @@ module XADC (
    ) ;
 
 
+//`ifdef SYNTHESIS
+
+/*
 
    //////////////////////
    //   XADC IP core   //
@@ -54,6 +57,27 @@ module XADC (
 
    ) ;
 
+*/
+
+
+   integer muTemperature = 2048  ;
+
+   reg adc_eoc_sim  = 1'b0 ;
+
+   reg [11:0] adc_data_sim ;
+
+   always @(posedge AdcSoc) begin
+
+      #1000 ;
+
+      adc_data_sim = muTemperature + $urandom_range(10) ;
+      adc_eoc_sim = 1'b1 ;
+
+      #10 adc_eoc_sim = 1'b0 ;
+   end
+
+   assign AdcEoc = adc_eoc_sim ;
+
 
    //////////////////////////////////////////////////////
    //   register ADC output into a bank of FlipFlops   //
@@ -65,7 +89,8 @@ module XADC (
 
       if( AdcEoc )
 
-         adc_data_reg[11:0] <= do_out[15:4] ;  // only 12-bits do_out[15:4] are meaningful
+         adc_data_reg[11:0] <= adc_data_sim ;
+         //adc_data_reg[11:0] <= do_out[15:4] ;  // only 12-bits do_out[15:4] are meaningful
    end
 
    assign AdcData[11:0] = adc_data_reg[11:0] ;
