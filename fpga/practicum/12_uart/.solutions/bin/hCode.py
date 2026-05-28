@@ -87,6 +87,9 @@ except :
 
 ROOT.gROOT.SetStyle("Plain")
 
+c1 = ROOT.TCanvas("c1","On-chip temperature monitor",700,500)
+c1.cd()
+
 hCode = ROOT.TH1F("hCode","", 4096, -0.5, 4095.5) ;   ## **NOTE: the XADC is a 12-bit ADC
 
 hCode.Draw()
