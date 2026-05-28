@@ -264,6 +264,10 @@ Assuming that you have a proper PyROOT installation you can run the code with:
 
 <br />
 
+<img src="doc/pictures/hCode.png" alt="drawing" width="650"/>
+
+<br /><br />
+
 Ask to the teacher if you need help.
 
 <br />
