@@ -30,11 +30,11 @@ https://github.com/lpacher/lae/tree/master/fpga/practicum/0_arty_doc)
 https://github.com/lpacher/lae/tree/master/fpga/practicum/1_arty_board)
 
 * **Practicum 2** <br />
-[Fundamental logic gates. Ring oscillator. Full-adder](
+[Fundamental logic gates. Ring oscillator.](
 https://github.com/lpacher/lae/tree/master/fpga/practicum/2_gates)
 
 * **Practicum 3** <br />
-[LED pattern multiplexer.](
+[LED pattern multiplexer. Full-adder](
 https://github.com/lpacher/lae/tree/master/fpga/practicum/3_LED_pattern_mux)
 
 * **Practicum 4** <br />
