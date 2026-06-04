@@ -61,19 +61,26 @@ LOG_DIR  := log
 ## specify RTL sources by hand (more in general can be Verilog + VHDL code)
 ##
 
-#RTL_TOP_MODULE := uart_ascii
-#SIM_TOP_MODULE := tb_uart_ascii
+top ?= uart_ascii
+#top ?= uart_xadc
 
-#RTL_VLOG_SOURCES := $(RTL_DIR)/TickCounterRst.v $(RTL_DIR)/BaudGen.v $(RTL_DIR)/ascii_rom.v $(RTL_DIR)/uart_tx_FSM.v $(RTL_DIR)/uart_ascii.v
-#SIM_VLOG_SOURCES := $(SIM_DIR)/glbl.v $(SIM_DIR)/ClockGen.v $(SIM_DIR)/tb_uart_ascii.v
+ifeq ($(top),uart_ascii)
 
+  RTL_TOP_MODULE := uart_ascii
+  SIM_TOP_MODULE := tb_uart_ascii
 
-RTL_TOP_MODULE := uart_xadc
-SIM_TOP_MODULE := tb_uart_xadc
+  RTL_VLOG_SOURCES := $(RTL_DIR)/TickCounterRst.v $(RTL_DIR)/BaudGen.v $(RTL_DIR)/ascii_rom.v $(RTL_DIR)/uart_tx_FSM.v $(RTL_DIR)/uart_ascii.v
+  SIM_VLOG_SOURCES := $(SIM_DIR)/glbl.v $(SIM_DIR)/ClockGen.v $(SIM_DIR)/tb_uart_ascii.v
 
-RTL_VLOG_SOURCES := $(RTL_DIR)/TickCounterRst.v $(RTL_DIR)/BaudGen.v $(RTL_DIR)/XADC.v $(RTL_DIR)/uart_tx_FSM.v $(RTL_DIR)/uart_xadc.v
-SIM_VLOG_SOURCES := $(SIM_DIR)/glbl.v $(SIM_DIR)/ClockGen.v $(SIM_DIR)/tb_uart_xadc.v
+else
 
+  RTL_TOP_MODULE := uart_xadc
+  SIM_TOP_MODULE := tb_uart_xadc
+
+  RTL_VLOG_SOURCES := $(RTL_DIR)/TickCounterRst.v $(RTL_DIR)/BaudGen.v $(RTL_DIR)/XADC.v $(RTL_DIR)/uart_tx_FSM.v $(RTL_DIR)/uart_xadc.v
+  SIM_VLOG_SOURCES := $(SIM_DIR)/glbl.v $(SIM_DIR)/ClockGen.v $(SIM_DIR)/tb_uart_xadc.v
+
+endif
 
 ## if no VHDL sources, you can either comment the below variables or just leave them empty
 #RTL_VHDL_SOURCES :=

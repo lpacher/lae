@@ -28,28 +28,16 @@ module uart_xadc (
    PLL  PLL_inst ( .CLK_IN(clk), .CLK_OUT(pll_clk), .LOCKED(pll_locked) ) ;
 
 
-
    ///////////////////////////
    //   ADC SOC generator   //
    ///////////////////////////
 
-   reg adc_soc = 1'b0 ;
-
-   initial begin
-
-      #1000 adc_soc = 1'b1 ;
-      #10   adc_soc = 1'b0 ;
-   end
-
-/*
-
    // assert a single clock-pulse "SOC" once every 0.1 seconds
    wire adc_soc ;
 
-   //TickCounterRst #(.MAX(10000000)) AdcSocGen (.clk(pll_clk), .rst(~pll_locked), .tick(adc_soc)) ;
-   TickCounterRst #(.MAX(100000)) AdcSocGen (.clk(pll_clk), .rst(~pll_locked), .tick(adc_soc)) ;
+   TickCounterRst #(.MAX(10000000)) AdcSocGen (.clk(pll_clk), .rst(~pll_locked), .tick(adc_soc)) ;
 
-*/
+
 
    ////////////////////////////////////////////////////////////
    //    XADC configured to read on-die temperature sensor   //
@@ -59,75 +47,21 @@ module uart_xadc (
 
    wire [11:0] adc_data ;
 
-   //assign adc_data = 12'hABC ;    // **DEBUG
-
-
    XADC  XADC (
 
       .AdcClk    (        pll_clk ),
       .AdcSoc    (        adc_soc ),
       .AdcEoc    (        adc_eoc ),
       .AdcData   ( adc_data[11:0] )
-
-   ) ;
-
-
-   // compose BYTES to be transmitted over serial lane
-   wire [7:0] tx_byte1 = (select == 1'b0) ? 8'hFF : adc_data[7:0] ;                  //lower tx_byte
-   wire [7:0] tx_byte2 = (select == 1'b0) ? 8'hFF : {4'b0000 , adc_data[11:8] } ;    //upper tx_byte
+   );
 
 
-   /////////////////////////////////
-   //   tx_byte-splitter using FSM   //
-   /////////////////////////////////
-
-   wire busy ;   //FROM UART FSM
-
-   parameter [1:0] IDLE       = 2'b00 ;
-   parameter [1:0] BYTE1 = 2'b01 ;
-   parameter [1:0] BYTE2 = 2'b10 ;
-   parameter [1:0] DONE       = 2'b11 ;   //dummy-state, just one clock delay
-
-   reg [1:0] STATE = 2'b00 ;
-
-   always @(posedge pll_clk) begin
-
-      if (~pll_locked)
-         STATE <= IDLE ;
-      else
-         case (STATE)
-
-            default : STATE <= IDLE ;
-            //_________________________________
-            //
-            IDLE :
-            begin
-               if (adc_eoc)
-                  STATE <= BYTE1 ;
-            end
-            //_________________________________
-            //
-            BYTE1 :
-            begin
-               if (~busy)
-                  STATE <= BYTE2 ;
-            end
-            //_________________________________
-            //
-            BYTE2 :
-            begin
-               if (~busy)
-                  STATE <= DONE ;
-            end
-            //_________________________________
-            //
-            DONE : STATE <= IDLE ;
-         endcase
-   end   //always
+   wire tx_byte_up  = (~select) ? 8'hAB : { 4'b0000 , adc_data[11:8] } ;
+   wire tx_byte_low = (~select) ? 8'hCD : adc_data[7:0]  ;
 
 
    /////////////////////////////
-   //   baud-rate geberator   //
+   //   baud-rate generator   //
    /////////////////////////////
 
    wire baud_tick ;
@@ -135,29 +69,98 @@ module uart_xadc (
    BaudGen  BaudGen (.clk(pll_clk), .rst(~pll_locked), .tx_en(baud_tick)) ;
 
 
+   /////////////////////////////////
+   //   byte-splitter using FSM   //
+   /////////////////////////////////
+
+   wire tx_busy, tx_done ;   //from UART FSM
+
+   parameter [1:0] IDLE  = 2'd0 ;
+   parameter [1:0] BYTE1 = 2'd1 ;
+   parameter [1:0] BYTE2 = 2'd2 ;
+
+   reg [1:0] STATE = 2'd0 ;
+
+   reg [7:0] tx_data = 8'hFF ;
+   reg tx_start = 1'b0 ;
+
+   always @(posedge pll_clk) begin
+
+      if (~pll_locked) begin
+         STATE    <= IDLE  ;
+         tx_data  <= 8'hFF ;
+         tx_start <= 1'b0  ;
+      end
+      else begin
+
+         case (STATE)
+            //_________________________________
+            //
+            IDLE :
+            begin
+               tx_start <= 1'b0 ;
+               if (adc_eoc) begin
+                  STATE <= BYTE1 ;
+                  tx_data  <= tx_byte_up ;
+                  tx_start <= 1'b1 ;
+               end
+            end
+            BYTE1 :
+            begin
+               tx_start <= 1'b0 ;
+               if (tx_done) begin
+                  STATE <= BYTE2 ;
+                  tx_data  <= tx_byte_low ;
+                  tx_start <= 1'b1 ;
+               end
+               else begin
+                  STATE <= BYTE1 ;
+                  tx_start <= 1'b0 ;
+               end
+            end
+            //_________________________________
+            //
+            BYTE2 :
+            begin
+               tx_start <= 1'b0 ;
+               if (tx_done) begin
+                  STATE <= IDLE ;
+               end
+               else
+                  STATE <= BYTE2 ;
+            end
+            //_________________________________
+            //
+            default : STATE <= IDLE ;
+         endcase
+      end
+   end   //always
+
+//   wire [7:0] tx_data = (STATE == BYTE1) ? tx_byte_up : tx_byte_low ;
+
+
    //////////////////////////////
    //   UART transmitter FSM   //
    //////////////////////////////
 
-   wire tx_start = (STATE == BYTE1) || (STATE == BYTE2) ;
-   wire [7:0] tx_data = (STATE == BYTE1) ? tx_byte1 : tx_byte2 ;
 
    uart_tx_FSM  uart_tx (
 
-      .clk           (       pll_clk ),
-      .rst           (   ~pll_locked ),
-      .tx_start      (      tx_start ),
-      .tx_en         (     baud_tick ),
-      .tx_data       (  tx_data[7:0] ),
-      .tx_busy       (          busy ),
-      .TxD           (           TxD )
-
-      ) ;
-
+      .clk      (       pll_clk ),
+      .rst      (   ~pll_locked ),
+      .tx_start (      tx_start ),
+      .tx_baud  (     baud_tick ),
+      .tx_data  (       tx_data ),
+      .tx_busy  (       tx_busy ),
+      .tx_done  (       tx_done ),
+      .TxD      (           TxD )
+   );
 
    // display the serial output at the oscilloscope (use "busy" as trigger to show START/STOP bits)
-   assign txd_probe  = TxD ;
-   assign busy_probe = busy ;
+   assign txd_probe  = TxD;
+
+   //assign busy_probe = tx_busy ;
+   assign busy_probe = (STATE == BYTE1) || (STATE == BYTE2);
 
 endmodule
 

@@ -108,7 +108,7 @@ module uart_ascii (
       .clk       (     pll_clk ),
       .rst       ( ~pll_locked ),
       .tx_start  (     rom_ren ),
-      .tx_en     (   baud_tick ),
+      .tx_baud   (   baud_tick ),
       .tx_data   (     tx_data ),
       .TxD       (         sdo ),
       .tx_busy   (        busy )
