@@ -453,6 +453,10 @@ Step-by-step instructions explaining how to run this test flow can be found [**h
 * A.K. Maini, _Digital Electronics, Principles, Devices and Applications_ 
 * M.M. Mano and C.R. Kime, _Logic and Computer Design Fundamentals_
 
+Despite "old" this is a very good reference to really learn digital circuit design with "low-level" hardware:
+
+_Designing with TTL Integrated Circuits_ by Texas Instruments
+
 </p>
 <br />
 </details>
